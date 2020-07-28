@@ -7,6 +7,8 @@
 
 #ifndef MidiNotesState_h
 #define MidiNotesState_h
+
+#include "Note.h"
 /**
  * Class encapsulating the state of MIDI inputted Note On and Note Offs.
  * Supports concurrent read/write access from multiple threads
@@ -15,10 +17,10 @@ class MidiNotesState {
 public:
     MidiNotesState() : noteOns(), mtx() {}
     
-    void tryAddNoteOn(int note){
+    void tryAddNoteOn(int note, int velocity){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
-        noteOns.insert(note);
+        noteOns.insert( { note, velocity } );
         lck.unlock();
     }
     void tryAddNoteOff(int note){
@@ -27,19 +29,22 @@ public:
         noteOns.erase(note);
         lck.unlock();
     }
-    std::vector<int> getNotes(){
-        std::vector<int> ret;
-        
+    std::map<int,int> getNotes(){
+        //std::vector<int> ret;
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
-        for(auto note: noteOns)
-            ret.push_back(note);
+        // copy map
+        auto ret = noteOns;
         lck.unlock();
         return ret;
     }
 private:
-    std::set<int> noteOns;
+    
+    std::map<int, int> noteOns;
     std::mutex mtx;
+
+
+
 };
 
 #endif /* MidiNotesState_h */

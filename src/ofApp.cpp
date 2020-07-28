@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : desiredNetworkPort("Network Session 1"), notes() {
+ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes() {
 
 }
 
@@ -11,21 +11,23 @@ void ofApp::setup(){
     ofSetWindowTitle("VS Visual");
     ofEnableAntiAliasing();
     
-    if(midiIn.getInPortList().size() > 0){
+    if(useVirtualPort) {
+        std::cout << "Setting up local virtual midi port " << virtualMIDIPort << "\n";
+        midiIn.openVirtualPort();
+        std::cout<< virtualMIDIPort <<" port # is "<< midiIn.getPort() << '\n';
+    }
+    else {
         for(std::string portIn : midiIn.getInPortList()) {
             std::cout << "Available InPort: " << portIn << '\n';
-            if(portIn.compare(desiredNetworkPort) == 0){
-                midiIn.openPort(desiredNetworkPort);
+            if(portIn.compare(networkMIDIPort) == 0){
+                midiIn.openPort(networkMIDIPort);
                 if(midiIn.isOpen())
                     std::cout << "Found desired network port and opened it \n";
             }
         }
         
     }
-    else {
-        midiIn.openVirtualPort("ofxMidiIn Input");
-        std::cout<<"ofxMidiIn port # is "<< midiIn.getPort() << '\n';
-    }
+
     midiIn.addListener(this);
 }
 
@@ -42,24 +44,15 @@ void ofApp::draw(){
     int boxWidth = ofGetWidth() / nColumns, boxHeight = ofGetHeight() / nRows;
     
     
-    std::vector<int> ns = notes.getNotes();
-    for(auto noteNumber : ns) {
+    auto ns = notes.getNotes();
+    for(auto note : ns) {
+        int noteNumber = note.first, velocity = note.second;
         int row = noteNumber / 12, col = noteNumber % nColumns;
-        //ofTranslate(col * boxWidth, row * boxHeight);
-        
+        ofSetColor(velocity * 2, 255, 255);
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        std::cout << col << ", " << row << '\n';
+        // std::cout << col << ", " << row << '\n';
     }
-    
-//    for(auto noteNumber : noteOnSet){
-//
-//        int row = noteNumber / 12, col = noteNumber % nColumns;
-//        //ofTranslate(col * boxWidth, row * boxHeight);
-//
-//        ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-//        std::cout << col  << ", " << row << '\n';
-//    }
-//
+
     
 
 }
@@ -122,8 +115,8 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::newMidiMessage(ofxMidiMessage& message){
     if(message.status == MIDI_NOTE_ON ) {
-        std::cout << "Setting pitch #" << message.pitch << " on\n";
-        notes.tryAddNoteOn(message.pitch);
+        std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
+        notes.tryAddNoteOn(message.pitch, message.velocity);
     } else if(message.status == MIDI_NOTE_OFF){
         std::cout << "Setting pitch #" << message.pitch << " off\n";
         notes.tryAddNoteOff(message.pitch);

@@ -25,9 +25,14 @@ class ofApp : public ofBaseApp, ofxMidiListener{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 private:
+        
         ofxMidiIn midiIn;
-        std::string desiredNetworkPort;
+        // flag set to true if using local MIDI port, false if using network MIDI port
+        bool useVirtualPort;
+        // names of local and network MIDI ports.
+        std::string virtualMIDIPort, networkMIDIPort;
         MidiNotesState notes;
     
+        // methods
         void newMidiMessage(ofxMidiMessage& message);
 };
