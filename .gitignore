@@ -1,5 +1,8 @@
 # Ableton Live Test project
 of-midi-visualizer-testing-Project/
+# (Unused) Juce assets TODO remove from gitignore if using in project
+JuceLibraryCode/
+JuceModules/
 
 ###########################
 # ignore generated binaries

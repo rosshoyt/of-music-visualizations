@@ -2,8 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxMidi.h"
-
 #include <iostream>
+#include "MidiNotesState.h"
 
 class ofApp : public ofBaseApp, ofxMidiListener{
 
@@ -26,7 +26,8 @@ class ofApp : public ofBaseApp, ofxMidiListener{
 		void gotMessage(ofMessage msg);
 private:
         ofxMidiIn midiIn;
-        std::vector<bool> noteOns;
-        std::set<int> noteOnSet;
+        std::string desiredNetworkPort;
+        MidiNotesState notes;
+    
         void newMidiMessage(ofxMidiMessage& message);
 };
