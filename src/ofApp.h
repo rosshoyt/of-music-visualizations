@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxMidi.h"
 #include <iostream>
-#include "MidiNotesState.h"
+#include "MIDIChannelNotesState.h"
 
 class ofApp : public ofBaseApp, ofxMidiListener{
 
@@ -31,7 +31,7 @@ private:
         bool useVirtualPort;
         // names of local and network MIDI ports.
         std::string virtualMIDIPort, networkMIDIPort;
-        MidiNotesState notes;
+        MIDIChannelNotesState notes;
     
         // methods
         void newMidiMessage(ofxMidiMessage& message);

@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes() {
+ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes() {
 
 }
 
