@@ -15,7 +15,8 @@
  */
 class MIDIChannelNotesState {
 public:
-    MIDIChannelNotesState() : noteOns(), mtx() {}
+    MIDIChannelNotesState() : noteOns(), sustainedNotes(), sustainPedalDown(false), mtx() {}
+    
     
     void tryAddNoteOn(int note, int velocity){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
@@ -23,12 +24,27 @@ public:
         noteOns.insert( { note, velocity } );
         lck.unlock();
     }
-    void tryAddNoteOff(int note){
+void tryAddNoteOff(int note){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
         noteOns.erase(note);
         lck.unlock();
     }
+    
+    void trySetSustainPedalOn(){
+        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+        lck.lock();
+        sustainPedalDown = true;
+        lck.unlock();
+    }
+    
+    void trySetSustainPedalOff(){
+        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+        lck.lock();
+        sustainPedalDown = false;
+        lck.unlock();
+    }
+    
     std::map<int,int> getNotes(){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
@@ -40,6 +56,9 @@ public:
 private:
     
     std::map<int, int> noteOns;
+    std::map<int, int> sustainedNotes;
+    std::atomic<bool> sustainPedalDown;
+    
     std::mutex mtx;
     
 

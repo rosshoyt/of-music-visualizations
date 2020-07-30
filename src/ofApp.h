@@ -35,4 +35,7 @@ private:
     
         // methods
         void newMidiMessage(ofxMidiMessage& message);
+    
+        // display methods
+        void drawNoteGrid();
 };

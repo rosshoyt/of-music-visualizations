@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes() {
+ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes() {
 
 }
 
@@ -38,22 +38,29 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    //int centerX = ofGetWidth() / 2, centerY = ofGetHeight() / 2;
+    drawNoteGrid();
+}
+
+
+//--------------------------------------------------------------
+void ofApp::drawNoteGrid(){
     // we'll only display the midi notes # 0 - 127, and there will be 5 extra unused boxes at the bottom right.
     int nColumns = 12, nRows = 11;
     
     int boxWidth = ofGetWidth() / nColumns, boxHeight = ofGetHeight() / nRows;
     
-    
     auto ns = notes.getNotes();
+    
     for(auto note : ns) {
+        //std::cout<< "drawing a note!\n";
         int noteNumber = note.first, velocity = note.second;
         int row = noteNumber / 12, col = noteNumber % nColumns;
-        ofSetColor(velocity * 2, 255, 255);
+        ofSetColor(velocity * 2,  255 / nColumns * col, 255 / nRows * row);
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
         // std::cout << col << ", " << row << '\n';
     }
-
-    
 
 }
 
@@ -114,11 +121,34 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 
 void ofApp::newMidiMessage(ofxMidiMessage& message){
-    if(message.status == MIDI_NOTE_ON ) {
-        std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
-        notes.tryAddNoteOn(message.pitch, message.velocity);
-    } else if(message.status == MIDI_NOTE_OFF){
-        std::cout << "Setting pitch #" << message.pitch << " off\n";
-        notes.tryAddNoteOff(message.pitch);
+    
+    switch(message.status) {
+            
+        case MIDI_NOTE_ON:
+            std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
+            notes.tryAddNoteOn(message.pitch, message.velocity);
+            break;
+        case MIDI_NOTE_OFF:
+            std::cout << "Setting pitch #" << message.pitch << " off\n";
+            notes.tryAddNoteOff(message.pitch);
+            break;
+        case MIDI_CONTROL_CHANGE:
+            
+            switch(message.control){
+                case 64:
+                    switch(message.value){
+                        case 0:
+                            std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
+                            notes.trySetSustainPedalOff();
+                            break;
+                        case 127:
+                            std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
+                            notes.trySetSustainPedalOn();
+                            break;
+                    }
+                    
+            }
+            
+            
     }
 }
