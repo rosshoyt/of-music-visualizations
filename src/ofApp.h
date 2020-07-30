@@ -25,17 +25,34 @@ class ofApp : public ofBaseApp, ofxMidiListener{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 private:
-        
+        // Midi Input port
         ofxMidiIn midiIn;
         // flag set to true if using local MIDI port, false if using network MIDI port
         bool useVirtualPort;
         // names of local and network MIDI ports.
         std::string virtualMIDIPort, networkMIDIPort;
+    
+        // Class storing the current state of the midi input's note on and note off's.
         MIDIChannelNotesState notes;
     
-        // methods
+        // stores current width and height of the window
+        int windowWidth, windowHeight;
+    
+        /**
+         * Method which sets up the OFX MIDI port. Creates a 'local' virtual port if field
+         * useVirtualPort is set to true; ot herwise, creates a network MIDI port
+         */
+        void setupOfxMIDIPort();
+    
+        /**
+         * ofMidiListener implemented method
+         */
         void newMidiMessage(ofxMidiMessage& message);
     
-        // display methods
+        /**
+         * Method which draws a piano background and visualizes the notes currently
+         * being played
+         * Called from draw()
+         */
         void drawNoteGrid();
 };
