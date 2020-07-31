@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight() {
+ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight() {
 
 }
 
@@ -38,9 +38,9 @@ void ofApp::drawNoteGrid(){
     for(int i = 0; i < nColumns; ++i) {
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-            ofSetColor(255, 255, 255);
+            ofSetColor(ofColor::lightGrey);
         else
-            ofSetColor(0,0,0);
+            ofSetColor(ofColor::darkGrey);
         // draw the column rectangles
         ofDrawRectangle(i * boxWidth, 0, boxWidth, ofGetHeight());
         // draw border coloumn lines
@@ -59,10 +59,11 @@ void ofApp::drawNoteGrid(){
     for(auto note : ns) {
         //std::cout<< "drawing a note!\n";
         int noteNumber = note.first, velocity = note.second;
-        int row = noteNumber / 12, col = noteNumber % nColumns;
-        ofSetColor(velocity * 2,  255 / noteNumber /*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
+        int row = nRows - 1 - noteNumber / 12, col = noteNumber  % nColumns;
+        // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
+        ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        // std::cout << col << ", " << row << '\n';
+        std::cout << "col: " << col << ", row: " << row << '\n';
     }
 
 }
