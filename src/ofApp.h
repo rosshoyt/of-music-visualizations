@@ -35,6 +35,7 @@ private:
         // Class storing the current state of the midi input's note on and note off's.
         MIDIChannelNotesState notes;
     
+        
         // stores current width and height of the window
         int windowWidth, windowHeight;
     

@@ -15,51 +15,115 @@
  */
 class MIDIChannelNotesState {
 public:
-    MIDIChannelNotesState() : noteOns(), sustainedNotes(), sustainPedalDown(false), mtx() {}
+    MIDIChannelNotesState() : activeNoteOns(), sustainedNotes(), sustained(false), mtx(), mtxSusNotes() {}
     
     
     void tryAddNoteOn(int note, int velocity){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
-        noteOns.insert( { note, velocity } );
+        activeNoteOns.insert( { note, velocity } );
         lck.unlock();
     }
 void tryAddNoteOff(int note){
+    
+    if(sustained) {
+        // we'll need to move note from activeNoteOns to sustainedNotes
+        
+        // first track original note on's velocity
+        int noteOnVel = activeNoteOns.at(note); // 'concurrent access is safe' @see http://www.cplusplus.com/reference/map/map/at/
+        
+        // remove note from activeNoteOnsMap
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
-        noteOns.erase(note);
+        activeNoteOns.erase(note);
+        lck.unlock();
+        
+        // add to sustainedNotes
+        std::unique_lock<std::mutex> lck2 (mtxSusNotes,std::defer_lock);
+        lck2.lock();
+        sustainedNotes.insert({ note, noteOnVel });
+        lck2.unlock();
+        
+        
+    }
+    else{
+        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+        lck.lock();
+        activeNoteOns.erase(note);
         lck.unlock();
     }
     
-    void trySetSustainPedalOn(){
-        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-        lck.lock();
-        sustainPedalDown = true;
-        lck.unlock();
     }
     
-    void trySetSustainPedalOff(){
-        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-        lck.lock();
-        sustainPedalDown = false;
-        lck.unlock();
+    void setSustainPedalOn(){
+        sustained.store(true);
+    }
+    
+    void setSustainPedalOff(){
+        //std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+        //lck.lock();
+        if(sustained){
+            sustained.store(false);
+            
+            // clear all notes from sustainedNotes
+            std::unique_lock<std::mutex> lck (mtxSusNotes,std::defer_lock);
+            lck.lock();
+            sustainedNotes.clear();
+            lck.unlock();
+            
+        }
+        
+        //lck.unlock();
     }
     
     std::map<int,int> getNotes(){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
         // copy note map
-        auto ret = noteOns;
+        auto ret = activeNoteOns;
         lck.unlock();
         return ret;
     }
+    std::map<int,int> getSustainedNotes(){
+        std::unique_lock<std::mutex> lck (mtxSusNotes,std::defer_lock);
+        lck.lock();
+        // copy sus notes map
+        auto ret = sustainedNotes;
+        lck.unlock();
+        return ret;
+    }
+    
+    std::map<int,int> getAllNotes(){
+        auto notes = getNotes();
+        auto susNotes = getSustainedNotes();
+        notes.insert(susNotes.begin(), susNotes.end());
+        return notes;
+//        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+//        lck.lock();
+//        auto
+    }
+    
+    int getNumNotes(){
+        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+        lck.lock();
+        int n = activeNoteOns.size();
+        lck.unlock();
+        return n;
+    }
+    
+    bool sustainPedalIsDown(){
+        return sustained.load();
+    }
+    
 private:
     
-    std::map<int, int> noteOns;
-    std::map<int, int> sustainedNotes;
-    std::atomic<bool> sustainPedalDown;
+    std::map<int, int> activeNoteOns;
+    std::map<int,int> sustainedNotes;
+    
+    std::atomic<bool>  sustained;
     
     std::mutex mtx;
+    std::mutex mtxSusNotes;
     
 
 

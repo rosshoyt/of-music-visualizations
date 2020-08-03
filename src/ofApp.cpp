@@ -162,11 +162,11 @@ void ofApp::newMidiMessage(ofxMidiMessage& message){
                     switch(message.value){
                         case 0:
                             std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                            notes.trySetSustainPedalOff();
+                            notes.setSustainPedalOff();
                             break;
                         case 127:
                             std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                            notes.trySetSustainPedalOn();
+                            notes.setSustainPedalOn();
                             break;
                     }
             }
