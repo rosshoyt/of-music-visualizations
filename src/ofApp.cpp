@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight() {
+ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight() {
 
 }
 
@@ -13,7 +13,8 @@ void ofApp::setup(){
     
     setupOfxMIDIPort();
     
-    windowWidth = ofGetWidth(), windowHeight = ofGetHeight();
+    //windowWidth = ofGetWidth(), windowHeight = ofGetHeight();
+    windowResized(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -25,35 +26,41 @@ void ofApp::update(){
 void ofApp::draw(){
     
     drawNoteGrid();
+    drawActiveNotes();
 }
 
 //--------------------------------------------------------------
 void ofApp::drawNoteGrid(){
-    // Midi notes # 0 - 127 will be displayed, and there will be 5 extra unused boxes at the bottom right (12 X 11 = 132_
-    int nColumns = 12, nRows = 11;
+    
     // calculate box width based on window size
-    int boxWidth = windowWidth / nColumns, boxHeight = windowHeight / nRows;
+    
     
     // draw black and white background to represent fundamental pitches C - B
     for(int i = 0; i < nColumns; ++i) {
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-            ofSetColor(ofColor::lightGrey);
+            ofSetColor(ofColor::grey);
         else
             ofSetColor(ofColor::darkGrey);
         // draw the column rectangles
         ofDrawRectangle(i * boxWidth, 0, boxWidth, ofGetHeight());
         // draw border coloumn lines
-        ofSetColor(ofColor::gray);
+        ofSetColor(ofColor::dimGrey);
         ofDrawLine(i * boxWidth, 0, i * boxWidth, ofGetHeight());
     }
     
     // draw  horizontal grid lines to represent octaves
-    ofSetColor(ofColor::gray);
+    ofSetColor(ofColor::dimGrey);
     for(int i = 0; i < nRows; ++i){
         ofDrawLine(0, i * boxHeight, ofGetWidth(), i * boxHeight);
     }
     
+
+
+}
+
+//--------------------------------------------------------------
+void ofApp::drawActiveNotes(){
     // draw all notes currently being played
     auto ns = notes.getAllNotes();
     for(auto note : ns) {
@@ -65,7 +72,6 @@ void ofApp::drawNoteGrid(){
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
         //std::cout << "col: " << col << ", row: " << row << '\n';
     }
-
 }
 
 //--------------------------------------------------------------
@@ -112,6 +118,9 @@ void ofApp::mouseExited(int x, int y){
 void ofApp::windowResized(int w, int h){
     windowWidth = w;
     windowHeight = h;
+    
+    boxWidth = windowWidth / nColumns;
+    boxHeight = windowHeight / nRows;
 }
 
 //--------------------------------------------------------------

@@ -32,6 +32,12 @@ private:
         // names of local and network MIDI ports.
         std::string virtualMIDIPort, networkMIDIPort;
     
+        // Midi notes # 0 - 127 will be displayed, and there will be 5 extra unused boxes at the bottom right (12 X 11 = 132_
+        int nColumns, nRows;
+    
+        int boxWidth, boxHeight;
+    
+    
         // Class storing the current state of the midi input's note on and note off's.
         MIDIChannelNotesState notes;
         
@@ -55,4 +61,6 @@ private:
          * Called from draw()
          */
         void drawNoteGrid();
+    
+        void drawActiveNotes();
 };

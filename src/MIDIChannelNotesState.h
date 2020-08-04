@@ -27,17 +27,17 @@ public:
 void tryAddNoteOff(int note){
     
     if(sustained) {
-        std::cout << "Sustain pedal down, copying note to sustainedNotes map\n";
+        //std::cout << "Sustain pedal down, copying note to sustainedNotes map\n";
         // we'll need to move note from activeNoteOns to sustainedNotes
         
         // first track original note on's velocity
         int noteOnVel = activeNoteOns.at(note); // 'concurrent access is safe' @see http://www.cplusplus.com/reference/map/map/at/
         
-        // remove note from activeNoteOnsMap
-        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-        lck.lock();
-        activeNoteOns.erase(note);
-        lck.unlock();
+//        // remove note from activeNoteOnsMap
+//        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+//        lck.lock();
+//        activeNoteOns.erase(note);
+//        lck.unlock();
         
         // add to sustainedNotes
         std::unique_lock<std::mutex> lck2 (mtxSusNotes,std::defer_lock);
@@ -45,15 +45,20 @@ void tryAddNoteOff(int note){
         sustainedNotes.insert({ note, noteOnVel });
         lck2.unlock();
         
-        std::cout << "Num sustained notes = " << sustainedNotes.size() <<"\n";
+        //std::cout << "Num sustained notes = " << sustainedNotes.size() <<"\n";
         
     }
-    else{
-        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-        lck.lock();
-        activeNoteOns.erase(note);
-        lck.unlock();
-    }
+    // remove note from activeNoteOnsMap
+    std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+    lck.lock();
+    activeNoteOns.erase(note);
+    lck.unlock();
+//    else{
+//        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
+//        lck.lock();
+//        activeNoteOns.erase(note);
+//        lck.unlock();
+//    }
     
     }
     
