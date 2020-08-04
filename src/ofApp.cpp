@@ -13,7 +13,7 @@ void ofApp::setup(){
     
     setupOfxMIDIPort();
     
-    //windowWidth = ofGetWidth(), windowHeight = ofGetHeight();
+    // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
 }
 
@@ -39,7 +39,7 @@ void ofApp::drawNoteGrid(){
     for(int i = 0; i < nColumns; ++i) {
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-            ofSetColor(ofColor::grey);
+            ofSetColor(ofColor::lightGrey);
         else
             ofSetColor(ofColor::darkGrey);
         // draw the column rectangles
@@ -157,11 +157,11 @@ void ofApp::newMidiMessage(ofxMidiMessage& message){
     
     switch(message.status) {
         case MIDI_NOTE_ON:
-            std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
+            //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
             notes.tryAddNoteOn(message.pitch, message.velocity);
             break;
         case MIDI_NOTE_OFF:
-            std::cout << "Setting pitch #" << message.pitch << " off\n";
+            //std::cout << "Setting pitch #" << message.pitch << " off\n";
             notes.tryAddNoteOff(message.pitch);
             break;
         case MIDI_CONTROL_CHANGE:
@@ -170,11 +170,11 @@ void ofApp::newMidiMessage(ofxMidiMessage& message){
                 case 64:
                     switch(message.value){
                         case 0:
-                            std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
+                            //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
                             notes.setSustainPedalOff();
                             break;
                         case 127:
-                            std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
+                            //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
                             notes.setSustainPedalOn();
                             break;
                     }

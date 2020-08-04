@@ -21,28 +21,28 @@ public:
     void tryAddNoteOn(int note, int velocity){
         std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         lck.lock();
-        activeNoteOns.insert( { note, velocity } );
+        // insert or update new note/velocity pair
+        activeNoteOns[note] = velocity;
+        
+        // activeNoteOns.insert( { note, velocity } ); // (retains first NoteOn Vel if key already exists)
         lck.unlock();
     }
 void tryAddNoteOff(int note){
     
     if(sustained) {
         //std::cout << "Sustain pedal down, copying note to sustainedNotes map\n";
-        // we'll need to move note from activeNoteOns to sustainedNotes
         
+        // we'll need to move note from activeNoteOns to sustainedNotes
         // first track original note on's velocity
         int noteOnVel = activeNoteOns.at(note); // 'concurrent access is safe' @see http://www.cplusplus.com/reference/map/map/at/
         
-//        // remove note from activeNoteOnsMap
-//        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-//        lck.lock();
-//        activeNoteOns.erase(note);
-//        lck.unlock();
+
         
         // add to sustainedNotes
         std::unique_lock<std::mutex> lck2 (mtxSusNotes,std::defer_lock);
         lck2.lock();
-        sustainedNotes.insert({ note, noteOnVel });
+        // insert or update note value
+        sustainedNotes[note] = noteOnVel;
         lck2.unlock();
         
         //std::cout << "Num sustained notes = " << sustainedNotes.size() <<"\n";
@@ -53,25 +53,17 @@ void tryAddNoteOff(int note){
     lck.lock();
     activeNoteOns.erase(note);
     lck.unlock();
-//    else{
-//        std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-//        lck.lock();
-//        activeNoteOns.erase(note);
-//        lck.unlock();
-//    }
-    
+
     }
     
     void setSustainPedalOn(){
-        std::cout << "Sus Pedal On\n";
+        //std::cout << "Sus Pedal On\n";
         sustained.store(true);
     }
     
     void setSustainPedalOff(){
         
-        std::cout << "Sus Pedal Off\n";
-        //std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-        //lck.lock();
+        //std::cout << "Sus Pedal Off\n";
         if(sustained){
             sustained.store(false);
             
