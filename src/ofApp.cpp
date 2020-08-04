@@ -55,7 +55,7 @@ void ofApp::drawNoteGrid(){
     }
     
     // draw all notes currently being played
-    auto ns = notes.getNotes();
+    auto ns = notes.getAllNotes();
     for(auto note : ns) {
         //std::cout<< "drawing a note!\n";
         int noteNumber = note.first, velocity = note.second;
@@ -63,7 +63,7 @@ void ofApp::drawNoteGrid(){
         // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
         ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        std::cout << "col: " << col << ", row: " << row << '\n';
+        //std::cout << "col: " << col << ", row: " << row << '\n';
     }
 
 }

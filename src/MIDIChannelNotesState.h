@@ -27,6 +27,7 @@ public:
 void tryAddNoteOff(int note){
     
     if(sustained) {
+        std::cout << "Sustain pedal down, copying note to sustainedNotes map\n";
         // we'll need to move note from activeNoteOns to sustainedNotes
         
         // first track original note on's velocity
@@ -44,6 +45,7 @@ void tryAddNoteOff(int note){
         sustainedNotes.insert({ note, noteOnVel });
         lck2.unlock();
         
+        std::cout << "Num sustained notes = " << sustainedNotes.size() <<"\n";
         
     }
     else{
@@ -56,10 +58,13 @@ void tryAddNoteOff(int note){
     }
     
     void setSustainPedalOn(){
+        std::cout << "Sus Pedal On\n";
         sustained.store(true);
     }
     
     void setSustainPedalOff(){
+        
+        std::cout << "Sus Pedal Off\n";
         //std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
         //lck.lock();
         if(sustained){
