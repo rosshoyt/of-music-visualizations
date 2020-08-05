@@ -1,8 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "ofxMidi.h"
+
 #include <iostream>
+
 #include "MIDIChannelNotesState.h"
 
 #define HEIGHT 1024
@@ -28,6 +31,17 @@ class ofApp : public ofBaseApp, ofxMidiListener{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+        // gui components
+    
+        ofxButton drawLinesButton;
+    
+        ofxPanel gui;
+
+        ofColor backgroundColor;
+    
+        ofxColorSlider backgroundColorSelector;
+    
 private:
         // Midi Input port
         ofxMidiIn midiIn;
@@ -48,6 +62,9 @@ private:
         // stores current width and height of the window
         int windowWidth, windowHeight;
     
+        // gui variables
+        bool drawLines;
+    
         /**
          * Method which sets up the OFX MIDI port. Creates a 'local' virtual port if field
          * useVirtualPort is set to true; ot herwise, creates a network MIDI port
@@ -64,7 +81,10 @@ private:
          * being played
          * Called from draw()
          */
+    
         void drawNoteGrid();
     
         void drawActiveNotes();
+    
+    void drawLine(int x, int y, int x2, int y2, ofColor color = ofColor::black, int alpha = 255);
 };

@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight() {
+ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -13,8 +13,15 @@ void ofApp::setup(){
     
     setupOfxMIDIPort();
     
+    
+    
+    gui.setup();
+    gui.add(drawLinesButton.setup("Draw Lines"));
+    gui.add(backgroundColorSelector.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
+    
 }
 
 //--------------------------------------------------------------
@@ -27,6 +34,8 @@ void ofApp::draw(){
     
     drawNoteGrid();
     drawActiveNotes();
+    
+    gui.draw();
 }
 
 //--------------------------------------------------------------
@@ -37,27 +46,38 @@ void ofApp::drawNoteGrid(){
     
     // draw black and white background to represent fundamental pitches C - B
     for(int i = 0; i < nColumns; ++i) {
+        if((i & 1) == 0){
+            ofSetColor(ofColor::paleVioletRed, 50);
+            ofDrawRectangle(0, i * boxHeight, windowWidth, boxHeight);
+          
+        }
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-            ofSetColor(ofColor::lightGrey);
+        //if((i > 5 && (i&1)) || ()
+            ofSetColor(ofColor::lightGrey, 128);
         else
-            ofSetColor(ofColor::darkGrey);
+            ofSetColor(ofColor::darkGrey, 128);
         // draw the column rectangles
         ofDrawRectangle(i * boxWidth, 0, boxWidth, windowHeight);
         // draw border coloumn lines
-        ofSetColor(ofColor::dimGrey);
-        ofDrawLine(i * boxWidth, 0, i * boxWidth, windowHeight);
+        drawLine(i * boxWidth, 0, i * boxWidth, windowHeight, ofColor::dimGrey);
     }
     
-    // draw  horizontal grid lines to represent octaves
-    ofSetColor(ofColor::dimGrey);
-    for(int i = 0; i < nRows; ++i){
-        ofDrawLine(0, i * boxHeight, windowWidth, i * boxHeight);
+    
+        // draw  horizontal grid lines to represent octaves
+        ofSetColor(backgroundColorSelector);
+        for(int i = 0; i < nRows; ++i){
+            ofDrawLine(0, i * boxHeight, windowWidth, i * boxHeight);
     }
     
-
-
 }
+    
+    void ofApp::drawLine(int x, int y, int x2, int y2, ofColor color, int alpha){
+        if(drawLinesButton){
+            ofSetColor(color, alpha);
+            ofDrawLine(x, y, x2, y2);
+        }
+    }
 
 //--------------------------------------------------------------
 void ofApp::drawActiveNotes(){
@@ -121,6 +141,8 @@ void ofApp::windowResized(int w, int h){
     
     boxWidth = windowWidth / nColumns;
     boxHeight = windowHeight / nRows;
+    
+    gui.setPosition(windowWidth, 0);
 }
 
 //--------------------------------------------------------------
