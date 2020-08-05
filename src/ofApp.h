@@ -5,6 +5,10 @@
 #include <iostream>
 #include "MIDIChannelNotesState.h"
 
+#define HEIGHT 1024
+#define WIDTH 1024
+#define RIGHT_CONTROLBAR 300
+
 class ofApp : public ofBaseApp, ofxMidiListener{
 
 	public:

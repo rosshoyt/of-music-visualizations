@@ -43,16 +43,16 @@ void ofApp::drawNoteGrid(){
         else
             ofSetColor(ofColor::darkGrey);
         // draw the column rectangles
-        ofDrawRectangle(i * boxWidth, 0, boxWidth, ofGetHeight());
+        ofDrawRectangle(i * boxWidth, 0, boxWidth, windowHeight);
         // draw border coloumn lines
         ofSetColor(ofColor::dimGrey);
-        ofDrawLine(i * boxWidth, 0, i * boxWidth, ofGetHeight());
+        ofDrawLine(i * boxWidth, 0, i * boxWidth, windowHeight);
     }
     
     // draw  horizontal grid lines to represent octaves
     ofSetColor(ofColor::dimGrey);
     for(int i = 0; i < nRows; ++i){
-        ofDrawLine(0, i * boxHeight, ofGetWidth(), i * boxHeight);
+        ofDrawLine(0, i * boxHeight, windowWidth, i * boxHeight);
     }
     
 
@@ -116,7 +116,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    windowWidth = w;
+    windowWidth = w - RIGHT_CONTROLBAR;
     windowHeight = h;
     
     boxWidth = windowWidth / nColumns;
