@@ -33,15 +33,20 @@ class ofApp : public ofBaseApp, ofxMidiListener{
 		void gotMessage(ofMessage msg);
     
         // gui components
-    
-        ofxButton drawLinesButton;
-    
         ofxPanel gui;
 
+        ofxToggle drawLinesToggle;
+    
+        ofxToggle drawBackgroundGridToggle;
+    
         ofColor backgroundColor;
     
-        ofxColorSlider backgroundColorSelector;
     
+        ofxColorSlider gridLineColorSelector;
+        ofxColorSlider octaveRowColorSelector;
+    
+        ofxColorSlider noteDisplayColorSelector1;
+        ofxColorSlider noteDisplayColorSelector2;
 private:
         // Midi Input port
         ofxMidiIn midiIn;
@@ -76,15 +81,10 @@ private:
          */
         void newMidiMessage(ofxMidiMessage& message);
     
-        /**
-         * Method which draws a piano background and visualizes the notes currently
-         * being played
-         * Called from draw()
-         */
+        void drawBgdGridLines();
     
-        void drawNoteGrid();
+        void drawBgdGrid();
     
         void drawActiveNotes();
-    
-    void drawLine(int x, int y, int x2, int y2, ofColor color = ofColor::black, int alpha = 255);
+
 };

@@ -16,8 +16,15 @@ void ofApp::setup(){
     
     
     gui.setup();
-    gui.add(drawLinesButton.setup("Draw Lines"));
-    gui.add(backgroundColorSelector.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(drawLinesToggle.setup("Draw Lines", true));
+    gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
+    gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
+    gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(27,0,255,255), ofColor(0, 0), ofColor(255, 255)));
+    
+    //ofColor(255,0,83,255)
+    gui.add(noteDisplayColorSelector1.setup("Note Display Color #1", ofColor::seaGreen, ofColor(0,0), ofColor(0,0)));
+    gui.add(noteDisplayColorSelector2.setup("Note Display Color #2", ofColor::lightGoldenRodYellow, ofColor(0,0), ofColor(0,0)));
+    
     
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
@@ -31,53 +38,60 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    if(drawBackgroundGridToggle)
+        drawBgdGrid();
+    if(drawLinesToggle)
+        drawBgdGridLines();
     
-    drawNoteGrid();
+    
     drawActiveNotes();
     
     gui.draw();
 }
 
 //--------------------------------------------------------------
-void ofApp::drawNoteGrid(){
+
+void ofApp::drawBgdGridLines(){
+    // draw  horizontal grid lines to represent octaves
+    ofSetColor(gridLineColorSelector);
     
-    // calculate box width based on window size
+    for(int i = 0; i < nRows; ++i)
+        ofDrawLine(0, i * boxHeight, windowWidth, i * boxHeight);
     
+    // draw border column lines
+    for(int i = 0; i < nColumns; ++i)
+        ofDrawLine(i * boxWidth, 0, i * boxWidth, windowHeight);
+}
+
+//--------------------------------------------------------------
+void ofApp::drawBgdGrid(){
+    // color the even numbered rows with chosen color
+    ofSetColor(octaveRowColorSelector);
+    for(int i = 0; i < nRows; i += 2)
+        ofDrawRectangle(0, i * boxHeight, windowWidth, boxHeight);
     
     // draw black and white background to represent fundamental pitches C - B
     for(int i = 0; i < nColumns; ++i) {
-        if((i & 1) == 0){
-            ofSetColor(ofColor::paleVioletRed, 50);
-            ofDrawRectangle(0, i * boxHeight, windowWidth, boxHeight);
-          
-        }
+//        // color the even numbered rows with chosen color
+//        if((i & 1) == 0){
+//            ofSetColor(octaveRowColorSelector);
+//            ofDrawRectangle(0, i * boxHeight, windowWidth, boxHeight);
+//
+//        }
+        
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-        //if((i > 5 && (i&1)) || ()
+            //if((i > 5 && (i&1)) || ()
             ofSetColor(ofColor::lightGrey, 128);
         else
             ofSetColor(ofColor::darkGrey, 128);
         // draw the column rectangles
         ofDrawRectangle(i * boxWidth, 0, boxWidth, windowHeight);
-        // draw border coloumn lines
-        drawLine(i * boxWidth, 0, i * boxWidth, windowHeight, ofColor::dimGrey);
     }
     
     
-        // draw  horizontal grid lines to represent octaves
-        ofSetColor(backgroundColorSelector);
-        for(int i = 0; i < nRows; ++i){
-            ofDrawLine(0, i * boxHeight, windowWidth, i * boxHeight);
-    }
-    
+
 }
-    
-    void ofApp::drawLine(int x, int y, int x2, int y2, ofColor color, int alpha){
-        if(drawLinesButton){
-            ofSetColor(color, alpha);
-            ofDrawLine(x, y, x2, y2);
-        }
-    }
 
 //--------------------------------------------------------------
 void ofApp::drawActiveNotes(){
@@ -88,8 +102,20 @@ void ofApp::drawActiveNotes(){
         int noteNumber = note.first, velocity = note.second;
         int row = nRows - 1 - noteNumber / 12, col = noteNumber  % nColumns;
         // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
-        ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
+        //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
+        ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
+        
+        //float scaleR = noteColor.get
+        
+        
+        float lerpAmount = velocity * 2.f / 256.f;
+        
+        
+        ofSetColor(noteColor1.getLerped(noteColor2, lerpAmount));
+        
+        
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
+        std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
         //std::cout << "col: " << col << ", row: " << row << '\n';
     }
 }
@@ -139,6 +165,7 @@ void ofApp::windowResized(int w, int h){
     windowWidth = w - RIGHT_CONTROLBAR;
     windowHeight = h;
     
+    // calculate note box width/height based on window size
     boxWidth = windowWidth / nColumns;
     boxHeight = windowHeight / nRows;
     
