@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(true), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : useVirtualPort(false ), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -16,14 +16,17 @@ void ofApp::setup(){
     
     
     gui.setup();
+
     gui.add(drawLinesToggle.setup("Draw Lines", true));
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
-    gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(27,0,255,255), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(86,0,200,88), ofColor(0, 0), ofColor(255, 255)));
+    
+    gui.add(noteDisplayColorSelector1.setup("Note Display Color #1", ofColor(0,220,255,255), ofColor(0,0), ofColor(255,255)));
+    gui.add(noteDisplayColorSelector2.setup("Note Display Color #2", ofColor(0,5,255,255), ofColor(0,0), ofColor(255,255)));
     
     //ofColor(255,0,83,255)
-    gui.add(noteDisplayColorSelector1.setup("Note Display Color #1", ofColor::seaGreen, ofColor(0,0), ofColor(0,0)));
-    gui.add(noteDisplayColorSelector2.setup("Note Display Color #2", ofColor::lightGoldenRodYellow, ofColor(0,0), ofColor(0,0)));
+
     
     
     // set global display vars
@@ -115,7 +118,7 @@ void ofApp::drawActiveNotes(){
         
         
         ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
+        //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
         //std::cout << "col: " << col << ", row: " << row << '\n';
     }
 }
