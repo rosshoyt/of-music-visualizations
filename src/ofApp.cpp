@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(false ), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -75,13 +75,7 @@ void ofApp::drawBgdGrid(){
     
     // draw black and white background to represent fundamental pitches C - B
     for(int i = 0; i < nColumns; ++i) {
-//        // color the even numbered rows with chosen color
-//        if((i & 1) == 0){
-//            ofSetColor(octaveRowColorSelector);
-//            ofDrawRectangle(0, i * boxHeight, windowWidth, boxHeight);
-//
-//        }
-        
+    
         // set color to white for non-accidental keys, black for accidentals
         if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
             //if((i > 5 && (i&1)) || ()

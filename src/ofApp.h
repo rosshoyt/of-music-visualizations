@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "MIDIChannelNotesState.h"
-
+#include "MIDIPortNotesState.h"
 #define HEIGHT 1024
 #define WIDTH 1024
 #define RIGHT_CONTROLBAR 300
@@ -34,17 +34,12 @@ class ofApp : public ofBaseApp, ofxMidiListener{
     
         // gui components
         ofxPanel gui;
-
         ofxToggle drawLinesToggle;
-    
         ofxToggle drawBackgroundGridToggle;
-    
         ofColor backgroundColor;
-    
     
         ofxColorSlider gridLineColorSelector;
         ofxColorSlider octaveRowColorSelector;
-    
         ofxColorSlider noteDisplayColorSelector1;
         ofxColorSlider noteDisplayColorSelector2;
 private:
