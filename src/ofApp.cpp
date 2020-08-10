@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(false), virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), notes(), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : useVirtualPort(false),virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), numMidiChannels(10), channelNotes(useVirtualPort ? virtualMIDIPort : networkMIDIPort, useVirtualPort, numMidiChannels), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -11,7 +11,8 @@ void ofApp::setup(){
     ofSetWindowTitle("VS Visual");
     ofEnableAntiAliasing();
     
-    setupOfxMIDIPort();
+    
+    
     
     
     
@@ -22,11 +23,16 @@ void ofApp::setup(){
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
     gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(86,0,200,88), ofColor(0, 0), ofColor(255, 255)));
     
-    gui.add(noteDisplayColorSelector1.setup("Note Display Color #1", ofColor(0,220,255,255), ofColor(0,0), ofColor(255,255)));
-    gui.add(noteDisplayColorSelector2.setup("Note Display Color #2", ofColor(0,5,255,255), ofColor(0,0), ofColor(255,255)));
+    ofColor color1(0,5,255,255);
+    ofColor color2(50,220,255,255);
     
-    //ofColor(255,0,83,255)
-
+    channelColors = new ofxColorSlider[numMidiChannels];
+    for(int i = 0; i < numMidiChannels; ++i){
+        std::string channelName("Channel Color #");
+        channelName.append(std::to_string(i+1));
+        float lerpAmount = 1.0f / numMidiChannels * float(i) ;
+        gui.add(channelColors[i].setup(channelName, color2.lerp(color1, lerpAmount), ofColor(0,0), ofColor(255,255)));
+    }
     
     
     // set global display vars
@@ -93,27 +99,31 @@ void ofApp::drawBgdGrid(){
 //--------------------------------------------------------------
 void ofApp::drawActiveNotes(){
     // draw all notes currently being played
-    auto ns = notes.getAllNotes();
-    for(auto note : ns) {
-        //std::cout<< "drawing a note!\n";
-        int noteNumber = note.first, velocity = note.second;
-        int row = nRows - 1 - noteNumber / 12, col = noteNumber  % nColumns;
-        // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
-        //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
-        ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
+    for(unsigned int channelNumber = 0; channelNumber < numMidiChannels; ++channelNumber) {
         
-        //float scaleR = noteColor.get
-        
-        
-        float lerpAmount = velocity * 2.f / 256.f;
-        
-        
-        ofSetColor(noteColor1.getLerped(noteColor2, lerpAmount));
-        
-        
-        ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
-        //std::cout << "col: " << col << ", row: " << row << '\n';
+        auto ns = channelNotes.getChannelNotes(channelNumber);
+        for(auto note : ns) {
+            //std::cout<< "drawing a note!\n";
+            int noteNumber = note.first, velocity = note.second;
+            int row = nRows - 1 - noteNumber / 12, col = noteNumber  % nColumns;
+            // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
+            //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
+            //ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
+            
+            //float scaleR = noteColor.get
+            
+            
+            float lerpAmount = velocity * 2.f / 256.f;
+            
+            
+            //ofSetColor(noteColor1.getLerped(noteColor2, lerpAmount));
+            ofSetColor(channelColors[channelNumber],velocity * 2 );
+            
+            
+            ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
+            //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
+            //std::cout << "col: " << col << ", row: " << row << '\n';
+        }
     }
 }
 
@@ -177,53 +187,4 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
-}
-
-void ofApp::setupOfxMIDIPort(){
-    if(useVirtualPort) {
-        std::cout << "Setting up local virtual midi port " << virtualMIDIPort << "\n";
-        midiIn.openVirtualPort();
-        std::cout<< virtualMIDIPort <<" port # is "<< midiIn.getPort() << '\n';
-    }
-    else {
-        for(std::string portIn : midiIn.getInPortList()) {
-            std::cout << "Available InPort: " << portIn << '\n';
-            if(portIn.compare(networkMIDIPort) == 0){
-                midiIn.openPort(networkMIDIPort);
-                if(midiIn.isOpen())
-                    std::cout << "Found desired network port and opened it \n";
-            }
-        }
-        
-    }
-    midiIn.addListener(this);
-}
-
-void ofApp::newMidiMessage(ofxMidiMessage& message){
-    
-    switch(message.status) {
-        case MIDI_NOTE_ON:
-            //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
-            notes.tryAddNoteOn(message.pitch, message.velocity);
-            break;
-        case MIDI_NOTE_OFF:
-            //std::cout << "Setting pitch #" << message.pitch << " off\n";
-            notes.tryAddNoteOff(message.pitch);
-            break;
-        case MIDI_CONTROL_CHANGE:
-            // process MIDI Control Changes
-            switch(message.control){
-                case 64:
-                    switch(message.value){
-                        case 0:
-                            //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                            notes.setSustainPedalOff();
-                            break;
-                        case 127:
-                            //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                            notes.setSustainPedalOn();
-                            break;
-                    }
-            }
-    }
 }

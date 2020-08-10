@@ -20,6 +20,10 @@ public:
         //for(int i = 0; i < numChannels; ++i)
         //    channels[i] = new MIDIChannelNotesState();
     }
+    
+    std::map<int,int> getChannelNotes(unsigned int channel){
+        return channels[channel].getNotes();
+    }
 private:
     // Midi Input port
     ofxMidiIn midiIn;
@@ -32,16 +36,20 @@ private:
     
     MIDIChannelNotesState* channels;
     
+    /**
+     * ofMidiListener implemented method
+     */
     void newMidiMessage(ofxMidiMessage& message){
-        if(message.channel <= numChannels){
+        unsigned int channel(message.channel - 1);
+        if(channel < numChannels){
             switch(message.status) {
                 case MIDI_NOTE_ON:
                     //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
-                    channels[message.channel].tryAddNoteOn(message.pitch, message.velocity);
+                    channels[channel].tryAddNoteOn(message.pitch, message.velocity);
                     break;
                 case MIDI_NOTE_OFF:
                     //std::cout << "Setting pitch #" << message.pitch << " off\n";
-                    channels[message.channel].tryAddNoteOff(message.pitch);
+                    channels[channel].tryAddNoteOff(message.pitch);
                     break;
                 case MIDI_CONTROL_CHANGE:
                     // process MIDI Control Changes
@@ -50,11 +58,11 @@ private:
                             switch(message.value){
                                 case 0:
                                     //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                                    channels[message.channel].setSustainPedalOff();
+                                    channels[channel].setSustainPedalOff();
                                     break;
                                 case 127:
                                     //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
-                                    channels[message.channel].setSustainPedalOn();
+                                    channels[channel].setSustainPedalOn();
                                     break;
                             }
                     }

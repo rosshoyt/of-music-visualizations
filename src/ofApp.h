@@ -12,7 +12,7 @@
 #define WIDTH 1024
 #define RIGHT_CONTROLBAR 300
 
-class ofApp : public ofBaseApp, ofxMidiListener{
+class ofApp : public ofBaseApp {
 
 	public:
         ofApp();
@@ -42,6 +42,8 @@ class ofApp : public ofBaseApp, ofxMidiListener{
         ofxColorSlider octaveRowColorSelector;
         ofxColorSlider noteDisplayColorSelector1;
         ofxColorSlider noteDisplayColorSelector2;
+    
+        ofxColorSlider* channelColors;
 private:
         // Midi Input port
         ofxMidiIn midiIn;
@@ -50,6 +52,7 @@ private:
         // names of local and network MIDI ports.
         std::string virtualMIDIPort, networkMIDIPort;
     
+        unsigned int numMidiChannels;
         // Midi notes # 0 - 127 will be displayed, and there will be 5 extra unused boxes at the bottom right (12 X 11 = 132_
         int nColumns, nRows;
     
@@ -57,8 +60,9 @@ private:
     
     
         // Class storing the current state of the midi input's note on and note off's.
-        MIDIChannelNotesState notes;
-        
+        //MIDIChannelNotesState notes;
+        MIDIPortNotesState channelNotes;
+    
         // stores current width and height of the window
         int windowWidth, windowHeight;
     
@@ -70,11 +74,6 @@ private:
          * useVirtualPort is set to true; ot herwise, creates a network MIDI port
          */
         void setupOfxMIDIPort();
-    
-        /**
-         * ofMidiListener implemented method
-         */
-        void newMidiMessage(ofxMidiMessage& message);
     
         void drawBgdGridLines();
     
