@@ -6,7 +6,6 @@
 
 #include <iostream>
 
-#include "MIDIChannelNotesState.h"
 #include "MIDIPortNotesState.h"
 #define HEIGHT 1024
 #define WIDTH 1024
@@ -34,9 +33,11 @@ class ofApp : public ofBaseApp {
     
         // gui components
         ofxPanel gui;
+        ofxIntSlider pitchOffsetSlider;
         ofxToggle drawLinesToggle;
         ofxToggle drawBackgroundGridToggle;
         ofColor backgroundColor;
+    
     
         ofxColorSlider gridLineColorSelector;
         ofxColorSlider octaveRowColorSelector;
@@ -59,8 +60,7 @@ private:
         int boxWidth, boxHeight;
     
     
-        // Class storing the current state of the midi input's note on and note off's.
-        //MIDIChannelNotesState notes;
+        // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
         MIDIPortNotesState channelNotes;
     
         // stores current width and height of the window

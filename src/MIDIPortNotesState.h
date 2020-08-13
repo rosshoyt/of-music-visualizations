@@ -34,6 +34,7 @@ private:
     
     unsigned int numChannels;
     
+    // Array of channel note states represe
     MIDIChannelNotesState* channels;
     
     /**
@@ -44,7 +45,7 @@ private:
         if(channel < numChannels){
             switch(message.status) {
                 case MIDI_NOTE_ON:
-                    //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
+                     //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
                     channels[channel].tryAddNoteOn(message.pitch, message.velocity);
                     break;
                 case MIDI_NOTE_OFF:
