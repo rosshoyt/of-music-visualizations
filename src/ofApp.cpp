@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(false),virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), numMidiChannels(10), channelNotes(useVirtualPort ? virtualMIDIPort : networkMIDIPort, useVirtualPort, numMidiChannels), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : useVirtualPort(true),virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), numMidiChannels(10), channelNotes(useVirtualPort ? virtualMIDIPort : networkMIDIPort, useVirtualPort, numMidiChannels), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -106,23 +106,18 @@ void ofApp::drawActiveNotes(){
         for(auto note : ns) {
             //std::cout<< "drawing a note!\n";
             int noteNumber = note.first, velocity = note.second;
-            int row = nRows - 1 - noteNumber / 12, col = (noteNumber - pitchOffsetAmount)  % nColumns;
+            int row = nRows - 1 - (noteNumber - pitchOffsetAmount) / 12, col = (noteNumber - pitchOffsetAmount)  % nColumns;
             
-            // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
+            // TODO ensure MIDI NOTE #0 doesn't cause issue (scale midi note #s to start at 1?)
             //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
             //ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
-            
             //float scaleR = noteColor.get
             
-            
             float lerpAmount = velocity * 2.f / 256.f;
-            
-            
-            //ofSetColor(noteColor1.getLerped(noteColor2, lerpAmount));
             ofSetColor(channelColors[channelNumber],velocity * 2 );
-            
-            
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
+            
+            // debug msgs
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
             //std::cout << "col: " << col << ", row: " << row << '\n';
         }
