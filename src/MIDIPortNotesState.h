@@ -15,14 +15,26 @@ public:
     MIDIPortNotesState(std::string portName, bool useVirtualPort, unsigned int numChannels) : portName(portName), useVirtualPort(useVirtualPort), numChannels(numChannels > 16 ? 16 : numChannels){
         
         setupOfxMIDIPort();
-        
         channels = new MIDIChannelNotesState[this->numChannels];
-        //for(int i = 0; i < numChannels; ++i)
-        //    channels[i] = new MIDIChannelNotesState();
     }
     
+    /**
+     * Gets all the notes currently held down or sustained with pedal on the specified midi channel
+     * @param channel - MIDI Channel Number (1-16)
+     * TODO Input validation
+     */
     std::map<int,int> getChannelNotes(unsigned int channel){
         return channels[channel].getNotes();
+    }
+    
+    /**
+     * Gets the current value of the specified MIDI CC value based on its channel
+     * @param channel - MIDI Channel Number (1-16)
+     * @param ccNumber - MIDI CC Number (0-127)
+     * TODO Input validation
+     */
+    int getMIDICCValue(unsigned int channel, int ccNumber){
+        return channels[channel - 1].tryGetCCValue(ccNumber);
     }
 private:
     // Midi Input port
@@ -45,28 +57,37 @@ private:
         if(channel < numChannels){
             switch(message.status) {
                 case MIDI_NOTE_ON:
-                     //std::cout << "Setting pitch #" << message.pitch << " on, velocity = " << message.velocity  << "\n";
                     channels[channel].tryAddNoteOn(message.pitch, message.velocity);
+                    // TODO refactor channel to process each midi message independantly
                     break;
+                    
                 case MIDI_NOTE_OFF:
-                    //std::cout << "Setting pitch #" << message.pitch << " off\n";
                     channels[channel].tryAddNoteOff(message.pitch);
                     break;
+                    
                 case MIDI_CONTROL_CHANGE:
                     // process MIDI Control Changes
                     switch(message.control){
+                        case 1:
+                            // TODO eliminate data redundancy between classes (move CC handling to MidiChannelNotesState.h
+                             channels[channel].tryAddMIDICC(message.control, message.value);
+                            break;
+                            
                         case 64:
                             switch(message.value){
                                 case 0:
                                     //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
                                     channels[channel].setSustainPedalOff();
                                     break;
+                                    
                                 case 127:
                                     //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
                                     channels[channel].setSustainPedalOn();
                                     break;
                             }
+                            channels[channel].tryAddMIDICC(message.control, message.value);
                     }
+                    break;
             }
         }
     }

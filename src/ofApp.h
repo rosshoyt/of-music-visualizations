@@ -33,17 +33,21 @@ class ofApp : public ofBaseApp {
     
         // gui components
         ofxPanel gui;
+    
         ofxIntSlider pitchOffsetSlider;
+        ofxToggle pitchOffsetUseMIDICCToggle;
+        ofParameter<int> pitchOffsetAmount;
+    
         ofxToggle drawLinesToggle;
         ofxToggle drawBackgroundGridToggle;
         ofColor backgroundColor;
-    
-    
+        
         ofxColorSlider gridLineColorSelector;
         ofxColorSlider octaveRowColorSelector;
         ofxColorSlider noteDisplayColorSelector1;
         ofxColorSlider noteDisplayColorSelector2;
     
+        // array of color sliders for each midi channel
         ofxColorSlider* channelColors;
 private:
         // Midi Input port
@@ -54,6 +58,7 @@ private:
         std::string virtualMIDIPort, networkMIDIPort;
     
         unsigned int numMidiChannels;
+    
         // Midi notes # 0 - 127 will be displayed, and there will be 5 extra unused boxes at the bottom right (12 X 11 = 132_
         int nColumns, nRows;
     
@@ -80,5 +85,5 @@ private:
         void drawBgdGrid();
     
         void drawActiveNotes();
-
+    
 };

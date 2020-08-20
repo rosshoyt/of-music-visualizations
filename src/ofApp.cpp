@@ -12,7 +12,13 @@ void ofApp::setup(){
     ofEnableAntiAliasing();
     
     gui.setup();
+    // pitch-offset display controls
     gui.add(pitchOffsetSlider.setup("Pitch Offset (Half-Steps)", 0, 0, 11));
+    gui.add(pitchOffsetUseMIDICCToggle.setup("Toggle Pitch Offset MIDI CC Control", false));
+    pitchOffsetAmount.set("Pitch Offset (Half-Steps) MIDI CC-Controlled Value",0,0,11);
+    gui.add(pitchOffsetAmount);
+    
+    // background/animation view controls
     gui.add(drawLinesToggle.setup("Draw Lines", true));
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
@@ -38,7 +44,10 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    // update the pitch offset amount
+    if(pitchOffsetUseMIDICCToggle) pitchOffsetAmount.set(std::round(channelNotes.getMIDICCValue(1, 1) / 12.f));
+    else
+        pitchOffsetAmount.set(pitchOffsetSlider);
 }
 
 //--------------------------------------------------------------
@@ -47,7 +56,6 @@ void ofApp::draw(){
         drawBgdGrid();
     if(drawLinesToggle)
         drawBgdGridLines();
-    
     
     drawActiveNotes();
     
@@ -77,7 +85,7 @@ void ofApp::drawBgdGrid(){
     
     // draw black and white background to represent fundamental pitches C - B
     for(int i = 0; i < nColumns; ++i) {
-        int colPitch = (i + pitchOffsetSlider) % nColumns;
+        int colPitch = (i + pitchOffsetAmount) % nColumns;
         // set color to white for non-accidental keys, black for accidentals
         if(colPitch == 0 || colPitch == 2 || colPitch == 4 || colPitch == 5 || colPitch == 7 || colPitch == 9 || colPitch == 11)
             //if((i > 5 && (i&1)) || ()
@@ -87,9 +95,6 @@ void ofApp::drawBgdGrid(){
         // draw the column rectangles
         ofDrawRectangle(i * boxWidth, 0, boxWidth, windowHeight);
     }
-    
-    
-
 }
 
 //--------------------------------------------------------------
@@ -101,7 +106,8 @@ void ofApp::drawActiveNotes(){
         for(auto note : ns) {
             //std::cout<< "drawing a note!\n";
             int noteNumber = note.first, velocity = note.second;
-            int row = nRows - 1 - noteNumber / 12, col = (noteNumber - pitchOffsetSlider)  % nColumns;
+            int row = nRows - 1 - noteNumber / 12, col = (noteNumber - pitchOffsetAmount)  % nColumns;
+            
             // TODO ensure MIDI NOTE #0 doesn't cause issue ( scale midi note #s to start at 1?)
             //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
             //ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
@@ -118,7 +124,7 @@ void ofApp::drawActiveNotes(){
             
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
-            std::cout << "col: " << col << ", row: " << row << '\n';
+            //std::cout << "col: " << col << ", row: " << row << '\n';
         }
     }
 }
