@@ -34,13 +34,53 @@ private:
     std::mutex mtx;
 };
 
+
+
 /**
- * Class encapsulating the state of MIDI inputted Note On and Note Offs for a single MIDI channel.
+ * Class encapsulating the state of a single MIDI channel. Processes NoteOn, NoteOff, and all Control Change Messages.
  * Supports concurrent read/write access across multiple threads via mutex locks
  */
-class MIDIChannelNotesState {
+class MIDIChannelState {
 public:
-    MIDIChannelNotesState() : activeNoteOns(), sustainedNotes(), midiCCState(128), sustained(false), mtx(), mtxSusNotes() {}
+    MIDIChannelState() : activeNoteOns(), sustainedNotes(), midiCCState(128), sustained(false), mtx(), mtxSusNotes() {}
+    
+    void processMIDIMessage(ofxMidiMessage& message){
+        switch(message.status) {
+            case MIDI_NOTE_ON:
+                tryAddNoteOn(message.pitch, message.velocity);
+                // TODO refactor channel to process each midi message independantly
+                break;
+                
+            case MIDI_NOTE_OFF:
+                tryAddNoteOff(message.pitch);
+                break;
+                
+            case MIDI_CONTROL_CHANGE:
+                processMIDICC(message);
+                
+                break;
+        }
+    }
+    
+    void processMIDICC(ofxMidiMessage& message){
+        switch(message.control){
+            case 1:
+                tryAddMIDICC(message.control, message.value);
+                break;
+            case 64:
+                switch(message.value){
+                    case 0:
+                        //std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
+                        setSustainPedalOff();
+                        break;
+                        
+                    case 127:
+                        
+                        setSustainPedalOn();
+                        break;
+                }
+        }
+    }
     
     void tryAddNoteOn(int note, int velocity){
         Lock lck(mtx,std::defer_lock);
@@ -54,7 +94,7 @@ public:
         if(sustained) {
             // move note from activeNoteOns to sustainedNotes
             // record the note's initial (earliest occuring) NoteOn Velocity
-            int noteOnVel = activeNoteOns.at(note); // 'concurrent access is safe' @see http://www.cplusplus.com/reference/map/map/at/
+            int noteOnVel = activeNoteOns.at(note); // 'concurrent access is safe' @s`ee http://www.cplusplus.com/reference/map/map/at/
             // add to sustainedNotes
             Lock lck2 (mtxSusNotes,std::defer_lock);
             lck2.lock();
@@ -76,6 +116,7 @@ public:
     
     void setSustainPedalOff(){
         if(sustained){
+            
             sustained.store(false);
             // clear all notes from sustainedNotes
             Lock lck (mtxSusNotes,std::defer_lock);
@@ -117,13 +158,13 @@ public:
         return n;
     }
     
-     void tryAddMIDICC(int midiCC, int value) {
-         //std::cout << "Recieved midi CC #1 val = " << value << '\n';
-         Lock lck (mtx,std::defer_lock);
-         lck.lock();
-         midiCCState[midiCC].setValue(value);
-         lck.unlock();
-     }
+    void tryAddMIDICC(int midiCC, int value) {
+        //std::cout << "Recieved midi CC #1 val = " << value << '\n';
+        Lock lck (mtx,std::defer_lock);
+        lck.lock();
+        midiCCState[midiCC].setValue(value);
+        lck.unlock();
+    }
     
     int tryGetCCValue(int ccNo){
         Lock lck (mtx,std::defer_lock);
@@ -134,7 +175,7 @@ public:
         return cpy;
     }
     
-
+    
     bool sustainPedalIsDown(){
         return sustained.load();
     }
@@ -151,8 +192,8 @@ private:
     
     std::vector<MidiCCNode> midiCCState;
     
-
-
+    
+    
 };
 
 #endif /* MidiNotesState_h */

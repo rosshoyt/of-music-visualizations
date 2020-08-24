@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
 <group>
 	<Draw_Lines_Toggle>1</Draw_Lines_Toggle>
-	<Octave_Row_Color>219, 209, 174, 0</Octave_Row_Color>
-	<Grid_Line_Color>54, 219, 77, 105</Grid_Line_Color>
+	<Octave_Row_Color>13, 0, 45, 255</Octave_Row_Color>
+	<Grid_Line_Color>0, 0, 0, 255</Grid_Line_Color>
+	<Pitch_Offset__Half-Steps_>0</Pitch_Offset__Half-Steps_>
+	<Toggle_Pitch_Offset_MIDI_CC_Control>0</Toggle_Pitch_Offset_MIDI_CC_Control>
+	<Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>0</Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>
+	<Draw_Lines>0</Draw_Lines>
+	<Draw_Rows_Columns>0</Draw_Rows_Columns>
+	<Channel_Color__1>160, 0, 241, 255</Channel_Color__1>
+	<Channel_Color__2>55, 64, 255, 255</Channel_Color__2>
+	<Channel_Color__3>120, 255, 94, 255</Channel_Color__3>
+	<Channel_Color__4>96, 145, 255, 255</Channel_Color__4>
+	<Channel_Color__5>30, 134, 255, 255</Channel_Color__5>
+	<Channel_Color__6>25, 112, 255, 255</Channel_Color__6>
+	<Channel_Color__7>19, 90, 255, 255</Channel_Color__7>
+	<Channel_Color__8>15, 69, 255, 255</Channel_Color__8>
+	<Channel_Color__9>9, 47, 255, 255</Channel_Color__9>
+	<Channel_Color__10>4, 26, 255, 255</Channel_Color__10>
 </group>
