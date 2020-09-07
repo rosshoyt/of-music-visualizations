@@ -7,8 +7,8 @@
 
 #ifndef MIDIPortNotesState_h
 #define MIDIPortNotesState_h
-
-#import "MIDIChannelState.h"
+#include "ofxMidi.h"
+#include "MIDIChannelState.h"
 
 class MIDIPortState : public ofxMidiListener {
 public:
