@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : useVirtualPort(true),virtualMIDIPort("ofxMidiIn Input"), networkMIDIPort("Network Session 1"), numMidiChannels(10), channelNotes(useVirtualPort ? virtualMIDIPort : networkMIDIPort, useVirtualPort, numMidiChannels), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : midiPortState(4), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -28,14 +28,17 @@ void ofApp::setup(){
     ofColor color1(0,5,255,255);
     ofColor color2(50,220,255,255);
     
-    channelColors = new ofxColorSlider[numMidiChannels];
-    for(int i = 0; i < numMidiChannels; ++i){
+    int numMIDIChannels = midiPortState.getNumChannels();
+    channelColors = new ofxColorSlider[numMIDIChannels];
+    for(int i = 0; i < numMIDIChannels; ++i){
         std::string channelName("Channel Color #");
         channelName.append(std::to_string(i+1));
-        float lerpAmount = 1.0f / numMidiChannels * float(i) ;
+        float lerpAmount = 1.0f / numMIDIChannels * float(i) ;
         gui.add(channelColors[i].setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0,0), ofColor(255,255)));
     }
     
+    // initialize network MIDI port
+    midiPortState.setupMIDIPort();
     
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
@@ -45,7 +48,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     // update the pitch offset amount
-    if(pitchOffsetUseMIDICCToggle) pitchOffsetAmount.set(std::round(channelNotes.getMIDICCValue(1, 1) / 12.f));
+    if(pitchOffsetUseMIDICCToggle) pitchOffsetAmount.set(std::round(midiPortState.getMIDICCValue(1, 1) / 12.f));
     else
         pitchOffsetAmount.set(pitchOffsetSlider);
 }
@@ -100,9 +103,9 @@ void ofApp::drawBgdGrid(){
 //--------------------------------------------------------------
 void ofApp::drawActiveNotes(){
     // draw all notes currently being played
-    for(unsigned int channelNumber = 0; channelNumber < numMidiChannels; ++channelNumber) {
+    for(unsigned int channelNumber = 0; channelNumber < midiPortState.getNumChannels(); ++channelNumber) {
         
-        auto ns = channelNotes.getChannelNotes(channelNumber);
+        auto ns = midiPortState.getChannelNotes(channelNumber);
         for(auto note : ns) {
             //std::cout<< "drawing a note!\n";
             int noteNumber = note.first, velocity = note.second;
