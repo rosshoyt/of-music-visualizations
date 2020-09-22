@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : midiPortState(4), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : midiPortState(4, false), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -120,7 +120,8 @@ void ofApp::drawActiveNotes(){
             ofSetColor(channelColors[channelNumber],velocity * 2 );
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             
-            // debug msgs
+            // debug msgs TODO delete
+            std::cout << "Note #" << noteNumber << " ADSR val = " << midiPortState.getADSRValue(channelNumber, noteNumber) << '\n';
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
             //std::cout << "col: " << col << ", row: " << row << '\n';
         }

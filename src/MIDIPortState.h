@@ -73,6 +73,10 @@ public:
     int getMIDICCValue(unsigned int channel, int ccNumber){
         return channels[channel - 1].tryGetCCValue(ccNumber);
     }
+    
+    float getADSRValue(unsigned int channel, int noteNumber){
+        return channels[channel - 1].getADSRLevel(noteNumber);
+    }
 private:
     // Midi Input port
     ofxMidiIn midiIn;
