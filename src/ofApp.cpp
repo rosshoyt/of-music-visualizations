@@ -116,12 +116,13 @@ void ofApp::drawActiveNotes(){
             //ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
             //float scaleR = noteColor.get
             
+            auto adsrVal = midiPortState.getADSRValue(channelNumber, noteNumber);
+            
             float lerpAmount = velocity * 2.f / 256.f;
             ofSetColor(channelColors[channelNumber],velocity * 2 );
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             
             // debug msgs TODO delete
-            auto adsrVal = midiPortState.getADSRValue(channelNumber, noteNumber);
             //std::cout << "Note #" << noteNumber << " ADSR val = " << adsrVal << '\n';
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
             //std::cout << "col: " << col << ", row: " << row << '\n';

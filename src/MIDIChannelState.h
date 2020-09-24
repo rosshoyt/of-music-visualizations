@@ -46,8 +46,8 @@ public:
         
         ADSR pianoADSR;
         for(int i = 0; i < 128; i++){
-            NoteADSRState adsrNode(pianoADSR);
-            adsrStates.push_back(&adsrNode);
+            NoteADSRState* adsrNode = new NoteADSRState(pianoADSR);
+            adsrStates.push_back(adsrNode);
         }
     }
     
@@ -100,11 +100,8 @@ public:
     }
     
     void tryAddNoteOff(int note){
-        bool clearADSR = true;
         // We may want to continue to hear the note if the sustain pedal is down, so track it
         if(sustained) {
-            clearADSR = false;
-            
             // Move note to sustainedNotes
             // first get the note's earliest occuring NoteOn Velocity
             // TODO could cause exception if key not exists in the map (cased by corrupted MIDI data)
@@ -151,10 +148,12 @@ public:
             
         }
     }
+    
     // TODO input validation
     float getADSRLevel(int note){
         return adsrStates[note]->getLevel();
     }
+    
     std::map<int,int> getNotes(){
         Lock lck (mtx,std::defer_lock);
         lck.lock();

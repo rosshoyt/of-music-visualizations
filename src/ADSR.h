@@ -14,60 +14,75 @@ typedef std::chrono::system_clock SystemClock;
 class Time{
 public:
    
-    const long getCurrentTime(){
+    static const long getCurrentTime(){
         std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
         auto duration = now.time_since_epoch();
         auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
-        std::cout << "Getting current time of " << millis << '\n';
+        //std::cout << "In getCurrentTime, current time (MS) = " << millis << '\n';
         return millis;
     }
     
    
-    const long elapsedTimeSince(long oldTime){
+    static const long elapsedTimeSince(long oldTime){
         long elapsed = getCurrentTime() - oldTime;
         //std::cout<< elapsed << " milliseconds elapsed\n";
         return elapsed;
     }
-private:
-
     
 };
 
 // Class which can be shared between NoteADSRState
 class ADSR {
 public:
-    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.f) {
+    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.0f) {
         total = this->a + this->d + this->r + this->s;
         std::cout << "ADSR total = " << total << '\n';
     }
     float getLevel(long elapsed){
-        float level(0.f);
+        long startLevel, endLevel;
         
-        long start, end;
-        long divisor;
-        std::cout<< "Getting ADSR level for elapsed ms = " << elapsed << '\n';
-        if(elapsed < (divisor += a)){
-            start = 0.f;
-            end = aL;
+        // segment of the ADSR curve that the elapsed time falls into
+        long portionTimeLength(a);
+        
+        long portionCompleted;
+        
+        if(elapsed <= portionTimeLength){
+            startLevel = 0.f;
+            endLevel = aL;
+            portionCompleted = elapsed;
             //lerpAmt = float(elapsed.count()) / float(a.count());
-        } else if(elapsed < (divisor += d)){
-            start = dL;
-            end = sL;
-            
-        } else if(elapsed < (divisor += s)){
-            start = sL;
-            end = 0.f;
         }
-        std::cout << "After if/elses, start = " << start << " end = " << end << " divisor(ms)= " << elapsed << '\n';
-        return lerp(start, end, float(elapsed) / float(divisor));
+        // TODO update portion time length to store lengths used in below if() conditions
+        else if(elapsed <= (portionTimeLength + d)){
+            startLevel = dL;
+            endLevel = sL;
+            portionCompleted = elapsed - a;
+        } else if(elapsed <= (portionTimeLength + d + s)){
+            startLevel = sL;
+            endLevel = 0.f;
+            portionCompleted = elapsed - a - d;
+        }
+        std::cout << "Before Linear Interpolation, startLevel = " << startLevel << ", endLevel = " << endLevel << ", portionCompleted = " << elapsed << ", portionTimeLength = "<< portionCompleted<<'\n';
+        return lerp(startLevel, endLevel, float(portionCompleted) / float(portionTimeLength));
         
     }
     
 private:
-    static float lerp(float a, float b, float f){
-        return (a * (1.0 - f)) + (b * f);
-    }
+//    static float lerp(float a, float b, float f){
+//        return (a * (1.0 - f)) + (b * f);
+//    }
     
+    // http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0811r2.html
+    const float lerp(float a, float b, float t) {
+        // Exact, monotonic, bounded, determinate, and (for a=b=0) consistent:
+        if(a<=0 && b>=0 || a>=0 && b<=0) return t*b + (1-t)*a;
+        
+        if(t==1) return b;                        // exact
+        // Exact at t=0, monotonic except near t=1,
+        // bounded, determinate, and consistent:
+        const float x = a + t*(b-a);
+        return t>1 == b>a ? std::max(b,x) : std::min(b,x);  // monotonic near t=1
+    }
     long a, d, s, r, total;
     float aL, dL, sL;
     
@@ -76,25 +91,31 @@ private:
 class NoteADSRState{
 public:
        
-    NoteADSRState(ADSR adsr) : time(), adsr(adsr), level(0.f), active(), startTime(), endTime() {
-        
-    }
-    
+    NoteADSRState(ADSR adsr) : adsr(adsr), active(), startTime(), endTime() {}
     
     void start(){
-        startTime = time.getCurrentTime();
+        startTime = Time::getCurrentTime();
         active.store(true);
         
     }
     void stop(){
-        endTime = time.getCurrentTime();
-        level = 0.f;
+        endTime = Time::getCurrentTime();
+        //level = 0.f;
         active.store(false);
     }
     
     float getLevel(){
-        update();
-        return level;
+//        auto level(0.f);
+        if(active){
+            //std::cout << "Getting time elapsed since start time = " << startTime << '\n';
+            auto timePassed = Time::elapsedTimeSince(startTime);
+            //console.lo
+            std::cout<< timePassed << " milliseconds elapsed\n";
+            auto level = adsr.getLevel(timePassed);
+            std::cout<<"Note ADSR Level = " << level << '\n';
+            return level;
+        }
+        return 0.f;//level;
     }
     
     void setADSR(ADSR adsr){
@@ -102,22 +123,13 @@ public:
     }
     
 private:
-    void update(){
-        if(active){
-            //TimeMS elapsed(startTime - Time::getCurrentTime());
-            //auto timeElapsed =
-            auto timePassed = time.elapsedTimeSince(startTime);
-            //console.lo
-            std::cout<< timePassed << " milliseconds elapsed\n";
-            level = adsr.getLevel(timePassed);
-            //std::cout<<"Note ADSR Level = " << level << '\n';
-            
-        }
-    }
-    Time time;
+//    void update(){
+//
+//    }
+//    Time time;
     std::atomic<bool> active;
     ADSR adsr;
-    float level;
+    //float level;
     long startTime, endTime;
 };
 
