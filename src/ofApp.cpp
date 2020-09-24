@@ -121,7 +121,8 @@ void ofApp::drawActiveNotes(){
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             
             // debug msgs TODO delete
-            std::cout << "Note #" << noteNumber << " ADSR val = " << midiPortState.getADSRValue(channelNumber, noteNumber) << '\n';
+            auto adsrVal = midiPortState.getADSRValue(channelNumber, noteNumber);
+            //std::cout << "Note #" << noteNumber << " ADSR val = " << adsrVal << '\n';
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
             //std::cout << "col: " << col << ", row: " << row << '\n';
         }

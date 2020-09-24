@@ -8,6 +8,7 @@
 #ifndef MidiNotesState_h
 #define MidiNotesState_h
 #include "ofxMidi.h"
+#include "ADSR.h"
 
 typedef std::unique_lock<std::mutex> Lock;
 
@@ -33,103 +34,6 @@ public:
 private:
     int value;
     std::mutex mtx;
-};
-
-
-
-
-typedef std::chrono::milliseconds TimeMS;
-
-class Time{
-public:
-    // TODO move to a Time Utils class
-    static TimeMS getCurrentTime(){
-        return std::chrono::duration_cast<TimeMS>(std::chrono::system_clock::now().time_since_epoch());
-    }
-};
-
-// Class which can be shared between NoteADSRState
-class ADSR {
-
-public:
-    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.f) {
-        total = this->a + this->d + this->r + this->s;
-    }
-    
-    
-    float getLevel(TimeMS elapsed){
-        float level(0.f);
-        
-        float start, end, numerator = float(elapsed.count());
-        TimeMS divisor;
-        if(elapsed < (divisor += a)){
-            start = 0.f;
-            end = aL;
-            //lerpAmt = float(elapsed.count()) / float(a.count());
-        } else if(elapsed < (divisor += d)){
-            start = dL;
-            end = sL;
-            
-        } else if(elapsed < (divisor += s)){
-            start = sL;
-            end = 0.f;
-        }
-        return lerp(start, end, numerator / float(divisor.count()));
-        
-    }
-    
-private:
-    static float lerp(float a, float b, float f){
-        return (a * (1.0 - f)) + (b * f);
-    }
-    
-    TimeMS a, d, s, r, total;
-    float aL, dL, sL;
-    
-    
-};
-
-class NoteADSRState{
-public:
-    
-    
-    NoteADSRState(ADSR adsr) : adsr(adsr), level(0.f), active(), startTime(), endTime() {
-        
-    }
-    
-    
-    
-    void update(){
-        if(active){
-            TimeMS elapsed = Time::getCurrentTime() - startTime;
-            level = adsr.getLevel(elapsed);
-            std::cout<<"Note ADSR Level = " << level << '\n';
-        }
-    }
-    void start(){
-        startTime = Time::getCurrentTime();
-        active.store(true);
-        
-    }
-    void stop(){
-        level = 0.f;
-        active.store(false);
-    }
-    
-    float getLevel(){
-        return level;
-    }
-    
-    void setADSR(ADSR adsr){
-        this->adsr = adsr;
-    }
-    
-private:
-    
-    std::atomic<bool> active;
-    ADSR adsr;
-    float level;
-    TimeMS startTime, endTime;
 };
 
 /**
