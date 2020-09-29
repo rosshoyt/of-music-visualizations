@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : midiPortState(4, false), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : midiPortState(4, true ), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -119,7 +119,7 @@ void ofApp::drawActiveNotes(){
             auto adsrVal = midiPortState.getADSRValue(channelNumber, noteNumber);
             
             float lerpAmount = velocity * 2.f / 256.f;
-            ofSetColor(channelColors[channelNumber],velocity * 2 );
+            ofSetColor(channelColors[channelNumber],/*velocity * 2*/ adsrVal * 256 );
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             
             // debug msgs TODO delete

@@ -21,8 +21,6 @@ public:
         //std::cout << "In getCurrentTime, current time (MS) = " << millis << '\n';
         return millis;
     }
-    
-   
     static const long elapsedTimeSince(long oldTime){
         long elapsed = getCurrentTime() - oldTime;
         //std::cout<< elapsed << " milliseconds elapsed\n";
@@ -30,47 +28,144 @@ public:
     }
     
 };
-
+enum ADSRState {
+    ATTACKING,
+    DECAYING,
+    SUSTAINING,
+    RELEASING,
+    OFF
+};
 // Class which can be shared between NoteADSRState
+// TODO add 'looping' ADSR curve
 class ADSR {
 public:
-    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.0f) {
-        total = this->a + this->d + this->r + this->s;
-        std::cout << "ADSR total = " << total << '\n';
+    
+    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.0f), sustainLoop(sustainLoop) {
+        init();
+        
+        
+        //std::cout << "ADSR total = " << total << '\n';
     }
-    float getLevel(long elapsed){
-        long startLevel, endLevel;
+    bool sustainLoop;
+    long a, d, s, r, total;
+    float aL, dL, sL;
+    long aTot, dTot, sTot, rTot;
+    
+    
+private:
+    void init(){
+        aTot = a;
+        dTot = aTot + d;
+        sTot = dTot + s;
+        rTot = sTot + r;
+        total = rTot;
+    }
+    //long getLength()
+};
+
+class NoteADSRState{
+public:
+       
+    NoteADSRState(ADSR adsr) : adsr(adsr), adsrState(OFF), active(), startTime(), endTime() {}
+    
+    void start(){
+        startTime = Time::getCurrentTime();
+        //active.store(true);
+        adsrState = ATTACKING;
         
-        // segment of the ADSR curve that the elapsed time falls into
-        long portionTimeLength(a);
-        
-        long portionCompleted;
-        
-        if(elapsed <= portionTimeLength){
-            startLevel = 0.f;
-            endLevel = aL;
-            portionCompleted = elapsed;
-            //lerpAmt = float(elapsed.count()) / float(a.count());
+    }
+    void stop(){
+        endTime = Time::getCurrentTime();
+        //level = 0.f;
+        //active.store(false);
+        adsrState = OFF;
+    }
+    
+    float getLevel(){
+//        auto level(0.f);
+        if(adsrState != OFF){
+            //std::cout << "Getting time elapsed since start time = " << startTime << '\n';
+            auto timePassed = Time::elapsedTimeSince(startTime);
+            //console.lo
+            std::cout<< timePassed << " milliseconds elapsed\n";
+            auto level = getLevel(timePassed);
+            std::cout<<"Note ADSR Level = " << level << '\n';
+            return level;
         }
-        // TODO update portion time length to store lengths used in below if() conditions
-        else if(elapsed <= (portionTimeLength + d)){
-            startLevel = dL;
-            endLevel = sL;
-            portionCompleted = elapsed - a;
-        } else if(elapsed <= (portionTimeLength + d + s)){
-            startLevel = sL;
-            endLevel = 0.f;
-            portionCompleted = elapsed - a - d;
-        }
-        std::cout << "Before Linear Interpolation, startLevel = " << startLevel << ", endLevel = " << endLevel << ", portionCompleted = " << elapsed << ", portionTimeLength = "<< portionCompleted<<'\n';
-        return lerp(startLevel, endLevel, float(portionCompleted) / float(portionTimeLength));
-        
+        return 0.f;//level;
+    }
+    
+    void setADSR(ADSR adsr){
+        this->adsr = adsr;
     }
     
 private:
-//    static float lerp(float a, float b, float f){
-//        return (a * (1.0 - f)) + (b * f);
+    //std::map<ADSRState,long> state;
+    std::vector<std::pair<long,ADSRState>> states;
+    
+    void updateState(){
+        
+    }
+    float getLevel(long elapsed){
+        // segment of the ADSR curve that the elapsed time falls into
+        //long currentSegmentTimeLength(adsr.a),  segmentTimeLength = currentSegmentTimeLength;
+        long segmentTimeLength;
+        // how much of the current ADSR segment has been completed (in time)
+        long segmentCompleted;
+        // start/end levels of current segment (To be determined)
+        long startLevel, endLevel;
+        
+        // Attacking
+        if(elapsed <= adsr.aTot){
+            startLevel = 0.f; // TODO user specify start level?
+            endLevel = adsr.aL;
+            segmentTimeLength = adsr.a;
+            segmentCompleted = elapsed;
+            
+        }
+        // Releasing TODO update segment time length to store lengths used in below if() conditions
+        else if(elapsed <= adsr.dTot){
+            startLevel = adsr.aL;
+            endLevel = adsr.dL;
+            segmentTimeLength = adsr.d;
+            segmentCompleted = elapsed - adsr.a;
+            //adsrState = ATTACKING;
+        }
+        // Sustaining
+        else if(elapsed <= adsr.sTot){
+            startLevel = adsr.dL;
+            endLevel = adsr.sL;
+            segmentTimeLength = adsr.s;
+            segmentCompleted = elapsed - adsr.a - adsr.d;
+        }
+        // Releasing
+        else if(elapsed <= adsr.rTot){
+            startLevel = adsr.sL;
+            endLevel = 0.f;
+            segmentTimeLength = adsr.r;
+            segmentCompleted = elapsed - adsr.a - adsr.d - adsr.s;
+        }
+        else {
+            // Note has been completed
+            return 0.f;
+        }
+        //endLevel = " << endLevel << ", elapsed = " << elapsed << ", segmentCompleted = "<< segmentCompleted<< "/segmentTimeLength = " << segmentTimeLength << '\n';
+        return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
+        
+    }
+//    void update(){
+//
 //    }
+//    Time time;
+    std::atomic<bool> active;
+    ADSR adsr;
+    ADSRState adsrState;
+    //float level;
+    long startTime, endTime;
+    
+    //    static float lerp(float a, float b, float f){
+    //        return (a * (1.0 - f)) + (b * f);
+    //    }
     
     // http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0811r2.html
     const float lerp(float a, float b, float t) {
@@ -83,54 +178,6 @@ private:
         const float x = a + t*(b-a);
         return t>1 == b>a ? std::max(b,x) : std::min(b,x);  // monotonic near t=1
     }
-    long a, d, s, r, total;
-    float aL, dL, sL;
-    
-};
-
-class NoteADSRState{
-public:
-       
-    NoteADSRState(ADSR adsr) : adsr(adsr), active(), startTime(), endTime() {}
-    
-    void start(){
-        startTime = Time::getCurrentTime();
-        active.store(true);
-        
-    }
-    void stop(){
-        endTime = Time::getCurrentTime();
-        //level = 0.f;
-        active.store(false);
-    }
-    
-    float getLevel(){
-//        auto level(0.f);
-        if(active){
-            //std::cout << "Getting time elapsed since start time = " << startTime << '\n';
-            auto timePassed = Time::elapsedTimeSince(startTime);
-            //console.lo
-            std::cout<< timePassed << " milliseconds elapsed\n";
-            auto level = adsr.getLevel(timePassed);
-            std::cout<<"Note ADSR Level = " << level << '\n';
-            return level;
-        }
-        return 0.f;//level;
-    }
-    
-    void setADSR(ADSR adsr){
-        this->adsr = adsr;
-    }
-    
-private:
-//    void update(){
-//
-//    }
-//    Time time;
-    std::atomic<bool> active;
-    ADSR adsr;
-    //float level;
-    long startTime, endTime;
 };
 
 #endif /* ADSR_h */
