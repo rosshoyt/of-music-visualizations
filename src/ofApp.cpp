@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : midiPortState(4, true ), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
+ofApp::ofApp() : midiPortState(4, true), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
 
 }
 
@@ -18,8 +18,11 @@ void ofApp::setup(){
     pitchOffsetAmount.set("Pitch Offset (Half-Steps) MIDI CC-Controlled Value",0,0,11);
     gui.add(pitchOffsetAmount);
     
+    
     // background/animation view controls
+    gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawLinesToggle.setup("Draw Lines", true));
+    
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
     gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(86,0,200,88), ofColor(0, 0), ofColor(255, 255)));
@@ -55,6 +58,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackground(backgroundColorSelector);
     if(drawBackgroundGridToggle)
         drawBgdGrid();
     if(drawLinesToggle)
@@ -119,7 +123,7 @@ void ofApp::drawActiveNotes(){
             auto adsrVal = midiPortState.getADSRValue(channelNumber, noteNumber);
             
             float lerpAmount = velocity * 2.f / 256.f;
-            ofSetColor(channelColors[channelNumber],/*velocity * 2*/ adsrVal * 256 );
+            ofSetColor(channelColors[channelNumber], float(velocity) / 128.f  * float(adsrVal) * 256.f );
             ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             
             // debug msgs TODO delete

@@ -38,7 +38,9 @@ class ofApp : public ofBaseApp {
         ofxToggle drawLinesToggle;
         ofxToggle drawBackgroundGridToggle;
         ofColor backgroundColor;
+        //ofColor backgroundColor;
         
+        ofxColorSlider backgroundColorSelector;
         ofxColorSlider gridLineColorSelector;
         ofxColorSlider octaveRowColorSelector;
         ofxColorSlider noteDisplayColorSelector1;

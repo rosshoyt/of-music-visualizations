@@ -39,11 +39,8 @@ enum ADSRState {
 // TODO add 'looping' ADSR curve
 class ADSR {
 public:
-    
-    ADSR(int a = 15, int d = 4000, int s = 0, int r = 15, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(0.f), sL(0.0f), sustainLoop(sustainLoop) {
+    ADSR(int a = 30, int d = 4020, int s = 5980, int r = 15, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
         init();
-        
-        
         //std::cout << "ADSR total = " << total << '\n';
     }
     bool sustainLoop;
@@ -55,10 +52,9 @@ public:
 private:
     void init(){
         aTot = a;
-        dTot = aTot + d;
-        sTot = dTot + s;
-        rTot = sTot + r;
-        total = rTot;
+        dTot = a + d;
+        sTot = a + d + s;
+        rTot = total = a + d + s + r;
     }
     //long getLength()
 };
@@ -112,7 +108,7 @@ private:
         long segmentTimeLength;
         // how much of the current ADSR segment has been completed (in time)
         long segmentCompleted;
-        // start/end levels of current segment (To be determined)
+        // start/end levels of current segment to be determined
         long startLevel, endLevel;
         
         // Attacking
@@ -121,15 +117,13 @@ private:
             endLevel = adsr.aL;
             segmentTimeLength = adsr.a;
             segmentCompleted = elapsed;
-            
         }
-        // Releasing TODO update segment time length to store lengths used in below if() conditions
+        // Decaying
         else if(elapsed <= adsr.dTot){
             startLevel = adsr.aL;
             endLevel = adsr.dL;
             segmentTimeLength = adsr.d;
             segmentCompleted = elapsed - adsr.a;
-            //adsrState = ATTACKING;
         }
         // Sustaining
         else if(elapsed <= adsr.sTot){
@@ -149,14 +143,14 @@ private:
             // Note has been completed
             return 0.f;
         }
+        
+     
         //endLevel = " << endLevel << ", elapsed = " << elapsed << ", segmentCompleted = "<< segmentCompleted<< "/segmentTimeLength = " << segmentTimeLength << '\n';
+        
         return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
         
     }
-//    void update(){
-//
-//    }
-//    Time time;
+
     std::atomic<bool> active;
     ADSR adsr;
     ADSRState adsrState;
