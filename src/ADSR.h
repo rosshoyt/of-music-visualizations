@@ -8,6 +8,8 @@
 #ifndef ADSR_h
 #define ADSR_h
 
+#include "spline.h"
+
 
 typedef std::chrono::system_clock SystemClock;
 
@@ -48,7 +50,7 @@ public:
     float aL, dL, sL;
     long aTot, dTot, sTot, rTot;
     
-    
+    long
 private:
     void init(){
         aTot = a;
@@ -62,7 +64,13 @@ private:
 class NoteADSRState{
 public:
        
-    NoteADSRState(ADSR adsr) : adsr(adsr), adsrState(OFF), active(), startTime(), endTime() {}
+    NoteADSRState(ADSR adsr) : adsr(adsr), adsrState(OFF), active(), startTime(), endTime() {
+        //std::vector<double>
+        spline.set_points(
+            { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
+            { double(0),double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
+        );
+    }
     
     void start(){
         startTime = Time::getCurrentTime();
@@ -97,11 +105,12 @@ public:
     
 private:
     //std::map<ADSRState,long> state;
-    std::vector<std::pair<long,ADSRState>> states;
+    //std::vector<std::pair<long,ADSRState>> states;
     
     void updateState(){
         
     }
+    
     float getLevel(long elapsed){
         // segment of the ADSR curve that the elapsed time falls into
         //long currentSegmentTimeLength(adsr.a),  segmentTimeLength = currentSegmentTimeLength;
@@ -113,7 +122,7 @@ private:
         
         // Attacking
         if(elapsed <= adsr.aTot){
-            startLevel = 0.f; // TODO user specify start level?
+            startLevel = 0.f;
             endLevel = adsr.aL;
             segmentTimeLength = adsr.a;
             segmentCompleted = elapsed;
@@ -123,39 +132,43 @@ private:
             startLevel = adsr.aL;
             endLevel = adsr.dL;
             segmentTimeLength = adsr.d;
-            segmentCompleted = elapsed - adsr.a;
+            segmentCompleted = elapsed - adsr.aTot;
         }
         // Sustaining
         else if(elapsed <= adsr.sTot){
             startLevel = adsr.dL;
             endLevel = adsr.sL;
             segmentTimeLength = adsr.s;
-            segmentCompleted = elapsed - adsr.a - adsr.d;
+            segmentCompleted = elapsed - adsr.dTot;
         }
         // Releasing
         else if(elapsed <= adsr.rTot){
             startLevel = adsr.sL;
             endLevel = 0.f;
             segmentTimeLength = adsr.r;
-            segmentCompleted = elapsed - adsr.a - adsr.d - adsr.s;
+            segmentCompleted = elapsed - adsr.sTot;
         }
+        // Note has been completed
         else {
-            // Note has been completed
             return 0.f;
         }
-        
-     
         //endLevel = " << endLevel << ", elapsed = " << elapsed << ", segmentCompleted = "<< segmentCompleted<< "/segmentTimeLength = " << segmentTimeLength << '\n';
         
-        return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
+        return spline(double(elapsed));
+        //return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
         
     }
-
+    
+    tk::spline spline;
+    
+    // tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
+    
     std::atomic<bool> active;
     ADSR adsr;
     ADSRState adsrState;
-    //float level;
+    
     long startTime, endTime;
+    
     
     //    static float lerp(float a, float b, float f){
     //        return (a * (1.0 - f)) + (b * f);

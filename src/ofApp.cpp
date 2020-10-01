@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 ofApp::ofApp() : midiPortState(4, true), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {
-
+    
 }
 
 //--------------------------------------------------------------
