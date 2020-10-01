@@ -41,35 +41,62 @@ enum ADSRState {
 // TODO add 'looping' ADSR curve
 class ADSR {
 public:
-    ADSR(int a = 30, int d = 4020, int s = 5980, int r = 15, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
+    ADSR(int a = 50, int d = 7020, int s = 0, int r = 500, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
         init();
         //std::cout << "ADSR total = " << total << '\n';
     }
     bool sustainLoop;
-    long a, d, s, r, total;
+    double a, d, s, r, total;
     float aL, dL, sL;
-    long aTot, dTot, sTot, rTot;
+    double aTot, dTot, sTot, rTot;
+    long splineAmount;
+    //long aMidpointL, dMidpointL, rMidpointL;
     
-    long
 private:
     void init(){
         aTot = a;
         dTot = a + d;
         sTot = a + d + s;
         rTot = total = a + d + s + r;
+        
+        splineAmount = .85f;
+        
+        //aMidpointL = .75f;
+        //dMidpointL = .75f;
+        //rMidpointL = .75f;
+        
     }
     //long getLength()
 };
 
+
+
+
+//class Spline {
+//public:
+//    Spline(double yAmount, std::vector<double> xVals) : X(), Y() {
+//        for(int i = 1; i < 6; i+=2){
+//
+//        }
+//        //                     { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
+//        //                   { double(0), double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
+//        //                   );
+//        spline.set_points(X, Y);
+//    }
+//    tk::spline spline;
+//
+//    std::vector<double> X, Y;
+//
+//
+//};
+
+
+
 class NoteADSRState{
 public:
        
-    NoteADSRState(ADSR adsr) : adsr(adsr), adsrState(OFF), active(), startTime(), endTime() {
-        //std::vector<double>
-        spline.set_points(
-            { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
-            { double(0),double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
-        );
+    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineAmount = .75f) : adsr(adsr), splineAmount(.75f), adsrState(OFF), active(), startTime(), endTime() {
+        initSplines();
     }
     
     void start(){
@@ -104,14 +131,44 @@ public:
     }
     
 private:
+    
+    
     //std::map<ADSRState,long> state;
     //std::vector<std::pair<long,ADSRState>> states;
-    
+    void initSplines(){
+        //std::vector<double>
+        //spline.set_points(
+        
+//        std::vector<double> Y {
+//            0.f, .75f, .0f, .75, .0f
+//        };
+        
+        
+        
+        //}
+        ///;, Y;
+        
+       //                     { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
+       //                   { double(0), double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
+       //                   );
+        
+        splineAttack.set_points( { 0.f, adsr.a / 2.f,           adsr.a  },
+                                 { 0.f, splineAmount * adsr.aL, adsr.aL }
+        );
+        splineDecay.set_points(  { adsr.a, adsr.a + adsr.d / 2.f, adsr.dTot },
+                                 { adsr.aL, 1.f - (1.f - splineAmount) * adsr.dL, adsr.dL }
+        );
+        //splineRelease.set_points({ adsr.sTot, adsr.sTot + adsr.r / 2.f, adsr.rTot },
+        //                         { adsr.sL, (1.f - splineAmount) * adsr.r, adsr.}
+        //);
+    }
     void updateState(){
         
     }
     
     float getLevel(long elapsed){
+        //if(splineCurve){ // TODO fix splineCurve boolean flag (remove?)
+        
         // segment of the ADSR curve that the elapsed time falls into
         //long currentSegmentTimeLength(adsr.a),  segmentTimeLength = currentSegmentTimeLength;
         long segmentTimeLength;
@@ -126,6 +183,7 @@ private:
             endLevel = adsr.aL;
             segmentTimeLength = adsr.a;
             segmentCompleted = elapsed;
+            
         }
         // Decaying
         else if(elapsed <= adsr.dTot){
@@ -152,16 +210,29 @@ private:
         else {
             return 0.f;
         }
+        
+        
         //endLevel = " << endLevel << ", elapsed = " << elapsed << ", segmentCompleted = "<< segmentCompleted<< "/segmentTimeLength = " << segmentTimeLength << '\n';
         
-        return spline(double(elapsed));
-        //return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
+        //return spline(double(elapsed));
         
-    }
+        if(splineCurve)
+            return splineAttack(double(elapsed));
+        else
+            return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
+    //    else {
+    //
+    //        }
+}
     
-    tk::spline spline;
+    bool splineCurve;
+    //tk::spline spline;
+    double splineAmount;
     
-    // tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
+    tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
+    
+    
+    
     
     std::atomic<bool> active;
     ADSR adsr;
