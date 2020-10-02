@@ -41,7 +41,7 @@ enum ADSRState {
 // TODO add 'looping' ADSR curve
 class ADSR {
 public:
-    ADSR(int a = 50, int d = 7020, int s = 0, int r = 500, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
+    ADSR(int a = 10, int d = 6000, int s = 0, int r = 1000, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
         init();
         //std::cout << "ADSR total = " << total << '\n';
     }
@@ -59,7 +59,7 @@ private:
         sTot = a + d + s;
         rTot = total = a + d + s + r;
         
-        splineAmount = .85f;
+        splineAmount = .3f;
         
         //aMidpointL = .75f;
         //dMidpointL = .75f;
@@ -95,7 +95,7 @@ private:
 class NoteADSRState{
 public:
        
-    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineAmount = .75f) : adsr(adsr), splineAmount(.75f), adsrState(OFF), active(), startTime(), endTime() {
+    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineAmount = .25f) : adsr(adsr), splineAmount(.65f), adsrState(OFF), active(), startTime(), endTime() {
         initSplines();
     }
     
@@ -119,8 +119,8 @@ public:
             auto timePassed = Time::elapsedTimeSince(startTime);
             //console.lo
             std::cout<< timePassed << " milliseconds elapsed\n";
-            auto level = getLevel(timePassed);
-            std::cout<<"Note ADSR Level = " << level << '\n';
+            auto level = getLevel(timePassed, true);
+            std::cout<<"Note ADSR Level = " << level << ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
             return level;
         }
         return 0.f;//level;
@@ -158,15 +158,15 @@ private:
         splineDecay.set_points(  { adsr.a, adsr.a + adsr.d / 2.f, adsr.dTot },
                                  { adsr.aL, 1.f - (1.f - splineAmount) * adsr.dL, adsr.dL }
         );
-        //splineRelease.set_points({ adsr.sTot, adsr.sTot + adsr.r / 2.f, adsr.rTot },
-        //                         { adsr.sL, (1.f - splineAmount) * adsr.r, adsr.}
-        //);
+        splineRelease.set_points({ adsr.sTot, adsr.sTot + adsr.r / 2.f, adsr.rTot },
+                                 { adsr.sL, adsr.sL / 2.f, 0.f }//(1.f - splineAmount) * adsr.r, adsr.}
+        );
     }
     void updateState(){
         
     }
     
-    float getLevel(long elapsed){
+    float getLevel(long elapsed, bool spline){
         //if(splineCurve){ // TODO fix splineCurve boolean flag (remove?)
         
         // segment of the ADSR curve that the elapsed time falls into
@@ -184,6 +184,8 @@ private:
             segmentTimeLength = adsr.a;
             segmentCompleted = elapsed;
             
+            if(spline)
+                return splineAttack(double(segmentCompleted));
         }
         // Decaying
         else if(elapsed <= adsr.dTot){
@@ -191,6 +193,9 @@ private:
             endLevel = adsr.dL;
             segmentTimeLength = adsr.d;
             segmentCompleted = elapsed - adsr.aTot;
+            
+            if(spline)
+                return splineDecay(double(elapsed));
         }
         // Sustaining
         else if(elapsed <= adsr.sTot){
@@ -216,10 +221,7 @@ private:
         
         //return spline(double(elapsed));
         
-        if(splineCurve)
-            return splineAttack(double(elapsed));
-        else
-            return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
+        return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
     //    else {
     //
     //        }
