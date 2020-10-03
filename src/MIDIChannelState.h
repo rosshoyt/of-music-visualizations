@@ -24,7 +24,7 @@ public:
         return cpy;
     }
     
-    int setValue(int value){
+    void setValue(int value){
         Lock lck(mtx, std::defer_lock);
         lck.lock();
         this->value = value;

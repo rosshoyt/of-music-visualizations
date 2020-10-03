@@ -3,6 +3,22 @@ of-midi-visualizer-testing-Project/
 # (Unused) Juce assets TODO remove from gitignore if using in project
 JuceLibraryCode/
 JuceModules/
+*.db
+/.vs
+bin/
+*.rc
+
+# Some general ignore patterns (https://github.com/openframeworks/projectGenerator/blob/master/.gitignore)
+build/
+obj/
+*.o
+Debug*/
+Release*/
+*.mode*
+*.app/
+*.pyc
+.svn/
+
 
 ###########################
 # ignore generated binaries
@@ -27,7 +43,7 @@ JuceModules/
 .svn/
 *.log
 
-########################
+########################    
 # IDE files which should
 # be ignored
 ########################
