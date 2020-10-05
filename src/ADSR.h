@@ -41,7 +41,7 @@ enum ADSRState {
 // TODO add 'looping' ADSR curve
 class ADSR {
 public:
-    ADSR(int a = 10, int d = 6000, int s = 0, int r = 1000, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop) {
+    ADSR(int a = 10, int d = 6000, int s = 0, int r = 1000, bool sustainLoop = false) : a(a), d(d), s(s), r(r), aL(1.f), dL(.3f), sL(.0f), sustainLoop(sustainLoop), envelopeSections() {
         init();
         //std::cout << "ADSR total = " << total << '\n';
     }
@@ -51,6 +51,7 @@ public:
     double aTot, dTot, sTot, rTot;
     long splineAmount;
     //long aMidpointL, dMidpointL, rMidpointL;
+    std::map<long, ADSRState> envelopeSections;
     
 private:
     void init(){
@@ -60,35 +61,11 @@ private:
         rTot = total = a + d + s + r;
         
         splineAmount = .3f;
-        
-        //aMidpointL = .75f;
-        //dMidpointL = .75f;
-        //rMidpointL = .75f;
+       
         
     }
     //long getLength()
 };
-
-
-
-
-//class Spline {
-//public:
-//    Spline(double yAmount, std::vector<double> xVals) : X(), Y() {
-//        for(int i = 1; i < 6; i+=2){
-//
-//        }
-//        //                     { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
-//        //                   { double(0), double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
-//        //                   );
-//        spline.set_points(X, Y);
-//    }
-//    tk::spline spline;
-//
-//    std::vector<double> X, Y;
-//
-//
-//};
 
 
 
@@ -118,9 +95,9 @@ public:
             //std::cout << "Getting time elapsed since start time = " << startTime << '\n';
             auto timePassed = Time::elapsedTimeSince(startTime);
             //console.lo
-            std::cout<< timePassed << " milliseconds elapsed\n";
-            auto level = getLevel(timePassed, true);
-            std::cout<<"Note ADSR Level = " << level << ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
+            
+            auto level = getLevel(timePassed, false);
+            std::cout << std::setw(5) << timePassed << " milliseconds elapsed, note ADSR level = " << level << '\n'; //<< ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
             return level;
         }
         return 0.f;//level;
@@ -133,24 +110,7 @@ public:
 private:
     
     
-    //std::map<ADSRState,long> state;
-    //std::vector<std::pair<long,ADSRState>> states;
     void initSplines(){
-        //std::vector<double>
-        //spline.set_points(
-        
-//        std::vector<double> Y {
-//            0.f, .75f, .0f, .75, .0f
-//        };
-        
-        
-        
-        //}
-        ///;, Y;
-        
-       //                     { double(0), double(adsr.aTot), double(adsr.dTot), double(adsr.sTot), double(adsr.rTot)}, // x
-       //                   { double(0), double(adsr.aL), double(adsr.dL), double(adsr.sL),double(0)} // y
-       //                   );
         
         splineAttack.set_points( { 0.f, adsr.a / 2.f,           adsr.a  },
                                  { 0.f, splineAmount * adsr.aL, adsr.aL }
@@ -210,6 +170,8 @@ private:
             endLevel = 0.f;
             segmentTimeLength = adsr.r;
             segmentCompleted = elapsed - adsr.sTot;
+            if (spline)
+                return splineRelease(double(elapsed));
         }
         // Note has been completed
         else {

@@ -1,6 +1,7 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
+extern const int HEIGHT = 1024, WIDTH = 1024, RIGHT_CONTROLBAR = 300;
 
 //========================================================================
 int main( ){
