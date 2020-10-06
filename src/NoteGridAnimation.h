@@ -1,13 +1,15 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxGui.h"
+
+#include "AnimationComponent.h"
 #include "MIDIPortState.h"
 
 extern const int RIGHT_CONTROLBAR;
 
-class NoteGridAnimation {
+class NoteGridAnimation : public AnimationComponent {
 public:
-	NoteGridAnimation(MIDIPortState* midiPortState);
+	NoteGridAnimation(std::string uid, MIDIPortState* midiPortState);
 
 	void setup();
 	void update();

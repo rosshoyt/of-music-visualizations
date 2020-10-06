@@ -1,2 +1,4 @@
+ofxDatGui
 ofxGui
 ofxMidi
+ofxSmartFont
