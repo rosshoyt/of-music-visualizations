@@ -1,4 +1,3 @@
 ofxDatGui
 ofxGui
 ofxMidi
-ofxSmartFont
