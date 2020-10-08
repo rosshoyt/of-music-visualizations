@@ -62,25 +62,38 @@ void Animated3DMesh::setup() {
 
 //--------------------------------------------------------------
 void Animated3DMesh::update() {
+    // Get the current active MIDI notes for all channels and
+    // store in map<midiPitch, <velocity, adsr value>>
+    std::map<int, std::pair<int,float>> allNotesDown;
+    int channelNum = 0;
+    for (auto channelNotes : midiPortState->getAllChannelNotes()) {
+        for (auto note : channelNotes) {
+            // TODO don't overwrite values when 2 notes are same between channels
+            allNotesDown.insert({ note.first, { note.second, midiPortState->getADSRValue(channelNum, note.first) } });
+        }
+        ++channelNum;
+    }
+
+
+    // Update position of vertices based on if there is a note at their location
+    // TODO could optimize by reversing pointNoteMap to notePointMap 
     int numVertices = mainMesh.getNumVertices();
-
-    // get current active MIDI notes
-    auto notes = midiPortState->getChannelNotes(0);
-
     for (int i = 0; i < numVertices; i++) {
         ofVec3f newPosition = mainMesh.getVertex(i);
         int midiPitch = pointNoteMap.at({ newPosition.x, newPosition.y });
-        if (notes.count(midiPitch) > 0) {
-            // scale note based on velocity
-            // TODO scale based on SIN of frequency of pitch
-            //float sinMod = sin(timePassed, frequency);
-            newPosition.z = 20.f * float(notes[midiPitch]) / 128.f * midiPortState->getADSRValue(0, midiPitch); // * sinMod; TODO
-
-        }
-        else {
-            // no note present - reset z to 0
-            newPosition.z = 0.0f;
-        }
+            if (allNotesDown.count(midiPitch) > 0) {
+                // TODO scale based on SIN of frequency of pitch
+                // like: float sinMod = sin(timePassed, frequency);
+                
+                // scale note on velocity along with adsr value (TODO redundant scaling? ADSR takes velocity into account)
+                auto velocityADSR = allNotesDown[midiPitch];
+                newPosition.z = 20.f * velocityADSR.first / 128.f * velocityADSR.second; // * sinMod; TODO
+            }
+            else {
+                // no note present - set z to 0
+                newPosition.z = 0.0f;
+            }
+        
         mainMesh.setVertex(i, newPosition);
     }
 }

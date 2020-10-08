@@ -7,6 +7,10 @@ public:
 
 	}
 
+	virtual void drawGUI() {}
+
+	void drawBackground() {}
+
 	const std::string& getUID() {
 		return uid;
 	}

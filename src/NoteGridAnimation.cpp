@@ -47,7 +47,7 @@ void NoteGridAnimation::update() {
 
 //--------------------------------------------------------------
 void NoteGridAnimation::draw() {
-    ofBackground(backgroundColorSelector);
+    //ofBackground(backgroundColorSelector);
     gui.draw();
 
     if (drawBackgroundGridToggle)
@@ -151,3 +151,7 @@ void NoteGridAnimation::windowResized(int w, int h) {
     //gui.setPosition(windowWidth, 0);
     gui.setPosition(menuX, menuY);
 }
+
+//void NoteGridAnimation::drawGUI() {
+//
+//}

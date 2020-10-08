@@ -94,10 +94,9 @@ public:
         if(adsrState != OFF){
             //std::cout << "Getting time elapsed since start time = " << startTime << '\n';
             auto timePassed = Time::elapsedTimeSince(startTime);
-            //console.lo
             
             auto level = getLevel(timePassed, false);
-            std::cout << std::setw(5) << timePassed << " milliseconds elapsed, note ADSR level = " << level << '\n'; //<< ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
+            //std::cout << std::setw(5) << timePassed << " milliseconds elapsed, note ADSR level = " << level << '\n'; //<< ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
             return level;
         }
         return 0.f;//level;

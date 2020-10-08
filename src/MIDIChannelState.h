@@ -43,7 +43,7 @@ private:
 class MIDIChannelState {
 public:
     MIDIChannelState() : notesHeldDown(), notesSustained(), midiCCState(128), adsrStates(), sustained(false), mtx(), mtxSusNotes() {
-        
+        // TODO move to init() function
         ADSR pianoADSR;
         for(int i = 0; i < 128; i++){
             NoteADSRState* adsrNode = new NoteADSRState(pianoADSR);
@@ -207,6 +207,7 @@ public:
     bool sustainPedalIsDown(){
         return sustained.load();
     }
+
     
 private:
     
@@ -221,7 +222,7 @@ private:
     
     std::vector<MidiCCNode> midiCCState;
     
-    
+    unsigned int channelNumber;
     
 };
 

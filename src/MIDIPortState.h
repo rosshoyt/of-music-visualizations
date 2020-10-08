@@ -63,6 +63,14 @@ public:
     std::map<int,int> getChannelNotes(unsigned int channel){
         return channels[channel].getAllNotes();
     }
+
+    std::vector<std::map<int, int>> getAllChannelNotes() {
+        std::vector<std::map<int,int>> channelNotesList;
+        for (unsigned int i = 0; i < numChannels; ++i) {
+            channelNotesList.push_back(getChannelNotes(i));
+        }
+        return channelNotesList;
+    }
     
     /**
      * Gets the current value of the specified MIDI CC value based on its channel
