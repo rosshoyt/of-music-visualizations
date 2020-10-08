@@ -115,6 +115,10 @@ void Animated3DMesh::draw() {
     ofDrawBitmapString(msg, 10, 20);
 }
 
+void Animated3DMesh::drawGUI() {
+
+}
+
 //--------------------------------------------------------------
 void Animated3DMesh::keyPressed(int key) {
     switch (key) {

@@ -47,9 +47,8 @@ void NoteGridAnimation::update() {
 
 //--------------------------------------------------------------
 void NoteGridAnimation::draw() {
-    //ofBackground(backgroundColorSelector);
-    gui.draw();
-
+    ofBackground(backgroundColorSelector);
+    drawGUI(); // TODO move outside of class
     if (drawBackgroundGridToggle)
         drawBgdGrid();
     if (drawLinesToggle)
@@ -58,6 +57,10 @@ void NoteGridAnimation::draw() {
     drawActiveNotes();
 
     
+}
+
+void NoteGridAnimation::drawGUI() {
+    gui.draw();
 }
 
 //--------------------------------------------------------------

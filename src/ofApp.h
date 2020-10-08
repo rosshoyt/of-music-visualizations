@@ -35,4 +35,5 @@ private:
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
     
+        ofxColorSlider backgroundColorSelector;
 };

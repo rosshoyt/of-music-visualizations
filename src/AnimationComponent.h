@@ -7,7 +7,7 @@ public:
 
 	}
 
-	virtual void drawGUI() {}
+	virtual void drawGUI() = 0;
 
 	void drawBackground() {}
 
