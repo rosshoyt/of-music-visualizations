@@ -22,9 +22,12 @@ class ofApp : public ofBaseApp {
         void onDropdownEvent(ofxDatGuiDropdownEvent e);
 		
 private:
+        ofxColorSlider backgroundColorSelector;
+        
         // Global GUI componenets
         // gui components
-        //ofxPanel gui;
+        ofxPanel gui;
+        // TODO replace ofxDatGUI
         ofxDatGuiDropdown* animationSelectorDropdown;
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
@@ -35,5 +38,5 @@ private:
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
     
-        ofxColorSlider backgroundColorSelector;
+      
 };

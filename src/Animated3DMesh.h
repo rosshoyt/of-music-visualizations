@@ -11,6 +11,7 @@ public:
     void setup();
     void update();
     void draw();
+    void drawGUI() override;
     void keyPressed(int key);
 
 private:
@@ -21,7 +22,11 @@ private:
     // 3D graphics
     ofMesh mainMesh;
     ofEasyCam mainCam;
+
+
+
     int width, height;
+    // TODO refactor shared variables between this class and NoteGridAnimation to a parent class
     int widthNoteGrid, heightNoteGrid;
     bool b_messyMesh, b_perlinMesh, b_drawWireFrame;
     float perlinRange, perlinHeight;

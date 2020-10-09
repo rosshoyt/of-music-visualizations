@@ -16,31 +16,21 @@ void ofApp::setup(){
     // setup GUI dropdown animation selector
     animationUIDS.push_back(noteGridAnimation.getUID());
     animationUIDS.push_back(animated3DMesh.getUID());
-    
+    // set which animation to use first
     currentAnimationUID = animationUIDS[0];
 
-    // instantiate the dropdown //
+    //// instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
-
-    // and position it in the middle of the screen //
     animationSelectorDropdown->setPosition(WIDTH, 0);
-
-    // let's set the stripe of each option to its respective color //
-    //for (int i = 0; i < animationSelectorDropdown->size(); i++) animationSelectorDropdown->getChildAt(i)->setStripeColor(colors[i]);
-
-    // register to listen for change events //
+    //// register to listen for change events
     animationSelectorDropdown->onDropdownEvent(this, &ofApp::onDropdownEvent);
-
-    // finally let's have it open by default //
     animationSelectorDropdown->expand();
 
-    // Set Sub Menu's position based on main menu size
+    // Set ofxGUI menu position for note grid animation
     noteGridAnimation.setMenuXY(WIDTH, HEIGHT / 2);
-
 
     // initialize network MIDI port
     midiPortState.setupMIDIPort();
- 
 }
 
 

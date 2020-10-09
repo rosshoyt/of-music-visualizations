@@ -22,6 +22,7 @@ void Animated3DMesh::setup() {
 
     mainCam.setPosition(0, 0, 80);
 
+    //mainMesh.setMode(OF_PRIMITIVE_LINE_LOOP);
     // make points inide the mesth
     // add one vertex to the mesh across our width and height
     // we use these y and x vals to set the x and y coordinates of the mesh, adding a z value of zero to complete the 3D location of each vertex
@@ -29,9 +30,20 @@ void Animated3DMesh::setup() {
         for (int x = 0; x < width; x++) {
             ofPoint point(x - width / 2, y - height / 2, 0);
             mainMesh.addVertex(point);
-            mainMesh.addColor(ofFloatColor(0, 0, 0));
+
+            int note = getNoteFromPoint(point);
             // associate the x,y coords of each vertex with the MIDI note they represent
-            pointNoteMap.insert({ { point.x, point.y }, getNoteFromPoint(point) });
+            pointNoteMap.insert({ { point.x, point.y }, note });
+            
+            // Find the color for the row/column
+            // TODO create shared function set for these utils
+            //int row = heightNoteGrid - 1 - note / 12, col = note % widthNoteGrid;
+            //ofFloatColor().lerp
+
+            ofFloatColor start = ofFloatColor::darkBlue, end = ofFloatColor::lightSeaGreen;
+            mainMesh.addColor(start.lerp(end, std::max(float(y) / float(height), float(x)/float(width))));
+            
+            
         }
     }
 
@@ -58,6 +70,7 @@ void Animated3DMesh::setup() {
             mainMesh.addIndex(index6);
         }
     }
+
 }
 
 //--------------------------------------------------------------
@@ -102,12 +115,13 @@ void Animated3DMesh::update() {
 void Animated3DMesh::draw() {
     mainCam.begin();
 
-    if (b_drawWireFrame) {
+    mainMesh.draw(OF_MESH_FILL);
+    /*if (b_drawWireFrame) {
         mainMesh.drawWireframe();
     }
     else {
         mainMesh.drawVertices();
-    }
+    }*/
     mainCam.end();
 
     ofSetColor(100);

@@ -1,6 +1,6 @@
 #include "NoteGridAnimation.h"
 
-NoteGridAnimation::NoteGridAnimation(std::string uid, MIDIPortState* midiPortState) : AnimationComponent(uid), midiPortState(midiPortState), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true), backgroundColor() {}
+NoteGridAnimation::NoteGridAnimation(std::string uid, MIDIPortState* midiPortState) : AnimationComponent(uid), midiPortState(midiPortState), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
 void NoteGridAnimation::setup() {
     gui.setup();
@@ -39,6 +39,7 @@ void NoteGridAnimation::setup() {
 
 //--------------------------------------------------------------
 void NoteGridAnimation::update() {
+    
     // update the pitch offset amount
     if (pitchOffsetUseMIDICCToggle) pitchOffsetAmount.set(std::round(midiPortState->getMIDICCValue(1, 1) / 12.f));
     else
@@ -47,7 +48,7 @@ void NoteGridAnimation::update() {
 
 //--------------------------------------------------------------
 void NoteGridAnimation::draw() {
-    ofBackground(backgroundColorSelector);
+    //ofBackground(backgroundColorSelector);
     drawGUI(); // TODO move outside of class
     if (drawBackgroundGridToggle)
         drawBgdGrid();
@@ -123,9 +124,6 @@ void NoteGridAnimation::drawActiveNotes() {
             int row = nRows - 1 - (noteNumber - pitchOffsetAmount) / 12, col = (noteNumber - pitchOffsetAmount) % nColumns;
 
             // TODO ensure MIDI NOTE #0 doesn't cause issue (scale midi note #s to start at 1?)
-            //ofSetColor(velocity * 2,  255 / std::max(1, noteNumber)/*255 / nColumns * col*/, 255 /*255 / nRows * row*/);
-            //ofColor noteColor1(noteDisplayColorSelector1), noteColor2(noteDisplayColorSelector2);
-            //float scaleR = noteColor.get
 
             auto adsrVal = midiPortState->getADSRValue(channelNumber, noteNumber);
 
