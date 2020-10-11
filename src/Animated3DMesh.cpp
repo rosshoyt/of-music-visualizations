@@ -166,7 +166,7 @@ void Animated3DMesh::keyPressed(int key) {
 
 //--------------------------------------------------------------
 int Animated3DMesh::getNoteFromPoint(const ofVec3f& point) {
-    std::cout << "Finding note for point (" << point << ")" << std::endl;
+    //std::cout << "Finding note for point (" << point << ")" << std::endl;
     int xSegment = getSegmentNumber(point.x, width, widthNoteGrid);
     int ySegment = getSegmentNumber(point.y, height, heightNoteGrid);
     // convert segment #s to MIDI note number

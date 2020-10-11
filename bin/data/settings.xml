@@ -3,20 +3,20 @@
 	<Draw_Lines_Toggle>1</Draw_Lines_Toggle>
 	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
 	<Grid_Line_Color>0, 0, 0, 255</Grid_Line_Color>
-	<Pitch_Offset__Half-Steps_>3</Pitch_Offset__Half-Steps_>
+	<Pitch_Offset__Half-Steps_>9</Pitch_Offset__Half-Steps_>
 	<Toggle_Pitch_Offset_MIDI_CC_Control>0</Toggle_Pitch_Offset_MIDI_CC_Control>
-	<Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>3</Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>
+	<Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>9</Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>
 	<Draw_Lines>0</Draw_Lines>
 	<Draw_Rows_Columns>0</Draw_Rows_Columns>
-	<Channel_Color__1>102, 255, 0, 255</Channel_Color__1>
+	<Channel_Color__1>0, 255, 99, 255</Channel_Color__1>
 	<Channel_Color__2>37, 166, 255, 255</Channel_Color__2>
-	<Channel_Color__3>25, 112, 255, 255</Channel_Color__3>
-	<Channel_Color__4>53, 255, 0, 255</Channel_Color__4>
+	<Channel_Color__3>0, 239, 255, 255</Channel_Color__3>
+	<Channel_Color__4>255, 145, 76, 255</Channel_Color__4>
 	<Channel_Color__5>30, 134, 255, 255</Channel_Color__5>
 	<Channel_Color__6>25, 112, 255, 255</Channel_Color__6>
 	<Channel_Color__7>19, 90, 255, 255</Channel_Color__7>
 	<Channel_Color__8>15, 69, 255, 255</Channel_Color__8>
 	<Channel_Color__9>9, 47, 255, 255</Channel_Color__9>
 	<Channel_Color__10>4, 26, 255, 255</Channel_Color__10>
-	<Background_Color>168, 168, 168, 255</Background_Color>
+	<Background_Color>0, 36, 32, 255</Background_Color>
 </group>

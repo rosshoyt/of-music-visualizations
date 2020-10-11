@@ -11,6 +11,7 @@ public:
 	}
 
 	void processSpacebar() {
+		//std::cout << "playing\n";
 		if (!isPlaying) {
 			play();
 			isPlaying = true;

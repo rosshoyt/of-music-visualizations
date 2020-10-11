@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : AbletonController(), midiPortState(4, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState) {}
+ofApp::ofApp() : abletonController(), midiPortState(4, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState) {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
