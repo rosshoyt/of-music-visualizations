@@ -100,9 +100,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxSmartFont\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxAbletonLive\src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,10 +121,11 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxSmartFont\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxAbletonLive\src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -140,10 +142,11 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxSmartFont\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxAbletonLive\src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -163,9 +166,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxSmartFont\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxAbletonLive\src;..\..\..\addons\ofxDatGui\src;..\..\..\addons\ofxDatGui\src\components;..\..\..\addons\ofxDatGui\src\core;..\..\..\addons\ofxDatGui\src\libs;..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont;..\..\..\addons\ofxDatGui\src\themes;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxMidi\libs;..\..\..\addons\ofxMidi\libs\pgmidi;..\..\..\addons\ofxMidi\libs\rtmidi;..\..\..\addons\ofxMidi\src;..\..\..\addons\ofxMidi\src\desktop;..\..\..\addons\ofxMidi\src\ios;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -184,6 +188,11 @@
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Animated3DMesh.cpp" />
     <ClCompile Include="src\NoteGridAnimation.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLive.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveClip.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveDevice.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveParameter.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveTrack.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDatGui\src\core\ofxDatGuiComponent.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDatGui\src\libs\ofxSmartFont\ofxSmartFont.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDatGui\src\ofxDatGui.cpp" />
@@ -207,9 +216,21 @@
     <ClCompile Include="..\..\..\addons\ofxMidi\src\ofxMidiOut.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMidi\src\ofxMidiTimecode.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMidi\libs\rtmidi\RtMidi.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxSmartFont\src\ofxSmartFont.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtils.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocket.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AbletonController.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ADSR.h" />
     <ClInclude Include="src\Animated3DMesh.h" />
@@ -218,6 +239,11 @@
     <ClInclude Include="src\MIDIPortState.h" />
     <ClInclude Include="src\NoteGridAnimation.h" />
     <ClInclude Include="src\spline.h" />
+    <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLive.h" />
+    <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveClip.h" />
+    <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveDevice.h" />
+    <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveParameter.h" />
+    <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLiveTrack.h" />
     <ClInclude Include="..\..\..\addons\ofxDatGui\src\components\ofxDatGui2dPad.h" />
     <ClInclude Include="..\..\..\addons\ofxDatGui\src\components\ofxDatGuiButton.h" />
     <ClInclude Include="..\..\..\addons\ofxDatGui\src\components\ofxDatGuiColorPicker.h" />
@@ -263,7 +289,26 @@
     <ClInclude Include="..\..\..\addons\ofxMidi\src\ofxMidiTimecode.h" />
     <ClInclude Include="..\..\..\addons\ofxMidi\src\ofxMidiTypes.h" />
     <ClInclude Include="..\..\..\addons\ofxMidi\libs\rtmidi\RtMidi.h" />
-    <ClInclude Include="..\..\..\addons\ofxSmartFont\src\ofxSmartFont.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

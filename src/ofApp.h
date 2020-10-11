@@ -6,10 +6,11 @@
 #include "MIDIPortState.h"
 #include "NoteGridAnimation.h"
 #include "Animated3DMesh.h"
+#include "AbletonController.h"
 
 extern const int WIDTH, HEIGHT;
 
-class ofApp : public ofBaseApp {
+class ofApp : public ofBaseApp, AbletonController {
 
 	public:
         ofApp();
@@ -22,6 +23,7 @@ class ofApp : public ofBaseApp {
         void onDropdownEvent(ofxDatGuiDropdownEvent e);
 		
 private:
+        AbletonController abletonController;
         ofxColorSlider backgroundColorSelector;
         
         // Global GUI componenets

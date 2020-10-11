@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : midiPortState(4, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState) {}
+ofApp::ofApp() : AbletonController(), midiPortState(4, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState) {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -55,6 +55,10 @@ void ofApp::draw(){
 
 void ofApp::keyPressed(int key) {
     animated3DMesh.keyPressed(key);
+    switch (key) {
+    case ' ':
+        abletonController.processSpacebar();
+    }
 }
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){

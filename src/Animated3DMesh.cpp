@@ -139,9 +139,6 @@ void Animated3DMesh::keyPressed(int key) {
     case 'f':
         ofToggleFullscreen();
         break;
-    case ' ':
-        b_messyMesh = !b_messyMesh;
-        break;
     case 'w':
         b_drawWireFrame = !b_drawWireFrame;
         break;
