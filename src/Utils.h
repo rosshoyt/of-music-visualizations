@@ -58,12 +58,12 @@ namespace utils {
 
 
             int getNoteFromPoint(const ofVec3f& point) {
-                std::cout << "Finding note for point (" << point << ").... ";
+                //std::cout << "Finding note for point (" << point << ").... ";
                 int xSegment = getSegmentNumber(point.x, width, widthGrid, widthMin, widthMax);
                 int ySegment = getSegmentNumber(point.y, height, heightGrid, heightMin, heightMax);
                 // convert segment #s to MIDI note number
                 int noteNumber = ySegment * heightGrid + xSegment;
-                std::cout<< "Pitch = " << noteNumber << ", xSegment #: " << xSegment << ", ySegment #: " << ySegment << std::endl;
+                //std::cout<< "Pitch = " << noteNumber << ", xSegment #: " << xSegment << ", ySegment #: " << ySegment << std::endl;
 
                 return noteNumber;
 

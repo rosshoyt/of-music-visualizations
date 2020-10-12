@@ -6,7 +6,7 @@ class MeshFromImage :
 	public AnimationComponent
 {
 public:
-	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/hubble.png") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap() {
+	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/hubble.png") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
 
 	}
 	
@@ -22,7 +22,7 @@ public:
 
         mesh.enableColors();
 
-        float intensityThreshold = 50.f;
+        float intensityThreshold = 65.f;
         int w = image.getWidth();
         int h = image.getHeight();
         for (int x = 0; x < w; ++x) {
@@ -32,10 +32,12 @@ public:
 
                 if (intensity >= intensityThreshold) {
                     float saturation = c.getSaturation();
-                    float z = ofMap(saturation, 0, 255, -100, 100);
+                    float z = ofMap(saturation, 0, 255, -100, 100) * .25f; // TODO fix scaling
                     ofVec3f pos(x * 4, y * 4, z);
                     mesh.addVertex(pos);
                     mesh.addColor(c);
+                    // track original z values for use in animation
+                    zVals.push_back(z);
                 }
             }
         }
@@ -71,10 +73,10 @@ public:
 
             if (allNotesDown.count(midiPitch) > 0) {
                 auto velocityADSR = allNotesDown[midiPitch];
-                position.z = 300.f * velocityADSR.first / 128.f * velocityADSR.second;
+                position.z = zVals[i]  + 300.f * velocityADSR.first / 128.f * velocityADSR.second;
             }
             else {
-                position.z = 0.0f;
+                position.z = zVals[i];
             }
 
             mesh.setVertex(i, position);
@@ -110,6 +112,7 @@ private:
     ofEasyCam easyCam;
     ofImage image;
     ofMesh mesh;
+    std::vector<float> zVals;
 
     int width = 200, height = 200;
 
