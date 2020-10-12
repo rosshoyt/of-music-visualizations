@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState), meshFromImage("Mesh From Image") {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image") {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -42,7 +42,9 @@ void ofApp::setup(){
 void ofApp::update(){
     animationSelectorDropdown->update();
     for (const auto& animation : animationComponents) {
-        animation->update();
+        if (animation->getUID() == currentAnimationUID) {
+            animation->update();
+        }
     }
 
 }

@@ -1,18 +1,18 @@
 #pragma once
 #include "AnimationComponent.h"
 #include "ofApp.h"
-
+#include "Utils.h"
 class MeshFromImage :
 	public AnimationComponent
 {
 public:
-	MeshFromImage(std::string uid, std::string imagePath = "textures/hubble.png") : AnimationComponent(uid), imagePath(imagePath) {
+	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/hubble.png") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap() {
 
 	}
 	
 	void setup() {
         image.load(imagePath);
-        image.resize(200, 200);
+        image.resize(width, height);
 
         // Don't forget to change to lines mode!
         mesh.setMode(OF_PRIMITIVE_LINES);
@@ -22,7 +22,7 @@ public:
 
         mesh.enableColors();
 
-        float intensityThreshold = 150.0;
+        float intensityThreshold = 50.f;
         int w = image.getWidth();
         int h = image.getHeight();
         for (int x = 0; x < w; ++x) {
@@ -40,6 +40,7 @@ public:
             }
         }
 
+
         // Let's add some lines!
         float connectionDistance = 30;
         int numVerts = mesh.getNumVertices();
@@ -56,10 +57,28 @@ public:
                 }
             }
         }
+
+        std::cout << "setting up MeshFromImage pointNoteMap\n";
+        pointNoteMap.setup(mesh, width, height, 12, 12);
 	}
     //--------------------------------------------------------------
     void update() {
+        auto allNotesDown = getAllNotesDown();
+        //std::cout << allNotesDown.size() << " notes down\n";
+        for (int i = 0; i < mesh.getNumVertices(); ++i) {
+            auto position = mesh.getVertex(i);
+            int midiPitch = pointNoteMap.getNote(position);
 
+            if (allNotesDown.count(midiPitch) > 0) {
+                auto velocityADSR = allNotesDown[midiPitch];
+                position.z = 300.f * velocityADSR.first / 128.f * velocityADSR.second;
+            }
+            else {
+                position.z = 0.0f;
+            }
+
+            mesh.setVertex(i, position);
+        }
     }
 
     //--------------------------------------------------------------
@@ -67,6 +86,10 @@ public:
         ofColor centerColor = ofColor(85, 78, 68);
         ofColor edgeColor(0, 0, 0);
         ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
+
+
+        
+
 
         easyCam.begin();
         ofPushMatrix();
@@ -87,6 +110,10 @@ private:
     ofEasyCam easyCam;
     ofImage image;
     ofMesh mesh;
+
+    int width = 200, height = 200;
+
+    utils::note_grid::PointNoteMap pointNoteMap;
 
 };
 

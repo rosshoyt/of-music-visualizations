@@ -1,6 +1,6 @@
 #include "NoteGridAnimation.h"
 
-NoteGridAnimation::NoteGridAnimation(std::string uid, MIDIPortState* midiPortState) : AnimationComponent(uid), midiPortState(midiPortState), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
+NoteGridAnimation::NoteGridAnimation(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
 void NoteGridAnimation::setup() {
     gui.setup();

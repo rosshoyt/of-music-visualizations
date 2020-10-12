@@ -8,7 +8,7 @@
 */
 class Animated3DMesh : public AnimationComponent {
 public:
-    Animated3DMesh(std::string uid, MIDIPortState* midiPortState);
+    Animated3DMesh(MIDIPortState* midiPortState, std::string uid);
     void setup();
     void update();
     void draw();
@@ -19,7 +19,6 @@ private:
     //--------------------------------------------------------------
     // Private fields
     //--------------------------------------------------------------
-    MIDIPortState* midiPortState;
     // 3D graphics
     ofMesh mainMesh;
     ofEasyCam mainCam;

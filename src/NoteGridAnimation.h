@@ -9,7 +9,7 @@ extern const int RIGHT_CONTROLBAR;
 
 class NoteGridAnimation : public AnimationComponent {
 public:
-	NoteGridAnimation(std::string uid, MIDIPortState* midiPortState);
+	NoteGridAnimation(MIDIPortState* midiPortState, std::string uid);
 
 	void setup();
 	void update();
@@ -44,7 +44,7 @@ private:
     
 
     // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
-    MIDIPortState* midiPortState;
+    //MIDIPortState* midiPortState;
 
     // stores current width and height of the window
     int windowWidth, windowHeight;

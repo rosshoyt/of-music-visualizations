@@ -1,6 +1,6 @@
 #include "Animated3DMesh.h"
 
-Animated3DMesh::Animated3DMesh(std::string uid, MIDIPortState* midiPortState) : AnimationComponent(uid), pointNoteMap(), midiPortState(midiPortState) {}
+Animated3DMesh::Animated3DMesh(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), pointNoteMap() {}
 
 //--------------------------------------------------------------
 void Animated3DMesh::setup() {
@@ -68,7 +68,6 @@ void Animated3DMesh::setup() {
             mainMesh.addIndex(index6);
         }
     }
-
     // setup the pointNoteMap
     pointNoteMap.setup(mainMesh, width, height, widthNoteGrid, heightNoteGrid);
 
@@ -76,18 +75,7 @@ void Animated3DMesh::setup() {
 
 //--------------------------------------------------------------
 void Animated3DMesh::update() {
-    // Get the current active MIDI notes for all channels and
-    // store in map<midiPitch, <velocity, adsr value>>
-    std::map<int, std::pair<int,float>> allNotesDown;
-    int channelNum = 0;
-    for (auto channelNotes : midiPortState->getAllChannelNotes()) {
-        for (auto note : channelNotes) {
-            // TODO don't overwrite values when 2 notes are same between channels
-            allNotesDown.insert({ note.first, { note.second, midiPortState->getADSRValue(channelNum, note.first) } });
-        }
-        ++channelNum;
-    }
-
+    auto allNotesDown = getAllNotesDown();
 
     // Update position of vertices based on if there is a note at their location
     // TODO could optimize by reversing pointNoteMap to notePointMap 
@@ -97,7 +85,7 @@ void Animated3DMesh::update() {
         int midiPitch = pointNoteMap.getNote(newPosition);
             if (allNotesDown.count(midiPitch) > 0) {
                 // TODO scale based on SIN of frequency of pitch
-                // like: float sinMod = sin(timePassed, frequency);
+                // like: float sinMod   = sin(timePassed, frequency);
                 
                 // scale note on velocity along with adsr value (TODO redundant scaling? ADSR takes velocity into account)
                 auto velocityADSR = allNotesDown[midiPitch];
