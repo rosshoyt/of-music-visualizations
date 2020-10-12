@@ -31,9 +31,6 @@ void Animated3DMesh::setup() {
             ofPoint point(x - width / 2, y - height / 2, 0);
             mainMesh.addVertex(point);
 
-            int note = getNoteFromPoint(point);
-            // associate the x,y coords of each vertex with the MIDI note they represent
-            pointNoteMap.insert({ { point.x, point.y }, note });
             
             // Find the color for the row/column
             // TODO create shared function set for these utils
@@ -46,6 +43,7 @@ void Animated3DMesh::setup() {
             
         }
     }
+
 
     // here we loop through and join the vertices together as indices to make rows of triangles to make the wireframe grid
     for (int y = 0; y < height - 1; y++) {
@@ -71,6 +69,9 @@ void Animated3DMesh::setup() {
         }
     }
 
+    // setup the pointNoteMap
+    pointNoteMap.setup(mainMesh, width, height, widthNoteGrid, heightNoteGrid);
+
 }
 
 //--------------------------------------------------------------
@@ -93,7 +94,7 @@ void Animated3DMesh::update() {
     int numVertices = mainMesh.getNumVertices();
     for (int i = 0; i < numVertices; i++) {
         ofVec3f newPosition = mainMesh.getVertex(i);
-        int midiPitch = pointNoteMap.at({ newPosition.x, newPosition.y });
+        int midiPitch = pointNoteMap.getNote(newPosition);
             if (allNotesDown.count(midiPitch) > 0) {
                 // TODO scale based on SIN of frequency of pitch
                 // like: float sinMod = sin(timePassed, frequency);
@@ -115,8 +116,10 @@ void Animated3DMesh::update() {
 void Animated3DMesh::draw() {
     mainCam.begin();
 
-    mainMesh.draw(OF_MESH_FILL);
-    /*if (b_drawWireFrame) {
+    //mainMesh.draw(OF_MESH_FILL);
+    mainMesh.drawWireframe();
+
+    /*if (b_drawWireFrame) { 
         mainMesh.drawWireframe();
     }
     else {
@@ -162,36 +165,4 @@ void Animated3DMesh::keyPressed(int key) {
             perlinHeight -= 0.1;
         break;
     }
-}
-
-//--------------------------------------------------------------
-int Animated3DMesh::getNoteFromPoint(const ofVec3f& point) {
-    //std::cout << "Finding note for point (" << point << ")" << std::endl;
-    int xSegment = getSegmentNumber(point.x, width, widthNoteGrid);
-    int ySegment = getSegmentNumber(point.y, height, heightNoteGrid);
-    // convert segment #s to MIDI note number
-    int noteNumber = ySegment * heightNoteGrid + xSegment;
-    //std::cout<< "Pitch = " << noteNumber << ", xSegment #: " << xSegment << ", ySegment #: " << ySegment << std::endl;
-
-    return noteNumber;
-
-}
-
-//--------------------------------------------------------------
-// TODO refactor, store some calculated vars globally
-int Animated3DMesh::getSegmentNumber(const int coord, const int dimLength, const int nSegments) {
-    float segmentSize = float(dimLength) / float(nSegments);
-    // first compensate for the offset which was introduced to center the mesh
-    float coordOffset = dimLength / 2;
-    int normalizedCoord = coord + coordOffset;
-
-    int pitchGridIndex = 1;
-    for (; pitchGridIndex <= nSegments; pitchGridIndex++) {
-        float gridSegmentMaxVal = pitchGridIndex * segmentSize;
-        if (normalizedCoord < gridSegmentMaxVal) {
-            break;
-        }
-    }
-    return pitchGridIndex - 1;
-
 }

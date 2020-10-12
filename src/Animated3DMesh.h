@@ -1,6 +1,7 @@
 #include "ofMain.h"
 #include "MIDIPortState.h"
 #include "AnimationComponent.h"
+#include "Utils.h"
 
 /**
 * Class that manages state of 3D mesh animation
@@ -23,22 +24,17 @@ private:
     ofMesh mainMesh;
     ofEasyCam mainCam;
 
-
-
     int width, height;
     // TODO refactor shared variables between this class and NoteGridAnimation to a parent class
     int widthNoteGrid, heightNoteGrid;
     bool b_messyMesh, b_perlinMesh, b_drawWireFrame;
     float perlinRange, perlinHeight;
+    
     // map that stores each x/y coord pair's associated MIDI pitch value
-    std::map<std::pair<int, int>, int> pointNoteMap;
+    utils::note_grid::PointNoteMap pointNoteMap;
     
     //--------------------------------------------------------------
     // Private methods
-    //--------------------------------------------------------------
-    
-    int getNoteFromPoint(const ofVec3f& point);
-    // TODO refactor, store some calculated vars globally
-    int getSegmentNumber(const int coord, const int dimLength, const int nSegments);
-    
+    //-------------------------------------------------------------- 
+   
 };
