@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState) {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation("2D Note Grid",&midiPortState), animated3DMesh("3D Mesh",&midiPortState), meshFromImage("Mesh From Image") {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -9,15 +9,18 @@ void ofApp::setup(){
     ofSetWindowTitle("VS Visual");
     ofEnableAntiAliasing();
 
-
+    animationComponents.push_back(&noteGridAnimation);
+    animationComponents.push_back(&animated3DMesh);
+    animationComponents.push_back(&meshFromImage);
+    
     // setup animation components
-    noteGridAnimation.setup();
-    animated3DMesh.setup();
-    // setup GUI dropdown animation selector
-    animationUIDS.push_back(noteGridAnimation.getUID());
-    animationUIDS.push_back(animated3DMesh.getUID());
+    for (auto& animation : animationComponents) {
+        animation->setup();
+        // track UIDS of animations
+        animationUIDS.push_back(animation->getUID());
+    }
     // set which animation to use first
-    currentAnimationUID = animationUIDS[0];
+    currentAnimationUID = animationUIDS[1];
 
     //// instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
@@ -38,17 +41,19 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     animationSelectorDropdown->update();
-    noteGridAnimation.update();
-    animated3DMesh.update();
+    for (const auto& animation : animationComponents) {
+        animation->update();
+    }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    if (currentAnimationUID == noteGridAnimation.getUID())
-        noteGridAnimation.draw();
-    else if (currentAnimationUID == animated3DMesh.getUID())
-        animated3DMesh.draw();
+    for (const auto& animation : animationComponents) {
+        if (animation->getUID() == currentAnimationUID) {
+            animation->draw();
+        }
+    }
 
     animationSelectorDropdown->draw();
 }

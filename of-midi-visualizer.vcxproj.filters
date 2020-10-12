@@ -464,6 +464,9 @@
     <ClInclude Include="src\Utils.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\MeshFromImage.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

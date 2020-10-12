@@ -12,7 +12,7 @@ public:
     void setup();
     void update();
     void draw();
-    void drawGUI() override;
+    void drawGUI();
     void keyPressed(int key);
 
 private:

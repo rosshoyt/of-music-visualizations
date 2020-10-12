@@ -6,7 +6,9 @@
 #include "MIDIPortState.h"
 #include "NoteGridAnimation.h"
 #include "Animated3DMesh.h"
+#include "MeshFromImage.h"
 #include "AbletonController.h"
+#include "AnimationComponent.h"
 
 extern const int WIDTH, HEIGHT;
 
@@ -36,9 +38,11 @@ private:
         
         // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
         MIDIPortState midiPortState;
+
+
         // Animation components
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
-    
-      
+        MeshFromImage meshFromImage;
+        std::vector<AnimationComponent*> animationComponents;
 };

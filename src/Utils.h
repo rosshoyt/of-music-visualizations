@@ -9,9 +9,7 @@ namespace utils {
 
         class PointNoteMap {
         public:
-            PointNoteMap() : pointNoteMap(), width(), height(), widthGrid(), heightGrid() {
-            
-            }
+            PointNoteMap() : pointNoteMap(), width(), height(), widthGrid(), heightGrid() {}
             
             void setup(const ofMesh& mesh, int width, int height, int widthGrid, int heightGrid) {
                 this->width = width, this->height = height, this->widthGrid = widthGrid, this->heightGrid = heightGrid;

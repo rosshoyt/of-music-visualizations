@@ -231,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbletonController.h" />
+    <ClInclude Include="src\MeshFromImage.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ADSR.h" />
     <ClInclude Include="src\Animated3DMesh.h" />

@@ -14,7 +14,7 @@ public:
 	void setup();
 	void update();
 	void draw();
-    void drawGUI() override;
+    void drawGUI();
 
     void windowResized(int w, int h);
 
