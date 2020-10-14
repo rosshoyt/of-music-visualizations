@@ -42,18 +42,19 @@ namespace utils {
                     heightMax = std::max(vertex.y, heightMax);
                     heightMin = std::min(vertex.y, heightMin);
 
-                }
-                width = widthMax - widthMin;
-                height = heightMax - heightMin;
-                
-                
-                std::cout << "Calculated width/height = " << width << "/" << height << ", widthMin/Max = " << widthMin << "/" << widthMax << ", heightMin/Max = " << heightMin << "/" << heightMax << "\n";
-                for (const auto& vertex : mesh.getVertices()) {
                     int note = getNoteFromPoint(vertex);
                     // associate the x,y coords of each vertex with the MIDI note they represent
                     pointNoteMap.insert({ { vertex.x, vertex.y }, note });
-
                 }
+
+                width = widthMax - widthMin;
+                height = heightMax - heightMin;
+                
+                std::cout << "Calculated width/height = " << width << "/" << height << ", widthMin/Max = " << widthMin << "/" << widthMax << ", heightMin/Max = " << heightMin << "/" << heightMax << "\n";
+               /* for (const auto& vertex : mesh.getVertices()) {
+                   
+
+                }*/
             }
 
 

@@ -23,7 +23,7 @@ public:
 
         mesh.enableColors();
 
-        float intensityThreshold = 75.f;
+        float intensityThreshold = 130.f;
         int w = image.getWidth();
         int h = image.getHeight();
         for (int x = 0; x < w; ++x) {
