@@ -22,7 +22,6 @@ void NoteGridAnimation::setup() {
     // 2 colors to interpolate between for default colors
     ofColor color1(0, 5, 255, 255);
     ofColor color2(50, 220, 255, 255);
-
     int numMIDIChannels = midiPortState->getNumChannels();
     channelColors = new ofxColorSlider[numMIDIChannels];
     for (int i = 0; i < numMIDIChannels; ++i) {
@@ -127,15 +126,17 @@ void NoteGridAnimation::drawActiveNotes() {
 
             // TODO ensure MIDI NOTE #0 doesn't cause issue (scale midi note #s to start at 1?)
 
-            auto adsrVal = midiPortState->getADSRValue(channelNumber, noteNumber);
-
-            float lerpAmount = velocity * 2.f / 256.f;
-            float scalar = float(velocity) / 128.f * float(adsrVal);
+            float scalarADSR = midiPortState->getADSRValue(channelNumber, noteNumber);
+            float scalarVelocity = float(velocity) / 128.f;
+            float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f);
+            
             ofSetColor(channelColors[channelNumber], scalar * 256.f);
             int startX = col * boxWidth, startY = row * boxHeight;
             if (drawCirclesToggle) {
                 float radius = float(boxWidth) / 2.f;
-                ofDrawCircle({ startX + radius, startY + radius}, radius);
+                //ofDrawCircle({ startX + radius, startY - radius}, radius); // good 'bloomy', lens-flare circle effect (with purple/red colors)
+                ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); // good 'bloomy', lens-flare circle effect (with purple/red colors)
+
             }
             else {
                 ofDrawRectangle(startX, startY, boxWidth, boxHeight);
