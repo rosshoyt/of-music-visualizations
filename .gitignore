@@ -5,7 +5,6 @@ JuceLibraryCode/
 JuceModules/
 *.db
 /.vs
-bin/
 *.rc
 
 # Some general ignore patterns (https://github.com/openframeworks/projectGenerator/blob/master/.gitignore)
@@ -25,8 +24,10 @@ Release*/
 # but not the data folder
 ###########################
 
-*/bin/*
-!*/bin/data/
+!bin/
+
+bin/*
+!bin/data/
 
 #########
 # general

@@ -6,11 +6,12 @@ class MeshFromImage :
 	public AnimationComponent
 {
 public:
-	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/hubble.png") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
-
+	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/treeCrop.png") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
+        // textures/allRGBV.png
+        // textures/nebulabrotCrop.png
 	}
 	
-	void setup() {
+	void setup() {      
         image.load(imagePath);
         image.resize(width, height);
 
@@ -22,7 +23,7 @@ public:
 
         mesh.enableColors();
 
-        float intensityThreshold = 65.f;
+        float intensityThreshold = 75.f;
         int w = image.getWidth();
         int h = image.getHeight();
         for (int x = 0; x < w; ++x) {
@@ -32,7 +33,7 @@ public:
 
                 if (intensity >= intensityThreshold) {
                     float saturation = c.getSaturation();
-                    float z = ofMap(saturation, 0, 255, -100, 100) * .25f; // TODO fix scaling
+                    float z = ofMap(saturation, 0, 255, -100, 100); // TODO fix scaling
                     ofVec3f pos(x * 4, y * 4, z);
                     mesh.addVertex(pos);
                     mesh.addColor(c);
