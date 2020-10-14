@@ -23,7 +23,7 @@ void Animated3DMesh::setup() {
     mainCam.setPosition(0, 0, 80);
 
     //mainMesh.setMode(OF_PRIMITIVE_LINE_LOOP);
-    // make points inide the mesth
+    // make points inside the mesh
     // add one vertex to the mesh across our width and height
     // we use these y and x vals to set the x and y coordinates of the mesh, adding a z value of zero to complete the 3D location of each vertex
     for (int y = 0; y < height; y++) {
@@ -100,20 +100,61 @@ void Animated3DMesh::update() {
     }
 }
 
+
 //--------------------------------------------------------------
 void Animated3DMesh::draw() {
     mainCam.begin();
 
-    //mainMesh.draw(OF_MESH_FILL);
-    mainMesh.drawWireframe();
+    // TODO refactor - do in shader?
 
-    /*if (b_drawWireFrame) { 
-        mainMesh.drawWireframe();
-    }
-    else {
-        mainMesh.drawVertices();
-    }*/
+    float offset = float(width) / 2.f;
+    // front
+    ofPushMatrix();
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+
+    // right
+    ofPushMatrix();
+    ofTranslate(offset, 0.f, -offset);
+    ofRotateY(90.f);
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+    
+    // back
+    ofPushMatrix();
+    ofTranslate(0.f, 0.f, -width /*TODO create depth var? */);
+    ofRotateY(180.f);
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+
+    // left
+    ofPushMatrix();
+    ofTranslate(-offset, 0.f, -offset);
+    ofRotateY(270.f);
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+
+    // top
+    ofPushMatrix();
+    ofTranslate(0.f, offset, -offset);
+    ofRotateX(270.f);
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+
+    // bottom
+    ofPushMatrix(); 
+    ofTranslate(0.f, -offset, -offset);
+    ofRotateX(90.f);
+    mainMesh.drawWireframe();
+    ofPopMatrix();
+
+    
+    //ofTranslate(-ofGetWidth() / 3, -ofGetHeight() / 3);
+
+
+
     mainCam.end();
+
 
     ofSetColor(100);
     string msg = "f: toggle full screen, spacebar: random z-value in meshvertices, w: draw wireframe or point cloud \np: use PerlinNoise for z-value in meshvertices\nUp-key Down-key: increase/devrease PerlinNoise input range\nRight-key Left-key: increase/decrease amplitude of Perlin Noise distortion\nclick and drag in window to move camera";
