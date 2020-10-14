@@ -24,9 +24,12 @@ public:
     ofxToggle pitchOffsetUseMIDICCToggle;
     ofParameter<int> pitchOffsetAmount;
 
+    ofxToggle drawCirclesToggle;
+
+
     ofxToggle drawLinesToggle;
     ofxToggle drawBackgroundGridToggle;
-
+    
     ofxColorSlider backgroundColorSelector;
     ofxColorSlider gridLineColorSelector;
     ofxColorSlider octaveRowColorSelector;
@@ -42,9 +45,6 @@ private:
 
     int boxWidth, boxHeight;
     
-
-    // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
-    //MIDIPortState* midiPortState;
 
     // stores current width and height of the window
     int windowWidth, windowHeight;
