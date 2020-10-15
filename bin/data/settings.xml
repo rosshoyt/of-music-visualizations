@@ -25,4 +25,5 @@
 	<Channel_Color__14>9, 45, 255, 255</Channel_Color__14>
 	<Channel_Color__15>6, 31, 255, 255</Channel_Color__15>
 	<Channel_Color__16>3, 18, 255, 255</Channel_Color__16>
+	<Draw_Circles>1</Draw_Circles>
 </group>

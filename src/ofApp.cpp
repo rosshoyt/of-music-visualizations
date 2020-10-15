@@ -1,17 +1,18 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image") {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image"), texturedSphere(&midiPortState, "Textured Sphere") {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(60);
-    ofSetWindowTitle("VS Visual");
+    ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    animationComponents.push_back(&noteGridAnimation);
-    animationComponents.push_back(&animated3DMesh);
-    animationComponents.push_back(&meshFromImage);
+    //animationComponents.push_back(&noteGridAnimation);
+    //animationComponents.push_back(&animated3DMesh);
+    //animationComponents.push_back(&meshFromImage);
+    animationComponents.push_back(&texturedSphere);
     
     // setup animation components
     for (auto& animation : animationComponents) {
@@ -20,7 +21,7 @@ void ofApp::setup(){
         animationUIDS.push_back(animation->getUID());
     }
     // set which animation to use first
-    currentAnimationUID = animationUIDS[1];
+    currentAnimationUID = animationUIDS[0];
 
     //// instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);

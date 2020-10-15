@@ -35,9 +35,12 @@ private:
 	std::string uid;
 
 protected:
+	// TODO 
+	// int displayWidth, displayHeight // to track the sub-window space that the animation component displays on
 
 	MIDIPortState* midiPortState;
 
+	// TODO refactor, move menu code to the ofApp and create framework for sub-apps to communicate/update GUI
 	int menuX, menuY;
 
 	ofColor backgroundColor;

@@ -5,10 +5,11 @@
 #include <iostream>
 #include "MIDIPortState.h"
 #include "NoteGridAnimation.h"
+#include "AnimationComponent.h"
 #include "Animated3DMesh.h"
 #include "MeshFromImage.h"
+#include "TexturedSphere.h"
 #include "AbletonController.h"
-#include "AnimationComponent.h"
 
 extern const int WIDTH, HEIGHT;
 
@@ -44,5 +45,6 @@ private:
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
+        TexturedSphere texturedSphere;
         std::vector<AnimationComponent*> animationComponents;
 };
