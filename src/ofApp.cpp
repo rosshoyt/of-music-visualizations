@@ -4,24 +4,24 @@
 ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image"), texturedSphere(&midiPortState, "Textured Sphere") {}
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    //animationComponents.push_back(&noteGridAnimation);
-    //animationComponents.push_back(&animated3DMesh);
-    //animationComponents.push_back(&meshFromImage);
-    animationComponents.push_back(&texturedSphere);
-    
+    //animationComponents.insert(&noteGridAnimation);
+    //animationComponents.insert(&animated3DMesh);
+    //animationComponents.insert(&meshFromImage);
+    animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
+
     // setup animation components
-    for (auto& animation : animationComponents) {
-        animation->setup();
+    for (auto& pair : animationComponents) {
+        animationComponents[pair.first]->setup();
         // track UIDS of animations
-        animationUIDS.push_back(animation->getUID());
+        //animationUIDS.insert(animation->getUID());
     }
-    // set which animation to use first
-    currentAnimationUID = animationUIDS[0];
+    // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
+    currentAnimationUID = animationComponents.begin()->first;
 
     //// instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
@@ -37,32 +37,20 @@ void ofApp::setup(){
     midiPortState.setupMIDIPort();
 }
 
-
-
 //--------------------------------------------------------------
 void ofApp::update(){
+    animationComponents[currentAnimationUID]->update();
     animationSelectorDropdown->update();
-    for (const auto& animation : animationComponents) {
-        if (animation->getUID() == currentAnimationUID) {
-            animation->update();
-        }
-    }
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    for (const auto& animation : animationComponents) {
-        if (animation->getUID() == currentAnimationUID) {
-            animation->draw();
-        }
-    }
-
+    animationComponents[currentAnimationUID]->draw();
     animationSelectorDropdown->draw();
 }
 
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    
     switch (key) {
     case ' ':
         std::cout << "Pressed Space\n";
@@ -71,11 +59,13 @@ void ofApp::keyPressed(int key) {
 
     animated3DMesh.keyPressed(key);
 }
+
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     noteGridAnimation.windowResized(w, h);
 }
 
+//--------------------------------------------------------------
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e){
     currentAnimationUID = animationUIDS[e.child];
     animationSelectorDropdown->expand();
