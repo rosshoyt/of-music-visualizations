@@ -16,10 +16,21 @@ public:
 		light.enable();
 		light.setPosition(ofVec3f(100, 100, 200));
 		light.lookAt(ofVec3f(0, 0, 0));
-		ofDisableArbTex();
 		ofLoadImage(mTex, "textures/earth.jpg");
 		mTex.generateMipmap();
 		mTex.setTextureMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+		ofDisableArbTex();
+	}
+
+	void prepare() override {	
+		
+	}
+
+	void takedown() override {
+	    light.disable();
+		ofEnableAlphaBlending();
+		ofDisableDepthTest();
+		ofEnableArbTex();
 	}
 
 	void update() {
@@ -34,12 +45,9 @@ public:
 		cam.end();
 	}
 
-	void drawGUI() {
+	void drawGUI() {}
 
-	}
-
-	//void drawBackground() {}
-
+	
 private:
 	ofSpherePrimitive sphere;
 	ofLight light;
