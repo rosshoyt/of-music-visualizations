@@ -36,6 +36,7 @@ private:
         ofxDatGuiDropdown* animationSelectorDropdown;
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
+        std::map<std::string, AnimationComponent*> animationComponents;
         
         // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
         MIDIPortState midiPortState;
@@ -45,5 +46,5 @@ private:
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
-        std::map<std::string, AnimationComponent*> animationComponents;
+        
 };

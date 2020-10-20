@@ -224,28 +224,13 @@
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\ADSR.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Animated3DMesh.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationComponent.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MIDIChannelState.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MIDIPortState.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\NoteGridAnimation.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\spline.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxAbletonLive\src\ofxAbletonLive.h">
@@ -457,12 +442,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AbletonController.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Utils.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshFromImage.h">
       <Filter>src</Filter>

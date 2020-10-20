@@ -3,9 +3,9 @@
 	<Draw_Lines_Toggle>1</Draw_Lines_Toggle>
 	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
 	<Grid_Line_Color>0, 0, 0, 255</Grid_Line_Color>
-	<Pitch_Offset__Half-Steps_>2</Pitch_Offset__Half-Steps_>
+	<Pitch_Offset__Half-Steps_>0</Pitch_Offset__Half-Steps_>
 	<Toggle_Pitch_Offset_MIDI_CC_Control>0</Toggle_Pitch_Offset_MIDI_CC_Control>
-	<Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>2</Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>
+	<Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>0</Pitch_Offset__Half-Steps__MIDI_CC-Controlled_Value>
 	<Draw_Lines>0</Draw_Lines>
 	<Draw_Rows_Columns>0</Draw_Rows_Columns>
 	<Channel_Color__1>0, 255, 99, 255</Channel_Color__1>

@@ -9,19 +9,20 @@ void ofApp::setup() {
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    //animationComponents.insert(&noteGridAnimation);
-    //animationComponents.insert(&animated3DMesh);
-    //animationComponents.insert(&meshFromImage);
-    animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
+    animationComponents.insert({ noteGridAnimation.getUID(), &noteGridAnimation });
+    animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
+    animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
+    //animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
 
+    // list to tactrack the animationUIDS to add to dropdown menu
+    
+    
     // setup animation components
     for (auto& pair : animationComponents) {
         animationComponents[pair.first]->setup();
-        // track UIDS of animations
-        //animationUIDS.insert(animation->getUID());
+        // track UIDS of animations to add to the animationSelectorDropdown
+        animationUIDS.push_back(pair.first);
     }
-    // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
-    currentAnimationUID = animationComponents.begin()->first;
 
     //// instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
@@ -29,6 +30,10 @@ void ofApp::setup() {
     //// register to listen for change events
     animationSelectorDropdown->onDropdownEvent(this, &ofApp::onDropdownEvent);
     animationSelectorDropdown->expand();
+
+    // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
+    currentAnimationUID = animationComponents.begin()->first;
+
 
     // Set ofxGUI menu position for note grid animation
     noteGridAnimation.setMenuXY(WIDTH, HEIGHT / 2);
