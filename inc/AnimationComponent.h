@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "MIDIPortState.h"
+#include "ofMain.h"
 
 class AnimationComponent {
 public:

@@ -9,6 +9,7 @@
 #define ADSR_h
 
 #include "spline.h"
+#include <map>
 
 
 typedef std::chrono::system_clock SystemClock;
@@ -16,19 +17,17 @@ typedef std::chrono::system_clock SystemClock;
 class Time{
 public:
    
-    static const long getCurrentTime(){
+    static inline const long getCurrentTime(){
         std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
         auto duration = now.time_since_epoch();
         auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
         //std::cout << "In getCurrentTime, current time (MS) = " << millis << '\n';
         return millis;
     }
-    static const long elapsedTimeSince(long oldTime){
+    static inline const long elapsedTimeSince(long oldTime){
         long elapsed = getCurrentTime() - oldTime;
-        //std::cout<< elapsed << " milliseconds elapsed\n";
         return elapsed;
     }
-    
 };
 enum ADSRState {
     ATTACKING,

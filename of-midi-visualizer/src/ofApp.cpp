@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image"), texturedSphere(&midiPortState, "Textured Sphere") {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image"), texturedSphere(&midiPortState, "Textured Sphere"), adsrVisualizer(&midiPortState) {}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -12,6 +12,7 @@ void ofApp::setup() {
     animationComponents.insert({ noteGridAnimation.getUID(), &noteGridAnimation });
     animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
     animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
+    animationComponents.insert({ adsrVisualizer.getUID(), &adsrVisualizer });
     //animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
 
     // list to tactrack the animationUIDS to add to dropdown menu

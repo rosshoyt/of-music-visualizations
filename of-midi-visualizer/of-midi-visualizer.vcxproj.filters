@@ -139,6 +139,7 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
+    <ClCompile Include="ADSRVisualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -449,6 +450,7 @@
     <ClInclude Include="src\TexturedSphere.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="ADSRVisualizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

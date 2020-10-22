@@ -10,6 +10,7 @@
 #include "MeshFromImage.h"
 #include "TexturedSphere.h"
 #include "AbletonController.h"
+#include "../ADSRVisualizer.h"
 
 extern const int WIDTH, HEIGHT;
 
@@ -46,5 +47,6 @@ private:
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
+        ADSRVisualizer adsrVisualizer;
         
 };

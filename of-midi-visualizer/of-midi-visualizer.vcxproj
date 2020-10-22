@@ -184,6 +184,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ADSRVisualizer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Animated3DMesh.cpp" />
@@ -230,6 +231,7 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ADSRVisualizer.h" />
     <ClInclude Include="src\MeshFromImage.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Animated3DMesh.h" />
