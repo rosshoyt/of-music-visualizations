@@ -11,7 +11,7 @@ void ofApp::setup() {
 
     animationComponents.insert({ noteGridAnimation.getUID(), &noteGridAnimation });
     animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
-    animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
+    //animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
     animationComponents.insert({ adsrVisualizer.getUID(), &adsrVisualizer });
     //animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
 
@@ -20,7 +20,11 @@ void ofApp::setup() {
     
     // setup animation components
     for (auto& pair : animationComponents) {
-        animationComponents[pair.first]->setup();
+        
+        auto component = animationComponents[pair.first];
+        component->setup();
+        // Set ofxGUI menu position for note grid animation
+        component->setMenuXY(WIDTH, HEIGHT / 2);
         // track UIDS of animations to add to the animationSelectorDropdown
         animationUIDS.push_back(pair.first);
     }
@@ -35,9 +39,8 @@ void ofApp::setup() {
     // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
     currentAnimationUID = animationComponents.begin()->first;
 
+    
 
-    // Set ofxGUI menu position for note grid animation
-    noteGridAnimation.setMenuXY(WIDTH, HEIGHT / 2);
 
     // initialize network MIDI port
     midiPortState.setupMIDIPort();

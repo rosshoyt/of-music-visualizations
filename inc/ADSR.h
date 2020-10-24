@@ -48,7 +48,7 @@ public:
     double a, d, s, r, total;
     float aL, dL, sL;
     double aTot, dTot, sTot, rTot;
-    long splineAmount;
+    long splineControlY;
     //long aMidpointL, dMidpointL, rMidpointL;
     std::map<long, ADSRState> envelopeSections;
     
@@ -59,7 +59,7 @@ private:
         sTot = a + d + s;
         rTot = total = a + d + s + r;
         
-        splineAmount = .3f;
+        splineControlY = .3f;
        
         
     }
@@ -71,7 +71,7 @@ private:
 class NoteADSRState{
 public:
        
-    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineAmount = .25f) : adsr(adsr), splineAmount(.65f), adsrState(OFF), active(), startTime(), endTime() {
+    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineControlY = .25f) : adsr(adsr), splineControlY(.65f), adsrState(OFF), active(), startTime(), endTime() {
         initSplines();
     }
     
@@ -111,13 +111,13 @@ private:
     void initSplines(){
         
         splineAttack.set_points( { 0.f, adsr.a / 2.f,           adsr.a  },
-                                 { 0.f, splineAmount * adsr.aL, adsr.aL }
+                                 { 0.f, splineControlY * adsr.aL, adsr.aL }
         );
         splineDecay.set_points(  { adsr.a, adsr.a + adsr.d / 2.f, adsr.dTot },
-                                 { adsr.aL, 1.f - (1.f - splineAmount) * adsr.dL, adsr.dL }
+                                 { adsr.aL, 1.f - (1.f - splineControlY) * adsr.dL, adsr.dL }
         );
         splineRelease.set_points({ adsr.sTot, adsr.sTot + adsr.r / 2.f, adsr.rTot },
-                                 { adsr.sL, adsr.sL / 2.f, 0.f }//(1.f - splineAmount) * adsr.r, adsr.}
+                                 { adsr.sL, adsr.sL / 2.f, 0.f }//(1.f - splineControlY) * adsr.r, adsr.}
         );
     }
     void updateState(){
@@ -189,7 +189,7 @@ private:
     
     bool splineCurve;
     //tk::spline spline;
-    double splineAmount;
+    double splineControlY;
     
     tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
     

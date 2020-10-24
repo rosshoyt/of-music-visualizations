@@ -6,7 +6,7 @@ class MeshFromImage :
 	public AnimationComponent
 {
 public:
-	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
+	MeshFromImage(MIDIPortState* midiPortState, std::string uid, std::string imagePath = "textures/pnw.jpg") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
         // "textures/treeCrop.png"
         // textures/allRGBV.png
         // textures/nebulabrotCrop.png
