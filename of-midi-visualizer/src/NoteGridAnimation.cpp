@@ -3,7 +3,7 @@
 NoteGridAnimation::NoteGridAnimation(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
 void NoteGridAnimation::setup() {
-    gui.setup();
+    gui.setup();    
     gui.add(drawCirclesToggle.setup("Draw Circles", false));
     // pitch-offset display controls
     gui.add(pitchOffsetSlider.setup("Pitch Offset (Half-Steps)", 0, 0, 11));
@@ -31,9 +31,11 @@ void NoteGridAnimation::setup() {
         gui.add(channelColors[i].setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255)));
     }
 
+
+
+    gui.loadFromFile("settings.xml");
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
-
 }
 
 //--------------------------------------------------------------
@@ -50,6 +52,7 @@ void NoteGridAnimation::update() {
 void NoteGridAnimation::draw() {
     ofBackground(backgroundColorSelector);
     drawGUI(); // TODO move outside of class
+
     if (drawBackgroundGridToggle)
         drawBgdGrid();
     if (drawLinesToggle)
@@ -163,6 +166,3 @@ void NoteGridAnimation::windowResized(int w, int h) {
     gui.setPosition(menuX, menuY);
 }
 
-//void NoteGridAnimation::drawGUI() {
-//
-//}

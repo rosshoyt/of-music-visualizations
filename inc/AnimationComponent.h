@@ -5,7 +5,12 @@
 
 class AnimationComponent {
 public:
+	// TODO could move 'MIDI' code to an abstract class
 	AnimationComponent(MIDIPortState* midiPortState, std::string uid) : midiPortState(midiPortState), uid(uid) {
+
+	}
+
+	static void setMenuXY(float x, float y) {
 
 	}
 
@@ -55,7 +60,7 @@ protected:
 	MIDIPortState* midiPortState;
 
 	// TODO refactor, move menu code to the ofApp and create framework for sub-apps to communicate/update GUI
-	int menuX, menuY;
+	float menuX, menuY;
 
 	ofColor backgroundColor;
 

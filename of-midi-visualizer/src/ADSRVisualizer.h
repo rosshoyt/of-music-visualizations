@@ -19,17 +19,17 @@ public:
 
 	ADSR adsr;
 
-	double minF = -2.f;//0.000001f;
-	double maxF = 2.f;//0.999999f;
-	//ofxInputField<double> textEntryField;
-	std::vector<ofParameter<double>> splineControlX, splineControlY;// splineControlX1, splineControlX2, splineControlX3, splineControlY1, splineControlY2, splineControlY3;
-	std::vector<double> scXDefaults { -.5f, 0.f, .333f, .666f, 1.f,  1.5f };
-	std::vector<double> scYDefaults { 0.f,  0.f, .25f,  .75f, 1.f, 1.f };
+	double minF = -2.f;
+	double maxF = 2.f;
+
+	std::vector<ofParameter<double>> splineControlX, splineControlY;
+	std::vector<double> scXDefaults { -.5f, 0.f, .333f, .5f,.666f, 1.f,  1.5f };
+	std::vector<double> scYDefaults { 0.f,  0.f, .25f, .5f, .75f, 1.f, 1.f };
 
 	// display params
 	ofParameter<double> circleSize;
-	ofParameter<int> colorSpeed;
-
+	ofParameter<int> changeSpeed;
+	int minYToChange = 1, maxYToChange = scYDefaults.size() - 2, currentYToChange = minYToChange;
 
 	void setup() {
 
@@ -45,12 +45,12 @@ public:
 			gui.add(splineControlX[i]);
 			gui.add(splineControlY[i]);
 		}
+
+
 		/*gui.add(splineControlX2.set("control point X", .5f, minF, maxF));
 		gui.add(splineControlY2.set("spline Amount", .75f, minF, maxF));*/
 		
-		
-		
-		gui.add(colorSpeed.set("color speed ms", 300, 1, 5000));
+		gui.add(changeSpeed.set("color speed ms", 300, 1, 5000));
 		gui.add(circleSize.set("circle size", 5.f, 0.1f, 100.f));		
 		
 
@@ -89,25 +89,50 @@ public:
 
 	ofColor currentColor;
 
-	double validateParam(const double& param) {
-
+	bool shouldChange() {
+		//update color
+		auto nowMS = ofGetSystemTimeMillis();
+		if (nowMS > lastColorChange + changeSpeed) {
+			lastColorChange = nowMS;
+			return true;
+		}
+		return false;
 	}
-
-	/*bool sortDouble(double i, double j) {
-		return i 
-	}*/
-
 	void draw() {
+		
 		gui.draw();
+		int maxVel = 0;
+		int numNotes = 0;
+		for (auto channel : midiPortState->getAllChannelNotes()) {
+			for (auto note : channel) {
+				maxVel = std::max(note.second, maxVel);
+				++numNotes;
+			}
+		}
+
 		tk::spline spline;
 		std::vector<double> xTemps, yTemps;
+
+		//update time-based params
+		if (shouldChange()) {
+			ofSetColor(getRandomColor()); //colors[i % colors.size()]);
+			// update which y val to augment
+			if (currentYToChange > maxYToChange) {
+				currentYToChange = minYToChange;
+			}
+			else {
+				++currentYToChange;
+			}
+
+		}
 
 		auto size = splineControlX.size();
 		for (auto i = 0; i < size; i++) {
 			//if(i < size - 1)
 			xTemps.push_back(splineControlX[i]);//a1//i < size - 1 ? std::min(splineControlX[i].get(),splineControlX[i+1].get()) : splineControlX[i]);
-			yTemps.push_back(splineControlY[i]);
+			yTemps.push_back(i == currentYToChange && numNotes > 0 ? splineControlY[i] * maxVel / 128.f : splineControlY[i]); 
 		}
+		
 		//std::sort(xTemps.begin(), xTemps.end());//, sortDouble);
 
 		spline.set_points(xTemps, yTemps);
@@ -117,14 +142,11 @@ public:
 		*/
 		float width = ofGetWidth(), height = ofGetHeight();
 
+		
+		
 		for (int i = 0; i < numPoints; ++i) {
-			//update color
-			auto nowMS = ofGetSystemTimeMillis();
-			if (nowMS > lastColorChange + colorSpeed) {
-				ofSetColor(getRandomColor()); //colors[i % colors.size()]);
-				//currentColor = getRandomColor();
-				lastColorChange = nowMS;
-			}
+			
+			
 			
 
 			double xF = float(i) / numPoints;
@@ -139,7 +161,7 @@ public:
 	}
 
 	void drawGUI() {
-
+		
 	}
 
 	void drawBackground() {

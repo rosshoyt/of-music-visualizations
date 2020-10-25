@@ -9,7 +9,7 @@ extern const int RIGHT_CONTROLBAR;
 
 class NoteGridAnimation : public AnimationComponent {
 public:
-	NoteGridAnimation(MIDIPortState* midiPortState, std::string uid);
+	NoteGridAnimation(MIDIPortState* midiPortState, std::string uid = "2D Note Grid");
 
 	void setup();
 	void update();

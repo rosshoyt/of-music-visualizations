@@ -10,7 +10,7 @@
 #include "MeshFromImage.h"
 #include "TexturedSphere.h"
 #include "AbletonController.h"
-#include "../ADSRVisualizer.h"
+#include "ADSRVisualizer.h"
 
 extern const int WIDTH, HEIGHT;
 
@@ -32,7 +32,7 @@ private:
         
         // Global GUI componenets
         // gui components
-        ofxPanel gui;
+        //ofxPanel gui;
         // TODO replace ofxDatGUI
         ofxDatGuiDropdown* animationSelectorDropdown;
         std::string currentAnimationUID;

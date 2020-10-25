@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState, "2D Note Grid"), animated3DMesh(&midiPortState, "3D Mesh"), meshFromImage(&midiPortState, "Mesh From Image"), texturedSphere(&midiPortState, "Textured Sphere"), adsrVisualizer(&midiPortState) {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState), animated3DMesh(&midiPortState), meshFromImage(&midiPortState), texturedSphere(&midiPortState), adsrVisualizer(&midiPortState) {}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -22,14 +22,16 @@ void ofApp::setup() {
     for (auto& pair : animationComponents) {
         
         auto component = animationComponents[pair.first];
-        component->setup();
         // Set ofxGUI menu position for note grid animation
         component->setMenuXY(WIDTH, HEIGHT / 2);
+
+        component->setup();
+        
         // track UIDS of animations to add to the animationSelectorDropdown
         animationUIDS.push_back(pair.first);
     }
 
-    //// instantiate the animation selector dropdown and set position
+    // instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
     animationSelectorDropdown->setPosition(WIDTH, 0);
     //// register to listen for change events
@@ -38,8 +40,7 @@ void ofApp::setup() {
 
     // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
     currentAnimationUID = animationComponents.begin()->first;
-
-    
+      
 
 
     // initialize network MIDI port
@@ -54,7 +55,15 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    /*
+    //// Allows ADSR Animation to also draw the NoteGrid Animation underneath
+    if (currentAnimationUID == adsrVisualizer.getUID()) {
+        noteGridAnimation.draw();
+    }*/
     animationComponents[currentAnimationUID]->draw();
+ 
+    
     animationSelectorDropdown->draw();
 }
 

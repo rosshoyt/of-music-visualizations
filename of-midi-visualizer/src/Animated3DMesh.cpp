@@ -107,7 +107,7 @@ void Animated3DMesh::draw() {
 
     // TODO refactor - do in shader?
 
-    float offset = float(width) / 2.f;
+    float offset = float(width);// / 2.f;
     // front
     ofPushMatrix();
     mainMesh.drawWireframe();

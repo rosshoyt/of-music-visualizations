@@ -6,7 +6,7 @@
 
 class TexturedSphere : public AnimationComponent {
 public:
-	TexturedSphere(MIDIPortState* midiPortState, std::string uid): AnimationComponent(midiPortState, uid){
+	TexturedSphere(MIDIPortState* midiPortState, std::string uid = "Textured Sphere"): AnimationComponent(midiPortState, uid){
 
 	}
 

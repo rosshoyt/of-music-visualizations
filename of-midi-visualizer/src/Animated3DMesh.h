@@ -8,7 +8,7 @@
 */
 class Animated3DMesh : public AnimationComponent {
 public:
-    Animated3DMesh(MIDIPortState* midiPortState, std::string uid);
+    Animated3DMesh(MIDIPortState* midiPortState, std::string uid = "Mesh From Image");
     void setup();
     void update();
     void draw();
