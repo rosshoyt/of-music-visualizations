@@ -36,6 +36,13 @@ enum ADSRState {
     RELEASING,
     OFF
 };
+
+
+
+
+
+
+
 // Class which can be shared between NoteADSRState
 // TODO add 'looping' ADSR curve
 class ADSR {

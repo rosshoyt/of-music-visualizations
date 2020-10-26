@@ -35,6 +35,11 @@ private:
         //ofxPanel gui;
         // TODO replace ofxDatGUI
         ofxDatGuiDropdown* animationSelectorDropdown;
+        
+        ofxPanel gui;
+        ofxToggle drawAllAnimationsToggle;
+        
+        
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
         std::map<std::string, AnimationComponent*> animationComponents;

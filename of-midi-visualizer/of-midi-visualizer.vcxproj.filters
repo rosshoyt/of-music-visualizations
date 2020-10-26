@@ -455,6 +455,13 @@
     <ClInclude Include="src\ADSRVisualizer.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\inc\AbletonController.h" />
+    <ClInclude Include="..\inc\ADSR.h" />
+    <ClInclude Include="..\inc\AnimationComponent.h" />
+    <ClInclude Include="..\inc\MIDIChannelState.h" />
+    <ClInclude Include="..\inc\MIDIPortState.h" />
+    <ClInclude Include="..\inc\spline.h" />
+    <ClInclude Include="..\inc\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

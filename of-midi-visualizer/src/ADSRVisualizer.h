@@ -1,7 +1,7 @@
 #pragma once
 #include "AnimationComponent.h"
 #include "spline.h"
-#include "ADSR.h"
+//#include "ADSR.h"
 #include "ofMain.h"
 #include "MIDIPortState.h"
 #include "ofUtils.h"
@@ -10,6 +10,34 @@
 #include "ofxGui.h"
 
 
+// TODO 
+//class EnvelopeParam {
+//public:
+//
+//	EnvelopeParam(double startLevel, double endLevel, std::vector<double> xControlPoints, std::vector<double> yControlPoints) : startLevel(startLevel), endLevel(endLevel), xControlPoints(xControlPoints), yControlPoints(yControlPoints)  {
+//
+//	}
+//
+//	EnvelopeParam() {
+//
+//	}
+//
+//	double startLevel, endLevel;
+//	std::vector<double> xControlPoints, yControlPoints;
+//	
+//	//EnvelopeParam attack, decay, sustain, release;
+//
+//
+//
+//	ADSR adsr;
+//	std::vector<ofParameter<double>> xPoints { -.5f, 0.f, .5f, 1.f,  1.5f };// ,
+//		//yPoints{ 0.f,  0.f, midpointLevel, adsr.aL, adsr.aL}
+//	
+//	/*void setup(ofxPanel& panel) {
+//		panel.add(textEntryField.setup());
+//	}*/
+//};
+
 
 class ADSRVisualizer : public AnimationComponent {
 public:
@@ -17,7 +45,6 @@ public:
 
 	}
 
-	ADSR adsr;
 
 	double minF = -2.f;
 	double maxF = 2.f;
@@ -25,6 +52,8 @@ public:
 	std::vector<ofParameter<double>> splineControlX, splineControlY;
 	std::vector<double> scXDefaults { -.5f, 0.f, .333f, .5f,.666f, 1.f,  1.5f };
 	std::vector<double> scYDefaults { 0.f,  0.f, .25f, .5f, .75f, 1.f, 1.f };
+
+
 
 	// display params
 	ofParameter<double> circleSize;
@@ -53,6 +82,7 @@ public:
 		gui.add(changeSpeed.set("color speed ms", 300, 1, 5000));
 		gui.add(circleSize.set("circle size", 5.f, 0.1f, 100.f));		
 		
+
 
 		//setupColors
 		for (int i = 0; i < 32; i++) {
@@ -129,13 +159,16 @@ public:
 		auto size = splineControlX.size();
 		for (auto i = 0; i < size; i++) {
 			//if(i < size - 1)
-			xTemps.push_back(splineControlX[i]);//a1//i < size - 1 ? std::min(splineControlX[i].get(),splineControlX[i+1].get()) : splineControlX[i]);
+			xTemps.push_back(splineControlX[i]);
 			yTemps.push_back(i == currentYToChange && numNotes > 0 ? splineControlY[i] * maxVel / 128.f : splineControlY[i]); 
 		}
 		
 		//std::sort(xTemps.begin(), xTemps.end());//, sortDouble);
 
 		spline.set_points(xTemps, yTemps);
+
+
+
 		/*spline.set_points({ scXDefaults[0], splineControlX[1], splineControlX[2], splineControlX[3], scXDefaults[4] },
 			              { splineControlY[0], splineControlY[1], splineControlY[2], splineControlY[3], splineControlY[4] }
 		);
@@ -145,9 +178,6 @@ public:
 		
 		
 		for (int i = 0; i < numPoints; ++i) {
-			
-			
-			
 
 			double xF = float(i) / numPoints;
 			float heightScale = spline(xF);
@@ -169,32 +199,4 @@ public:
 
 };
 
-
-// TODO 
-//class EnvelopeParam {
-//public:
-//
-//	EnvelopeParam(double startLevel, double endLevel, std::vector<double> xControlPoints, std::vector<double> yControlPoints) : startLevel(startLevel), endLevel(endLevel), xControlPoints(xControlPoints), yControlPoints(yControlPoints)  {
-//
-//	}
-//
-//	EnvelopeParam() {
-//
-//	}
-//
-//	double startLevel, endLevel;
-//	std::vector<double> xControlPoints, yControlPoints;
-//	
-//	//EnvelopeParam attack, decay, sustain, release;
-//
-//
-//
-//	ADSR adsr;
-//	std::vector<ofParameter<double>> xPoints { -.5f, 0.f, .5f, 1.f,  1.5f };// ,
-//		//yPoints{ 0.f,  0.f, midpointLevel, adsr.aL, adsr.aL}
-//	
-//	/*void setup(ofxPanel& panel) {
-//		panel.add(textEntryField.setup());
-//	}*/
-//};
 

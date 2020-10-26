@@ -2,9 +2,9 @@
 
 NoteGridAnimation::NoteGridAnimation(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
+
 void NoteGridAnimation::setup() {
     gui.setup();    
-    gui.add(drawCirclesToggle.setup("Draw Circles", false));
     // pitch-offset display controls
     gui.add(pitchOffsetSlider.setup("Pitch Offset (Half-Steps)", 0, 0, 11));
     gui.add(pitchOffsetUseMIDICCToggle.setup("Toggle Pitch Offset MIDI CC Control", false));
@@ -25,13 +25,29 @@ void NoteGridAnimation::setup() {
     int numMIDIChannels = midiPortState->getNumChannels();
     channelColors = new ofxColorSlider[numMIDIChannels];
     for (int i = 0; i < numMIDIChannels; ++i) {
-        std::string channelName("Channel Color #");
-        channelName.append(std::to_string(i + 1));
         float lerpAmount = 1.0f / numMIDIChannels * float(i);
-        gui.add(channelColors[i].setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255)));
+        std::string channelName("Channel #");
+        channelName.append(std::to_string(i + 1));
+
+        //ofxToggle chanDrawCirclesToggle;
+        //chanDrawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i+1)), true);
+        //ofxColorSlider chanColor;
+        //chanColor.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
+
+        ChannelSettings* channelSettings = new ChannelSettings();
+        channelSettings->color.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
+        channelSettings->drawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i + 1)), true);
+            
+
+        gui.add(&channelSettings->drawCirclesToggle);
+        gui.add(&channelSettings->color);
+
+        channelSettingsList.push_back(channelSettings);
+
+        std::cout << std::boolalpha << channelSettings->drawCirclesToggle;
     }
 
-
+    //std::cout << "hello";
 
     gui.loadFromFile("settings.xml");
     // set global display vars
@@ -121,7 +137,7 @@ void NoteGridAnimation::drawActiveNotes() {
         // Original method based on notes held down
         auto ns = midiPortState->getChannelNotes(channelNumber);
 
-
+        auto channelSettings = channelSettingsList[channelNumber];
         for (auto note : ns) {
             //std::cout<< "drawing a note!\n";
             int noteNumber = note.first, velocity = note.second;
@@ -133,17 +149,20 @@ void NoteGridAnimation::drawActiveNotes() {
             float scalarVelocity = float(velocity) / 128.f;
             float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f);
             
-            ofSetColor(channelColors[channelNumber], scalar * 256.f);
+            ofSetColor(channelSettings->color, scalar * 256.f);
             int startX = col * boxWidth, startY = row * boxHeight;
-            if (drawCirclesToggle) {
+            
+            if (channelSettings->drawCirclesToggle) {
                 float radius = float(boxWidth) / 2.f;
-                //ofDrawCircle({ startX + radius, startY - radius}, radius); // good 'bloomy', lens-flare circle effect (with purple/red colors)
                 ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); // good 'bloomy', lens-flare circle effect (with purple/red colors)
 
             }
             else {
                 ofDrawRectangle(startX, startY, boxWidth, boxHeight);
             }
+
+
+
             // debug msgs TODO delete
             //std::cout << "Note #" << noteNumber << " ADSR val = " << adsrVal << '\n';
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';

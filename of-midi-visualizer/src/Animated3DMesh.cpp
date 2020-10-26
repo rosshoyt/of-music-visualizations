@@ -157,8 +157,8 @@ void Animated3DMesh::draw() {
 
 
     ofSetColor(100);
-    string msg = "f: toggle full screen, spacebar: random z-value in meshvertices, w: draw wireframe or point cloud \np: use PerlinNoise for z-value in meshvertices\nUp-key Down-key: increase/devrease PerlinNoise input range\nRight-key Left-key: increase/decrease amplitude of Perlin Noise distortion\nclick and drag in window to move camera";
-    ofDrawBitmapString(msg, 10, 20);
+    //string msg = "f: toggle full screen, spacebar: random z-value in meshvertices, w: draw wireframe or point cloud \np: use PerlinNoise for z-value in meshvertices\nUp-key Down-key: increase/devrease PerlinNoise input range\nRight-key Left-key: increase/decrease amplitude of Perlin Noise distortion\nclick and drag in window to move camera";
+    //ofDrawBitmapString(msg, 10, 20);
 }
 
 void Animated3DMesh::drawGUI() {

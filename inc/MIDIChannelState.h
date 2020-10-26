@@ -213,6 +213,8 @@ private:
     
     std::map<int,int> notesHeldDown;
     std::map<int,int> notesSustained;
+
+
     std::vector<NoteADSRState*> adsrStates;
     
     std::atomic<bool>  sustained;

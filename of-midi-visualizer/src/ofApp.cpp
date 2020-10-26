@@ -8,7 +8,7 @@ void ofApp::setup() {
     ofSetFrameRate(60);
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
-
+    
     animationComponents.insert({ noteGridAnimation.getUID(), &noteGridAnimation });
     animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
     //animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
@@ -38,6 +38,12 @@ void ofApp::setup() {
     animationSelectorDropdown->onDropdownEvent(this, &ofApp::onDropdownEvent);
     animationSelectorDropdown->expand();
 
+    gui.setup();
+    gui.setPosition(WIDTH, animationSelectorDropdown->getHeight()); // // HEIGHT / 3 * 2);//
+    gui.add(drawAllAnimationsToggle.setup("Draw All Animations", false));
+    
+
+
     // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
     currentAnimationUID = animationComponents.begin()->first;
       
@@ -49,22 +55,37 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    animationComponents[currentAnimationUID]->update();
+    if (drawAllAnimationsToggle) {
+        // update all animations 
+        for (auto animation : animationComponents) {
+            animation.second->update();
+        }
+    } else {
+        // draw selected animation
+        animationComponents[currentAnimationUID]->update();
+    }
+
+    // update dropdown menu
     animationSelectorDropdown->update();
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    /*
-    //// Allows ADSR Animation to also draw the NoteGrid Animation underneath
-    if (currentAnimationUID == adsrVisualizer.getUID()) {
-        noteGridAnimation.draw();
-    }*/
-    animationComponents[currentAnimationUID]->draw();
- 
-    
+    if (drawAllAnimationsToggle) {
+        // draw all animations
+        for (auto animation : animationComponents) {
+            animation.second->draw();
+        }
+    }
+    else {
+        // draw selected animation
+        animationComponents[currentAnimationUID]->draw();
+    }
+
     animationSelectorDropdown->draw();
+    // display main GUI
+    gui.draw();
 }
 
 //--------------------------------------------------------------
