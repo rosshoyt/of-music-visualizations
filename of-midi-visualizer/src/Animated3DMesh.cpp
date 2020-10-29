@@ -4,8 +4,13 @@ Animated3DMesh::Animated3DMesh(MIDIPortState* midiPortState, std::string uid) : 
 
 //--------------------------------------------------------------
 void Animated3DMesh::setup() {
-    width = 50;
-    height = 50;
+    
+    
+    gui.setup();
+    gui.setPosition(menuX, menuY);
+    //std::cout << "menuX/y" << menuX << " " << menuY;
+    gui.add(displacementSlider.set("Displacement", defaultDisplacement,-defaultDisplacement * rangeMult, defaultDisplacement  * rangeMult));
+
 
     widthNoteGrid = 12;
     heightNoteGrid = 12;
@@ -106,10 +111,12 @@ void Animated3DMesh::draw() {
     mainCam.begin();
 
     // TODO refactor - do in shader?
-
-    float offset = float(width);// / 2.f;
+    float offset = displacementSlider;//float(width) / 2.f;
+    
+    float depthDisplacement = defaultDisplacement - displacementSlider;
     // front
     ofPushMatrix();
+    ofTranslate(0, 0, depthDisplacement);
     mainMesh.drawWireframe();
     ofPopMatrix();
 
@@ -122,7 +129,7 @@ void Animated3DMesh::draw() {
     
     // back
     ofPushMatrix();
-    ofTranslate(0.f, 0.f, -width /*TODO create depth var? */);
+    ofTranslate(0.f, 0.f, depthDisplacement * 2 - width);/*-width //TODO create depth var? */
     ofRotateY(180.f);
     mainMesh.drawWireframe();
     ofPopMatrix();
@@ -148,21 +155,14 @@ void Animated3DMesh::draw() {
     mainMesh.drawWireframe();
     ofPopMatrix();
 
-    
-    //ofTranslate(-ofGetWidth() / 3, -ofGetHeight() / 3);
-
-
 
     mainCam.end();
 
-
-    ofSetColor(100);
-    //string msg = "f: toggle full screen, spacebar: random z-value in meshvertices, w: draw wireframe or point cloud \np: use PerlinNoise for z-value in meshvertices\nUp-key Down-key: increase/devrease PerlinNoise input range\nRight-key Left-key: increase/decrease amplitude of Perlin Noise distortion\nclick and drag in window to move camera";
-    //ofDrawBitmapString(msg, 10, 20);
+    gui.draw();
 }
 
 void Animated3DMesh::drawGUI() {
-
+    
 }
 
 //--------------------------------------------------------------

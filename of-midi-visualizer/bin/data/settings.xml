@@ -33,13 +33,13 @@
 	<Draw_Circles__3>0</Draw_Circles__3>
 	<Channel__3>23, 55, 254, 255</Channel__3>
 	<Draw_Circles__4>1</Draw_Circles__4>
-	<Channel__4>42, 100, 255, 255</Channel__4>
+	<Channel__4>107, 238, 255, 255</Channel__4>
 	<Draw_Circles__5>0</Draw_Circles__5>
 	<Channel__5>255, 111, 67, 255</Channel__5>
 	<Draw_Circles__6>1</Draw_Circles__6>
-	<Channel__6>34, 152, 255, 255</Channel__6>
-	<Draw_Circles__7>0</Draw_Circles__7>
-	<Channel__7>31, 139, 255, 255</Channel__7>
+	<Channel__6>158, 255, 0, 255</Channel__6>
+	<Draw_Circles__7>1</Draw_Circles__7>
+	<Channel__7>255, 0, 42, 255</Channel__7>
 	<Draw_Circles__8>1</Draw_Circles__8>
 	<Channel__8>28, 125, 255, 255</Channel__8>
 	<Draw_Circles__9>1</Draw_Circles__9>
@@ -74,4 +74,5 @@
 	<y7>1</y7>
 	<color_speed_ms>50</color_speed_ms>
 	<circle_size>5</circle_size>
+	<Draw_All_Animations>0</Draw_All_Animations>
 </group>

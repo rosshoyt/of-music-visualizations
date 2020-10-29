@@ -1,4 +1,5 @@
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "MIDIPortState.h"
 #include "AnimationComponent.h"
 #include "Utils.h"
@@ -8,7 +9,7 @@
 */
 class Animated3DMesh : public AnimationComponent {
 public:
-    Animated3DMesh(MIDIPortState* midiPortState, std::string uid = "Mesh From Image");
+    Animated3DMesh(MIDIPortState* midiPortState, std::string uid = "3D Mesh");
     void setup();
     void update();
     void draw();
@@ -23,11 +24,19 @@ private:
     ofMesh mainMesh;
     ofEasyCam mainCam;
 
-    int width, height;
+    ofxPanel gui;
+    ofParameter<float> displacementSlider;
+
+
+    
     // TODO refactor shared variables between this class and NoteGridAnimation to a parent class
     int widthNoteGrid, heightNoteGrid;
     bool b_messyMesh, b_perlinMesh, b_drawWireFrame;
     float perlinRange, perlinHeight;
+
+    int width = 50, height = 50;
+    float rangeMult = 4;
+    float defaultDisplacement = float(width) / 2.f;
     
     // map that stores each x/y coord pair's associated MIDI pitch value
     utils::note_grid::PointNoteMap pointNoteMap;
