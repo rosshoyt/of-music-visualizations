@@ -10,7 +10,7 @@ public:
 
 	}
 
-	static void setMenuXY(float x, float y) {
+	void setMenuXY(float x, float y) {
 
 	}
 

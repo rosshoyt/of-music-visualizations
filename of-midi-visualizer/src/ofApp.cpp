@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState), animated3DMesh(&midiPortState), meshFromImage(&midiPortState), texturedSphere(&midiPortState), adsrVisualizer(&midiPortState) {}
+ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState), animated3DMesh(&midiPortState), meshFromImage(&midiPortState), texturedSphere(&midiPortState), adsrVisualizer(&midiPortState), circleOfFifths(&midiPortState) {}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -13,7 +13,7 @@ void ofApp::setup() {
     animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
     //animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
     animationComponents.insert({ adsrVisualizer.getUID(), &adsrVisualizer });
-    //animationComponents.insert({ texturedSphere.getUID(), &texturedSphere });
+    animationComponents.insert({ circleOfFifths.getUID(), &circleOfFifths });
 
     // list to tactrack the animationUIDS to add to dropdown menu
     

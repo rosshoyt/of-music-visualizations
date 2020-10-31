@@ -5,9 +5,35 @@
 
 namespace utils {
     
+    //std::pair<int,int> rotate_point(float cx, float cy, float angle, std::pair<int,int> point)
+    //{
+    //    float s = sin(angle);
+    //    float c = cos(angle);
+
+    //    // translate point back to origin:
+    //    point.first -= cx;
+    //    point.second -= cy;
+
+    //    // rotate point
+    //    float xnew = point.first * c - point.second * s;
+    //    float ynew = point.first * s + point.second * c;
+
+    //    // translate point back:
+    //    point.first = xnew + cx;
+    //    point.second = ynew + cy;
+
+    //    return point;
+    //}
+    
+    inline std::pair<int, int> getOctavePitchPair(int midiNoteNumber) {
+        int octave = midiNoteNumber / 12;
+        int pitch = midiNoteNumber % 12;
+        return { octave, pitch };
+    }
 
     namespace note_grid {
-
+        
+        
         
 
         class PointNoteMap {

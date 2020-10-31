@@ -11,8 +11,12 @@
 #include "TexturedSphere.h"
 #include "AbletonController.h"
 #include "ADSRVisualizer.h"
+#include "CircleOfFifths.h"
+#include "Utils.h"
 
 extern const int WIDTH, HEIGHT;
+
+
 
 class ofApp : public ofBaseApp, AbletonController {
 
@@ -53,5 +57,6 @@ private:
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
         ADSRVisualizer adsrVisualizer;
+        CircleOfFifths circleOfFifths;
         
 };
