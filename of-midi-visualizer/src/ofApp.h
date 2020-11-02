@@ -4,8 +4,9 @@
 #include "ofxDatGui.h"
 #include <iostream>
 #include "MIDIPortState.h"
+
 #include "NoteGridAnimation.h"
-#include "AnimationComponent.h"
+#include "MIDIAnimationComponent.h"
 #include "Animated3DMesh.h"
 #include "MeshFromImage.h"
 #include "TexturedSphere.h"
@@ -15,8 +16,6 @@
 #include "Utils.h"
 
 extern const int WIDTH, HEIGHT;
-
-
 
 class ofApp : public ofBaseApp, AbletonController {
 
@@ -46,9 +45,10 @@ private:
         
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
-        std::map<std::string, AnimationComponent*> animationComponents;
+        std::map<std::string, MIDIAnimationComponent*> animationComponents;
         
         // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
+        MIDIPortStateSettings midiPortSettings;
         MIDIPortState midiPortState;
 
         // Animation components

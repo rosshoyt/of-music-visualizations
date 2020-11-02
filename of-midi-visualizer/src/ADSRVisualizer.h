@@ -1,49 +1,15 @@
 #pragma once
-#include "AnimationComponent.h"
+#include "MIDIAnimationComponent.h"
 #include "spline.h"
-//#include "ADSR.h"
 #include "ofMain.h"
-#include "MIDIPortState.h"
 #include "ofUtils.h"
 #include <map>
 #include <algorithm>
 #include "ofxGui.h"
 
-
-// TODO 
-//class EnvelopeParam {
-//public:
-//
-//	EnvelopeParam(double startLevel, double endLevel, std::vector<double> xControlPoints, std::vector<double> yControlPoints) : startLevel(startLevel), endLevel(endLevel), xControlPoints(xControlPoints), yControlPoints(yControlPoints)  {
-//
-//	}
-//
-//	EnvelopeParam() {
-//
-//	}
-//
-//	double startLevel, endLevel;
-//	std::vector<double> xControlPoints, yControlPoints;
-//	
-//	//EnvelopeParam attack, decay, sustain, release;
-//
-//
-//
-//	ADSR adsr;
-//	std::vector<ofParameter<double>> xPoints { -.5f, 0.f, .5f, 1.f,  1.5f };// ,
-//		//yPoints{ 0.f,  0.f, midpointLevel, adsr.aL, adsr.aL}
-//	
-//	/*void setup(ofxPanel& panel) {
-//		panel.add(textEntryField.setup());
-//	}*/
-//};
-
-
-class ADSRVisualizer : public AnimationComponent {
+class ADSRVisualizer : public MIDIAnimationComponent {
 public:
-	ADSRVisualizer(MIDIPortState* midiPortState, std::string uid = "ADSR Visualizer") : AnimationComponent(midiPortState, uid) {
-
-	}
+	ADSRVisualizer(std::string uid = "ADSR Visualizer") : MIDIAnimationComponent(uid) {}
 
 
 	double minF = -2.f;
@@ -200,3 +166,30 @@ public:
 };
 
 
+// TODO 
+//class EnvelopeParam {
+//public:
+//
+//	EnvelopeParam(double startLevel, double endLevel, std::vector<double> xControlPoints, std::vector<double> yControlPoints) : startLevel(startLevel), endLevel(endLevel), xControlPoints(xControlPoints), yControlPoints(yControlPoints)  {
+//
+//	}
+//
+//	EnvelopeParam() {
+//
+//	}
+//
+//	double startLevel, endLevel;
+//	std::vector<double> xControlPoints, yControlPoints;
+//	
+//	//EnvelopeParam attack, decay, sustain, release;
+//
+//
+//
+//	ADSR adsr;
+//	std::vector<ofParameter<double>> xPoints { -.5f, 0.f, .5f, 1.f,  1.5f };// ,
+//		//yPoints{ 0.f,  0.f, midpointLevel, adsr.aL, adsr.aL}
+//	
+//	/*void setup(ofxPanel& panel) {
+//		panel.add(textEntryField.setup());
+//	}*/
+//};

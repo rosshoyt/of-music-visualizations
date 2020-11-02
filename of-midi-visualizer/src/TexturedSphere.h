@@ -1,12 +1,10 @@
 #pragma once
 #include "ofMain.h"
-#include "MIDIPortState.h"
+#include "MIDIAnimationComponent.h"
 
-#include "AnimationComponent.h"
-
-class TexturedSphere : public AnimationComponent {
+class TexturedSphere : public MIDIAnimationComponent {
 public:
-	TexturedSphere(MIDIPortState* midiPortState, std::string uid = "Textured Sphere"): AnimationComponent(midiPortState, uid){
+	TexturedSphere(std::string uid = "Textured Sphere"): MIDIAnimationComponent(uid){
 
 	}
 

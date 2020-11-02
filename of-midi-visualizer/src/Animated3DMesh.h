@@ -1,15 +1,15 @@
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "MIDIPortState.h"
-#include "AnimationComponent.h"
+#include "MIDIAnimationComponent.h"
 #include "Utils.h"
+
 
 /**
 * Class that manages state of 3D mesh animation
 */
-class Animated3DMesh : public AnimationComponent {
+class Animated3DMesh : public MIDIAnimationComponent {
 public:
-    Animated3DMesh(MIDIPortState* midiPortState, std::string uid = "3D Mesh");
+    Animated3DMesh(std::string uid = "3D Mesh");
     void setup();
     void update();
     void draw();

@@ -1,11 +1,12 @@
 #pragma once
-#include "AnimationComponent.h"
+#include "MIDIAnimationComponent.h"
 #include "Utils.h"
 #include "ofMain.h"
 
-class CircleOfFifths : public AnimationComponent {
+
+class CircleOfFifths : public MIDIAnimationComponent {
 public:
-    CircleOfFifths(MIDIPortState* midiPortState, std::string uid = "Circle of Fifths") : AnimationComponent(midiPortState, uid) {
+    CircleOfFifths(std::string uid = "Circle of Fifths") : MIDIAnimationComponent(uid) {
 
     }
     // method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
@@ -38,11 +39,14 @@ public:
 
                 ofColor aqua(0, 252, 255, alpha);
                 ofColor purple(198, 0, 205, alpha);
-                ofColor inbetween = aqua.getLerped(purple, ofRandom(1.0));
+                ofColor inbetween = aqua.getLerped(purple, float(octavePitch.second) / 12.f);
+
                 ofSetColor(inbetween);
+
                 float circleSize = 40 * noteVel.second / 127.f;
                 
                 ofDrawCircle(point, circleSize);
+
 
             }
         }

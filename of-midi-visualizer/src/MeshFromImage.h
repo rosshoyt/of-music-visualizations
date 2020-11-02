@@ -1,12 +1,14 @@
 #pragma once
-#include "AnimationComponent.h"
+#include "MIDIAnimationComponent.h"
 #include "ofApp.h"
 #include "Utils.h"
+
+
 class MeshFromImage :
-	public AnimationComponent
+	public MIDIAnimationComponent
 {
 public:
-	MeshFromImage(MIDIPortState* midiPortState, std::string uid = "3D Mesh", std::string imagePath = "textures/pnw.jpg") : AnimationComponent(midiPortState, uid), imagePath(imagePath), pointNoteMap(), zVals() {
+	MeshFromImage(std::string uid = "3D Mesh", std::string imagePath = "textures/pnw.jpg") : MIDIAnimationComponent( uid), imagePath(imagePath), pointNoteMap(), zVals() {
         // "textures/treeCrop.png"
         // textures/allRGBV.png
         // textures/nebulabrotCrop.png
@@ -67,7 +69,7 @@ public:
 	}
     //--------------------------------------------------------------
     void update() {
-        auto allNotesDown = getAllNotesDown();
+        auto allNotesDown = midiPortState->getAllNotesDown();
         //std::cout << allNotesDown.size() << " notes down\n";
         for (int i = 0; i < mesh.getNumVertices(); ++i) {
             auto position = mesh.getVertex(i);

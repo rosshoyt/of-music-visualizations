@@ -7,13 +7,7 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Animated3DMesh.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NoteGridAnimation.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\ofApp.cpp">
@@ -140,7 +134,13 @@
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
     <ClCompile Include="src\ADSRVisualizer.cpp">
-      <Filter>src</Filter>
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animated3DMesh.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NoteGridAnimation.cpp">
+      <Filter>src\animation-components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,15 +222,12 @@
     <Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
       <UniqueIdentifier>{EDACB89C-9768-9551-4D41-B590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\animation-components">
+      <UniqueIdentifier>{0bfa7a78-2dd2-43e3-9e10-8c4ba7ed6043}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Animated3DMesh.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\NoteGridAnimation.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\ofApp.h">
@@ -446,15 +443,6 @@
     <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
-    <ClInclude Include="src\MeshFromImage.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TexturedSphere.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ADSRVisualizer.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AbletonController.h" />
     <ClInclude Include="..\inc\ADSR.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
@@ -462,9 +450,26 @@
     <ClInclude Include="..\inc\MIDIPortState.h" />
     <ClInclude Include="..\inc\spline.h" />
     <ClInclude Include="..\inc\Utils.h" />
+    <ClInclude Include="..\inc\MIDIPortStateUser.h" />
     <ClInclude Include="src\CircleOfFifths.h">
-      <Filter>src</Filter>
+      <Filter>src\animation-components</Filter>
     </ClInclude>
+    <ClInclude Include="src\ADSRVisualizer.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animated3DMesh.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NoteGridAnimation.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexturedSphere.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshFromImage.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

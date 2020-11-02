@@ -1,6 +1,6 @@
 #include "NoteGridAnimation.h"
 
-NoteGridAnimation::NoteGridAnimation(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
+NoteGridAnimation::NoteGridAnimation(std::string uid) : MIDIAnimationComponent(uid), windowWidth(), windowHeight(), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
 
 void NoteGridAnimation::setup() {
@@ -160,8 +160,6 @@ void NoteGridAnimation::drawActiveNotes() {
             else {
                 ofDrawRectangle(startX, startY, boxWidth, boxHeight);
             }
-
-
 
             // debug msgs TODO delete
             //std::cout << "Note #" << noteNumber << " ADSR val = " << adsrVal << '\n';

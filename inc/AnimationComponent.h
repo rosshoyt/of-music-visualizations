@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#include "MIDIPortState.h"
 #include "ofMain.h"
+
 
 class AnimationComponent {
 public:
 	// TODO could move 'MIDI' code to an abstract class
-	AnimationComponent(MIDIPortState* midiPortState, std::string uid) : midiPortState(midiPortState), uid(uid) {
+	AnimationComponent(std::string uid) : uid(uid) {
 
 	}
 
@@ -57,28 +57,11 @@ protected:
 	// TODO 
 	// int displayWidth, displayHeight // to track the sub-window space that the animation component displays on
 
-	MIDIPortState* midiPortState;
+	//MIDIPortState* midiPortState;
 
 	// TODO refactor, move menu code to the ofApp and create framework for sub-apps to communicate/update GUI
 	float menuX, menuY;
 
 	ofColor backgroundColor;
-
-	const std::map<int, std::pair<int, float>> getAllNotesDown() {
-		// Get the current active MIDI notes for all channels and
-		// store in map<midiPitch, <velocity, adsr value>>
-		std::map<int, std::pair<int, float>> allNotesDown;
-		int channelNum = 0;
-		for (auto channelNotes : midiPortState->getAllChannelNotes()) {
-			for (auto note : channelNotes) {
-				// TODO don't overwrite values when 2 notes are same between channels
-				allNotesDown.insert({ note.first, { note.second, midiPortState->getADSRValue(channelNum, note.first) } });
-			}
-			++channelNum;
-		}
-		return allNotesDown;
-	}
-	
-
 
 };

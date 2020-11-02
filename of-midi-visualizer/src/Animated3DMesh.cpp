@@ -1,6 +1,6 @@
 #include "Animated3DMesh.h"
 
-Animated3DMesh::Animated3DMesh(MIDIPortState* midiPortState, std::string uid) : AnimationComponent(midiPortState, uid), pointNoteMap() {}
+Animated3DMesh::Animated3DMesh(std::string uid) : MIDIAnimationComponent(uid), pointNoteMap() {}
 
 //--------------------------------------------------------------
 void Animated3DMesh::setup() {
@@ -80,7 +80,7 @@ void Animated3DMesh::setup() {
 
 //--------------------------------------------------------------
 void Animated3DMesh::update() {
-    auto allNotesDown = getAllNotesDown();
+    auto allNotesDown = midiPortState->getAllNotesDown();
 
     // Update position of vertices based on if there is a note at their location
     // TODO could optimize by reversing pointNoteMap to notePointMap 

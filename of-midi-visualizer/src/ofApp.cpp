@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-ofApp::ofApp() : abletonController(), midiPortState(16, false), noteGridAnimation(&midiPortState), animated3DMesh(&midiPortState), meshFromImage(&midiPortState), texturedSphere(&midiPortState), adsrVisualizer(&midiPortState), circleOfFifths(&midiPortState) {}
+ofApp::ofApp() : abletonController() {}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -9,14 +9,17 @@ void ofApp::setup() {
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
     
+
+    // setup the MIDI port
+    midiPortSettings.numChannels = 12;
+    midiPortState.setupMIDIPortState(midiPortSettings);
+
+
     animationComponents.insert({ noteGridAnimation.getUID(), &noteGridAnimation });
     animationComponents.insert({ animated3DMesh.getUID(), &animated3DMesh });
     //animationComponents.insert({ meshFromImage.getUID(), &meshFromImage });
     animationComponents.insert({ adsrVisualizer.getUID(), &adsrVisualizer });
     animationComponents.insert({ circleOfFifths.getUID(), &circleOfFifths });
-
-    // list to tactrack the animationUIDS to add to dropdown menu
-    
     
     // setup animation components
     for (auto& pair : animationComponents) {
@@ -24,9 +27,11 @@ void ofApp::setup() {
         auto component = animationComponents[pair.first];
         // Set ofxGUI menu position for note grid animation
         component->setMenuXY(WIDTH, HEIGHT / 2);
-
+        component->setMIDIPortState(&midiPortState);
         component->setup();
         
+       
+
         // track UIDS of animations to add to the animationSelectorDropdown
         animationUIDS.push_back(pair.first);
     }
@@ -48,9 +53,8 @@ void ofApp::setup() {
     currentAnimationUID = animationComponents.begin()->first;
       
 
-
-    // initialize network MIDI port
-    midiPortState.setupMIDIPort();
+    
+    
 }
 
 //--------------------------------------------------------------
