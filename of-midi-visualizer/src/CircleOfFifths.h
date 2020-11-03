@@ -12,7 +12,7 @@ public:
     // method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
     // memory allocations, expensive 1-time  initializations and file operations are examples that should be implemented in setup()
     void setup() {
-    }
+    } 
 
     void update() {
 
@@ -24,8 +24,8 @@ public:
         
         // TODO add 'snap to cursor' control so that Circle of Fifths displays around cursor?
         //ofVec2f centerPos(ofGetMouseX(), ofGetMouseY());
-        ofVec2f centerPos(ofGetWidth() / 2.f, ofGetHeight() / 2.f);
-        float smallestDim = ofGetWidth() > ofGetHeight() ? ofGetHeight() : ofGetWidth();
+        ofVec2f centerPos(animationWidth / 2.f, animationHeight / 2.f);
+        float smallestDim = animationWidth > animationHeight ? animationHeight : animationWidth;
         
         for (auto channel: midiPortState->getAllChannelNotes()) {
             for (auto noteVel : channel) {
@@ -33,7 +33,7 @@ public:
 
                 float rads = 2 * utils::pi * octavePitch.second / numPitches; // The rotate function uses degrees!
 
-                float radius = ofGetHeight() / 2.f / numOctaves * (octavePitch.first + 1);
+                float radius = animationHeight / 2.f / numOctaves * (octavePitch.first + 1);
 
                 auto point = centerPos + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
 
@@ -44,7 +44,7 @@ public:
                 ofSetColor(inbetween);
 
                 float circleSize = 40 * noteVel.second / 127.f;
-                
+
                 ofDrawCircle(point, circleSize);
 
 

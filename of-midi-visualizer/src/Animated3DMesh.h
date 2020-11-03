@@ -4,6 +4,7 @@
 #include "Utils.h"
 
 
+
 /**
 * Class that manages state of 3D mesh animation
 */
@@ -15,6 +16,7 @@ public:
     void draw();
     void drawGUI();
     void keyPressed(int key);
+    void resized(int w, int h) override;
 
 private:
     //--------------------------------------------------------------

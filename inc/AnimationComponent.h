@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "ofMain.h"
+#include "ofxGui.h"
 
 
 class AnimationComponent {
@@ -9,10 +10,12 @@ public:
 	AnimationComponent(std::string uid) : uid(uid) {
 
 	}
-
-	void setMenuXY(float x, float y) {
-
+	
+	void setAnimationDimensions(float width, float height) {
+		animationWidth = width, animationHeight = height;
 	}
+
+	
 
 	// method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
 	// memory allocations, expensive 1-time  initializations and file operations are examples that should be implemented in setup()
@@ -35,33 +38,38 @@ public:
 
 	void drawBackground() {}
 
-
+	virtual void resized(int w, int h) {}
 
 	const std::string& getUID() {
 		return uid;
 	}
+
+	void setMenuXY(float x, float y) {
+		menuX = x, menuY = y;
+	}
 	void setMenuXY(int x, int y) {
 		menuX = x, menuY = y;
 	}
-	void setBackgroundColor(ofColor color) {
+
+	/*void setBackgroundColor(ofColor color) {
 		backgroundColor = color;
 	}
 
 	ofColor getBackgroundColor() {
 		return backgroundColor;
-	}
-private:
-	std::string uid;
+	}*/
+
 
 protected:
-	// TODO 
-	// int displayWidth, displayHeight // to track the sub-window space that the animation component displays on
 
-	//MIDIPortState* midiPortState;
+	float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
 
-	// TODO refactor, move menu code to the ofApp and create framework for sub-apps to communicate/update GUI
+	// TODO refactor, move GUI code to separate class
 	float menuX, menuY;
+	//ofxPanel gui;
 
-	ofColor backgroundColor;
-
+	//ofColor backgroundColor;
+	
+private:
+	std::string uid;
 };

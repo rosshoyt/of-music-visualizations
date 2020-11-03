@@ -15,7 +15,7 @@
 #include "CircleOfFifths.h"
 #include "Utils.h"
 
-extern const int WIDTH, HEIGHT;
+extern const int WIDTH, HEIGHT, RIGHT_CONTROLBAR;
 
 class ofApp : public ofBaseApp, AbletonController {
 

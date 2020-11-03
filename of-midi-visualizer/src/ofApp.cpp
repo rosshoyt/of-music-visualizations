@@ -25,8 +25,7 @@ void ofApp::setup() {
     for (auto& pair : animationComponents) {
         
         auto component = animationComponents[pair.first];
-        // Set ofxGUI menu position for note grid animation
-        component->setMenuXY(WIDTH, HEIGHT / 2);
+       
         component->setMIDIPortState(&midiPortState);
         component->setup();
         
@@ -52,8 +51,8 @@ void ofApp::setup() {
     // set animation ID to first animation entry in map (TODO refactor, currently must be at least 1 animation 
     currentAnimationUID = animationComponents.begin()->first;
       
-
-    
+    // force window resize to 
+    windowResized(ofGetWidth(), ofGetHeight());
     
 }
 
@@ -105,9 +104,15 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    noteGridAnimation.windowResized(w, h);
+    for (auto& uidComp : animationComponents) {
+        std::cout << "Resizing " << uidComp.first << "\n";
+        auto component = uidComp.second;
+        component->setAnimationDimensions(w - RIGHT_CONTROLBAR, h);
+        component->setMenuXY(w - RIGHT_CONTROLBAR, h / 2);
+        component->resized(w, h);
+    }
 }
-
+    
 //--------------------------------------------------------------
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e){
     currentAnimationUID = animationUIDS[e.child];

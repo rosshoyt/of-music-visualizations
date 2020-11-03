@@ -4,21 +4,17 @@
 #include "MIDIAnimationComponent.h"
 
 
-extern const int RIGHT_CONTROLBAR;
+//extern const int RIGHT_CONTROLBAR;
 
 
 struct ChannelSettings {
 public:
-    ChannelSettings() {
-
-    }
-
+    ChannelSettings() = default;
 
     ofxToggle drawCirclesToggle;
     ofxColorSlider color;
 
-    // enum draw_mode { CIRCLES, SQUARES }; //TODO 
-
+    // enum draw_mode { CIRCLES, SQUARES }; //TODO
     //int channelNumber; // TODO ?
 
 };
@@ -65,7 +61,7 @@ private:
     
 
     // stores current width and height of the window
-    int windowWidth, windowHeight;
+    //int windowWidth, windowHeight;
 
     // gui variables
     bool drawLines;

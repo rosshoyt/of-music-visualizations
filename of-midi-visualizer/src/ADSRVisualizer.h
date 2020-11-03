@@ -139,7 +139,7 @@ public:
 			              { splineControlY[0], splineControlY[1], splineControlY[2], splineControlY[3], splineControlY[4] }
 		);
 		*/
-		float width = ofGetWidth(), height = ofGetHeight();
+		//float width = ofGetWidth(), height = ofGetHeight();
 
 		
 		
@@ -148,8 +148,8 @@ public:
 			double xF = float(i) / numPoints;
 			float heightScale = spline(xF);
 			
-			auto circleX = width * xF;
-			auto circleY = height - height * heightScale;
+			auto circleX = animationWidth * xF;
+			auto circleY = animationHeight - animationHeight * heightScale;
 			ofDrawCircle( { circleX , circleY }, circleSize);
 
 			//std::cout << "Height Scale = " << heightScale << " for x = " << i << '\n';
