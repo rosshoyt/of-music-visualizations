@@ -6,37 +6,19 @@
 class AbletonController
 {
 public:
-	AbletonController() : isPlaying(false) {
-		live.setup();
-	}
+	AbletonController();
 
-	void processSpacebar() {
-		//std::cout << "playing\n";
-		if (!isPlaying) {
-			play();
-			isPlaying = true;
-		}
-		else {
-			stop();
-			isPlaying = false;
-		}
-	}
+	void processSpacebar();
 
-	ofParameter<float> getTempo() {
-		return live.getTempo();
-	}
+	ofParameter<float> getTempo();
 
 private:
 	ofxAbletonLive live;
 
 	std::atomic<bool> isPlaying;
 
-	void play() {
-		live.play();
-	}
-	void stop() {
-		live.stop();
-	}
+	void play();
+	void stop();
 	
 
 };

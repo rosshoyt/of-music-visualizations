@@ -3,9 +3,7 @@
 
 class MIDIPortStateUser {
 public:
-    void setMIDIPortState(MIDIPortState* midiPortState) {
-        this->midiPortState = midiPortState;
-    }
+    void setMIDIPortState(MIDIPortState* midiPortState);
 protected:
     MIDIPortState* midiPortState;
 };

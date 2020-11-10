@@ -7,15 +7,9 @@
 class AnimationComponent {
 public:
 	// TODO could move 'MIDI' code to an abstract class
-	AnimationComponent(std::string uid) : uid(uid) {
-
-	}
+	AnimationComponent(std::string uid);
 	
-	void setAnimationDimensions(float width, float height) {
-		animationWidth = width, animationHeight = height;
-	}
-
-	
+	void setAnimationDimensions(float width, float height);
 
 	// method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
 	// memory allocations, expensive 1-time  initializations and file operations are examples that should be implemented in setup()
@@ -24,11 +18,11 @@ public:
 	// method which should be called first when the AnimationComponent is changed-to. 
 	// for example, when it is selected to be displayed from the dropdown menu
 	// sets up any destructive rendering settings which may affect other animations
-	virtual void prepare() {}
+	virtual void prepare();
 
 	// method which should be called first when an animation is being changed-from
 	// for exmaple, when it is the current animation and another is selected from the dropdown menu
-	virtual void takedown() {}
+	virtual void takedown();
 
 	virtual void update() = 0;
 
@@ -36,20 +30,14 @@ public:
 
 	virtual void drawGUI() = 0;
 
-	void drawBackground() {}
+	void drawBackground();
 
-	virtual void resized(int w, int h) {}
+	virtual void resized(int w, int h);
 
-	const std::string& getUID() {
-		return uid;
-	}
+	const std::string& getUID();
 
-	void setMenuXY(float x, float y) {
-		menuX = x, menuY = y;
-	}
-	void setMenuXY(int x, int y) {
-		menuX = x, menuY = y;
-	}
+	void setMenuXY(float x, float y);
+	void setMenuXY(int x, int y);
 
 	/*void setBackgroundColor(ofColor color) {
 		backgroundColor = color;

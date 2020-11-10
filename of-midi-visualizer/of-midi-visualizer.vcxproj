@@ -75,6 +75,7 @@
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
+    <LibraryPath>$(SolutionDir)..\Lib;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\</OutDir>
@@ -82,6 +83,7 @@
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
+    <LibraryPath>$(SolutionDir)..\Lib;$(LibraryPath);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>bin\</OutDir>
@@ -184,8 +186,17 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\AbletonController.cpp" />
+    <ClCompile Include="..\lib\ADSR.cpp" />
+    <ClCompile Include="..\lib\AnimationComponent.cpp" />
+    <ClCompile Include="..\lib\MIDIChannelState.cpp" />
+    <ClCompile Include="..\lib\MIDIPortState.cpp" />
+    <ClCompile Include="..\lib\MIDIPortStateUser.cpp" />
+    <ClCompile Include="..\lib\Utils.cpp" />
     <ClCompile Include="src\ADSRVisualizer.cpp" />
+    <ClCompile Include="src\CircleOfFifths.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MeshFromImage.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Animated3DMesh.cpp" />
     <ClCompile Include="src\NoteGridAnimation.cpp" />
@@ -229,12 +240,12 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
+    <ClCompile Include="src\TexturedSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\AbletonController.h" />
     <ClInclude Include="..\inc\ADSR.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
-    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />
@@ -243,6 +254,7 @@
     <ClInclude Include="src\ADSRVisualizer.h" />
     <ClInclude Include="src\CircleOfFifths.h" />
     <ClInclude Include="src\MeshFromImage.h" />
+    <ClInclude Include="src\MIDIAnimationComponent.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Animated3DMesh.h" />
     <ClInclude Include="src\NoteGridAnimation.h" />

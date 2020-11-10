@@ -142,6 +142,22 @@
     <ClCompile Include="src\NoteGridAnimation.cpp">
       <Filter>src\animation-components</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\AbletonController.cpp" />
+    <ClCompile Include="..\lib\ADSR.cpp" />
+    <ClCompile Include="..\lib\AnimationComponent.cpp" />
+    <ClCompile Include="..\lib\MIDIChannelState.cpp" />
+    <ClCompile Include="..\lib\MIDIPortState.cpp" />
+    <ClCompile Include="..\lib\MIDIPortStateUser.cpp" />
+    <ClCompile Include="..\lib\Utils.cpp" />
+    <ClCompile Include="src\CircleOfFifths.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshFromImage.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TexturedSphere.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -469,7 +485,9 @@
     <ClInclude Include="src\MeshFromImage.h">
       <Filter>src\animation-components</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
+    <ClInclude Include="src\MIDIAnimationComponent.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
