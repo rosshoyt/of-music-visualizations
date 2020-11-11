@@ -490,6 +490,7 @@
       <Filter>src\animation-components</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\GUIComponent.h" />
+    <ClInclude Include="..\inc\UID.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

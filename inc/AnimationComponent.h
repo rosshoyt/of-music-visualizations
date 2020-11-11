@@ -6,8 +6,7 @@
 
 class AnimationComponent {
 public:
-	// TODO could move 'MIDI' code to an abstract class
-	AnimationComponent(std::string uid);
+	AnimationComponent() = default;
 	
 	void setAnimationDimensions(float width, float height);
 
@@ -33,7 +32,6 @@ public:
 
 	virtual void resized(int w, int h);
 
-	const std::string& getUID();
 
 
 	/*void setBackgroundColor(ofColor color) {
@@ -50,7 +48,7 @@ protected:
 	float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
 
 
-	
-private:
-	std::string uid;
+//	
+//private:
+//	std::string uid;
 };

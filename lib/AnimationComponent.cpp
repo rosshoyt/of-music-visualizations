@@ -1,10 +1,8 @@
 #include "AnimationComponent.h"
 
-// TODO could move 'MIDI' code to an abstract class
-
-AnimationComponent::AnimationComponent(std::string uid) : uid(uid) {
-
-}
+//AnimationComponent::AnimationComponent() {
+//
+//}
 
 void AnimationComponent::setAnimationDimensions(float width, float height) {
 	animationWidth = width, animationHeight = height;
@@ -25,8 +23,6 @@ void AnimationComponent::takedown() {}
 
 void AnimationComponent::resized(int w, int h) {}
 
-const std::string& AnimationComponent::getUID() {
-	return uid;
-}
+
 
 

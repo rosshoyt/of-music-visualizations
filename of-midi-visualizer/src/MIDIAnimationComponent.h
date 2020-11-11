@@ -1,9 +1,11 @@
 #pragma once
 #include "AnimationComponent.h"
-#include "MIDIPortStateUser.h"
 #include "GUIComponent.h"
+#include "UID.h"
+#include "MIDIPortStateUser.h"
 
-class MIDIAnimationComponent : public AnimationComponent, public GUIComponent, public MIDIPortStateUser {
+
+class MIDIAnimationComponent : public UID, public AnimationComponent, public GUIComponent, public MIDIPortStateUser {
 public:
-	MIDIAnimationComponent(std::string uid) : AnimationComponent(uid) {}
+	MIDIAnimationComponent(std::string uid) : UID(uid) {}
 };

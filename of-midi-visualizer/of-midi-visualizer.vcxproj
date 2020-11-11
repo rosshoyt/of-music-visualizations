@@ -252,6 +252,7 @@
     <ClInclude Include="..\inc\MIDIPortState.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />
     <ClInclude Include="..\inc\spline.h" />
+    <ClInclude Include="..\inc\UID.h" />
     <ClInclude Include="..\inc\Utils.h" />
     <ClInclude Include="src\ADSRVisualizer.h" />
     <ClInclude Include="src\CircleOfFifths.h" />
