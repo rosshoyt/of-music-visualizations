@@ -4,14 +4,6 @@ Animated3DMesh::Animated3DMesh(std::string uid) : MIDIAnimationComponent(uid), p
 
 //--------------------------------------------------------------
 void Animated3DMesh::setup() {
-    
-    
-    gui.setup();
-    gui.setPosition(menuX, menuY);
-    //std::cout << "menuX/y" << menuX << " " << menuY;
-    gui.add(displacementSlider.set("Displacement", defaultDisplacement,-defaultDisplacement * rangeMult, defaultDisplacement  * rangeMult));
-
-
     widthNoteGrid = 12;
     heightNoteGrid = 12;
 
@@ -24,7 +16,6 @@ void Animated3DMesh::setup() {
     perlinRange = 1.0;
     perlinHeight = 5.0;
 
-
     //mainCam.setPosition(ofGetWidth() - animationWidth / 2.f, 0, 80);
 
     //mainMesh.setMode(OF_PRIMITIVE_LINE_LOOP);
@@ -36,19 +27,15 @@ void Animated3DMesh::setup() {
             ofPoint point(x - width / 2, y - height / 2, 0);
             mainMesh.addVertex(point);
 
-            
             // Find the color for the row/column
             // TODO create shared function set for these utils
             //int row = heightNoteGrid - 1 - note / 12, col = note % widthNoteGrid;
             //ofFloatColor().lerp
 
             ofFloatColor start = ofFloatColor::darkBlue, end = ofFloatColor::lightSeaGreen;
-            mainMesh.addColor(start.lerp(end, std::max(float(y) / float(height), float(x)/float(width))));
-            
-            
+            mainMesh.addColor(start.lerp(end, std::max(float(y) / float(height), float(x)/float(width))));          
         }
     }
-
 
     // here we loop through and join the vertices together as indices to make rows of triangles to make the wireframe grid
     for (int y = 0; y < height - 1; y++) {
@@ -75,7 +62,11 @@ void Animated3DMesh::setup() {
     }
     // setup the pointNoteMap
     pointNoteMap.setup(mainMesh, width, height, widthNoteGrid, heightNoteGrid);
+}
 
+//--------------------------------------------------------------
+void Animated3DMesh::setupGUI() {    
+    gui.add(displacementSlider.set("Displacement", defaultDisplacement, -defaultDisplacement * rangeMult, defaultDisplacement * rangeMult));
 }
 
 //--------------------------------------------------------------
@@ -104,7 +95,6 @@ void Animated3DMesh::update() {
         mainMesh.setVertex(i, newPosition);
     }
 }
-
 
 //--------------------------------------------------------------
 void Animated3DMesh::draw() {
@@ -160,10 +150,7 @@ void Animated3DMesh::draw() {
 
 }
 
-void Animated3DMesh::drawGUI() {
-
-    gui.draw();
-}
+//--------------------------------------------------------------
 void Animated3DMesh::resized(int w, int h) {
     // displace the camera to the right by half of the size of the menu bar
     // TODO allow each app to access the size of the GUI menu bar on the side
@@ -173,6 +160,7 @@ void Animated3DMesh::resized(int w, int h) {
     std::cout << "xDisplacement: " << xDisplacement << "\n";
 
 }
+
 //--------------------------------------------------------------
 void Animated3DMesh::keyPressed(int key) {
     switch (key) {

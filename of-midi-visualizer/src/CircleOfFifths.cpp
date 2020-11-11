@@ -1,19 +1,20 @@
 #include "CircleOfFifths.h"
 
+//--------------------------------------------------------------
 CircleOfFifths::CircleOfFifths(std::string uid) : MIDIAnimationComponent(uid) {
 
 }
 
-// method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
-// memory allocations, expensive 1-time  initializations and file operations are examples that should be implemented in setup()
+//--------------------------------------------------------------
+void CircleOfFifths::setup() {}
 
-void CircleOfFifths::setup() {
-}
+//--------------------------------------------------------------
+void CircleOfFifths::setupGUI() {}
 
-void CircleOfFifths::update() {
+//--------------------------------------------------------------
+void CircleOfFifths::update() {}
 
-}
-
+//--------------------------------------------------------------
 void CircleOfFifths::draw() {
 
 	//drawHaloAroundCursor();
@@ -42,13 +43,11 @@ void CircleOfFifths::draw() {
 			float circleSize = 40 * noteVel.second / 127.f;
 
 			ofDrawCircle(point, circleSize);
-
-
 		}
 	}
-
 }
 
+//--------------------------------------------------------------
 void CircleOfFifths::drawHaloAroundCursor() {
 	// Triangle Brush Source: https://github.com/openframeworks/ofBook/blob/master/chapters/intro_to_graphics/code/1_ii_e_Triangle_Brush/src/ofApp.cpp
 	// Code for the final version of the brush
@@ -117,6 +116,3 @@ void CircleOfFifths::drawHaloAroundCursor() {
 	//}
 }
 
-void CircleOfFifths::drawGUI() {
-
-}

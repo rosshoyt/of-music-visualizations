@@ -9,17 +9,11 @@ class MeshFromImage :
 {
 public:
     MeshFromImage(std::string uid = "3D Mesh", std::string imagePath = "textures/pnw.jpg");
-	
     void setup();
-    //--------------------------------------------------------------
+    void setupGUI() override;
     void update();
-
-    //--------------------------------------------------------------
     void draw();
 
-    void drawGUI();
-
-	
 private:
 	std::string imagePath;
 

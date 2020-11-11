@@ -12,9 +12,9 @@ class Animated3DMesh : public MIDIAnimationComponent {
 public:
     Animated3DMesh(std::string uid = "3D Mesh");
     void setup();
+    void setupGUI() override;
     void update();
     void draw();
-    void drawGUI();
     void keyPressed(int key);
     void resized(int w, int h) override;
 
@@ -26,11 +26,8 @@ private:
     ofMesh mainMesh;
     ofEasyCam mainCam;
 
-    ofxPanel gui;
     ofParameter<float> displacementSlider;
 
-
-    
     // TODO refactor shared variables between this class and NoteGridAnimation to a parent class
     int widthNoteGrid, heightNoteGrid;
     bool b_messyMesh, b_perlinMesh, b_drawWireFrame;
@@ -41,10 +38,5 @@ private:
     float defaultDisplacement = float(width) / 2.f;
     
     // map that stores each x/y coord pair's associated MIDI pitch value
-    utils::note_grid::PointNoteMap pointNoteMap;
-    
-    //--------------------------------------------------------------
-    // Private methods
-    //-------------------------------------------------------------- 
-   
+    utils::note_grid::PointNoteMap pointNoteMap;   
 };

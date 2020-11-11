@@ -28,16 +28,13 @@ public:
 
 	virtual void draw() = 0;
 
-	virtual void drawGUI() = 0;
 
-	void drawBackground();
+	//void drawBackground();
 
 	virtual void resized(int w, int h);
 
 	const std::string& getUID();
 
-	void setMenuXY(float x, float y);
-	void setMenuXY(int x, int y);
 
 	/*void setBackgroundColor(ofColor color) {
 		backgroundColor = color;
@@ -52,11 +49,7 @@ protected:
 
 	float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
 
-	// TODO refactor, move GUI code to separate class
-	float menuX, menuY;
-	//ofxPanel gui;
 
-	//ofColor backgroundColor;
 	
 private:
 	std::string uid;

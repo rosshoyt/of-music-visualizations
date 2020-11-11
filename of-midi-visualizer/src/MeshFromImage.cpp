@@ -1,11 +1,13 @@
 #include "MeshFromImage.h"
 
+//--------------------------------------------------------------
 MeshFromImage::MeshFromImage(std::string uid, std::string imagePath) : MIDIAnimationComponent(uid), imagePath(imagePath), pointNoteMap(), zVals() {
 	// "textures/treeCrop.png"
 	// textures/allRGBV.png
 	// textures/nebulabrotCrop.png
 }
 
+//--------------------------------------------------------------
 void MeshFromImage::setup() {
 	image.load(imagePath);
 	image.resize(width, height);
@@ -61,7 +63,9 @@ void MeshFromImage::setup() {
 }
 
 //--------------------------------------------------------------
+void MeshFromImage::setupGUI() {}
 
+//--------------------------------------------------------------
 void MeshFromImage::update() {
 	auto allNotesDown = midiPortState->getAllNotesDown();
 	//std::cout << allNotesDown.size() << " notes down\n";
@@ -82,15 +86,10 @@ void MeshFromImage::update() {
 }
 
 //--------------------------------------------------------------
-
 void MeshFromImage::draw() {
 	ofColor centerColor = ofColor(85, 78, 68);
 	ofColor edgeColor(0, 0, 0);
 	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
-
-
-
-
 
 	easyCam.begin();
 	ofPushMatrix();
@@ -100,6 +99,3 @@ void MeshFromImage::draw() {
 	easyCam.end();
 }
 
-void MeshFromImage::drawGUI() {
-
-}

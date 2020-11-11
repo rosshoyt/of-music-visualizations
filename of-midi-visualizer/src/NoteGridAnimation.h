@@ -24,14 +24,14 @@ public:
 	NoteGridAnimation(std::string uid = "2D Note Grid");
 
 	void setup();
+    void setupGUI() override;
 	void update();
 	void draw();
-    void drawGUI();
+
 
     void windowResized(int w, int h);
 
     // gui components
-    ofxPanel gui;
     ofxToggle drawAllAnimations;
     ofxIntSlider pitchOffsetSlider;
     ofxToggle pitchOffsetUseMIDICCToggle;

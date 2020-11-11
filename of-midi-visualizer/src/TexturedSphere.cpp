@@ -1,9 +1,9 @@
 #include "TexturedSphere.h"
 
-TexturedSphere::TexturedSphere(std::string uid) : MIDIAnimationComponent(uid) {
+//--------------------------------------------------------------
+TexturedSphere::TexturedSphere(std::string uid) : MIDIAnimationComponent(uid) {}
 
-}
-
+//--------------------------------------------------------------
 void TexturedSphere::setup() {
 	ofDisableAlphaBlending();
 	ofEnableDepthTest();
@@ -16,10 +16,13 @@ void TexturedSphere::setup() {
 	ofDisableArbTex();
 }
 
-void TexturedSphere::prepare() {
+//--------------------------------------------------------------
+void TexturedSphere::setupGUI() {}
 
-}
+//--------------------------------------------------------------
+void TexturedSphere::prepare() {}
 
+//--------------------------------------------------------------
 void TexturedSphere::takedown() {
 	light.disable();
 	ofEnableAlphaBlending();
@@ -27,10 +30,10 @@ void TexturedSphere::takedown() {
 	ofEnableArbTex();
 }
 
-void TexturedSphere::update() {
+//--------------------------------------------------------------
+void TexturedSphere::update() {}
 
-}
-
+//--------------------------------------------------------------
 void TexturedSphere::draw() {
 	cam.begin();
 	mTex.bind();
@@ -38,5 +41,3 @@ void TexturedSphere::draw() {
 	mTex.unbind();
 	cam.end();
 }
-
-void TexturedSphere::drawGUI() {}

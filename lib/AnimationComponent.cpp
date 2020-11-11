@@ -21,7 +21,7 @@ void AnimationComponent::prepare() {}
 
 void AnimationComponent::takedown() {}
 
-void AnimationComponent::drawBackground() {}
+//void AnimationComponent::drawBackground() {}
 
 void AnimationComponent::resized(int w, int h) {}
 
@@ -29,10 +29,4 @@ const std::string& AnimationComponent::getUID() {
 	return uid;
 }
 
-void AnimationComponent::setMenuXY(float x, float y) {
-	menuX = x, menuY = y;
-}
 
-void AnimationComponent::setMenuXY(int x, int y) {
-	menuX = x, menuY = y;
-}

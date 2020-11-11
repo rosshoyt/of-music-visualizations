@@ -4,7 +4,7 @@
 #include "ofxDatGui.h"
 #include <iostream>
 #include "MIDIPortState.h"
-
+#include "GUIComponent.h"
 #include "NoteGridAnimation.h"
 #include "MIDIAnimationComponent.h"
 #include "Animated3DMesh.h"
@@ -17,16 +17,16 @@
 
 extern const int WIDTH, HEIGHT, RIGHT_CONTROLBAR;
 
-class ofApp : public ofBaseApp, AbletonController {
+class ofApp : public ofBaseApp, public GUIComponent {
 
 	public:
         ofApp();
 		void setup();
+        void setupGUI() override;
 		void update();
 		void draw();
         void keyPressed(int key);
         void windowResized(int w, int h);
-
         void onDropdownEvent(ofxDatGuiDropdownEvent e);
 		
 private:
@@ -35,14 +35,10 @@ private:
         
         // Global GUI componenets
         // gui components
-        //ofxPanel gui;
         // TODO replace ofxDatGUI
         ofxDatGuiDropdown* animationSelectorDropdown;
-        
-        ofxPanel gui;
         ofxToggle drawAllAnimationsToggle;
-        
-        
+       
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
         std::map<std::string, MIDIAnimationComponent*> animationComponents;
@@ -51,12 +47,11 @@ private:
         MIDIPortStateSettings midiPortSettings;
         MIDIPortState midiPortState;
 
-        // Animation components
+        // MIDI Animation components
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
         ADSRVisualizer adsrVisualizer;
-        CircleOfFifths circleOfFifths;
-        
+        CircleOfFifths circleOfFifths;  
 };

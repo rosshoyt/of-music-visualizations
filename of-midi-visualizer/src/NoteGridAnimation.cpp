@@ -1,10 +1,13 @@
 #include "NoteGridAnimation.h"
 
+//--------------------------------------------------------------
 NoteGridAnimation::NoteGridAnimation(std::string uid) : MIDIAnimationComponent(uid), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
+//--------------------------------------------------------------
+void NoteGridAnimation::setup() {}
 
-void NoteGridAnimation::setup() {
-    gui.setup();    
+//--------------------------------------------------------------
+void NoteGridAnimation::setupGUI() {
     // pitch-offset display controls
     gui.add(pitchOffsetSlider.setup("Pitch Offset (Half-Steps)", 0, 0, 11));
     gui.add(pitchOffsetUseMIDICCToggle.setup("Toggle Pitch Offset MIDI CC Control", false));
@@ -37,7 +40,7 @@ void NoteGridAnimation::setup() {
         ChannelSettings* channelSettings = new ChannelSettings();
         channelSettings->color.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
         channelSettings->drawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i + 1)), true);
-            
+
 
         gui.add(&channelSettings->drawCirclesToggle);
         gui.add(&channelSettings->color);
@@ -46,9 +49,7 @@ void NoteGridAnimation::setup() {
 
         std::cout << std::boolalpha << channelSettings->drawCirclesToggle;
     }
-
-    //std::cout << "hello";
-
+    
     gui.loadFromFile("settings.xml");
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
@@ -59,7 +60,6 @@ void NoteGridAnimation::update() {
     // calculate note box width/height based on window size
     boxWidth = animationWidth / nColumns;
     boxHeight = animationHeight / nRows;
-
 
     // update the pitch offset amount
     if (pitchOffsetUseMIDICCToggle) 
@@ -78,18 +78,10 @@ void NoteGridAnimation::draw() {
     if (drawLinesToggle)
         drawBgdGridLines();
 
-    
-    drawActiveNotes();
-
-    
-}
-
-void NoteGridAnimation::drawGUI() {
-    gui.draw();
+    drawActiveNotes();    
 }
 
 //--------------------------------------------------------------
-
 void NoteGridAnimation::drawBgdGridLines() {
     // draw  horizontal grid lines to represent octaves
     ofSetColor(gridLineColorSelector);
@@ -174,13 +166,5 @@ void NoteGridAnimation::drawActiveNotes() {
 }
 
 //--------------------------------------------------------------
-void NoteGridAnimation::windowResized(int w, int h) {
-    
-    
-    
-   
-    //
-    ////gui.setPosition(windowWidth, 0);
-    //gui.setPosition(menuX, menuY);
-}
+void NoteGridAnimation::windowResized(int w, int h) {}
 

@@ -28,9 +28,12 @@ public:
 
 	void setup();
 
+	void setupGUI() override; 
+
+	// TODO move to utils.h
 	ofColor getRandomColor();
 
-	ofxPanel gui;
+
 	//double splineControlY2;
 	tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
 
@@ -57,9 +60,9 @@ public:
 	bool shouldChange();
 	void draw();
 
-	void drawGUI();
 
-	void drawBackground();
+
+
 
 };
 
