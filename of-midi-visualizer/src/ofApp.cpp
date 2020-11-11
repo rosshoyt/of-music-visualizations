@@ -45,13 +45,12 @@ void ofApp::setup() {
 void ofApp::setupGUI() {
     // instantiate the animation selector dropdown and set position
     animationSelectorDropdown = new ofxDatGuiDropdown("SELECT AN ANIMATION", animationUIDS);
-    animationSelectorDropdown->setPosition(WIDTH, 0);
+   
     //// register to listen for change events
     animationSelectorDropdown->onDropdownEvent(this, &ofApp::onDropdownEvent);
     animationSelectorDropdown->expand();
 
-    gui.setPosition(WIDTH, animationSelectorDropdown->getHeight()); // // HEIGHT / 3 * 2);//
-    gui.add(drawAllAnimationsToggle.setup("Draw All Animations", false));
+   gui.add(drawAllAnimationsToggle.setup("Draw All Animations", false));
 }
 
 //--------------------------------------------------------------
@@ -104,6 +103,9 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+    gui.setPosition(w - RIGHT_CONTROLBAR, animationSelectorDropdown->getHeight()); // // HEIGHT / 3 * 2);//
+    animationSelectorDropdown->setPosition(w - RIGHT_CONTROLBAR, 0);
+    
     for (auto& uidComp : animationComponents) {
         std::cout << "Resizing " << uidComp.first << "\n";
         auto component = uidComp.second;
@@ -111,6 +113,7 @@ void ofApp::windowResized(int w, int h){
         component->setMenuXY(w - RIGHT_CONTROLBAR, h / 2);
         component->resized(w, h);
     }
+
 }
     
 //--------------------------------------------------------------
