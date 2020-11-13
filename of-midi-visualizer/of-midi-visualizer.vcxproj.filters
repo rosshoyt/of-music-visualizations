@@ -159,6 +159,7 @@
       <Filter>src\animation-components</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\GUIComponent.cpp" />
+    <ClCompile Include="..\lib\MIDIPortStateGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -490,6 +491,7 @@
       <Filter>src\animation-components</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\GUIComponent.h" />
+    <ClInclude Include="..\inc\MIDIPortStateGUI.h" />
     <ClInclude Include="..\inc\UID.h" />
   </ItemGroup>
   <ItemGroup>

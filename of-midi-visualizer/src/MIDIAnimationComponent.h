@@ -5,7 +5,7 @@
 #include "MIDIPortStateUser.h"
 
 
-class MIDIAnimationComponent : public UID, public AnimationComponent, public GUIComponent, public MIDIPortStateUser {
+class MIDIAnimationComponent : public AnimationComponent, public GUIComponent, public MIDIPortStateUser {
 public:
-	MIDIAnimationComponent(std::string uid) : UID(uid) {}
+	MIDIAnimationComponent(std::string uid) : GUIComponent(uid) {}
 };

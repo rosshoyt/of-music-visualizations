@@ -1,15 +1,20 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "UID.h"
 
-class GUIComponent {
+class GUIComponent : public UID {
 public:
-	GUIComponent();
+	GUIComponent(std::string uid);
 
 	// method which must be implemented by inheriting class.
 	// gui parameters should be added to the ofxPanel in this method
 	virtual void setupGUI() = 0;
 	
+	void setGUIName(std::string name);
+
+	std::string getGUIName();
+
 	void drawGUI();
 
 	void setMenuXY(float x, float y);
@@ -17,11 +22,14 @@ public:
 	float getMenuHeight();
 
 	float getMenuWidth();
+
+	//void setMenuHeight(float height);
+	void setDefaultMenuWidth(float width);
 protected:
 	ofxPanel gui;
 
-	// TODO refactor, move GUI code to separate class
-	float menuX, menuY;
+	float menuX = 0, menuY = 0;
 
+	float defaultMenuWidth = 100; // TODO choose better default value
 };
 

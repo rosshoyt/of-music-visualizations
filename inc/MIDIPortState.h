@@ -8,20 +8,14 @@
 #ifndef MIDIPortNotesState_h
 #define MIDIPortNotesState_h
 #include "ofxMidi.h"
+#include "ofxGui.h"
 #include "MIDIChannelState.h"
 #include <assert.h>
 
 struct MIDIPortStateSettings {
     MIDIPortStateSettings() = default;
 
-    //MIDIPortStateSettings(unsigned int numChannels, bool useVirtualPort, std::string networkPortName, std::string virtualPortName) :
-    //    numChannels(numChannels), 
-    //    useVirtualPort(useVirtualPort), 
-    //    networkPortName(networkPortName), 
-    //    virtualPortName(virtualPortName) {
-
-    //}
-
+    // TODO implement operator chaining
     //MIDIPortStateSettings& operator= (const MIDIPortStateSettings& state) {
     //    std::cout << " in assignment operator ";
     //    // do the copy
@@ -29,18 +23,32 @@ struct MIDIPortStateSettings {
     //    useVirtualPort = state.useVirtualPort;
     //    networkPortName = state.networkPortName;
     //    virtualPortName = state.virtualPortName;
-
     //    // return the existing object so we can chain this operator
     //    return *this;
     //}
 
-    // How many midi channels to listen to on the port (1 - 16)
-    unsigned int numChannels = 16; 
+    
     // flag set to true if using local MIDI port, false if using network MIDI port
-    bool useVirtualPort = false; 
+    ofParameter<bool> useVirtualPort = false; 
     // names of local and network MIDI ports
-    std::string networkPortName = "Network Session 1", virtualPortName = "ofxMidiIn Input";
+    ofParameter<std::string> networkPortName = "Network Session 1", virtualPortName = "ofxMidiIn Input";
+
+    // How many midi channels to listen to on the port (1 - 16)
+    ofParameter<unsigned int> numChannels = 16;
+
+    
+    // TODO
+    //std::vector<MIDIChannelSettings> channelSettings;
+
 };
+
+//struct MIDIChannelSettings {
+//    unsigned int channelNumber = 0;
+//    ofxColorSlider color;
+//    //ShapeType shape = TRIANGLE;
+//    //ofParameter<int> pitchOffsetAmount;
+//    //ADSR adsr;
+//};
 
 
 

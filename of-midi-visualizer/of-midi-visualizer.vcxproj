@@ -192,6 +192,7 @@
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\MIDIChannelState.cpp" />
     <ClCompile Include="..\lib\MIDIPortState.cpp" />
+    <ClCompile Include="..\lib\MIDIPortStateGUI.cpp" />
     <ClCompile Include="..\lib\MIDIPortStateUser.cpp" />
     <ClCompile Include="..\lib\Utils.cpp" />
     <ClCompile Include="src\ADSRVisualizer.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
+    <ClInclude Include="..\inc\MIDIPortStateGUI.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />
     <ClInclude Include="..\inc\spline.h" />
     <ClInclude Include="..\inc\UID.h" />

@@ -4,6 +4,7 @@
 #include "ofxDatGui.h"
 #include <iostream>
 #include "MIDIPortState.h"
+#include "MIDIPortStateGUI.h"
 #include "GUIComponent.h"
 #include "NoteGridAnimation.h"
 #include "MIDIAnimationComponent.h"
@@ -41,11 +42,18 @@ private:
        
         std::string currentAnimationUID;
         std::vector<std::string> animationUIDS;
-        std::map<std::string, MIDIAnimationComponent*> animationComponents;
+        std::map<std::string, MIDIAnimationComponent*> animationComponentsMap;
         
         // Class which creates MIDI port and tracks the current state of the midi input's note on and note off's
-        MIDIPortStateSettings midiPortSettings;
-        MIDIPortState midiPortState;
+        //MIDIPortStateSettings midiPortSettings;
+        //MIDIPortState midiPortState;
+
+        // list of all gui components
+        std::vector<GUIComponent*> guiComponentsList;
+
+
+        // GUI-Only Components (no animation)
+        MIDIPortStateGUI midiPortStateGUI;
 
         // MIDI Animation components
         NoteGridAnimation noteGridAnimation;

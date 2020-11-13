@@ -1,12 +1,16 @@
 #include "GUIComponent.h"
 
-GUIComponent::GUIComponent() {
+GUIComponent::GUIComponent(std::string uid) : UID(uid) {
 	gui.setup();
 }
 
-//void GUIComponent::setupGUI() {
-//	setMenuXY(x, y);
-//}
+void GUIComponent::setGUIName(std::string name) {
+	gui.setName(name);
+}
+
+std::string GUIComponent::getGUIName() {
+	return gui.getName();
+}
 
 void GUIComponent::drawGUI() {
 	gui.draw();
@@ -24,6 +28,10 @@ float GUIComponent::getMenuHeight() {
 }
 float GUIComponent::getMenuWidth() {
 	return gui.getWidth();
+}
+
+void GUIComponent::setDefaultMenuWidth(float width) {
+	gui.setDefaultWidth(width);
 }
 
 //void GUIComponent::setMenuXY(int x, int y) {
