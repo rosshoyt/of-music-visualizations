@@ -496,7 +496,6 @@
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\MIDIPortStateGUI.h" />
     <ClInclude Include="..\inc\UID.h" />
-    <ClInclude Include="..\inc\Toggleable.h" />
     <ClInclude Include="src\MainGUI.h">
       <Filter>src\animation-components</Filter>
     </ClInclude>

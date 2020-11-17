@@ -1,7 +1,7 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
-extern const int HEIGHT = 1024, WIDTH = 1024, RIGHT_CONTROLBAR = 300;
+extern const int HEIGHT = 1024, WIDTH = 1024, OFXGUI_DEF_WIDTH = 200, RIGHT_CONTROLBAR = OFXGUI_DEF_WIDTH * 2;
 
 //========================================================================
 int main( ){

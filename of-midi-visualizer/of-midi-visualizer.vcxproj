@@ -255,7 +255,6 @@
     <ClInclude Include="..\inc\MIDIPortStateGUI.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />
     <ClInclude Include="..\inc\spline.h" />
-    <ClInclude Include="..\inc\Toggleable.h" />
     <ClInclude Include="..\inc\UID.h" />
     <ClInclude Include="..\inc\Utils.h" />
     <ClInclude Include="src\ADSRVisualizer.h" />

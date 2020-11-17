@@ -77,11 +77,15 @@ void ofApp::windowResized(int w, int h){
     // update gui positions
     // start with main gui
     mainGUI.setMenuXY(animationWidth, 0);
-    float currX, currY = mainGUI.getMenuHeight();
+    float currX = animationWidth, currY = mainGUI.getMenuHeight();
     for (auto& component : animationComponentsMap) {
-        //component->setDefaultMenuWidth(RIGHT_CONTROLBAR);
-        component->setMenuXY(animationWidth, currY);
-        currY += component->getMenuHeight();
+        auto guiCompHeight = component->getMenuHeight();
+        if (currY >= HEIGHT) {
+            currX += OFXGUI_DEF_WIDTH;
+            currY = 0;
+        }
+        component->setMenuXY(currX, currY);
+        currY += guiCompHeight;
     }
 }
 
