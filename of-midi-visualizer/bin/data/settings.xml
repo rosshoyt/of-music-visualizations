@@ -76,3 +76,9 @@
 	<circle_size>5</circle_size>
 	<Draw_All_Animations>0</Draw_All_Animations>
 </group>
+<MIDI_Port_Info>
+	<__MIDI_Channels>12</__MIDI_Channels>
+	<Use_Virtual_Port>0</Use_Virtual_Port>
+	<Virtual_Port_Name>ofxMidiIn Input</Virtual_Port_Name>
+	<Network_Port_Name>Network Session 1</Network_Port_Name>
+</MIDI_Port_Info>

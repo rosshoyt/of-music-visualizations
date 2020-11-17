@@ -15,11 +15,11 @@ public:
 
 	std::string getGUIName();
 
-	void drawGUI();
+	virtual void drawGUI();
 
-	void setMenuXY(float x, float y);
+	virtual void setMenuXY(float x, float y);
 
-	float getMenuHeight();
+	virtual float getMenuHeight();
 
 	float getMenuWidth();
 

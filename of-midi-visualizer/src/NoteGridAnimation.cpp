@@ -15,7 +15,7 @@ void NoteGridAnimation::setupGUI() {
     gui.add(pitchOffsetAmount);
 
     // background/animation view controls
-    gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
+    //gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawLinesToggle.setup("Draw Lines", true));
 
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
@@ -50,7 +50,7 @@ void NoteGridAnimation::setupGUI() {
         std::cout << std::boolalpha << channelSettings->drawCirclesToggle;
     }
     
-    gui.loadFromFile("settings.xml");
+    
     // set global display vars
     windowResized(ofGetWidth(), ofGetHeight());
 }
@@ -70,8 +70,8 @@ void NoteGridAnimation::update() {
 
 //--------------------------------------------------------------
 void NoteGridAnimation::draw() {
-    ofBackground(backgroundColorSelector);
-    drawGUI(); // TODO move outside of class
+    //ofBackground(backgroundColorSelector);
+    //drawGUI(); // TODO move outside of class
 
     if (drawBackgroundGridToggle)
         drawBgdGrid();

@@ -160,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\MIDIPortStateGUI.cpp" />
+    <ClCompile Include="src\MainGUI.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -493,6 +496,10 @@
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\MIDIPortStateGUI.h" />
     <ClInclude Include="..\inc\UID.h" />
+    <ClInclude Include="..\inc\Toggleable.h" />
+    <ClInclude Include="src\MainGUI.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

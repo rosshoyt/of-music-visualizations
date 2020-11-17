@@ -2,6 +2,7 @@
 
 GUIComponent::GUIComponent(std::string uid) : UID(uid) {
 	gui.setup();
+	setGUIName(uid);
 }
 
 void GUIComponent::setGUIName(std::string name) {
@@ -19,7 +20,7 @@ void GUIComponent::drawGUI() {
 void GUIComponent::setMenuXY(float x, float y) {
 	menuX = x, menuY = y;
 	gui.setPosition(x, y);
-	std::cout << "set menu position to " << menuX << "," << y << '\n';
+	std::cout << "set menu position of " << getUID() << " to " << menuX << "," << y << '\n';
 
 }
 
