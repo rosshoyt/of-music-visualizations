@@ -82,3 +82,13 @@
 	<Virtual_Port_Name>ofxMidiIn Input</Virtual_Port_Name>
 	<Network_Port_Name>Network Session 1</Network_Port_Name>
 </MIDI_Port_Info>
+<Main_Controls>
+	<Background_Color>11, 22, 0, 255</Background_Color>
+	<Animation_Toggles>
+		<Show_2D_Note_Grid>0</Show_2D_Note_Grid>
+		<Show_3D_Mesh>1</Show_3D_Mesh>
+		<Show_ADSR_Visualizer>0</Show_ADSR_Visualizer>
+		<Show_Circle_of_Fifths>0</Show_Circle_of_Fifths>
+		<Show_Mesh_From_Image>1</Show_Mesh_From_Image>
+	</Animation_Toggles>
+</Main_Controls>

@@ -12,10 +12,10 @@ void MeshFromImage::setup() {
 	image.load(imagePath);
 	image.resize(width, height);
 
-	// Don't forget to change to lines mode!
+	// Change to lines mode!
 	mesh.setMode(OF_PRIMITIVE_LINES);
 
-	// We are going to be using indices this time
+	// We are using indices
 	mesh.enableIndices();
 
 	mesh.enableColors();
@@ -40,7 +40,6 @@ void MeshFromImage::setup() {
 		}
 	}
 
-
 	// Let's add some lines!
 	float connectionDistance = 30;
 	int numVerts = mesh.getNumVertices();
@@ -57,40 +56,34 @@ void MeshFromImage::setup() {
 			}
 		}
 	}
-
-	std::cout << "setting up MeshFromImage pointNoteMap\n";
 	pointNoteMap.setup(mesh, width, height, 12, 12);
 }
 
 //--------------------------------------------------------------
-void MeshFromImage::setupGUI() {}
+void MeshFromImage::setupGUI() {
+	gui.add(positionScale.set("Note Scale", _defPositionScale, -4000, 4000));
+}
 
 //--------------------------------------------------------------
 void MeshFromImage::update() {
 	auto allNotesDown = midiPortState->getAllNotesDown();
-	//std::cout << allNotesDown.size() << " notes down\n";
 	for (int i = 0; i < mesh.getNumVertices(); ++i) {
 		auto position = mesh.getVertex(i);
 		int midiPitch = pointNoteMap.getNote(position);
 
 		if (allNotesDown.count(midiPitch) > 0) {
 			auto velocityADSR = allNotesDown[midiPitch];
-			position.z = zVals[i] + 300.f * velocityADSR.first / 128.f * velocityADSR.second;
+			position.z = zVals[i] + positionScale * velocityADSR.first / 128.f * velocityADSR.second;
 		}
 		else {
 			position.z = zVals[i];
 		}
-
 		mesh.setVertex(i, position);
 	}
 }
 
 //--------------------------------------------------------------
 void MeshFromImage::draw() {
-	ofColor centerColor = ofColor(85, 78, 68);
-	ofColor edgeColor(0, 0, 0);
-	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
-
 	easyCam.begin();
 	ofPushMatrix();
 	ofTranslate(-ofGetWidth() / 3, -ofGetHeight() / 3);

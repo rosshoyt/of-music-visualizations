@@ -19,7 +19,7 @@ void ofApp::setup() {
     animationComponentsList.push_back(&animated3DMesh);
     animationComponentsList.push_back(&adsrVisualizer);
     animationComponentsList.push_back(&circleOfFifths);
-    //animationComponentsList.push_back(&meshFromImage);
+    animationComponentsList.push_back(&meshFromImage);
 
     // setup animation components
     for (auto& component : animationComponentsList) {

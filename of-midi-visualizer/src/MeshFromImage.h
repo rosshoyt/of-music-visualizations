@@ -8,7 +8,7 @@ class MeshFromImage :
 	public MIDIAnimationComponent
 {
 public:
-    MeshFromImage(std::string uid = "3D Mesh", std::string imagePath = "textures/pnw.jpg");
+    MeshFromImage(std::string uid = "Mesh From Image", std::string imagePath = "textures/21lawrence-superJumbo.jpg");
     void setup();
     void setupGUI() override;
     void update();
@@ -26,5 +26,8 @@ private:
 
     utils::note_grid::PointNoteMap pointNoteMap;
 
+    // Gui Parameters
+    ofParameter<float> positionScale;
+    const float _defPositionScale = 350;
 };
 
