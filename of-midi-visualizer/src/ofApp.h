@@ -28,20 +28,23 @@ class ofApp : public ofBaseApp {
         void windowResized(int w, int h);
 		
 private:
-        AbletonController abletonController;
-        
-        
-        // main gui component (always shown)
-        MainGUI mainGUI;
-        
-        // list for all MIDI Animation Components
-        std::vector<MIDIAnimationComponent*> animationComponentsMap;
-
-        // MIDI Animation components
+        // Individual MIDI Animations
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
         ADSRVisualizer adsrVisualizer;
-        CircleOfFifths circleOfFifths;  
+        CircleOfFifths circleOfFifths;
+        
+        // All MIDI Animations
+        std::vector<MIDIAnimationComponent*> animationComponentsList;
+
+        // Individual GUI Components
+        MainGUI mainGUI;
+
+        // All GUI components
+        std::vector<GUIComponent*> guiComponentsList;
+
+        // Class which communicates with Ableton via OSC
+        AbletonController abletonController;
 };

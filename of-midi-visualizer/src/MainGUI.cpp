@@ -46,10 +46,15 @@ void MainGUI::initToggles() {
     gui.add(animationTogglesGroup);
 }
 
+void MainGUI::setToggleState(std::string uid, bool toggled){
+    toggles.at(uid).set(toggled);
+}
+
 bool MainGUI::isToggled(std::string uid) {
-    if (toggles.count(uid) > 0)
-        return toggles[uid];
-    return false; // TODO could if assert map contains provided uid
+    return toggles.at(uid);
+    //if (toggles.count(uid) > 0)
+    //    return toggles[uid];
+    //return false; // TODO could if assert map contains provided uid
 }
 
 ofColor MainGUI::getBackgroundColor() {

@@ -26,6 +26,8 @@ public:
 
     void initToggles();
 
+    void setToggleState(std::string uid, bool toggled);
+    
     bool isToggled(std::string uid);
 
     ofColor getBackgroundColor();
@@ -37,4 +39,5 @@ private:
     ofParameterGroup animationTogglesGroup;
 
     std::map<std::string, ofParameter<bool>> toggles;
+
 };

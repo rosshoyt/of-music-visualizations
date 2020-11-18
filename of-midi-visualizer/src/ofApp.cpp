@@ -9,33 +9,37 @@ void ofApp::setup() {
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    // setup the main GUI
+    // setup the main GUI TODO refactor or document - must be done before setting up MIDIPortState
     mainGUI.setupGUI();
+    // add main GUI to the gui components list
+    guiComponentsList.push_back(&mainGUI);
     
     // track animation components 
-    animationComponentsMap.push_back(&noteGridAnimation);
-    animationComponentsMap.push_back(&animated3DMesh);
-    animationComponentsMap.push_back(&adsrVisualizer);
-    animationComponentsMap.push_back(&circleOfFifths);
-    //animationComponentsMap.insert(&meshFromImage);
+    animationComponentsList.push_back(&noteGridAnimation);
+    animationComponentsList.push_back(&animated3DMesh);
+    animationComponentsList.push_back(&adsrVisualizer);
+    animationComponentsList.push_back(&circleOfFifths);
+    //animationComponentsList.push_back(&meshFromImage);
 
     // setup animation components
-    for (auto& component : animationComponentsMap) {
+    for (auto& component : animationComponentsList) {
         component->setMIDIPortState(&mainGUI.midiPortStateGUI.getMIDIPortState());
         component->setup();
         component->setupGUI();
+        // add a toggle to turn the animation on and off from the main gui
         mainGUI.addToggle(component->getUID(), false);
+        // add the component to the GUI Component list (TODO separate MIDIAnimationComponent from GUIComponent parent class)
+        guiComponentsList.push_back(component);
     }
-    // setup the animation toggles in the main gui
+    // initialize the animation toggles in the main gui
     mainGUI.initToggles();
-
-    // force window resize
-    windowResized(ofGetWidth(), ofGetHeight());
+    // set an animation to start with
+    mainGUI.setToggleState(circleOfFifths.getUID(), true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for (auto& animation : animationComponentsMap) {
+    for (auto& animation : animationComponentsList) {
         if(mainGUI.isToggled(animation->getUID()))
             animation->update();
     }    
@@ -44,7 +48,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(mainGUI.getBackgroundColor());
-    for (auto& animation: animationComponentsMap) {
+    for (auto& animation: animationComponentsList) {
         if (mainGUI.isToggled(animation->getUID())) {
             animation->draw();
             animation->drawGUI();
@@ -65,27 +69,27 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    float animationWidth = w - RIGHT_CONTROLBAR;
+    float animationDisplayWidth = w - RIGHT_CONTROLBAR;
+    
     // update all animation posisions
-    for (auto& animation : animationComponentsMap) {
-        std::cout << "Resizing animation " << animation->getUID() << "\n";      
-        animation->setAnimationDimensions(animationWidth, h);
-        // TODO have animation component automatically resize?
+    for (auto& animation : animationComponentsList) {
+        animation->setAnimationDimensions(animationDisplayWidth, h);
         animation->resized(w, h);
     }
 
-    // update gui positions
-    // start with main gui
-    mainGUI.setMenuXY(animationWidth, 0);
-    float currX = animationWidth, currY = mainGUI.getMenuHeight();
-    for (auto& component : animationComponentsMap) {
-        auto guiCompHeight = component->getMenuHeight();
-        if (currY >= HEIGHT) {
-            currX += OFXGUI_DEF_WIDTH;
-            currY = 0;
+    // update all GUI panel positions
+    float guiSpacer = 10;
+    float x = animationDisplayWidth, y = 0;
+    for (auto& component : guiComponentsList) {
+        // check if we are going to position GUI off-screen
+        if (y >= HEIGHT) {
+            // TODO refactor the positioning of the GUI components
+            y = 0; // reset Y
+            x += OFXGUI_DEF_WIDTH; // shift right to the next column 
         }
-        component->setMenuXY(currX, currY);
-        currY += guiCompHeight;
+        component->setMenuXY(x, y);
+        auto guiCompHeight = component->getMenuHeight() + guiSpacer;
+        y += guiCompHeight; 
     }
 }
 
