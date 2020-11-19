@@ -4,9 +4,28 @@
 #include <algorithm>
 
 namespace utils {
-    static constexpr double pi = 3.14159265358979323846;
+    namespace math {
+        // source http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0811r2.html
+        const float lerp(float a, float b, float t);
 
-    std::pair<int, int> getOctavePitchPair(int midiNoteNumber);
+        static constexpr double pi = 3.14159265358979323846;
+    }
+    
+    
+    namespace midi {
+        std::pair<int, int> getOctavePitchPair(int midiNoteNumber);
+    }
+
+    namespace time {
+        const long getCurrentTime();
+
+        const long elapsedTimeSince(long oldTime);
+    }
+
+    namespace color {
+        ofColor getRandomColor();
+    }
+
 
     namespace note_grid {
         class PointNoteMap {

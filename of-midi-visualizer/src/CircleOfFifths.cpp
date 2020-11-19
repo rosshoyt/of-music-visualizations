@@ -26,9 +26,9 @@ void CircleOfFifths::draw() {
 
 	for (auto channel : midiPortState->getAllChannelNotes()) {
 		for (auto noteVel : channel) {
-			auto octavePitch = utils::getOctavePitchPair(noteVel.first);
+			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
 
-			float rads = 2 * utils::pi * octavePitch.second / numPitches; // The rotate function uses degrees!
+			float rads = 2 * utils::math::pi * octavePitch.second / numPitches; // The rotate function uses degrees!
 
 			float radius = animationHeight / 2.f / numOctaves * (octavePitch.first + 1);
 

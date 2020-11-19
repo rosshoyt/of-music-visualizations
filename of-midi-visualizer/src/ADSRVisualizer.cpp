@@ -7,7 +7,7 @@ ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
 void ADSRVisualizer::setup() {
 	//setup Colors
 	for (int i = 0; i < 32; i++) {
-		colors.push_back(getRandomColor());
+		colors.push_back(utils::color::getRandomColor());
 	}
 }
 
@@ -24,11 +24,6 @@ void ADSRVisualizer::setupGUI() {
 	gui.add(splineControlY2.set("spline Amount", .75f, minF, maxF));*/
 	gui.add(changeSpeed.set("color speed ms", 300, 1, 5000));
 	gui.add(circleSize.set("circle size", 5.f, 0.1f, 100.f));
-}
-
-//--------------------------------------------------------------
-ofColor ADSRVisualizer::getRandomColor() {
-	return ofColor((int)ofRandom(0, 255), (int)ofRandom(0, 255), (int)ofRandom(0, 255));
 }
 
 //--------------------------------------------------------------
@@ -69,8 +64,8 @@ void ADSRVisualizer::draw() {
 
 	//update time-based params
 	if (shouldChange()) {
-		ofSetColor(getRandomColor()); //colors[i % colors.size()]);
-									  // update which y val to augment
+		ofSetColor(utils::color::getRandomColor()); //colors[i % colors.size()]);
+		// update which y val to augment
 		if (currentYToChange > maxYToChange) {
 			currentYToChange = minYToChange;
 		}

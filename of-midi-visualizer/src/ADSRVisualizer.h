@@ -30,8 +30,6 @@ public:
 
 	void setupGUI() override; 
 
-	// TODO move to utils.h
-	ofColor getRandomColor();
 
 
 	//double splineControlY2;

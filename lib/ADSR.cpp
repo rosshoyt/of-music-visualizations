@@ -12,8 +12,6 @@ void ADSR::init() {
 	rTot = total = a + d + s + r;
 
 	splineControlY = .3f;
-
-
 }
 
 NoteADSRState::NoteADSRState(ADSR adsr, bool splineCurve, double splineControlY) : adsr(adsr), splineControlY(.65f), adsrState(OFF), active(), startTime(), endTime() {
@@ -21,24 +19,24 @@ NoteADSRState::NoteADSRState(ADSR adsr, bool splineCurve, double splineControlY)
 }
 
 void NoteADSRState::start() {
-	startTime = Time::getCurrentTime();
+	startTime = utils::time::getCurrentTime();
 	//active.store(true);
 	adsrState = ATTACKING;
 
 }
 
 void NoteADSRState::stop() {
-	endTime = Time::getCurrentTime();
+	endTime = utils::time::getCurrentTime();
 	//level = 0.f;
 	//active.store(false);
 	adsrState = OFF;
 }
 
 float NoteADSRState::getLevel() {
-	//        auto level(0.f);
+	// auto level(0.f);
 	if (adsrState != OFF) {
 		//std::cout << "Getting time elapsed since start time = " << startTime << '\n';
-		auto timePassed = Time::elapsedTimeSince(startTime);
+		auto timePassed = utils::time::elapsedTimeSince(startTime);
 
 		auto level = getLevel(timePassed, false);
 		//std::cout << std::setw(5) << timePassed << " milliseconds elapsed, note ADSR level = " << level << '\n'; //<< ", regular lerp = "<< getLevel(timePassed, false)<< '\n';
@@ -120,26 +118,5 @@ float NoteADSRState::getLevel(long elapsed, bool spline) {
 		return 0.f;
 	}
 
-
-	//endLevel = " << endLevel << ", elapsed = " << elapsed << ", segmentCompleted = "<< segmentCompleted<< "/segmentTimeLength = " << segmentTimeLength << '\n';
-
-	//return spline(double(elapsed));
-
-	return lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
-	//    else {
-	//
-	//        }
-}
-
-// http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0811r2.html
-
-const float NoteADSRState::lerp(float a, float b, float t) {
-	// Exact, monotonic, bounded, determinate, and (for a=b=0) consistent:
-	if (a <= 0 && b >= 0 || a >= 0 && b <= 0) return t * b + (1 - t) * a;
-
-	if (t == 1) return b;                        // exact
-												 // Exact at t=0, monotonic except near t=1,
-												 // bounded, determinate, and consistent:
-	const float x = a + t * (b - a);
-	return t>1 == b>a ? std::max(b, x) : std::min(b, x);  // monotonic near t=1
+	return utils::math::lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
 }
