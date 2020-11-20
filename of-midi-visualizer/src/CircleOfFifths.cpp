@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 CircleOfFifths::CircleOfFifths(std::string uid) : MIDIAnimationComponent(uid) {
-
+	
 }
 
 //--------------------------------------------------------------
@@ -10,6 +10,7 @@ void CircleOfFifths::setup() {}
 
 //--------------------------------------------------------------
 void CircleOfFifths::setupGUI() {
+	gui.add(drawOctavesToggle.set("Draw Octaves", true));
 	gui.add(drawChromaticModeToggle.set("Draw Chromatic Circle", false));
 }
 
@@ -28,6 +29,8 @@ void CircleOfFifths::draw() {
 
 	for (auto channel : midiPortState->getAllChannelNotes()) {
 		for (auto noteVel : channel) {
+
+
 			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
 			
 			int pitchPosition = octavePitch.second;
@@ -37,19 +40,25 @@ void CircleOfFifths::draw() {
 				pitchPosition = pitchPosition * 7 % numPitches;
 			}
 
+			float circleSize = 40 * noteVel.second / 127.f;
+
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			
-			float radius = animationHeight / 2.f / numOctaves * (octavePitch.first + 1);
-
+			// TODO base this on smaller of height or width
+			float radius = animationHeight / 2.f / numOctaves;
+			
+			if (drawOctavesToggle) radius *= octavePitch.first + 1;
+			else radius *= numOctaves / 2;
+			
 			auto point = centerPos + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
 
 			ofColor aqua(0, 252, 255, alpha);
-			ofColor purple(198, 0, 205, alpha);
-			ofColor inbetween = aqua.getLerped(purple, float(octavePitch.second) / 12.f);
+			/*ofColor purple(198, 0, 205, alpha);
+			ofColor inbetween = aqua.getLerped(purple, float(octavePitch.second) / 12.f);*/
 
-			ofSetColor(inbetween);
+			ofSetColor(aqua);
 
-			float circleSize = 40 * noteVel.second / 127.f;
+			
 
 			ofDrawCircle(point, circleSize);
 		}

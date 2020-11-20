@@ -22,6 +22,7 @@ private:
     int alpha = 150;    
     
     ofParameter<bool> drawChromaticModeToggle;
+    ofParameter<bool> drawOctavesToggle;
     ofParameter<int> pitchOffsetSlider;
 
     // create class to manage a GUI toggle for enum values (stepped slider)
