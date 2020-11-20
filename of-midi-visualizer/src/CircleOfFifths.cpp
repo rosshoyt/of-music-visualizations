@@ -9,7 +9,9 @@ CircleOfFifths::CircleOfFifths(std::string uid) : MIDIAnimationComponent(uid) {
 void CircleOfFifths::setup() {}
 
 //--------------------------------------------------------------
-void CircleOfFifths::setupGUI() {}
+void CircleOfFifths::setupGUI() {
+	gui.add(drawChromaticModeToggle.set("Draw Chromatic Circle", false));
+}
 
 //--------------------------------------------------------------
 void CircleOfFifths::update() {}
@@ -27,9 +29,16 @@ void CircleOfFifths::draw() {
 	for (auto channel : midiPortState->getAllChannelNotes()) {
 		for (auto noteVel : channel) {
 			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
+			
+			int pitchPosition = octavePitch.second;
 
-			float rads = 2 * utils::math::pi * octavePitch.second / numPitches; // The rotate function uses degrees!
+			if(!drawChromaticModeToggle) {
+				// convert chromatic pitch to circle of fifths
+				pitchPosition = pitchPosition * 7 % numPitches;
+			}
 
+			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
+			
 			float radius = animationHeight / 2.f / numOctaves * (octavePitch.first + 1);
 
 			auto point = centerPos + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
