@@ -12,6 +12,9 @@ void CircleOfFifths::setup() {}
 void CircleOfFifths::setupGUI() {
 	gui.add(drawOctavesToggle.set("Draw Octaves", true));
 	gui.add(drawChromaticModeToggle.set("Draw Chromatic Circle", false));
+	gui.add(noteCircleSizeSlider.set("Note Circle Size", 1.0, .001, 10));
+	gui.add(noteColorSlider.setup("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
+	
 }
 
 //--------------------------------------------------------------
@@ -40,7 +43,7 @@ void CircleOfFifths::draw() {
 				pitchPosition = pitchPosition * 7 % numPitches;
 			}
 
-			float circleSize = 40 * noteVel.second / 127.f;
+			float circleSize = 40 * noteVel.second / 127.f * noteCircleSizeSlider;
 
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			
@@ -56,9 +59,7 @@ void CircleOfFifths::draw() {
 			/*ofColor purple(198, 0, 205, alpha);
 			ofColor inbetween = aqua.getLerped(purple, float(octavePitch.second) / 12.f);*/
 
-			ofSetColor(aqua);
-
-			
+			ofSetColor(noteColorSlider);
 
 			ofDrawCircle(point, circleSize);
 		}
