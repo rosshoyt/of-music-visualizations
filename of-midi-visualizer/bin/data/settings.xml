@@ -83,12 +83,21 @@
 	<Network_Port_Name>Network Session 1</Network_Port_Name>
 </MIDI_Port_Info>
 <Main_Controls>
-	<Background_Color>11, 22, 0, 255</Background_Color>
+	<Background_Color>4, 8, 0, 255</Background_Color>
 	<Animation_Toggles>
 		<Show_2D_Note_Grid>0</Show_2D_Note_Grid>
-		<Show_3D_Mesh>1</Show_3D_Mesh>
+		<Show_3D_Mesh>0</Show_3D_Mesh>
 		<Show_ADSR_Visualizer>0</Show_ADSR_Visualizer>
-		<Show_Circle_of_Fifths>0</Show_Circle_of_Fifths>
-		<Show_Mesh_From_Image>1</Show_Mesh_From_Image>
+		<Show_Circle_of_Fifths>1</Show_Circle_of_Fifths>
+		<Show_Mesh_From_Image>0</Show_Mesh_From_Image>
 	</Animation_Toggles>
 </Main_Controls>
+<Circle_of_Fifths>
+	<Draw_Octaves>1</Draw_Octaves>
+	<Draw_Chromatic_Circle>0</Draw_Chromatic_Circle>
+	<Note_Circle_Size>3.15068</Note_Circle_Size>
+	<Octave_Row_Color>158, 200, 112, 255</Octave_Row_Color>
+	<Octave_Size_Multiplier>1.09</Octave_Size_Multiplier>
+	<Note_Multiplier_>7</Note_Multiplier_>
+	<Draw_Halo_on_Notes>0</Draw_Halo_on_Notes>
+</Circle_of_Fifths>

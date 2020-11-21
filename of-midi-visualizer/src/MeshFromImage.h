@@ -8,7 +8,8 @@ class MeshFromImage :
 	public MIDIAnimationComponent
 {
 public:
-    MeshFromImage(std::string uid = "Mesh From Image", std::string imagePath = "textures/21lawrence-superJumbo.jpg");
+    // TODO add multiple mesh support (search all pictures in a directory?) support async loading (may holdup build times)
+    MeshFromImage(std::string uid = "Mesh From Image", std::string imagePath = "textures/allRGBV.png"); // 21lawrence-superJumbo.jpg
     void setup();
     void setupGUI() override;
     void update();

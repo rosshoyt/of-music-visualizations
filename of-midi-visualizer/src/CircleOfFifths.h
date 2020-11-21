@@ -13,9 +13,10 @@ public:
     void setupGUI() override;
     void update();
     void draw();
-    void drawHaloAroundCursor();
-
 private:
+    void drawHaloAroundCursor();
+    void drawHaloAroundPoint(ofVec2f point);
+
     int numOctaves = 10;
     int numPitches = 12;
 
@@ -23,12 +24,15 @@ private:
     
     ofParameter<bool> drawOctavesToggle;
     ofParameter<bool> drawChromaticModeToggle;
+    ofParameter<bool> drawHaloOnNotesToggle;
+    ofParameter<int> noteMultiplierToggle;
     ofParameter<float> noteCircleSizeSlider;
+    ofParameter<float> octaveSizeMultiplierSlider;
     ofxColorSlider noteColorSlider;
     //ofParameter<ofColor> noteColor;
     ofParameter<int> pitchOffsetSlider;
 
-    // create class to manage a GUI toggle for enum values (stepped slider)
+    // TODO create class to manage a GUI toggle for enum values (stepped slider)
     struct Toggle {
         Toggle(std::vector<std::string> _states) : states(_states) {
             currentState.set("States", 0, 0, states.size() - 1);
