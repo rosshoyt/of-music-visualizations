@@ -5,16 +5,20 @@ MIDIPortState::MIDIPortState() : GUIComponent("MIDI Port Info") {
 }
 
 void MIDIPortState::setupGUI() {
+	gui.clear();
 	gui.setName(getUID());
 
 	gui.add(numChannels.set("# MIDI Channels", numChannels, 1, 16));// .numChannels.set("# MIDI Channels", );
 	gui.add(useVirtualPort.set("Use Virtual Port", useVirtualPort));
 	gui.add(virtualPortName.set("Virtual Port Name", virtualPortName));
 	gui.add(networkPortName.set("Network Port Name", networkPortName));
-	std::cout << "Setting up MIDIPortStateGUI - num channels = " << numChannels << "\n";
+
+	for (int i = 0; i < numChannels; i++) {
+		Settings* settings = new Settings(i);
+		gui.add(settings->params);
+		perChannelSettings.push_back(settings);
+	}
 }
-
-
 
 unsigned int MIDIPortState::getNumChannels() {
 	return numChannels;
@@ -25,7 +29,6 @@ unsigned int MIDIPortState::getNumChannels() {
 * @param channel - MIDI Channel Number (1-16)
 * TODO Input validation
 */
-
 std::map<int, int> MIDIPortState::getChannelNotes(unsigned int channel) {
 	return channels[channel].getAllNotes();
 }

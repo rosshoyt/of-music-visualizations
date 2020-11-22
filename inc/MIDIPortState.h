@@ -17,10 +17,37 @@
 //struct MIDIChannelSettings {
 //    unsigned int channelNumber = 0;
 //    ofxColorSlider color;
-//    //ShapeType shape = TRIANGLE;
-//    //ofParameter<int> pitchOffsetAmount;
-//    //ADSR adsr;
+//   
 //};
+
+class Settings {
+public:
+    ofParameter<ofColor> color;
+
+    ofParameterGroup params;
+    //std::vector<ofAbstractParameter> params;
+
+    Settings() : Settings(channelNum) {
+        //Settings(channelNum);
+    }
+
+    Settings(int channelNum) : channelNum(channelNum) {
+        params.setName("Channel " + std::to_string(channelNum + 1) + " Settings");
+        params.add(color.set(ofColor::cornflowerBlue));
+    }
+
+    int getChannelNum() {
+        return channelNum;
+    }
+private:
+    // TODO implement
+    //ShapeType shape = TRIANGLE;
+    //ofParameter<int> pitchOffsetAmount;
+    //ADSR adsr;
+
+    int channelNum = 0;
+
+};
 
 class MIDIPortState : public ofxMidiListener, public GUIComponent {
 public:
@@ -34,7 +61,7 @@ public:
 
     /**
      * Gets all the notes currently held down or sustained with pedal on the specified midi channel
-     * @param channel - MIDI Channel Number (1-16)
+     * @param channel - MIDI Channel Number (0-15)
      * TODO Input validation
      */
     std::map<int, int> getChannelNotes(unsigned int channel);
@@ -52,6 +79,10 @@ public:
     int getMIDICCValue(unsigned int channel, int ccNumber);
     
     float getADSRValue(unsigned int channel, int noteNumber);
+
+    Settings* getChannelSettings(unsigned int channel) {
+        return perChannelSettings[channel];
+    }
 private:
     // Midi Input port
     ofxMidiIn midiIn;
@@ -68,7 +99,7 @@ private:
 
     // bool initialized; // TODO assert that MIDI port state is initialized in each method
     
-    // Array of channel note states represe
+    // Array of channel note states
     MIDIChannelState* channels;
     
     // Private methods
@@ -82,6 +113,11 @@ private:
      * ofMidiListener implemented method
      */
     void newMidiMessage(ofxMidiMessage& message);
+
+    // List of all per-channel settings
+    std::vector<Settings*> perChannelSettings;
+
+    
     
 };
 #endif /* MIDIPortNotesState_h */

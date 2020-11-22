@@ -38,12 +38,12 @@ void NoteGridAnimation::setupGUI() {
         //chanColor.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
 
         ChannelSettings* channelSettings = new ChannelSettings();
-        channelSettings->color.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
+        //channelSettings->color.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
         channelSettings->drawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i + 1)), true);
 
 
         gui.add(&channelSettings->drawCirclesToggle);
-        gui.add(&channelSettings->color);
+        //gui.add(&channelSettings->color);
 
         channelSettingsList.push_back(channelSettings);
 
@@ -134,6 +134,7 @@ void NoteGridAnimation::drawActiveNotes() {
         auto ns = midiPortState->getChannelNotes(channelNumber);
 
         auto channelSettings = channelSettingsList[channelNumber];
+        auto settings = midiPortState->getChannelSettings(channelNumber); // TODO combine above line into this call
         for (auto note : ns) {
             //std::cout<< "drawing a note!\n";
             int noteNumber = note.first, velocity = note.second;
@@ -145,13 +146,12 @@ void NoteGridAnimation::drawActiveNotes() {
             float scalarVelocity = float(velocity) / 128.f;
             float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f);
             
-            ofSetColor(channelSettings->color, scalar * 256.f);
+            ofSetColor(settings->color, scalar * 256.f);
             int startX = col * boxWidth, startY = row * boxHeight;
             
             if (channelSettings->drawCirclesToggle) {
                 float radius = float(boxWidth) / 2.f;
                 ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); // good 'bloomy', lens-flare circle effect (with purple/red colors)
-
             }
             else {
                 ofDrawRectangle(startX, startY, boxWidth, boxHeight);

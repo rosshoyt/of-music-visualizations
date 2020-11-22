@@ -31,7 +31,9 @@ void CircleOfFifths::draw() {
 	ofVec2f centerPos(animationWidth / 2.f, animationHeight / 2.f);
 	float smallestDim = animationWidth > animationHeight ? animationHeight : animationWidth;
 
+	int channelNum = 0; // TODO refactor - midiChannelState object should contain all 'channel settings'
 	for (auto channel : midiPortState->getAllChannelNotes()) {
+		auto channelSettings = midiPortState->getChannelSettings(channelNum);
 		for (auto noteVel : channel) {
 			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
 			
@@ -58,7 +60,7 @@ void CircleOfFifths::draw() {
 			/*ofColor purple(198, 0, 205, alpha);
 			ofColor inbetween = aqua.getLerped(purple, float(octavePitch.second) / 12.f);*/
 
-			ofSetColor(noteColorSlider);
+			ofSetColor(channelSettings->color);
 
 			if (drawHaloOnNotesToggle) {
 				drawHaloAroundPoint(point);
@@ -69,13 +71,14 @@ void CircleOfFifths::draw() {
 
 			
 		}
+		++channelNum;
 	}
 
 	
 }
 
 //--------------------------------------------------------------
-void CircleOfFifths::drawHaloAroundPoint(ofVec2f point) {
+void CircleOfFifths::drawHaloAroundPoint(ofVec2f point, int channelNum) {
 	// Triangle Brush Source: https://github.com/openframeworks/ofBook/blob/master/chapters/intro_to_graphics/code/1_ii_e_Triangle_Brush/src/ofApp.cpp
 	// Code for the final version of the brush
 
@@ -83,6 +86,19 @@ void CircleOfFifths::drawHaloAroundPoint(ofVec2f point) {
 	int minOffset = 5;
 	int maxOffset = 70;
 	int alpha = 150;
+
+
+	ofColor aqua(0, 252, 255, alpha);
+	ofColor purple(198, 0, 205, alpha);
+	// if a channel was passed in, we will interpolate between it and purple
+	bool usingChannelColor;
+	if (channelNum <= 0) {
+		ofColor chanColor = aqua;
+		usingChannelColor = true;
+	}
+	else {
+
+	}
 
 	for (int t = 0; t < numTriangles; ++t) {
 		float offsetDistance = ofRandom(minOffset, maxOffset);
@@ -106,9 +122,16 @@ void CircleOfFifths::drawHaloAroundPoint(ofVec2f point) {
 		p2 += point + triangleOffset;
 		p3 += point + triangleOffset;
 
-		ofColor aqua(0, 252, 255, alpha);
-		ofColor purple(198, 0, 205, alpha);
-		ofColor inbetween = aqua.getLerped(purple, ofRandom(1.0));
+		
+		ofColor inbetween;
+		
+		if (usingChannelColor) {
+
+		}else {
+			inbetween = aqua.getLerped(purple, ofRandom(1.0));
+		}
+
+		
 		ofSetColor(inbetween);
 
 		ofDrawTriangle(p1, p2, p3);

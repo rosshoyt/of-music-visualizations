@@ -12,7 +12,6 @@ public:
     ChannelSettings() = default;
 
     ofxToggle drawCirclesToggle;
-    ofxColorSlider color;
 
     // enum draw_mode { CIRCLES, SQUARES }; //TODO
     //int channelNumber; // TODO ?

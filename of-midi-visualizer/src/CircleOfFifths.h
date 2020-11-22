@@ -16,7 +16,7 @@ public:
 
 private:
     void drawHaloAroundCursor();
-    void drawHaloAroundPoint(ofVec2f point);
+    void drawHaloAroundPoint(ofVec2f point, int channelNum = -1);
 
     int numOctaves = 10;
     int numPitches = 12;
