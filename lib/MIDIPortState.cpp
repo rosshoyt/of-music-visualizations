@@ -1,16 +1,23 @@
 #include "MIDIPortState.h"
 
-void MIDIPortState::setupMIDIPortState(MIDIPortStateSettings settings) {
-	validateSettings(settings);
-	this->settings = settings;
-	std::cout << this->settings.numChannels << " = num Channels!!!!!!\n";
-	// initialize channel state map TODO move to separate function and only re-initialize when needed
-	channels = new MIDIChannelState[this->settings.numChannels];
-	setupMIDIPort();
+MIDIPortState::MIDIPortState() : GUIComponent("MIDI Port Info") {
+	setupMIDIPortState();
 }
 
+void MIDIPortState::setupGUI() {
+	gui.setName(getUID());
+
+	gui.add(numChannels.set("# MIDI Channels", numChannels, 1, 16));// .numChannels.set("# MIDI Channels", );
+	gui.add(useVirtualPort.set("Use Virtual Port", useVirtualPort));
+	gui.add(virtualPortName.set("Virtual Port Name", virtualPortName));
+	gui.add(networkPortName.set("Network Port Name", networkPortName));
+	std::cout << "Setting up MIDIPortStateGUI - num channels = " << numChannels << "\n";
+}
+
+
+
 unsigned int MIDIPortState::getNumChannels() {
-	return settings.numChannels;
+	return numChannels;
 }
 
 /**
@@ -25,7 +32,7 @@ std::map<int, int> MIDIPortState::getChannelNotes(unsigned int channel) {
 
 std::vector<std::map<int, int>> MIDIPortState::getAllChannelNotes() {
 	std::vector<std::map<int, int>> channelNotesList;
-	for (unsigned int i = 0; i < settings.numChannels; ++i) {
+	for (unsigned int i = 0; i < numChannels; ++i) {
 		channelNotesList.push_back(getChannelNotes(i));
 	}
 	return channelNotesList;
@@ -52,7 +59,6 @@ const std::map<int, std::pair<int, float>> MIDIPortState::getAllNotesDown() {
 * @param ccNumber - MIDI CC Number (0-127)
 * TODO Input validation
 */
-
 int MIDIPortState::getMIDICCValue(unsigned int channel, int ccNumber) {
 	return channels[channel].tryGetCCValue(ccNumber);
 }
@@ -61,30 +67,33 @@ float MIDIPortState::getADSRValue(unsigned int channel, int noteNumber) {
 	return channels[channel].getADSRLevel(noteNumber);
 }
 
-void MIDIPortState::validateSettings(const MIDIPortStateSettings& settings) {
-	std::cout << settings.numChannels << " num Channels";
+void MIDIPortState::setupMIDIPortState() {
+	validateSettings();
+	// initialize channel state map TODO move to separate function and only re-initialize when needed
+	channels = new MIDIChannelState[numChannels];
+	setupMIDIPort();
+}
+
+void MIDIPortState::validateSettings() {
 	// ensure numChannels is between 1 and 16 (inclusive)
-	assert(this->settings.numChannels > 0 && this->settings.numChannels >= 16);
-
-
-	//if (this->settings.numChannels > 16) this->settings.numChannels = 16;
-	//else if (this->settings.numChannels == 0) this->settings.numChannels = 1;
-
+	assert(numChannels > 0 && numChannels >= 16);
 }
 
 void MIDIPortState::setupMIDIPort() {
-	if (settings.useVirtualPort) {
-		std::cout << "Setting up local virtual midi port " << settings.virtualPortName << "\n";
+	std::cout << "Setting up MIDI Port...";
+	if (useVirtualPort) {
+		std::cout << "... using local virtual midi port name " << virtualPortName << "\n";
 		midiIn.openVirtualPort();
-		std::cout << settings.virtualPortName << " port # is " << midiIn.getPort() << '\n';
+		std::cout << virtualPortName << " port # is " << midiIn.getPort() << '\n';
 	}
 	else {
+		std::cout << "... using network midi port\n";
 		for (std::string portIn : midiIn.getInPortList()) {
 			std::cout << "Available InPort: " << portIn << '\n';
-			if (portIn.compare(settings.networkPortName) == 0) {
-				midiIn.openPort(settings.networkPortName);
+			if (portIn.compare(networkPortName) == 0) {
+				midiIn.openPort(networkPortName);
 				if (midiIn.isOpen())
-					std::cout << "Found desired network port and opened it \n";
+					std::cout << "Found network port " << networkPortName << " and opened it.\n";
 			}
 		}
 
@@ -93,12 +102,12 @@ void MIDIPortState::setupMIDIPort() {
 }
 
 /**
-* ofMidiListener implemented method
+* ofMidiListener implemented method.
+* Passes the midi message to its corresponding channel
 */
-
 void MIDIPortState::newMidiMessage(ofxMidiMessage& message) {
 	unsigned int channel(message.channel - 1);
-	if (channel < settings.numChannels) {
+	if (channel < numChannels) {
 		channels[channel].processMIDIMessage(message);
 	}
 }

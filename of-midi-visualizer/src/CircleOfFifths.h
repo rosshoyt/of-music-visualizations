@@ -13,6 +13,7 @@ public:
     void setupGUI() override;
     void update();
     void draw();
+
 private:
     void drawHaloAroundCursor();
     void drawHaloAroundPoint(ofVec2f point);

@@ -2,13 +2,9 @@
 #include "ofMain.h"
 #include <iostream>
 #include "GUIComponent.h"
-#include "MIDIPortStateGUI.h"
 /*
-* Class that represents all the GUI components for the application
-* which should be visible to the user during the entire program runtime.
-* Manages the display location of its GUI sub-components.
-* Sub-components are available publically to allow access to their contents
-* Initializes the underlying MIDIPortState upon construction
+* Class that manages GUI component parameters for the OF application
+* Always visible to the user during the program runtime.
 */
 class MainGUI : public GUIComponent {
 public:
@@ -17,10 +13,6 @@ public:
     void setupGUI();
 
     void drawGUI() override;
-
-    void setMenuXY(float x, float y) override;
-
-    float getMenuHeight();
 
     void addToggle(std::string uid, bool startToggled = false);
 
@@ -32,12 +24,10 @@ public:
 
     ofColor getBackgroundColor();
 
-    MIDIPortStateGUI midiPortStateGUI;
 private:
 
     ofxColorSlider backgroundColorSelector;
     ofParameterGroup animationTogglesGroup;
 
     std::map<std::string, ofParameter<bool>> toggles;
-
 };

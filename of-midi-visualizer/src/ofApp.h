@@ -3,7 +3,6 @@
 #include <iostream>
 #include "GUIComponent.h"
 #include "MIDIPortState.h"
-#include "MIDIPortStateGUI.h"
 #include "MainGUI.h"
 #include "NoteGridAnimation.h"
 #include "MIDIAnimationComponent.h"
@@ -28,6 +27,9 @@ class ofApp : public ofBaseApp {
         void windowResized(int w, int h);
 		
 private:
+        // Class which communicates with Ableton via OSC
+        AbletonController abletonController;
+
         // Individual MIDI Animations
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
@@ -35,16 +37,16 @@ private:
         TexturedSphere texturedSphere;
         ADSRVisualizer adsrVisualizer;
         CircleOfFifths circleOfFifths;
-        
-        // All MIDI Animations
+        // List for all MIDI Animations
         std::vector<MIDIAnimationComponent*> animationComponentsList;
 
-        // Individual GUI Components
+        // GUI Components of the main window (always visible)
+        MIDIPortState midiPortState;
         MainGUI mainGUI;
 
-        // All GUI components
-        std::vector<GUIComponent*> guiComponentsList;
-
-        // Class which communicates with Ableton via OSC
-        AbletonController abletonController;
+        // List for always visible GUI components
+        std::vector<GUIComponent*> permanentGUIComponentsList;
+        
+        // List for all GUI components
+        std::vector<GUIComponent*> guiComponentsList;     
 };

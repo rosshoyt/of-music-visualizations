@@ -9,11 +9,16 @@ void ofApp::setup() {
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    // setup the main GUI TODO refactor or document - must be done before setting up MIDIPortState
-    mainGUI.setupGUI();
-    // add main GUI to the gui components list
-    guiComponentsList.push_back(&mainGUI);
-    
+    // add MIDI Port State GUI and Main GUI to the permanent gui components list
+    permanentGUIComponentsList.push_back(&midiPortState);
+    permanentGUIComponentsList.push_back(&mainGUI);
+    // setup all GUI components which are not animations
+    for (auto& guiComponent : permanentGUIComponentsList) {
+        guiComponent->setupGUI();
+        // also add them to the list for all GUI components for updating positions on resize
+        guiComponentsList.push_back(guiComponent);
+    }
+
     // track animation components 
     animationComponentsList.push_back(&noteGridAnimation);
     animationComponentsList.push_back(&animated3DMesh);
@@ -23,7 +28,7 @@ void ofApp::setup() {
 
     // setup animation components
     for (auto& component : animationComponentsList) {
-        component->setMIDIPortState(&mainGUI.midiPortStateGUI.getMIDIPortState());
+        component->setMIDIPortState(&midiPortState);
         component->setup();
         component->setupGUI();
         // add a toggle to turn the animation on and off from the main gui
@@ -54,7 +59,9 @@ void ofApp::draw(){
             animation->drawGUI();
         }
     }
-    mainGUI.drawGUI();
+    for (auto& guiComponent : permanentGUIComponentsList) {
+        guiComponent->drawGUI();
+    }
 }
 
 //--------------------------------------------------------------
