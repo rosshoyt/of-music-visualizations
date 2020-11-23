@@ -20,8 +20,7 @@ void GUIComponent::drawGUI() {
 void GUIComponent::setMenuXY(float x, float y) {
 	menuX = x, menuY = y;
 	gui.setPosition(x, y);
-	std::cout << "set menu position of " << getUID() << " to " << menuX << "," << y << '\n';
-
+	//std::cout << "set menu position of " << getUID() << " to " << menuX << "," << y << '\n';
 }
 
 float GUIComponent::getMenuHeight() {

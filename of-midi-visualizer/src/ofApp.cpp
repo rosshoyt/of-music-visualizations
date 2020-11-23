@@ -85,18 +85,19 @@ void ofApp::windowResized(int w, int h){
     }
 
     // update all GUI panel positions
-    float guiSpacer = 10;
+    float guiSpacer = 10; // TODO move to global variable, create WindowManager
     float x = animationDisplayWidth, y = 0;
     for (auto& component : guiComponentsList) {
+        auto bottomOfNewGUIComponent = y + component->getMenuHeight();
         // check if we are going to position GUI off-screen
-        if (y >= HEIGHT) {
+        if (bottomOfNewGUIComponent > HEIGHT) {
             // TODO refactor the positioning of the GUI components
             y = 0; // reset Y
             x += OFXGUI_DEF_WIDTH; // shift right to the next column 
+            // TODO ensure doesn't paint gui menu in off-screen columns
         }
         component->setMenuXY(x, y);
-        auto guiCompHeight = component->getMenuHeight() + guiSpacer;
-        y += guiCompHeight; 
+        y += component->getMenuHeight() + guiSpacer; 
     }
 }
 

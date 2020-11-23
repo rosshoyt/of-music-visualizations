@@ -23,7 +23,6 @@ public:
 
 	float getMenuWidth();
 
-	//void setMenuHeight(float height);
 	void setDefaultMenuWidth(float width);
 protected:
 	ofxPanel gui;
