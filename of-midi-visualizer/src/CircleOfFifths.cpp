@@ -11,12 +11,11 @@ void CircleOfFifths::setup() {}
 //--------------------------------------------------------------
 void CircleOfFifths::setupGUI() {
 	gui.add(drawOctavesToggle.set("Draw Octaves", true));
-	gui.add(drawChromaticModeToggle.set("Draw Chromatic Circle", false));
 	gui.add(noteCircleSizeSlider.set("Note Circle Size", 1.0, .001, 10));
 	gui.add(octaveSizeMultiplierSlider.set("Octave Size Multiplier", 1, 0.1, 10));
-	gui.add(noteMultiplierToggle.set("Note Multiplier ", 7, 1, 12));
+	gui.add(noteMultiplierSlider.set("Note Multiplier", 7, 1, 12));
+	gui.add(pitchOffsetSlider.set("Pitch Offset", 0, 0, 11));
 	gui.add(drawHaloOnNotesToggle.set("Draw Halo on Notes", false));
-	gui.add(noteColorSlider.setup("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
 	
 }
 
@@ -37,12 +36,11 @@ void CircleOfFifths::draw() {
 		for (auto noteVel : channel) {
 			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
 			
-			int pitchPosition = octavePitch.second;
+			int pitchPosition = octavePitch.second; //(octavePitch.second + pitchOffsetSlider) % 12;
 
-			if(!drawChromaticModeToggle) {
-				// convert chromatic pitch to circle of fifths
-				pitchPosition = pitchPosition * noteMultiplierToggle % numPitches;
-			}
+			// convert chromatic pitch to circle of fifths
+			pitchPosition = (pitchPosition * noteMultiplierSlider + pitchOffsetSlider) % numPitches;
+			
 
 			float circleSize = 40 * noteVel.second / 127.f * noteCircleSizeSlider;
 
@@ -51,8 +49,10 @@ void CircleOfFifths::draw() {
 			// TODO base this on smaller of height or width
 			float radius = animationHeight / 2.f / numOctaves * octaveSizeMultiplierSlider;
 			
-			if (drawOctavesToggle) radius *= octavePitch.first + 1;
-			else radius *= numOctaves / 2;
+			if (drawOctavesToggle) 
+				radius *= octavePitch.first + 1;
+			else 
+				radius *= numOctaves / 2;
 			
 			auto point = centerPos + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
 

@@ -77,13 +77,62 @@
 	<Draw_All_Animations>0</Draw_All_Animations>
 </group>
 <MIDI_Port_Info>
-	<__MIDI_Channels>12</__MIDI_Channels>
+	<__MIDI_Channels>16</__MIDI_Channels>
 	<Use_Virtual_Port>0</Use_Virtual_Port>
 	<Virtual_Port_Name>ofxMidiIn Input</Virtual_Port_Name>
 	<Network_Port_Name>Network Session 1</Network_Port_Name>
+	<Channel_1_Settings>
+		<UnknownName>237, 197, 161, 255</UnknownName>
+	</Channel_1_Settings>
+	<Channel_2_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_2_Settings>
+	<Channel_3_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_3_Settings>
+	<Channel_4_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_4_Settings>
+	<Channel_5_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_5_Settings>
+	<Channel_6_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_6_Settings>
+	<Channel_7_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_7_Settings>
+	<Channel_8_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_8_Settings>
+	<Channel_9_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_9_Settings>
+	<Channel_10_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_10_Settings>
+	<Channel_11_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_11_Settings>
+	<Channel_12_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_12_Settings>
+	<Channel_13_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_13_Settings>
+	<Channel_14_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_14_Settings>
+	<Channel_15_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_15_Settings>
+	<Channel_16_Settings>
+		<UnknownName>100, 149, 237, 255</UnknownName>
+	</Channel_16_Settings>
+	<UnknownName>h# Note Off </UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
-	<Background_Color>4, 8, 0, 255</Background_Color>
+	<Background_Color>20, 0, 15, 255</Background_Color>
 	<Animation_Toggles>
 		<Show_2D_Note_Grid>0</Show_2D_Note_Grid>
 		<Show_3D_Mesh>0</Show_3D_Mesh>
@@ -95,9 +144,9 @@
 <Circle_of_Fifths>
 	<Draw_Octaves>1</Draw_Octaves>
 	<Draw_Chromatic_Circle>0</Draw_Chromatic_Circle>
-	<Note_Circle_Size>3.15068</Note_Circle_Size>
-	<Octave_Row_Color>158, 200, 112, 255</Octave_Row_Color>
-	<Octave_Size_Multiplier>1.09</Octave_Size_Multiplier>
-	<Note_Multiplier_>7</Note_Multiplier_>
+	<Note_Circle_Size>5.80042</Note_Circle_Size>
+	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
+	<Octave_Size_Multiplier>0.694</Octave_Size_Multiplier>
+	<Note_Multiplier_>1</Note_Multiplier_>
 	<Draw_Halo_on_Notes>0</Draw_Halo_on_Notes>
 </Circle_of_Fifths>

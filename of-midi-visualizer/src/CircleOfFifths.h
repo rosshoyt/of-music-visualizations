@@ -24,14 +24,11 @@ private:
     int alpha = 150;    
     
     ofParameter<bool> drawOctavesToggle;
-    ofParameter<bool> drawChromaticModeToggle;
-    ofParameter<bool> drawHaloOnNotesToggle;
-    ofParameter<int> noteMultiplierToggle;
     ofParameter<float> noteCircleSizeSlider;
     ofParameter<float> octaveSizeMultiplierSlider;
-    ofxColorSlider noteColorSlider;
-    //ofParameter<ofColor> noteColor;
+    ofParameter<int> noteMultiplierSlider;
     ofParameter<int> pitchOffsetSlider;
+    ofParameter<bool> drawHaloOnNotesToggle;
 
     // TODO create class to manage a GUI toggle for enum values (stepped slider)
     struct Toggle {
