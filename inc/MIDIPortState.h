@@ -13,13 +13,6 @@
 #include "GUIComponent.h"
 #include <assert.h>
 
-// TODO Implement -
-//struct MIDIChannelSettings {
-//    unsigned int channelNumber = 0;
-//    ofxColorSlider color;
-//   
-//};
-
 class Settings {
 public:
     ofParameter<ofColor> color;
@@ -57,6 +50,7 @@ public:
    
     // TODO allow user to change from virtual port to network port
     // void setUseVirtualPort(bool useVirtualPort){ }
+
     unsigned int getNumChannels();
 
     /**
@@ -88,14 +82,19 @@ private:
     ofxMidiIn midiIn;
 
     // GUI parameters
-
     // flag set to true if using local MIDI port, false if using network MIDI port
     ofParameter<bool> useVirtualPort = false;
     // names of local and network MIDI ports
     ofParameter<std::string> networkPortName = "Network Session 1", virtualPortName = "ofxMidiIn Input";
-
     // How many midi channels to listen to on the port (1 - 16)
     ofParameter<unsigned int> numChannels = 16;
+    // Display field for the most recent midi message
+    ofParameter<std::string> midiMessageMonitor = "No MIDI Messages Detected";
+
+    //GUIReadOnlyParam<std::string> midiMessageMonitor;// = "No MIDI Messages Detected";
+
+    // List of all per-channel settings
+    std::vector<Settings*> perChannelSettings;
 
     // bool initialized; // TODO assert that MIDI port state is initialized in each method
     
@@ -114,9 +113,7 @@ private:
      */
     void newMidiMessage(ofxMidiMessage& message);
 
-    // List of all per-channel settings
-    std::vector<Settings*> perChannelSettings;
-
+    void updateMIDIMessageMonitor(ofxMidiMessage& message);
     
     
 };

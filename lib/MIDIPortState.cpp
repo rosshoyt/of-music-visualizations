@@ -12,6 +12,7 @@ void MIDIPortState::setupGUI() {
 	gui.add(useVirtualPort.set("Use Virtual Port", useVirtualPort));
 	gui.add(virtualPortName.set("Virtual Port Name", virtualPortName));
 	gui.add(networkPortName.set("Network Port Name", networkPortName));
+	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
 	for (int i = 0; i < numChannels; i++) {
 		Settings* settings = new Settings(i);
@@ -106,11 +107,50 @@ void MIDIPortState::setupMIDIPort() {
 
 /**
 * ofMidiListener implemented method.
-* Passes the midi message to its corresponding channel
+* Passes the midi message to its corresponding channel.
+* Converts Channel Number from 1-16 (inclusive) to 0-15 (inclusive)
 */
 void MIDIPortState::newMidiMessage(ofxMidiMessage& message) {
+	updateMIDIMessageMonitor(message);
 	unsigned int channel(message.channel - 1);
 	if (channel < numChannels) {
 		channels[channel].processMIDIMessage(message);
 	}
+}
+
+void MIDIPortState::updateMIDIMessageMonitor(ofxMidiMessage& message) {
+	int descriptionMsgSize = 22;
+	std::string text, value;
+	text.append("Ch#" + std::to_string(message.channel) + " ");
+	// TODO refactor
+	switch (message.status) {
+	case MIDI_NOTE_ON:
+		
+		text.append("Note On");
+		value = std::to_string(message.pitch);
+		break;
+	case MIDI_NOTE_OFF:
+		text.append("Note Off");
+		value = std::to_string(message.pitch);
+		break;
+	case MIDI_CONTROL_CHANGE:
+		text.append("CC#" + std::to_string(message.control));
+		value = std::to_string(message.value);
+	default:
+		;
+	}
+	text.resize(descriptionMsgSize - value.size(), ' ');
+	text.append(value);
+	
+	midiMessageMonitor = text;
+	//midiMessageMonitor += " " + message.
+	//bool addValue = true;
+	/*switch (message.status) {
+	case MIDI_NOTE_ON:
+		break;
+	case MIDI_NOTE_OFF:
+		break;
+	case: MIDI_
+
+	}*/
 }
