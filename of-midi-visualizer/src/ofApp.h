@@ -44,7 +44,7 @@ private:
         MIDIPortState midiPortState;
         MainGUI mainGUI;
 
-        // List for always visible GUI components
+        // List for always-visible GUI components
         std::vector<GUIComponent*> permanentGUIComponentsList;
         
         // List for all GUI components

@@ -132,7 +132,7 @@
 	<UnknownName>h# Note Off </UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
-	<Background_Color>20, 0, 15, 255</Background_Color>
+	<Background_Color>9, 0, 20, 255</Background_Color>
 	<Animation_Toggles>
 		<Show_2D_Note_Grid>0</Show_2D_Note_Grid>
 		<Show_3D_Mesh>0</Show_3D_Mesh>
@@ -150,3 +150,20 @@
 	<Note_Multiplier_>1</Note_Multiplier_>
 	<Draw_Halo_on_Notes>0</Draw_Halo_on_Notes>
 </Circle_of_Fifths>
+<ADSR_Visualizer>
+	<Spline_Intensity>0.23643</Spline_Intensity>
+	<x1>-0.333</x1>
+	<y1>-0.333</y1>
+	<x2>0</x2>
+	<y2>0</y2>
+	<x3>0.333</x3>
+	<y3>0.333</y3>
+	<x4>0.666</x4>
+	<y4>0.666</y4>
+	<x5>1</x5>
+	<y5>1</y5>
+	<x6>1.333</x6>
+	<y6>1.333</y6>
+	<color_speed_ms>300</color_speed_ms>
+	<circle_size>30.5695</circle_size>
+</ADSR_Visualizer>

@@ -7,6 +7,7 @@
 #include <map>
 #include <algorithm>
 #include "ofxGui.h"
+#include "ADSR.h"
 
 
 class ADSRVisualizer : public MIDIAnimationComponent {
@@ -30,7 +31,15 @@ private:
 	// private mehotds
 	bool shouldChange();
 
+	void drawADSRTest();
+
 	// private fields
+	NoteADSRState testADSR;
+
+	//ofParameter<bool> testADSRToggle;
+	ofParameter<float> splineIntensitySlider;
+
+	
 	tk::spline splineAttack, splineDecay, splineRelease; // TODO unique spline for each ADSR segment
 
 	int numPoints = 128;
@@ -41,8 +50,12 @@ private:
 	const double maxF = 2.f;
 
 	std::vector<ofParameter<double>> splineControlX, splineControlY;
-	std::vector<double> scXDefaults{ -.5f, 0.f, .333f, .5f,.666f, 1.f,  1.5f };
-	std::vector<double> scYDefaults{ 0.f,  0.f, .25f, .5f, .75f, 1.f, 1.f };
+	std::vector<double> scXDefaults 
+		//{ 0, .333, .666, 1 };
+		{ -.333f, 0.f, .333f, .666f, 1.f, 1.333f };//,  1.5f };
+	std::vector<double> scYDefaults 
+		//{ 0, .333, .666, 1 }; 
+		{ -.333f, 0.f, .333f, .666f, 1.f, 1.333f };//,  1.f };
 
 	uint64_t colorTimeMS = 100; // in ms
 	uint64_t lastColorChange = 0;
@@ -52,6 +65,8 @@ private:
 	// display params
 	ofParameter<double> circleSize;
 	ofParameter<int> changeSpeed;
+
+
 	int minYToChange = 1, maxYToChange = scYDefaults.size() - 2, currentYToChange = minYToChange;
 
 

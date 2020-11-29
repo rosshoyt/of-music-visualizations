@@ -13,6 +13,8 @@ void ADSRVisualizer::setup() {
 
 //--------------------------------------------------------------
 void ADSRVisualizer::setupGUI() {		
+	//gui.add(testADSRToggle.set("Test ADSR", false));
+	gui.add(splineIntensitySlider.set("Spline Intensity", 0, -.3, .3));
 	for (int i = 0; i < scXDefaults.size(); ++i) {
 		auto pNumber = std::to_string(i + 1);
 		splineControlX.push_back(ofParameter<double>().set("x" + pNumber, scXDefaults[i], minF, maxF));
@@ -75,11 +77,38 @@ void ADSRVisualizer::draw() {
 
 	}
 
+
+	int numExternalControlPointsPerSide = 1; // TODO rename - the points beyond the visible ADSR segment on each side
+	int numImmovablePointsPerSide = 1; // TODO rename - the points that can't be moved from where they are (start and end of visible ADSR segment)
+	int nonRegularPointsBuffer = numExternalControlPointsPerSide + numImmovablePointsPerSide;
 	auto size = splineControlX.size();
 	for (auto i = 0; i < size; i++) {
 		//if(i < size - 1)
-		xTemps.push_back(splineControlX[i]);
-		yTemps.push_back(i == currentYToChange && numNotes > 0 ? splineControlY[i] * maxVel / 128.f : splineControlY[i]);
+		auto xVal = splineControlX[i];
+		xTemps.push_back(xVal);
+
+		//if(xVal < 0)
+		auto yVal = splineControlY[i].get();
+
+		// TODO validation for when there aren't any external control poitns
+		if (i < numExternalControlPointsPerSide) {
+			yVal -= splineIntensitySlider;
+		}
+		else if (i < nonRegularPointsBuffer || i == size - nonRegularPointsBuffer) {
+
+		}
+		else if (i >= size - 1 - numExternalControlPointsPerSide) {
+			yVal -= splineIntensitySlider;
+		}
+		else {
+			yVal += splineIntensitySlider;
+		}/*
+		else if (i >= nonRegularPointsBuffer || i < size - nonRegularPointsBuffer || i == size - 1) {
+			yVal += splineIntensitySlider;
+		}*/
+
+		yTemps.push_back(yVal);
+		//yTemps.push_back(i == currentYToChange && numNotes > 0 ? splineControlY[i] * maxVel / 128.f : splineControlY[i]);
 	}
 
 	//std::sort(xTemps.begin(), xTemps.end());//, sortDouble);
@@ -107,4 +136,9 @@ void ADSRVisualizer::draw() {
 
 		//std::cout << "Height Scale = " << heightScale << " for x = " << i << '\n';
 	}
+
+}
+
+void ADSRVisualizer::drawADSRTest() {
+
 }

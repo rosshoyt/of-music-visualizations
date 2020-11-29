@@ -47,12 +47,14 @@ private:
 class NoteADSRState {
 public:
 
-    NoteADSRState(ADSR adsr, bool splineCurve = true, double splineControlY = .25f);
+    NoteADSRState(ADSR adsr = ADSR(), bool splineCurve = true, double splineControlY = .25f);
 
     void start();
     void stop();
 
     float getLevel();
+
+    long getLength();
 
     void setADSR(ADSR adsr);
 

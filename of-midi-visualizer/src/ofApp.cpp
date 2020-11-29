@@ -24,7 +24,7 @@ void ofApp::setup() {
     animationComponentsList.push_back(&animated3DMesh);
     animationComponentsList.push_back(&adsrVisualizer);
     animationComponentsList.push_back(&circleOfFifths);
-    animationComponentsList.push_back(&meshFromImage);
+    //animationComponentsList.push_back(&meshFromImage);
 
     // setup animation components
     for (auto& component : animationComponentsList) {
@@ -39,7 +39,7 @@ void ofApp::setup() {
     // initialize the animation toggles in the main gui
     mainGUI.initToggles();
     // set an animation to start with
-    mainGUI.setToggleState(circleOfFifths.getUID(), true);
+    mainGUI.setToggleState(adsrVisualizer.getUID(), true);
 }
 
 //--------------------------------------------------------------

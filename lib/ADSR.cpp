@@ -120,3 +120,7 @@ float NoteADSRState::getLevel(long elapsed, bool spline) {
 
 	return utils::math::lerp(startLevel, endLevel, float(segmentCompleted) / float(segmentTimeLength));
 }
+
+long NoteADSRState::getLength() {
+	return adsr.total;
+}
