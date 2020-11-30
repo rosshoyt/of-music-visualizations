@@ -162,6 +162,7 @@
     <ClCompile Include="src\MainGUI.cpp">
       <Filter>src\animation-components</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\Envelope.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -497,6 +498,7 @@
     <ClInclude Include="src\MainGUI.h">
       <Filter>src\animation-components</Filter>
     </ClInclude>
+    <ClInclude Include="..\inc\Envelope.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -189,6 +189,7 @@
     <ClCompile Include="..\lib\AbletonController.cpp" />
     <ClCompile Include="..\lib\ADSR.cpp" />
     <ClCompile Include="..\lib\AnimationComponent.cpp" />
+    <ClCompile Include="..\lib\Envelope.cpp" />
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\MIDIChannelState.cpp" />
     <ClCompile Include="..\lib\MIDIPortState.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="..\inc\AbletonController.h" />
     <ClInclude Include="..\inc\ADSR.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
+    <ClInclude Include="..\inc\Envelope.h" />
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />

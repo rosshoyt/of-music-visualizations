@@ -1,10 +1,16 @@
 #include "ADSRVisualizer.h"
 
 //--------------------------------------------------------------
-ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid), attackSegment(EnvelopeSegmentType::ATTACK, 0, 1, 1, 0.25) {}
+ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
 
 //--------------------------------------------------------------
 void ADSRVisualizer::setup() {
+	EnvelopeSettings envelopeSettings;
+	envelopeSettings.envelopeType = ADR;
+	envelopeSettings.envSegmentLengths = { 200, 1600, 200 };
+	envelopeSettings.envSegmentLevels  = { 0,      1,  .5 };
+	envelope = new Envelope(envelopeSettings);
+	
 	//setup Colors
 	for (int i = 0; i < 32; i++) {
 		colors.push_back(utils::color::getRandomColor());
@@ -13,7 +19,8 @@ void ADSRVisualizer::setup() {
 
 //--------------------------------------------------------------
 void ADSRVisualizer::setupGUI() {		
-	gui.add(attackSegment.splineIntensitySlider);
+	//gui.add(attackSegment.splineIntensitySlider);
+	gui.add(envelope->guiParams);
 	//gui.add(splineIntensitySlider.set("Spline Intensity", 0, -.3, .3));
 	/*for (int i = 0; i < scXDefaults.size(); ++i) {
 		auto pNumber = std::to_string(i + 1);
@@ -74,11 +81,12 @@ void ADSRVisualizer::draw() {
 	for (int i = 0; i < numPoints; ++i) {
 
 		double xF = float(i) / numPoints;
-		float heightScale = attackSegment.getLevel(xF);
-		//std::cout << "Height scale = " << heightScale << '\n';
-
+		float heightScale = envelope->getLevel(xF * envelope->getLength());
+		
 		auto circleX = animationWidth * xF;
-		auto circleY = animationHeight - animationHeight * heightScale;
+		auto circleY = animationHeight - animationHeight * heightScale ;
+		//std::cout << "X: " << circleX << " Y:"<< circleY << " xF = " << xF << " Level =" << heightScale << '\n';
+
 		ofDrawCircle({ circleX , circleY }, circleSize);
 
 		//std::cout << "Height Scale = " << heightScale << " for x = " << i << '\n';
