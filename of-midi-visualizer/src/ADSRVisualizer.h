@@ -28,9 +28,17 @@ public:
 
 private:
 	
-	Envelope* envelope;
+	Envelope* envelopeADR;
+	Envelope* envelopeADSR;
+	EnvelopeNode* envelopeADSRNode;
+
+	// note test params
+	uint64_t lastNoteOn = 0;
+	uint64_t lastNoteRelease = 0;
+
+
 	// display params
-	uint64_t colorTimeMS = 100; // in ms
+	//uint64_t colorTimeMS = 100; // in ms
 	uint64_t lastColorChange = 0;
 
 	int numPoints = 128;
@@ -38,11 +46,13 @@ private:
 	std::vector<ofColor> colors;
 	ofColor currentColor;
 
+	ofParameter<bool> showADRToggle;
 	ofParameter<double> circleSize;
 	ofParameter<int> changeSpeed;
+	ofParameter<int> adsrTestNoteSpeed;
 	//int minYToChange = 1, maxYToChange = scYDefaults.size() - 2, currentYToChange = minYToChange;
 	
 	// private methods
-	bool shouldChange();
+	void updateTimeBasedParams(uint64_t nowMS);
 
 };

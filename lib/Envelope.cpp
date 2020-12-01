@@ -10,19 +10,14 @@ EnvelopeSegment::EnvelopeSegment(EnvelopeSegmentSettings settings) : settings(se
 	init();
 }
 
-float EnvelopeSegment::getLevel(double xVal) {
+float EnvelopeSegment::getLevel(double timeSinceNoteStart) {
 
-	std::vector<double> xTemps(splineControlX), yTemps(splineControlY);
-
-	yTemps[0] -= splineIntensitySlider;
-	yTemps[2] += splineIntensitySlider;
-	yTemps[3] += splineIntensitySlider;
-	yTemps[5] -= splineIntensitySlider;
+	std::vector<double> xTemps(splineControlX), yTemps = getSplineYControlsWithIntensity();
 
 	tk::spline spline;
 	spline.set_points(xTemps, yTemps);
 
-	return spline(xVal);
+	return spline(timeSinceNoteStart);
 }
 
 double EnvelopeSegment::getLength() {
@@ -45,7 +40,9 @@ void EnvelopeSegment::init() {
 	for (int i = 0; i < 6; ++i, xVal += xStepSize, yVal += yStepSize) {
 		splineControlY.push_back(yVal);
 		splineControlX.push_back(xVal);
-		std::cout << "Xval = "<< xVal << " Yval = " << yVal << '\n';
+		splineControlXRelative.push_back(xVal - settings.start);
+		std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
+		
 	}
 	
 	// setup intensity slider
@@ -65,20 +62,76 @@ EnvelopeType Envelope::getEnvelopeType() {
 	return envelopeSettings.envelopeType;
 }
 
-float Envelope::getLevel(double time) {
-	int counter = 0;
-	for (auto& segment : envelopeSegments) {
-		if (segment->containsTime(time)) {
-			//std::cout << "Getting Level from segment # " << counter + 1 << '\n';
-			return segment->getLevel(time);
+float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
+	//int counter = 0;
+	float level = 0;
+	
+	
+	
+	if (envelopeSettings.envelopeType == ADR) {
+		if (timeSinceNoteStart < totalLength) {
+			for (auto& segment : envelopeSegments) {
+				if (segment->containsTime(timeSinceNoteStart)) {
+					//std::cout << "Getting Level from segment # " << counter + 1 << '\n';
+					level = segment->getLevel(timeSinceNoteStart);
+				}
+				//++counter;
+			}
 		}
-		++counter;
 	}
-	return 0;
+	else { // ADSR
+		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
+		std::cout << "Evauluating ADSR with TimeSinceNoteStart = " << timeSinceNoteStart << ", TimeSinceNoteOFF = " << timeSinceNoteOff << " Sustained: " << std::boolalpha << sustained << '\n';
+
+
+		// Check Attack
+		if (envelopeSegments[0]->containsTime(timeSinceNoteStart))
+			level = envelopeSegments[0]->getLevel(timeSinceNoteStart);
+		// Check Decay
+		else if (envelopeSegments[1]->containsTime(timeSinceNoteStart))
+			level = envelopeSegments[1]->getLevel(timeSinceNoteStart);
+		// Note is either sustained, in the Release segment, or finished
+		else if (sustained) { 
+			// note is Sustaining - value to return is start level of release curve
+			level = envelopeSegments[2]->getStartingLevel();
+		}
+		else { //if (envelopeSegments[2]->containsTime(timeSinceNoteStart)) { 
+			// note is Releasing
+			
+			//level = envelopeSegments[2]->getLevel(timeSinceNoteStart);
+			level = envelopeSegments[2]->getLevelForRelativeTime(timeSinceNoteOff);
+		}
+
+
+		   //for (int i = 0; i < envelopeSegments.size(); ++i) {
+		//	//if()
+
+
+
+
+		//	if (i < 2 && envelopeSegments[i]->containsTime(timeSinceNoteStart)) {
+		//		
+		//		level = envelopeSegments[i]->getLevel(timeSinceNoteStart);
+		//		//std::cout << "Found level in Attack/Decay" << 
+		//	}
+		//	else {
+		//		if (sustained) {
+		//			level = envelopeSegments[i]->getStartingLevel();
+		//		}
+		//		else if (envelopeSegments[i]->containsTime(timeSinceNoteStart)) {
+		//			level = envelopeSegments[i]->getLevel(timeSinceNoteStart);
+		//		}
+		//	}
+
+		//}
+		   		//	level = envelopeSegments
+	}
+	return level;
 }
 
-float Envelope::getLevel(long time) {
-	return getLevel(double(time));
+// TODO Refactor (could cause feedback loop if casting doesn't go correctly
+float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
+	return getLevel(double(timeSinceNoteStart), double(timeSinceNoteOff));
 }
 
 double Envelope::getLength() {
@@ -86,26 +139,26 @@ double Envelope::getLength() {
 }
 
 void Envelope::init() {
-	// initialize the segments of the envelope
+	// initialize the segments of the envelopeADR
 	totalLength = 0;
 	int size = envelopeSettings.envSegmentLengths.size();
 	for (int i = 0; i < size; ++i) {
 		// TODO refactor - Envelope Settings could generate a list of EnvelopeSegmentSettings on init()
 		// Create the segment settings
 		EnvelopeSegmentSettings segmentSettings;
-		// Set the start time of the envelope - how much time has passed to this point
+		// Set the start time of the envelopeADR - how much time has passed to this point
 		segmentSettings.start = totalLength; 
-		// Set the end time of the envelope
+		// Set the end time of the envelopeADR
 		segmentSettings.end = totalLength + envelopeSettings.envSegmentLengths[i];
 		
-		// Set the level the envelope should start at
+		// Set the level the envelopeADR should start at
 		segmentSettings.startLevel = envelopeSettings.envSegmentLevels[i];
 		// Set the end level
 		if (i < size - 1) {
 			//nextLength = envelopeSettings.envSegmentLengths[i+1];
 			segmentSettings.endLevel = envelopeSettings.envSegmentLevels[i+1];
 		}
-		else { // Release envelope, so set end level to 0
+		else { // Release envelopeADR, so set end level to 0
 			segmentSettings.endLevel = 0;
 		}
 

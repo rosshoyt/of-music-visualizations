@@ -5,12 +5,21 @@ ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
 
 //--------------------------------------------------------------
 void ADSRVisualizer::setup() {
-	EnvelopeSettings envelopeSettings;
-	envelopeSettings.envelopeType = ADR;
-	envelopeSettings.envSegmentLengths = { 200, 1600, 200 };
-	envelopeSettings.envSegmentLevels  = { 0,      1,  .5 };
-	envelope = new Envelope(envelopeSettings);
+	// Create ADR envelope
+	EnvelopeSettings envelopeSettingsADR;
+	envelopeSettingsADR.envelopeType = ADR;
+	envelopeSettingsADR.envSegmentLengths = { 400, 1400, 400 };
+	envelopeSettingsADR.envSegmentLevels  = { 0,      1,  .5 };
+	envelopeADR = new Envelope(envelopeSettingsADR);
 	
+	// Create ADSR envelope
+	EnvelopeSettings envelopeSettingsADSR(envelopeSettingsADR);
+	envelopeSettingsADSR.envelopeType = ADSR;
+	envelopeADSR = new Envelope(envelopeSettingsADSR);
+	// Setup ADSR Envelope Node
+	envelopeADSRNode = new EnvelopeNode(envelopeADSR);
+
+
 	//setup Colors
 	for (int i = 0; i < 32; i++) {
 		colors.push_back(utils::color::getRandomColor());
@@ -20,7 +29,13 @@ void ADSRVisualizer::setup() {
 //--------------------------------------------------------------
 void ADSRVisualizer::setupGUI() {		
 	//gui.add(attackSegment.splineIntensitySlider);
-	gui.add(envelope->guiParams);
+	gui.add(showADRToggle.set("Show ADR", false));
+	gui.add(adsrTestNoteSpeed.set("Test Note Length MS", 4000, 1, 20000));
+	envelopeADSR->guiParams.setName("ADSR Params");
+	envelopeADR->guiParams.setName("ADR Params");
+	gui.add(envelopeADSR->guiParams);
+	gui.add(envelopeADR->guiParams);
+	
 	//gui.add(splineIntensitySlider.set("Spline Intensity", 0, -.3, .3));
 	/*for (int i = 0; i < scXDefaults.size(); ++i) {
 		auto pNumber = std::to_string(i + 1);
@@ -45,51 +60,62 @@ void ADSRVisualizer::takedown() {}
 void ADSRVisualizer::update() {}
 
 //--------------------------------------------------------------
-bool ADSRVisualizer::shouldChange() {
-	//update color
-	auto nowMS = ofGetSystemTimeMillis();
-	if (nowMS > lastColorChange + changeSpeed) {
-		lastColorChange = nowMS;
-		return true;
-	}
-	return false;
-}
-
-//--------------------------------------------------------------
 void ADSRVisualizer::draw() {
-	/*int maxVel = 0;
-	int numNotes = 0;
-	for (auto channel : midiPortState->getAllChannelNotes()) {
-		for (auto note : channel) {
-			maxVel = std::max(note.second, maxVel);
-			++numNotes;
-		}
-	}*/
+	auto timeNowMS = ofGetSystemTimeMillis();
+	updateTimeBasedParams(timeNowMS);
 
-	//update time-based params
-	if (shouldChange()) {
-		ofSetColor(utils::color::getRandomColor()); //colors[i % colors.size()]);
-		// update which y val to augment
-		/*if (currentYToChange > maxYToChange) {
-			currentYToChange = minYToChange;
-		}
-		else {
-			++currentYToChange;
-		}*/
+	float heightScale, circleX, circleY;
+
+	if (!showADRToggle) {
+		// Draw the ADSR visualizer as a horizontal line, 
+		// so we'll get the level now instead of per-point
+		heightScale = envelopeADSRNode->getLevel(timeNowMS);
 	}
 
 	for (int i = 0; i < numPoints; ++i) {
 
 		double xF = float(i) / numPoints;
-		float heightScale = envelope->getLevel(xF * envelope->getLength());
+		circleX = animationWidth * xF;
+
+		if (showADRToggle) { //Draw the ADR visualizer, so get a height value for current point
+			heightScale = envelopeADR->getLevel(xF * envelopeADR->getLength(), true);
+		}
 		
-		auto circleX = animationWidth * xF;
-		auto circleY = animationHeight - animationHeight * heightScale ;
-		//std::cout << "X: " << circleX << " Y:"<< circleY << " xF = " << xF << " Level =" << heightScale << '\n';
-
+		circleY = animationHeight - animationHeight * heightScale;
 		ofDrawCircle({ circleX , circleY }, circleSize);
-
-		//std::cout << "Height Scale = " << heightScale << " for x = " << i << '\n';
 	}
 
+	// debug TODO delete
+	if (!showADRToggle) {
+		std::cout << "ADSR Y = "<< circleY << ", Height Scale (Level) = " << heightScale << '\n';
+
+	}
+}
+
+//--------------------------------------------------------------
+void ADSRVisualizer::updateTimeBasedParams(uint64_t nowMS) {
+	//auto nowMS = ofGetSystemTimeMillis();
+	// update the ADSR Node (simulating note being played to test ADSR)
+	double totalEnvLen = adsrTestNoteSpeed + envelopeADSR->getReleaseLength();
+
+	// TODO refactor - use EnvelopeNode's getLastStart(), getLastStop()
+	if (nowMS > lastNoteOn + totalEnvLen) { //Note needs to start
+		lastNoteOn = nowMS;
+		envelopeADSRNode->start();
+	}
+	else if (nowMS > lastNoteOn + adsrTestNoteSpeed && lastNoteOn > lastNoteRelease) { //Note needs to release
+		lastNoteRelease = nowMS;
+		envelopeADSRNode->stop();
+	}
+	
+	
+	//update color
+	if (nowMS > lastColorChange + changeSpeed) {
+		lastColorChange = nowMS;
+		ofSetColor(utils::color::getRandomColor());
+	}
+
+
+
+	
 }
