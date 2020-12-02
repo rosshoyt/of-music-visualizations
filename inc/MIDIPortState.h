@@ -85,11 +85,11 @@ private:
     // flag set to true if using local MIDI port, false if using network MIDI port
     ofParameter<bool> useVirtualPort = false;
     // names of local and network MIDI ports
-    ofParameter<std::string> networkPortName = "Network Session 1", virtualPortName = "ofxMidiIn Input";
+    ofParameter<std::string> networkPortName = std::string("Network Session 1"), virtualPortName = std::string("ofxMidiIn Input");
     // How many midi channels to listen to on the port (1 - 16)
     ofParameter<unsigned int> numChannels = 16;
     // Display field for the most recent midi message
-    ofParameter<std::string> midiMessageMonitor = "No MIDI Messages Detected";
+    ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");
 
     //GUIReadOnlyParam<std::string> midiMessageMonitor;// = "No MIDI Messages Detected";
 
