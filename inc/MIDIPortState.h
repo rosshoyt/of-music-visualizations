@@ -88,6 +88,9 @@ private:
     ofParameter<std::string> networkPortName = std::string("Network Session 1"), virtualPortName = std::string("ofxMidiIn Input");
     // How many midi channels to listen to on the port (1 - 16)
     ofParameter<unsigned int> numChannels = 16;
+    
+    ofxButton resetMidiPortButton;
+    
     // Display field for the most recent midi message
     ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");
 

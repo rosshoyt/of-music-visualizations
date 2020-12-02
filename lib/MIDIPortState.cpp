@@ -12,8 +12,12 @@ void MIDIPortState::setupGUI() {
 	gui.add(useVirtualPort.set("Use Virtual Port", useVirtualPort));
 	gui.add(virtualPortName.set("Virtual Port Name", virtualPortName));
 	gui.add(networkPortName.set("Network Port Name", networkPortName));
+    gui.add(resetMidiPortButton.setup("Reset MIDI Port"));
 	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
+    resetMidiPortButton.addListener(this, &MIDIPortState::setupMIDIPort);
+    
+    
 	for (int i = 0; i < numChannels; i++) {
 		Settings* settings = new Settings(i);
 		gui.add(settings->params);
