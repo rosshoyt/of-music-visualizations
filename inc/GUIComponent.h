@@ -3,6 +3,13 @@
 #include "ofxGui.h"
 #include "UID.h"
 
+class GUIComponent;
+
+template<typename ParameterType>
+class GUIReadOnlyParam : public ofReadOnlyParameter<ParameterType, GUIComponent> {
+	friend class GUIComponent;
+};
+
 class GUIComponent : public UID {
 public:
 	GUIComponent(std::string uid);
