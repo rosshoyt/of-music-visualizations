@@ -120,9 +120,9 @@ enum EnvelopeType { ADR, ADSR };
 
 class EnvelopeSettings {
 public:
-	std::vector<double> envSegmentLengths = { 30, 1000, 500 };
+	std::vector<double> envSegmentLengths = { 30, 2000, 1000 };
 	std::vector<double> envSegmentLevels  = { 0.f, 1.f, .25 };
-	EnvelopeType envelopeType = EnvelopeType::ADR;
+	EnvelopeType envelopeType = EnvelopeType::ADSR;
 };
 
 class Envelope {
@@ -183,6 +183,12 @@ public:
 		
 		return envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop);
 	}
+
+	float getLevel() {
+		return getLevel(ofGetSystemTimeMillis());
+	}
+
+
 	// function called when a note is pressed down (via Note On)
 	void start() {
 		// TODO

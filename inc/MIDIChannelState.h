@@ -8,18 +8,19 @@
 #ifndef MidiNotesState_h
 #define MidiNotesState_h
 #include "ofxMidi.h"
-#include "ADSR.h"
-
+#include "Envelope.h"
 
 class Settings {
 public:
     ofParameter<ofColor> color;
+    Envelope volumeEnvelope;
 
     ofParameterGroup params;
     //std::vector<ofAbstractParameter> params;
 
     Settings() { 
-        params.add(color.set(ofColor::cornflowerBlue));
+        params.add(color.set("Note Color",ofColor::cornflowerBlue));
+        params.add(volumeEnvelope.guiParams);
     }
 
    /* int getChannelNum() {
@@ -99,8 +100,8 @@ private:
     std::map<int,int> notesSustained;
 
 
-    std::vector<NoteADSRState*> adsrStates;
-    
+   // std::vector<NoteADSRState*> adsrStates;
+    std::vector<EnvelopeNode*> adsrStates;
     std::atomic<bool>  sustained;
     
     std::mutex mtx;
