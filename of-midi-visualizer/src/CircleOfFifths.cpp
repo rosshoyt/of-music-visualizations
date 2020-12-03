@@ -31,18 +31,23 @@ void CircleOfFifths::draw() {
 	float smallestDim = animationWidth > animationHeight ? animationHeight : animationWidth;
 
 	int channelNum = 0; // TODO refactor - midiChannelState object should contain all 'channel settings'
-	for (auto channel : midiPortState->getAllChannelNotes()) {
+	//for (auto channel : midiPortState->getAllChannelNotes()) {
+	for(auto channel : midiPortState->getAllChannelActiveNoteADSRLevels()){
 		auto channelSettings = midiPortState->getChannelSettings(channelNum);
-		for (auto noteVel : channel) {
-			auto octavePitch = utils::midi::getOctavePitchPair(noteVel.first);
-			
-			int pitchPosition = octavePitch.second; //(octavePitch.second + pitchOffsetSlider) % 12;
-
+		//for (auto noteVel : channel) {
+		for(auto noteLevel : channel){
+			auto octavePitch = utils::midi::getOctavePitchPair(noteLevel.first);
+			int pitchPosition = octavePitch.second;
 			// convert chromatic pitch to circle of fifths
 			pitchPosition = (pitchPosition * noteMultiplierSlider + pitchOffsetSlider) % numPitches;
 			
+			// Old velocity code
+			//int velocity = 127; //noteVel.second;
+			//float circleSize = 40 * velocity / 127.f * noteCircleSizeSlider;
+			
+			// Scale size of circle by envelope level TODO take original velocity into account in Envelope::getLevel()
+			float circleSize = 40 * noteLevel.second * noteCircleSizeSlider;
 
-			float circleSize = 40 * noteVel.second / 127.f * noteCircleSizeSlider;
 
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			

@@ -20,6 +20,18 @@ float EnvelopeSegment::getLevel(double timeSinceNoteStart) {
 	return spline(timeSinceNoteStart);
 }
 
+float EnvelopeSegment::getLevelForRelativeTime(double timeSinceStartOfThisEnvelopeSegment) {
+	if (timeSinceStartOfThisEnvelopeSegment >= 0 && timeSinceStartOfThisEnvelopeSegment < totalLength) {
+		std::vector<double> xTemps(splineControlXRelative), yTemps = getSplineYControlsWithIntensity();
+		tk::spline spline;
+		spline.set_points(xTemps, yTemps);
+		return spline(timeSinceStartOfThisEnvelopeSegment);
+	}
+
+	return 0;
+}
+
+
 double EnvelopeSegment::getLength() {
 	return totalLength;
 }
@@ -81,7 +93,7 @@ float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
 	}
 	else { // ADSR
 		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
-		std::cout << "Evauluating ADSR with TimeSinceNoteStart = " << timeSinceNoteStart << ", TimeSinceNoteOFF = " << timeSinceNoteOff << " Sustained: " << std::boolalpha << sustained << '\n';
+		//std::cout << "Evauluating ADSR with TimeSinceNoteStart = " << timeSinceNoteStart << ", TimeSinceNoteOFF = " << timeSinceNoteOff << " Sustained: " << std::boolalpha << sustained << '\n';
 
 
 		// Check Attack

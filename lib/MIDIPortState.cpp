@@ -81,7 +81,7 @@ float MIDIPortState::getADSRValue(unsigned int channel, int noteNumber) {
 	return channels[channel].getADSRLevel(noteNumber);
 }
 
-Settings* MIDIPortState::getChannelSettings(unsigned int channel) {
+MIDIChannelSettings* MIDIPortState::getChannelSettings(unsigned int channel) {
 	return channels[channel].getChannelSettings();
 }
 

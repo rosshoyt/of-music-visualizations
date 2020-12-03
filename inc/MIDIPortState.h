@@ -36,6 +36,15 @@ public:
     
     const std::map<int, std::pair<int, float>> getAllNotesDown();
 
+
+    std::vector<std::map<int, float>> getAllChannelActiveNoteADSRLevels() {
+        std::vector<std::map<int, float>> ret;
+        for (int i = 0; i < numChannels; ++i) {
+            ret.push_back(channels[i].getAllActiveNoteADSRLevels());
+        }
+        return ret;
+    }
+
     /**
      * Gets the current value of the specified MIDI CC value based on its channel
      * @param channel - MIDI Channel Number (0-15)
@@ -46,7 +55,8 @@ public:
     
     float getADSRValue(unsigned int channel, int noteNumber);
 
-    Settings* getChannelSettings(unsigned int channel);
+
+    MIDIChannelSettings* getChannelSettings(unsigned int channel);
 
 private:
     // Midi Input port

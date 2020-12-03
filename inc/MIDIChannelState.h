@@ -10,15 +10,18 @@
 #include "ofxMidi.h"
 #include "Envelope.h"
 
-class Settings {
+class MIDIChannelSettings {
 public:
+    // gui params
     ofParameter<ofColor> color;
     Envelope volumeEnvelope;
+
+
 
     ofParameterGroup params;
     //std::vector<ofAbstractParameter> params;
 
-    Settings() { 
+    MIDIChannelSettings() { 
         params.add(color.set("Note Color",ofColor::cornflowerBlue));
         params.add(volumeEnvelope.guiParams);
     }
@@ -78,10 +81,21 @@ public:
     std::map<int, int> getSustainedNotes();
     
     std::map<int, int> getAllNotes();
+
+    std::map<int, float> getAllActiveNoteADSRLevels() {
+        std::map<int, float> ret;
+        for (int i = 0; i < 128; ++i) {
+            auto level = adsrStates[i]->getLevel();
+            // TODO ensure no probelm caused by notes being numbered 0 - 127
+            if (level > 0) 
+                ret.insert({ i, level });
+        }
+        return ret;
+    }
     
     int getNumNotes();
     
-    Settings* getChannelSettings() {
+    MIDIChannelSettings* getChannelSettings() {
         return settings;
     }
 
@@ -94,13 +108,13 @@ public:
 
     
 private:
-    Settings* settings;
+    MIDIChannelSettings* settings;
 
     std::map<int,int> notesHeldDown;
     std::map<int,int> notesSustained;
 
 
-   // std::vector<NoteADSRState*> adsrStates;
+    // TODO rename (might not be ADSR, could be ADR)
     std::vector<EnvelopeNode*> adsrStates;
     std::atomic<bool>  sustained;
     

@@ -19,7 +19,7 @@ void MidiCCNode::setValue(int value) {
 
 
 MIDIChannelState::MIDIChannelState() : notesHeldDown(), notesSustained(), midiCCState(128), adsrStates(), sustained(false), mtx(), mtxSusNotes() {
-	settings = new Settings();
+	settings = new MIDIChannelSettings();
 	
 	// TODO move to init() function
 	//ADSR pianoADSR;

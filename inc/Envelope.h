@@ -43,7 +43,8 @@ public:
 	// Must call containsTime() to ensure segment contains valid value for time value
 	float getLevel(double timeSinceNoteStart);
 
-	
+	// TODO combine with getLevel method? could use boolean flag
+	float getLevelForRelativeTime(double timeSinceStartOfThisEnvelopeSegment); 
 
 	double getLength();
 
@@ -51,17 +52,7 @@ public:
 		return settings.startLevel;
 	}
 
-	// TODO combine with getLevel method? could use boolean flag
-	float getLevelForRelativeTime(double timeSinceStartOfThisEnvelopeSegment) {
-		if (timeSinceStartOfThisEnvelopeSegment >= 0 && timeSinceStartOfThisEnvelopeSegment < totalLength) {
-			std::vector<double> xTemps(splineControlXRelative), yTemps = getSplineYControlsWithIntensity();
-			tk::spline spline;
-			spline.set_points(xTemps, yTemps);
-			return spline(timeSinceStartOfThisEnvelopeSegment);
-		}
-		
-		return 0;
-	}
+	
 
 
 	// TODO (only if implementation completed using real-timeSinceNoteStart values for Segment timeSinceNoteStart values)
@@ -81,6 +72,7 @@ public:
 
 	// Public GUI Slider
 	ofParameter<float> splineIntensitySlider;
+	ofParameter<double> lengthSlider;
 
 private:
 
@@ -95,6 +87,10 @@ private:
 		return yTemps;
 	}
 
+	/*std::vector<double> getSplineXControls() {
+		std::vector<double> x
+	}*/
+
 	// PRIVATE Fields
 	EnvelopeSegmentSettings settings;
 
@@ -103,7 +99,7 @@ private:
 
 	// enum type of envelopeADR segment
 	//EnvelopeSegmentType type;
-	// spline control values
+	// spline control values 
 	std::vector<double> splineControlX, splineControlY;
 
 	// Relative control values that has envelope start time as 0
@@ -121,7 +117,7 @@ enum EnvelopeType { ADR, ADSR };
 class EnvelopeSettings {
 public:
 	std::vector<double> envSegmentLengths = { 30, 2000, 1000 };
-	std::vector<double> envSegmentLevels  = { 0.f, 1.f, .25 };
+	std::vector<double> envSegmentLevels  = { 0.f, 1.f, .5f };
 	EnvelopeType envelopeType = EnvelopeType::ADSR;
 };
 
@@ -195,13 +191,13 @@ public:
 		// deal with what happens when start() called before stop() cancels previous note
 		// stop();
 		lastStart = ofGetSystemTimeMillis();
-		std:cout << "Starting Node at " << lastStart << ", time since last note released = " << lastStart - lastStop <<"\n";
+		//std:cout << "Starting Node at " << lastStart << ", time since last note released = " << lastStart - lastStop <<"\n";
 	}
 	
 	// function called when a note is released (via Note Off or Sustain Pedal Off)
 	void stop() {
 		lastStop = ofGetSystemTimeMillis();
-		std:cout << "Stopping Node at " << lastStop << ", length held = " << lastStop - lastStart << "\n";
+		//std:cout << "Stopping Node at " << lastStop << ", length held = " << lastStop - lastStart << "\n";
 
 	}
 
