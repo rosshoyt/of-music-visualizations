@@ -15,14 +15,20 @@ void MIDIPortState::setupGUI() {
     gui.add(resetMidiPortButton.setup("Reset MIDI Port"));
 	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
+	for (int i = 0; i < numChannels; i++) {
+		auto params = channels[i].getChannelSettings()->params;
+		params.setName("Channel " + std::to_string(i + 1) + " Settings");
+		gui.add(params);
+	}
+
     resetMidiPortButton.addListener(this, &MIDIPortState::setupMIDIPort);
     
     
-	for (int i = 0; i < numChannels; i++) {
-		Settings* settings = new Settings(i);
-		gui.add(settings->params);
-		perChannelSettings.push_back(settings);
-	}
+	//for (int i = 0; i < numChannels; i++) {
+	//	//Settings* settings = new Settings(i);
+	//	gui.add(settings->params);
+	//	//perChannelSettings.push_back(settings);
+	//}
 }
 
 unsigned int MIDIPortState::getNumChannels() {
@@ -75,10 +81,16 @@ float MIDIPortState::getADSRValue(unsigned int channel, int noteNumber) {
 	return channels[channel].getADSRLevel(noteNumber);
 }
 
+Settings* MIDIPortState::getChannelSettings(unsigned int channel) {
+	return channels[channel].getChannelSettings();
+}
+
+
 void MIDIPortState::setupMIDIPortState() {
 	validateSettings();
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
 	channels = new MIDIChannelState[numChannels];
+	
 	setupMIDIPort();
 }
 

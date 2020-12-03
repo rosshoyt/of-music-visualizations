@@ -10,6 +10,31 @@
 #include "ofxMidi.h"
 #include "ADSR.h"
 
+
+class Settings {
+public:
+    ofParameter<ofColor> color;
+
+    ofParameterGroup params;
+    //std::vector<ofAbstractParameter> params;
+
+    Settings() { 
+        params.add(color.set(ofColor::cornflowerBlue));
+    }
+
+   /* int getChannelNum() {
+        return channelNum;
+    }*/
+private:
+    // TODO implement
+    //ShapeType shape = TRIANGLE;
+    //ofParameter<int> pitchOffsetAmount;
+    //ADSR adsr;
+
+    //int channelNum = 0;
+
+};
+
 typedef std::unique_lock<std::mutex> Lock;
 
 class MidiCCNode {
@@ -55,6 +80,10 @@ public:
     
     int getNumNotes();
     
+    Settings* getChannelSettings() {
+        return settings;
+    }
+
     void tryAddMIDICC(int midiCC, int value);
     
     int tryGetCCValue(int ccNo);
@@ -64,7 +93,8 @@ public:
 
     
 private:
-    
+    Settings* settings;
+
     std::map<int,int> notesHeldDown;
     std::map<int,int> notesSustained;
 

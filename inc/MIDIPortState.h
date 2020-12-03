@@ -13,34 +13,6 @@
 #include "GUIComponent.h"
 #include <assert.h>
 
-class Settings {
-public:
-    ofParameter<ofColor> color;
-
-    ofParameterGroup params;
-    //std::vector<ofAbstractParameter> params;
-
-    Settings() : Settings(channelNum) {
-        //Settings(channelNum);
-    }
-
-    Settings(int channelNum) : channelNum(channelNum) {
-        params.setName("Channel " + std::to_string(channelNum + 1) + " Settings");
-        params.add(color.set(ofColor::cornflowerBlue));
-    }
-
-    int getChannelNum() {
-        return channelNum;
-    }
-private:
-    // TODO implement
-    //ShapeType shape = TRIANGLE;
-    //ofParameter<int> pitchOffsetAmount;
-    //ADSR adsr;
-
-    int channelNum = 0;
-
-};
 
 class MIDIPortState : public ofxMidiListener, public GUIComponent {
 public:
@@ -74,9 +46,8 @@ public:
     
     float getADSRValue(unsigned int channel, int noteNumber);
 
-    Settings* getChannelSettings(unsigned int channel) {
-        return perChannelSettings[channel];
-    }
+    Settings* getChannelSettings(unsigned int channel);
+
 private:
     // Midi Input port
     ofxMidiIn midiIn;
@@ -93,15 +64,8 @@ private:
     
     // Display field for the most recent midi message
     ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");
-
-    //GUIReadOnlyParam<std::string> midiMessageMonitor;// = "No MIDI Messages Detected";
-
-    // List of all per-channel settings
-    std::vector<Settings*> perChannelSettings;
-
-    // bool initialized; // TODO assert that MIDI port state is initialized in each method
     
-    // Array of channel note states
+    // Array of channel note states (TODO refactor to std::vector)
     MIDIChannelState* channels;
     
     // Private methods
