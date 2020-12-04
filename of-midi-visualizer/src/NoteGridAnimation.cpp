@@ -13,13 +13,10 @@ void NoteGridAnimation::setupGUI() {
     gui.add(pitchOffsetUseMIDICCToggle.setup("Toggle Pitch Offset MIDI CC Control", false));
     pitchOffsetAmount.set("Pitch Offset (Half-Steps) MIDI CC-Controlled Value", 0, 0, 11);
     gui.add(pitchOffsetAmount);
-
-    // background/animation view controls
-    //gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
-    gui.add(drawLinesToggle.setup("Draw Lines", true));
+    gui.add(drawLinesToggle.setup("Draw Lines", false));
 
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
-    gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", true));
+    gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", false));
     gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
 
     // 2 colors to interpolate between for default colors
@@ -118,8 +115,9 @@ void NoteGridAnimation::drawBgdGrid() {
 //--------------------------------------------------------------
 void NoteGridAnimation::drawActiveNotes() {
     // draw all notes currently being played
-    for (unsigned int channelNumber = 0; channelNumber < midiPortState->getNumChannels(); ++channelNumber) {
-
+    //for (unsigned int channelNumber = 0; channelNumber < midiPortState->getNumChannels(); ++channelNumber) {
+    int channelNum = 0;
+    for(auto channel : midiPortState->getAllChannelActiveNoteADSRLevels()){
         /*
         // TODO Look at each midi node instead of by 'held down' notes
         auto ns = midiPortState->getChannelNotes(channelNumber);
@@ -131,18 +129,21 @@ void NoteGridAnimation::drawActiveNotes() {
         }*/
 
         // Original method based on notes held down
-        auto ns = midiPortState->getChannelNotes(channelNumber);
+        //auto ns = midiPortState->getChannelNotes(channelNumber);
 
-        auto channelSettings = channelSettingsList[channelNumber];
-        auto settings = midiPortState->getChannelSettings(channelNumber); // TODO combine above line into this call
-        for (auto note : ns) {
+        auto channelSettings = channelSettingsList[channelNum];
+
+        
+        auto settings = midiPortState->getChannelSettings(channelNum); // TODO combine above line into this call
+        for (auto note: channel) {
+
             //std::cout<< "drawing a note!\n";
-            int noteNumber = note.first, velocity = note.second;
+            int noteNumber = note.first;//, velocity = note.second;
             int row = nRows - 1 - (noteNumber - pitchOffsetAmount) / 12, col = (noteNumber - pitchOffsetAmount) % nColumns;
 
             // TODO ensure MIDI NOTE #0 doesn't cause issue (scale midi note #s to start at 1?)
-
-            float scalarADSR = midiPortState->getADSRValue(channelNumber, noteNumber);
+            int velocity = note.second.first;
+            float scalarADSR = midiPortState->getADSRValue(channelNum, noteNumber);
             float scalarVelocity = float(velocity) / 128.f;
             float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f);
             
@@ -161,7 +162,9 @@ void NoteGridAnimation::drawActiveNotes() {
             //std::cout << "Note #" << noteNumber << " ADSR val = " << adsrVal << '\n';
             //std::cout<< "Velocity = " << velocity <<", Lerp Amount = " << lerpAmount << '\n';
             //std::cout << "col: " << col << ", row: " << row << '\n';
+           
         }
+        ++channelNum;
     }
 }
 

@@ -75,7 +75,7 @@ void MIDIChannelState::tryAddNoteOn(int note, int velocity) {
 	notesHeldDown[note] = velocity;
 	lck.unlock();
 
-	adsrStates[note]->start();
+	adsrStates[note]->start(velocity);
 }
 
 void MIDIChannelState::tryAddNoteOff(int note) {

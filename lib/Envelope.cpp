@@ -27,7 +27,6 @@ float EnvelopeSegment::getLevelForRelativeTime(double timeSinceStartOfThisEnvelo
 		spline.set_points(xTemps, yTemps);
 		return spline(timeSinceStartOfThisEnvelopeSegment);
 	}
-
 	return 0;
 }
 
@@ -54,7 +53,6 @@ void EnvelopeSegment::init() {
 		splineControlX.push_back(xVal);
 		splineControlXRelative.push_back(xVal - settings.start);
 		std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
-		
 	}
 	
 	// setup intensity slider

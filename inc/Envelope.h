@@ -184,6 +184,10 @@ public:
 		return getLevel(ofGetSystemTimeMillis());
 	}
 
+	void start(int velocity) {
+		lastNoteOnVelocity = velocity;
+		start();
+	}
 
 	// function called when a note is pressed down (via Note On)
 	void start() {
@@ -208,9 +212,16 @@ public:
 	long getLastStopTimeMS() {
 		return lastStop;
 	}
+
+	int getLastNoteOnVelocity() {
+		return lastNoteOnVelocity;
+	}
+
 private:
 	Envelope* envelope;
 
 	long lastStart = 0, lastStop = 0;
+	
+	int lastNoteOnVelocity = 0;
 	
 };

@@ -18,12 +18,14 @@ void MIDIPortState::setupGUI() {
 	for (int i = 0; i < numChannels; i++) {
 		auto params = channels[i].getChannelSettings()->params;
 		params.setName("Channel " + std::to_string(i + 1) + " Settings");
+		
 		gui.add(params);
 	}
 
     resetMidiPortButton.addListener(this, &MIDIPortState::setupMIDIPort);
-    
-    
+   
+	gui.minimizeAll();
+
 	//for (int i = 0; i < numChannels; i++) {
 	//	//Settings* settings = new Settings(i);
 	//	gui.add(settings->params);

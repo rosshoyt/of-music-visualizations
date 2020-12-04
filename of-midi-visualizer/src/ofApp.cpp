@@ -84,6 +84,15 @@ void ofApp::windowResized(int w, int h){
         animation->resized(w, h);
     }
 
+
+    // TODO Algorithm to sort GUI panels most evenly across a given number of columns of fixed size
+
+    // or
+
+    // TODO Algorithm to sort dynamically sort GUI panels in a 
+
+
+
     // update all GUI panel positions
     float guiSpacer = 10; // TODO move to global variable, create WindowManager
     float x = animationDisplayWidth, y = 0;

@@ -37,8 +37,8 @@ public:
     const std::map<int, std::pair<int, float>> getAllNotesDown();
 
 
-    std::vector<std::map<int, float>> getAllChannelActiveNoteADSRLevels() {
-        std::vector<std::map<int, float>> ret;
+    std::vector<std::map<int, std::pair<int, float>>> getAllChannelActiveNoteADSRLevels() {
+        std::vector<std::map<int, std::pair<int, float>>> ret;
         for (int i = 0; i < numChannels; ++i) {
             ret.push_back(channels[i].getAllActiveNoteADSRLevels());
         }

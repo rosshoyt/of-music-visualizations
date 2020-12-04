@@ -8,6 +8,7 @@
 #ifndef MidiNotesState_h
 #define MidiNotesState_h
 #include "ofxMidi.h"
+#include "ofxGui.h"
 #include "Envelope.h"
 
 class MIDIChannelSettings {
@@ -16,14 +17,18 @@ public:
     ofParameter<ofColor> color;
     Envelope volumeEnvelope;
 
+    //ofxGuiGroup params; // TODO
+    ofParameterGroup params; // TODO
 
-
-    ofParameterGroup params;
     //std::vector<ofAbstractParameter> params;
 
     MIDIChannelSettings() { 
-        params.add(color.set("Note Color",ofColor::cornflowerBlue));
+        // TODO add channel number to the gui names
+        params.add(color.set("Note Color", ofColor::cornflowerBlue));
         params.add(volumeEnvelope.guiParams);
+        
+        //params.minimize();
+        //volumeEnvelope.guiParams.setName()
     }
 
    /* int getChannelNum() {
@@ -82,13 +87,14 @@ public:
     
     std::map<int, int> getAllNotes();
 
-    std::map<int, float> getAllActiveNoteADSRLevels() {
-        std::map<int, float> ret;
+    std::map<int, std::pair<int, float>> getAllActiveNoteADSRLevels() {
+        std::map<int, std::pair<int, float>> ret;
         for (int i = 0; i < 128; ++i) {
             auto level = adsrStates[i]->getLevel();
+            auto velocity = adsrStates[i]->getLastNoteOnVelocity();
             // TODO ensure no probelm caused by notes being numbered 0 - 127
             if (level > 0) 
-                ret.insert({ i, level });
+                ret.insert({ i, {  velocity , level } });
         }
         return ret;
     }
