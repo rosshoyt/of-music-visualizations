@@ -1,0 +1,130 @@
+\hypertarget{class_envelope_segment}{}\doxysection{Envelope\+Segment Class Reference}
+\label{class_envelope_segment}\index{EnvelopeSegment@{EnvelopeSegment}}
+
+
+{\ttfamily \#include $<$Envelope.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_envelope_segment_a4e2c78f912633dcf955de4179612d00a}{Envelope\+Segment}} (\mbox{\hyperlink{class_envelope_segment_settings}{Envelope\+Segment\+Settings}} settings)
+\item 
+float \mbox{\hyperlink{class_envelope_segment_ac3ef43c718ad44ee5052bdd45905b449}{get\+Level}} (double time\+Since\+Note\+Start)
+\item 
+float \mbox{\hyperlink{class_envelope_segment_aff280595e9c9aa0d30a6cc3efc8bb443}{get\+Level\+For\+Relative\+Time}} (double time\+Since\+Start\+Of\+This\+Envelope\+Segment)
+\item 
+double \mbox{\hyperlink{class_envelope_segment_adba555668cb6e25cae1fb014a27f8ee8}{get\+Length}} ()
+\item 
+float \mbox{\hyperlink{class_envelope_segment_a90e73126b74f50f5636751bbee7c9498}{get\+Starting\+Level}} ()
+\item 
+bool \mbox{\hyperlink{class_envelope_segment_a2eff37a6c88a1ac7f3ffbf33e23253e0}{contains\+Time}} (double elapsed\+Time\+MS)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+of\+Parameter$<$ float $>$ \mbox{\hyperlink{class_envelope_segment_a15ad88793f807204b16b2f7a20edf74d}{spline\+Intensity\+Slider}}
+\item 
+of\+Parameter$<$ double $>$ \mbox{\hyperlink{class_envelope_segment_a4edfc28d7a04c710af32d9112688efe4}{length\+Slider}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Envelope.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_envelope_segment_a4e2c78f912633dcf955de4179612d00a}\label{class_envelope_segment_a4e2c78f912633dcf955de4179612d00a}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!EnvelopeSegment@{EnvelopeSegment}}
+\index{EnvelopeSegment@{EnvelopeSegment}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{EnvelopeSegment()}{EnvelopeSegment()}}
+{\footnotesize\ttfamily Envelope\+Segment\+::\+Envelope\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_envelope_segment_settings}{Envelope\+Segment\+Settings}}}]{settings }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Envelope.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_envelope_segment_a2eff37a6c88a1ac7f3ffbf33e23253e0}\label{class_envelope_segment_a2eff37a6c88a1ac7f3ffbf33e23253e0}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!containsTime@{containsTime}}
+\index{containsTime@{containsTime}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{containsTime()}{containsTime()}}
+{\footnotesize\ttfamily bool Envelope\+Segment\+::contains\+Time (\begin{DoxyParamCaption}\item[{double}]{elapsed\+Time\+MS }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file Envelope.\+cpp.
+
+\mbox{\Hypertarget{class_envelope_segment_adba555668cb6e25cae1fb014a27f8ee8}\label{class_envelope_segment_adba555668cb6e25cae1fb014a27f8ee8}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!getLength@{getLength}}
+\index{getLength@{getLength}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{getLength()}{getLength()}}
+{\footnotesize\ttfamily double Envelope\+Segment\+::get\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file Envelope.\+cpp.
+
+\mbox{\Hypertarget{class_envelope_segment_ac3ef43c718ad44ee5052bdd45905b449}\label{class_envelope_segment_ac3ef43c718ad44ee5052bdd45905b449}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!getLevel@{getLevel}}
+\index{getLevel@{getLevel}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{getLevel()}{getLevel()}}
+{\footnotesize\ttfamily float Envelope\+Segment\+::get\+Level (\begin{DoxyParamCaption}\item[{double}]{time\+Since\+Note\+Start }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Envelope.\+cpp.
+
+\mbox{\Hypertarget{class_envelope_segment_aff280595e9c9aa0d30a6cc3efc8bb443}\label{class_envelope_segment_aff280595e9c9aa0d30a6cc3efc8bb443}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!getLevelForRelativeTime@{getLevelForRelativeTime}}
+\index{getLevelForRelativeTime@{getLevelForRelativeTime}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{getLevelForRelativeTime()}{getLevelForRelativeTime()}}
+{\footnotesize\ttfamily float Envelope\+Segment\+::get\+Level\+For\+Relative\+Time (\begin{DoxyParamCaption}\item[{double}]{time\+Since\+Start\+Of\+This\+Envelope\+Segment }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file Envelope.\+cpp.
+
+\mbox{\Hypertarget{class_envelope_segment_a90e73126b74f50f5636751bbee7c9498}\label{class_envelope_segment_a90e73126b74f50f5636751bbee7c9498}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!getStartingLevel@{getStartingLevel}}
+\index{getStartingLevel@{getStartingLevel}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{getStartingLevel()}{getStartingLevel()}}
+{\footnotesize\ttfamily float Envelope\+Segment\+::get\+Starting\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Envelope.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_envelope_segment_a4edfc28d7a04c710af32d9112688efe4}\label{class_envelope_segment_a4edfc28d7a04c710af32d9112688efe4}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!lengthSlider@{lengthSlider}}
+\index{lengthSlider@{lengthSlider}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{lengthSlider}{lengthSlider}}
+{\footnotesize\ttfamily of\+Parameter$<$double$>$ Envelope\+Segment\+::length\+Slider}
+
+
+
+Definition at line 31 of file Envelope.\+h.
+
+\mbox{\Hypertarget{class_envelope_segment_a15ad88793f807204b16b2f7a20edf74d}\label{class_envelope_segment_a15ad88793f807204b16b2f7a20edf74d}} 
+\index{EnvelopeSegment@{EnvelopeSegment}!splineIntensitySlider@{splineIntensitySlider}}
+\index{splineIntensitySlider@{splineIntensitySlider}!EnvelopeSegment@{EnvelopeSegment}}
+\doxysubsubsection{\texorpdfstring{splineIntensitySlider}{splineIntensitySlider}}
+{\footnotesize\ttfamily of\+Parameter$<$float$>$ Envelope\+Segment\+::spline\+Intensity\+Slider}
+
+
+
+Definition at line 30 of file Envelope.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{_envelope_8h}{Envelope.\+h}}\item 
+lib/\mbox{\hyperlink{_envelope_8cpp}{Envelope.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,168 @@
+\hypertarget{class_animation_component}{}\doxysection{Animation\+Component Class Reference}
+\label{class_animation_component}\index{AnimationComponent@{AnimationComponent}}
+
+
+{\ttfamily \#include $<$Animation\+Component.\+h$>$}
+
+Inheritance diagram for Animation\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.707317cm]{class_animation_component}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_animation_component_ac9eb5f198ecfed1bf713feb0e64d9472}{Animation\+Component}} ()=default
+\item 
+void \mbox{\hyperlink{class_animation_component_ae173d51b782b7bd7d538c15aa01d7db5}{set\+Animation\+Dimensions}} (float width, float height)
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_af22bddd14a26f667a6558f398a3b3974}{setup}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_a9305158f44d5647ad6fec20a6077d0a8}{prepare}} ()
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_a9b6a6d98e870fc494445d22e09a6d8b9}{takedown}} ()
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_ae36ba9a4f011140e93c0a6da5946f2e3}{update}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_a00d82c08b91644fb73c6d385112855ad}{draw}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_animation_component_adfd28134b3f2f3a7b2689d28f704d1de}{resized}} (int w, int h)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_animation_component_a627f78662daded09a00c8090ab5908cb}{animation\+Width}}
+\item 
+float \mbox{\hyperlink{class_animation_component_a638394f0533efc512e931a8f0666dbe0}{animation\+Height}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Animation\+Component.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_animation_component_ac9eb5f198ecfed1bf713feb0e64d9472}\label{class_animation_component_ac9eb5f198ecfed1bf713feb0e64d9472}} 
+\index{AnimationComponent@{AnimationComponent}!AnimationComponent@{AnimationComponent}}
+\index{AnimationComponent@{AnimationComponent}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{AnimationComponent()}{AnimationComponent()}}
+{\footnotesize\ttfamily Animation\+Component\+::\+Animation\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_animation_component_a00d82c08b91644fb73c6d385112855ad}\label{class_animation_component_a00d82c08b91644fb73c6d385112855ad}} 
+\index{AnimationComponent@{AnimationComponent}!draw@{draw}}
+\index{draw@{draw}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual void Animation\+Component\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_note_grid_animation_a1a9abf90170755f18d55fa101716570f}{Note\+Grid\+Animation}}, \mbox{\hyperlink{class_a_d_s_r_visualizer_a277fa4be146812413f0e6938f75982c0}{A\+D\+S\+R\+Visualizer}}, \mbox{\hyperlink{class_animated3_d_mesh_ad43a17487a40db9ea8c63b35f7c5fc23}{Animated3\+D\+Mesh}}, \mbox{\hyperlink{class_mesh_from_image_a293ec6ed014c74752dc7105d7a5d1e9f}{Mesh\+From\+Image}}, \mbox{\hyperlink{class_circle_of_fifths_a949658c9ba2e1e80e9845305432c6500}{Circle\+Of\+Fifths}}, and \mbox{\hyperlink{class_textured_sphere_a1653356e69524101349f0fd90a80c74e}{Textured\+Sphere}}.
+
+\mbox{\Hypertarget{class_animation_component_a9305158f44d5647ad6fec20a6077d0a8}\label{class_animation_component_a9305158f44d5647ad6fec20a6077d0a8}} 
+\index{AnimationComponent@{AnimationComponent}!prepare@{prepare}}
+\index{prepare@{prepare}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily void Animation\+Component\+::prepare (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_textured_sphere_a3be4c1a8f1041fc92e2d55749d7e2b09}{Textured\+Sphere}}, and \mbox{\hyperlink{class_a_d_s_r_visualizer_aecc3d343c7d6014cbb77c9d6793e1217}{A\+D\+S\+R\+Visualizer}}.
+
+
+
+Definition at line 15 of file Animation\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_animation_component_adfd28134b3f2f3a7b2689d28f704d1de}\label{class_animation_component_adfd28134b3f2f3a7b2689d28f704d1de}} 
+\index{AnimationComponent@{AnimationComponent}!resized@{resized}}
+\index{resized@{resized}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{resized()}{resized()}}
+{\footnotesize\ttfamily void Animation\+Component\+::resized (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_animated3_d_mesh_afe5b2a81eb45c9cf9c770a4c62acb7b6}{Animated3\+D\+Mesh}}.
+
+
+
+Definition at line 24 of file Animation\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_animation_component_ae173d51b782b7bd7d538c15aa01d7db5}\label{class_animation_component_ae173d51b782b7bd7d538c15aa01d7db5}} 
+\index{AnimationComponent@{AnimationComponent}!setAnimationDimensions@{setAnimationDimensions}}
+\index{setAnimationDimensions@{setAnimationDimensions}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{setAnimationDimensions()}{setAnimationDimensions()}}
+{\footnotesize\ttfamily void Animation\+Component\+::set\+Animation\+Dimensions (\begin{DoxyParamCaption}\item[{float}]{width,  }\item[{float}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Animation\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_animation_component_af22bddd14a26f667a6558f398a3b3974}\label{class_animation_component_af22bddd14a26f667a6558f398a3b3974}} 
+\index{AnimationComponent@{AnimationComponent}!setup@{setup}}
+\index{setup@{setup}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily virtual void Animation\+Component\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_note_grid_animation_a8982928e8db11a18f397d84e05b144a7}{Note\+Grid\+Animation}}, \mbox{\hyperlink{class_a_d_s_r_visualizer_afef182ffa8396be135d35ecbe69e8cd9}{A\+D\+S\+R\+Visualizer}}, \mbox{\hyperlink{class_animated3_d_mesh_adc859284b1be30ef850641c760e9b379}{Animated3\+D\+Mesh}}, \mbox{\hyperlink{class_mesh_from_image_a76ab5f0da1f28e959a6fd4bc9a95f32f}{Mesh\+From\+Image}}, \mbox{\hyperlink{class_circle_of_fifths_a206c663bcc05acd309d77b540bc466ba}{Circle\+Of\+Fifths}}, and \mbox{\hyperlink{class_textured_sphere_a9276603af691b9cf4b468f8fcb112cc0}{Textured\+Sphere}}.
+
+\mbox{\Hypertarget{class_animation_component_a9b6a6d98e870fc494445d22e09a6d8b9}\label{class_animation_component_a9b6a6d98e870fc494445d22e09a6d8b9}} 
+\index{AnimationComponent@{AnimationComponent}!takedown@{takedown}}
+\index{takedown@{takedown}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{takedown()}{takedown()}}
+{\footnotesize\ttfamily void Animation\+Component\+::takedown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_textured_sphere_ad13a9a4b9c74677d9ac9fae50f84c738}{Textured\+Sphere}}, and \mbox{\hyperlink{class_a_d_s_r_visualizer_a2de612bbc2872853a5ce21ecef6e5c20}{A\+D\+S\+R\+Visualizer}}.
+
+
+
+Definition at line 20 of file Animation\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_animation_component_ae36ba9a4f011140e93c0a6da5946f2e3}\label{class_animation_component_ae36ba9a4f011140e93c0a6da5946f2e3}} 
+\index{AnimationComponent@{AnimationComponent}!update@{update}}
+\index{update@{update}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void Animation\+Component\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_note_grid_animation_a5c8fb5ecaf9dd560e1e222bccefb7a4a}{Note\+Grid\+Animation}}, \mbox{\hyperlink{class_a_d_s_r_visualizer_ab6b59ba6222afbadc5a9012b41cf6a04}{A\+D\+S\+R\+Visualizer}}, \mbox{\hyperlink{class_animated3_d_mesh_af6c17dc656a2836ef5fce8cfafbc1a41}{Animated3\+D\+Mesh}}, \mbox{\hyperlink{class_mesh_from_image_a095065424d7bd22611de12b2745c770f}{Mesh\+From\+Image}}, \mbox{\hyperlink{class_circle_of_fifths_a3bcf7ab0e077bc20234a8212b0b271ec}{Circle\+Of\+Fifths}}, and \mbox{\hyperlink{class_textured_sphere_a3e6fff08ec4b638ec794c813fb1381df}{Textured\+Sphere}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_animation_component_a638394f0533efc512e931a8f0666dbe0}\label{class_animation_component_a638394f0533efc512e931a8f0666dbe0}} 
+\index{AnimationComponent@{AnimationComponent}!animationHeight@{animationHeight}}
+\index{animationHeight@{animationHeight}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{animationHeight}{animationHeight}}
+{\footnotesize\ttfamily float Animation\+Component\+::animation\+Height\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 48 of file Animation\+Component.\+h.
+
+\mbox{\Hypertarget{class_animation_component_a627f78662daded09a00c8090ab5908cb}\label{class_animation_component_a627f78662daded09a00c8090ab5908cb}} 
+\index{AnimationComponent@{AnimationComponent}!animationWidth@{animationWidth}}
+\index{animationWidth@{animationWidth}!AnimationComponent@{AnimationComponent}}
+\doxysubsubsection{\texorpdfstring{animationWidth}{animationWidth}}
+{\footnotesize\ttfamily float Animation\+Component\+::animation\+Width\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 48 of file Animation\+Component.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{_animation_component_8h}{Animation\+Component.\+h}}\item 
+lib/\mbox{\hyperlink{_animation_component_8cpp}{Animation\+Component.\+cpp}}\end{DoxyCompactItemize}

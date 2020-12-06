@@ -1,0 +1,232 @@
+\hypertarget{class_m_i_d_i_channel_state}{}\doxysection{M\+I\+D\+I\+Channel\+State Class Reference}
+\label{class_m_i_d_i_channel_state}\index{MIDIChannelState@{MIDIChannelState}}
+
+
+{\ttfamily \#include $<$M\+I\+D\+I\+Channel\+State.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_i_d_i_channel_state_a0ebe3f4f576fc108696a41309da47b13}{M\+I\+D\+I\+Channel\+State}} ()
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a9ca6c223d0c2e68af9a0cff556ee2d75}{process\+M\+I\+D\+I\+Message}} (ofx\+Midi\+Message \&message)
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a31306900f5e074085c961b29ef76cb9a}{process\+M\+I\+D\+I\+CC}} (ofx\+Midi\+Message \&message)
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a3e6dd1ac33d3c72e2f8f7f8aa475cbd8}{try\+Add\+Note\+On}} (int note, int velocity)
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a36c5174129f2f05b6a15e216c60cbd9a}{try\+Add\+Note\+Off}} (int note)
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a7ad00f8a3fba17fbc53c2785c5c64e62}{set\+Sustain\+Pedal\+On}} ()
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a62e9a7db1959b8e6d260e3af6f5f40c5}{set\+Sustain\+Pedal\+Off}} ()
+\item 
+float \mbox{\hyperlink{class_m_i_d_i_channel_state_a36f0be6545ff6e9d04bc9a94a8e1e471}{get\+A\+D\+S\+R\+Level}} (int note)
+\item 
+std\+::map$<$ int, int $>$ \mbox{\hyperlink{class_m_i_d_i_channel_state_aa1bceb4d3446bdce1b8be3760208587f}{get\+Notes}} ()
+\item 
+std\+::map$<$ int, int $>$ \mbox{\hyperlink{class_m_i_d_i_channel_state_a692a2143b9b22b637b6893593ccdaa2e}{get\+Sustained\+Notes}} ()
+\item 
+std\+::map$<$ int, int $>$ \mbox{\hyperlink{class_m_i_d_i_channel_state_a2fabd563938c918c2ef5515ecd0262aa}{get\+All\+Notes}} ()
+\item 
+std\+::map$<$ int, std\+::pair$<$ int, float $>$ $>$ \mbox{\hyperlink{class_m_i_d_i_channel_state_a976487c061733c58cc8e1ee356086539}{get\+All\+Active\+Note\+A\+D\+S\+R\+Levels}} ()
+\item 
+int \mbox{\hyperlink{class_m_i_d_i_channel_state_a97f61d1fff73c07b6c83c77bf070eaa6}{get\+Num\+Notes}} ()
+\item 
+\mbox{\hyperlink{class_m_i_d_i_channel_settings}{M\+I\+D\+I\+Channel\+Settings}} $\ast$ \mbox{\hyperlink{class_m_i_d_i_channel_state_a9f92efc219eb17038123b7d749921249}{get\+Channel\+Settings}} ()
+\item 
+void \mbox{\hyperlink{class_m_i_d_i_channel_state_a814dc707c0a2ba705bd68adc4efafd5e}{try\+Add\+M\+I\+D\+I\+CC}} (int midi\+CC, int value)
+\item 
+int \mbox{\hyperlink{class_m_i_d_i_channel_state_a9c4560d8ea3cc27009e042f021635aee}{try\+Get\+C\+C\+Value}} (int cc\+No)
+\item 
+bool \mbox{\hyperlink{class_m_i_d_i_channel_state_af7c25c9c93ca4932dfecd34f807fe499}{sustain\+Pedal\+Is\+Down}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class encapsulating the state of a single M\+I\+DI channel. Processes Note\+On, Note\+Off, and all Control Change Messages. Supports concurrent read/write access across multiple threads via mutex locks 
+
+Definition at line 66 of file M\+I\+D\+I\+Channel\+State.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a0ebe3f4f576fc108696a41309da47b13}\label{class_m_i_d_i_channel_state_a0ebe3f4f576fc108696a41309da47b13}} 
+\index{MIDIChannelState@{MIDIChannelState}!MIDIChannelState@{MIDIChannelState}}
+\index{MIDIChannelState@{MIDIChannelState}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{MIDIChannelState()}{MIDIChannelState()}}
+{\footnotesize\ttfamily M\+I\+D\+I\+Channel\+State\+::\+M\+I\+D\+I\+Channel\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a36f0be6545ff6e9d04bc9a94a8e1e471}\label{class_m_i_d_i_channel_state_a36f0be6545ff6e9d04bc9a94a8e1e471}} 
+\index{MIDIChannelState@{MIDIChannelState}!getADSRLevel@{getADSRLevel}}
+\index{getADSRLevel@{getADSRLevel}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getADSRLevel()}{getADSRLevel()}}
+{\footnotesize\ttfamily float M\+I\+D\+I\+Channel\+State\+::get\+A\+D\+S\+R\+Level (\begin{DoxyParamCaption}\item[{int}]{note }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a976487c061733c58cc8e1ee356086539}\label{class_m_i_d_i_channel_state_a976487c061733c58cc8e1ee356086539}} 
+\index{MIDIChannelState@{MIDIChannelState}!getAllActiveNoteADSRLevels@{getAllActiveNoteADSRLevels}}
+\index{getAllActiveNoteADSRLevels@{getAllActiveNoteADSRLevels}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getAllActiveNoteADSRLevels()}{getAllActiveNoteADSRLevels()}}
+{\footnotesize\ttfamily std\+::map$<$int, std\+::pair$<$int, float$>$ $>$ M\+I\+D\+I\+Channel\+State\+::get\+All\+Active\+Note\+A\+D\+S\+R\+Levels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 90 of file M\+I\+D\+I\+Channel\+State.\+h.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a2fabd563938c918c2ef5515ecd0262aa}\label{class_m_i_d_i_channel_state_a2fabd563938c918c2ef5515ecd0262aa}} 
+\index{MIDIChannelState@{MIDIChannelState}!getAllNotes@{getAllNotes}}
+\index{getAllNotes@{getAllNotes}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getAllNotes()}{getAllNotes()}}
+{\footnotesize\ttfamily std\+::map$<$ int, int $>$ M\+I\+D\+I\+Channel\+State\+::get\+All\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 156 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a9f92efc219eb17038123b7d749921249}\label{class_m_i_d_i_channel_state_a9f92efc219eb17038123b7d749921249}} 
+\index{MIDIChannelState@{MIDIChannelState}!getChannelSettings@{getChannelSettings}}
+\index{getChannelSettings@{getChannelSettings}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getChannelSettings()}{getChannelSettings()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_m_i_d_i_channel_settings}{M\+I\+D\+I\+Channel\+Settings}}$\ast$ M\+I\+D\+I\+Channel\+State\+::get\+Channel\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 104 of file M\+I\+D\+I\+Channel\+State.\+h.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_aa1bceb4d3446bdce1b8be3760208587f}\label{class_m_i_d_i_channel_state_aa1bceb4d3446bdce1b8be3760208587f}} 
+\index{MIDIChannelState@{MIDIChannelState}!getNotes@{getNotes}}
+\index{getNotes@{getNotes}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getNotes()}{getNotes()}}
+{\footnotesize\ttfamily std\+::map$<$ int, int $>$ M\+I\+D\+I\+Channel\+State\+::get\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 138 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a97f61d1fff73c07b6c83c77bf070eaa6}\label{class_m_i_d_i_channel_state_a97f61d1fff73c07b6c83c77bf070eaa6}} 
+\index{MIDIChannelState@{MIDIChannelState}!getNumNotes@{getNumNotes}}
+\index{getNumNotes@{getNumNotes}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getNumNotes()}{getNumNotes()}}
+{\footnotesize\ttfamily int M\+I\+D\+I\+Channel\+State\+::get\+Num\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 163 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a692a2143b9b22b637b6893593ccdaa2e}\label{class_m_i_d_i_channel_state_a692a2143b9b22b637b6893593ccdaa2e}} 
+\index{MIDIChannelState@{MIDIChannelState}!getSustainedNotes@{getSustainedNotes}}
+\index{getSustainedNotes@{getSustainedNotes}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{getSustainedNotes()}{getSustainedNotes()}}
+{\footnotesize\ttfamily std\+::map$<$ int, int $>$ M\+I\+D\+I\+Channel\+State\+::get\+Sustained\+Notes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 147 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a31306900f5e074085c961b29ef76cb9a}\label{class_m_i_d_i_channel_state_a31306900f5e074085c961b29ef76cb9a}} 
+\index{MIDIChannelState@{MIDIChannelState}!processMIDICC@{processMIDICC}}
+\index{processMIDICC@{processMIDICC}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{processMIDICC()}{processMIDICC()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::process\+M\+I\+D\+I\+CC (\begin{DoxyParamCaption}\item[{ofx\+Midi\+Message \&}]{message }\end{DoxyParamCaption})}
+
+
+
+Definition at line 51 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a9ca6c223d0c2e68af9a0cff556ee2d75}\label{class_m_i_d_i_channel_state_a9ca6c223d0c2e68af9a0cff556ee2d75}} 
+\index{MIDIChannelState@{MIDIChannelState}!processMIDIMessage@{processMIDIMessage}}
+\index{processMIDIMessage@{processMIDIMessage}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{processMIDIMessage()}{processMIDIMessage()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::process\+M\+I\+D\+I\+Message (\begin{DoxyParamCaption}\item[{ofx\+Midi\+Message \&}]{message }\end{DoxyParamCaption})}
+
+
+
+Definition at line 33 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a62e9a7db1959b8e6d260e3af6f5f40c5}\label{class_m_i_d_i_channel_state_a62e9a7db1959b8e6d260e3af6f5f40c5}} 
+\index{MIDIChannelState@{MIDIChannelState}!setSustainPedalOff@{setSustainPedalOff}}
+\index{setSustainPedalOff@{setSustainPedalOff}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{setSustainPedalOff()}{setSustainPedalOff()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::set\+Sustain\+Pedal\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 113 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a7ad00f8a3fba17fbc53c2785c5c64e62}\label{class_m_i_d_i_channel_state_a7ad00f8a3fba17fbc53c2785c5c64e62}} 
+\index{MIDIChannelState@{MIDIChannelState}!setSustainPedalOn@{setSustainPedalOn}}
+\index{setSustainPedalOn@{setSustainPedalOn}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{setSustainPedalOn()}{setSustainPedalOn()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::set\+Sustain\+Pedal\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 109 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_af7c25c9c93ca4932dfecd34f807fe499}\label{class_m_i_d_i_channel_state_af7c25c9c93ca4932dfecd34f807fe499}} 
+\index{MIDIChannelState@{MIDIChannelState}!sustainPedalIsDown@{sustainPedalIsDown}}
+\index{sustainPedalIsDown@{sustainPedalIsDown}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{sustainPedalIsDown()}{sustainPedalIsDown()}}
+{\footnotesize\ttfamily bool M\+I\+D\+I\+Channel\+State\+::sustain\+Pedal\+Is\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 188 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a814dc707c0a2ba705bd68adc4efafd5e}\label{class_m_i_d_i_channel_state_a814dc707c0a2ba705bd68adc4efafd5e}} 
+\index{MIDIChannelState@{MIDIChannelState}!tryAddMIDICC@{tryAddMIDICC}}
+\index{tryAddMIDICC@{tryAddMIDICC}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{tryAddMIDICC()}{tryAddMIDICC()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::try\+Add\+M\+I\+D\+I\+CC (\begin{DoxyParamCaption}\item[{int}]{midi\+CC,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 171 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a36c5174129f2f05b6a15e216c60cbd9a}\label{class_m_i_d_i_channel_state_a36c5174129f2f05b6a15e216c60cbd9a}} 
+\index{MIDIChannelState@{MIDIChannelState}!tryAddNoteOff@{tryAddNoteOff}}
+\index{tryAddNoteOff@{tryAddNoteOff}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{tryAddNoteOff()}{tryAddNoteOff()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::try\+Add\+Note\+Off (\begin{DoxyParamCaption}\item[{int}]{note }\end{DoxyParamCaption})}
+
+
+
+Definition at line 81 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a3e6dd1ac33d3c72e2f8f7f8aa475cbd8}\label{class_m_i_d_i_channel_state_a3e6dd1ac33d3c72e2f8f7f8aa475cbd8}} 
+\index{MIDIChannelState@{MIDIChannelState}!tryAddNoteOn@{tryAddNoteOn}}
+\index{tryAddNoteOn@{tryAddNoteOn}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{tryAddNoteOn()}{tryAddNoteOn()}}
+{\footnotesize\ttfamily void M\+I\+D\+I\+Channel\+State\+::try\+Add\+Note\+On (\begin{DoxyParamCaption}\item[{int}]{note,  }\item[{int}]{velocity }\end{DoxyParamCaption})}
+
+
+
+Definition at line 71 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+\mbox{\Hypertarget{class_m_i_d_i_channel_state_a9c4560d8ea3cc27009e042f021635aee}\label{class_m_i_d_i_channel_state_a9c4560d8ea3cc27009e042f021635aee}} 
+\index{MIDIChannelState@{MIDIChannelState}!tryGetCCValue@{tryGetCCValue}}
+\index{tryGetCCValue@{tryGetCCValue}!MIDIChannelState@{MIDIChannelState}}
+\doxysubsubsection{\texorpdfstring{tryGetCCValue()}{tryGetCCValue()}}
+{\footnotesize\ttfamily int M\+I\+D\+I\+Channel\+State\+::try\+Get\+C\+C\+Value (\begin{DoxyParamCaption}\item[{int}]{cc\+No }\end{DoxyParamCaption})}
+
+
+
+Definition at line 179 of file M\+I\+D\+I\+Channel\+State.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{_m_i_d_i_channel_state_8h}{M\+I\+D\+I\+Channel\+State.\+h}}\item 
+lib/\mbox{\hyperlink{_m_i_d_i_channel_state_8cpp}{M\+I\+D\+I\+Channel\+State.\+cpp}}\end{DoxyCompactItemize}

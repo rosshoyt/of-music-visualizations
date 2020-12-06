@@ -1,0 +1,223 @@
+\hypertarget{class_a_d_s_r}{}\doxysection{A\+D\+SR Class Reference}
+\label{class_a_d_s_r}\index{ADSR@{ADSR}}
+
+
+{\ttfamily \#include $<$A\+D\+S\+R.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_d_s_r_a8dcfb35d31bcd6b220c4ee6ef6b03855}{A\+D\+SR}} (int \mbox{\hyperlink{class_a_d_s_r_af422ee3598d3c0ef5e9add6536fd3c91}{a}}=10, int \mbox{\hyperlink{class_a_d_s_r_a05ad256b81301179deee675b0908c800}{d}}=6000, int \mbox{\hyperlink{class_a_d_s_r_ad2e30f7c9ad9eac4cc552b058a11c4cf}{s}}=0, int \mbox{\hyperlink{class_a_d_s_r_a4c2c01edb8ca87360fc48009c7931781}{r}}=1000, bool \mbox{\hyperlink{class_a_d_s_r_a720c1dd60acf1463015af2ea527a34df}{sustain\+Loop}}=false)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_a_d_s_r_a720c1dd60acf1463015af2ea527a34df}{sustain\+Loop}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_af422ee3598d3c0ef5e9add6536fd3c91}{a}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_a05ad256b81301179deee675b0908c800}{d}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_ad2e30f7c9ad9eac4cc552b058a11c4cf}{s}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_a4c2c01edb8ca87360fc48009c7931781}{r}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_a632fd678cbf4d1e619d7e4a56354f388}{total}}
+\item 
+float \mbox{\hyperlink{class_a_d_s_r_a07443924ea7ed0b33f4808d67464740e}{aL}}
+\item 
+float \mbox{\hyperlink{class_a_d_s_r_a7987e1f8dbe4f3d27297894ada7124f7}{dL}}
+\item 
+float \mbox{\hyperlink{class_a_d_s_r_a230781685f04c494bcdc730cb8f5edcd}{sL}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_a720e037f73ede68b88c8bd1c77cd64f8}{a\+Tot}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_abfce8bd25904109c2e3c4e94236142f8}{d\+Tot}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_aae6d5163cf43a1cc424445152ebf4008}{s\+Tot}}
+\item 
+double \mbox{\hyperlink{class_a_d_s_r_a5acec3b54914f0acb502a021aa9277b5}{r\+Tot}}
+\item 
+long \mbox{\hyperlink{class_a_d_s_r_a62f3934ea7a96de5d62a7ff8f47d735c}{spline\+ControlY}}
+\item 
+std\+::map$<$ long, \mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}{A\+D\+S\+R\+State}} $>$ \mbox{\hyperlink{class_a_d_s_r_acc31f1fef8a470ad022fddfe26b01604}{envelope\+Sections}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 29 of file A\+D\+S\+R.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_d_s_r_a8dcfb35d31bcd6b220c4ee6ef6b03855}\label{class_a_d_s_r_a8dcfb35d31bcd6b220c4ee6ef6b03855}} 
+\index{ADSR@{ADSR}!ADSR@{ADSR}}
+\index{ADSR@{ADSR}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{ADSR()}{ADSR()}}
+{\footnotesize\ttfamily A\+D\+S\+R\+::\+A\+D\+SR (\begin{DoxyParamCaption}\item[{int}]{a = {\ttfamily 10},  }\item[{int}]{d = {\ttfamily 6000},  }\item[{int}]{s = {\ttfamily 0},  }\item[{int}]{r = {\ttfamily 1000},  }\item[{bool}]{sustain\+Loop = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file A\+D\+S\+R.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_d_s_r_af422ee3598d3c0ef5e9add6536fd3c91}\label{class_a_d_s_r_af422ee3598d3c0ef5e9add6536fd3c91}} 
+\index{ADSR@{ADSR}!a@{a}}
+\index{a@{a}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{a}{a}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::a}
+
+
+
+Definition at line 33 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a07443924ea7ed0b33f4808d67464740e}\label{class_a_d_s_r_a07443924ea7ed0b33f4808d67464740e}} 
+\index{ADSR@{ADSR}!aL@{aL}}
+\index{aL@{aL}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{aL}{aL}}
+{\footnotesize\ttfamily float A\+D\+S\+R\+::aL}
+
+
+
+Definition at line 34 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a720e037f73ede68b88c8bd1c77cd64f8}\label{class_a_d_s_r_a720e037f73ede68b88c8bd1c77cd64f8}} 
+\index{ADSR@{ADSR}!aTot@{aTot}}
+\index{aTot@{aTot}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{aTot}{aTot}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::a\+Tot}
+
+
+
+Definition at line 35 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a05ad256b81301179deee675b0908c800}\label{class_a_d_s_r_a05ad256b81301179deee675b0908c800}} 
+\index{ADSR@{ADSR}!d@{d}}
+\index{d@{d}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::d}
+
+
+
+Definition at line 33 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a7987e1f8dbe4f3d27297894ada7124f7}\label{class_a_d_s_r_a7987e1f8dbe4f3d27297894ada7124f7}} 
+\index{ADSR@{ADSR}!dL@{dL}}
+\index{dL@{dL}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{dL}{dL}}
+{\footnotesize\ttfamily float A\+D\+S\+R\+::dL}
+
+
+
+Definition at line 34 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_abfce8bd25904109c2e3c4e94236142f8}\label{class_a_d_s_r_abfce8bd25904109c2e3c4e94236142f8}} 
+\index{ADSR@{ADSR}!dTot@{dTot}}
+\index{dTot@{dTot}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{dTot}{dTot}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::d\+Tot}
+
+
+
+Definition at line 35 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_acc31f1fef8a470ad022fddfe26b01604}\label{class_a_d_s_r_acc31f1fef8a470ad022fddfe26b01604}} 
+\index{ADSR@{ADSR}!envelopeSections@{envelopeSections}}
+\index{envelopeSections@{envelopeSections}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{envelopeSections}{envelopeSections}}
+{\footnotesize\ttfamily std\+::map$<$long, \mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}{A\+D\+S\+R\+State}}$>$ A\+D\+S\+R\+::envelope\+Sections}
+
+
+
+Definition at line 38 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a4c2c01edb8ca87360fc48009c7931781}\label{class_a_d_s_r_a4c2c01edb8ca87360fc48009c7931781}} 
+\index{ADSR@{ADSR}!r@{r}}
+\index{r@{r}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{r}{r}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::r}
+
+
+
+Definition at line 33 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a5acec3b54914f0acb502a021aa9277b5}\label{class_a_d_s_r_a5acec3b54914f0acb502a021aa9277b5}} 
+\index{ADSR@{ADSR}!rTot@{rTot}}
+\index{rTot@{rTot}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{rTot}{rTot}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::r\+Tot}
+
+
+
+Definition at line 35 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_ad2e30f7c9ad9eac4cc552b058a11c4cf}\label{class_a_d_s_r_ad2e30f7c9ad9eac4cc552b058a11c4cf}} 
+\index{ADSR@{ADSR}!s@{s}}
+\index{s@{s}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{s}{s}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::s}
+
+
+
+Definition at line 33 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a230781685f04c494bcdc730cb8f5edcd}\label{class_a_d_s_r_a230781685f04c494bcdc730cb8f5edcd}} 
+\index{ADSR@{ADSR}!sL@{sL}}
+\index{sL@{sL}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{sL}{sL}}
+{\footnotesize\ttfamily float A\+D\+S\+R\+::sL}
+
+
+
+Definition at line 34 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a62f3934ea7a96de5d62a7ff8f47d735c}\label{class_a_d_s_r_a62f3934ea7a96de5d62a7ff8f47d735c}} 
+\index{ADSR@{ADSR}!splineControlY@{splineControlY}}
+\index{splineControlY@{splineControlY}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{splineControlY}{splineControlY}}
+{\footnotesize\ttfamily long A\+D\+S\+R\+::spline\+ControlY}
+
+
+
+Definition at line 36 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_aae6d5163cf43a1cc424445152ebf4008}\label{class_a_d_s_r_aae6d5163cf43a1cc424445152ebf4008}} 
+\index{ADSR@{ADSR}!sTot@{sTot}}
+\index{sTot@{sTot}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{sTot}{sTot}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::s\+Tot}
+
+
+
+Definition at line 35 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a720c1dd60acf1463015af2ea527a34df}\label{class_a_d_s_r_a720c1dd60acf1463015af2ea527a34df}} 
+\index{ADSR@{ADSR}!sustainLoop@{sustainLoop}}
+\index{sustainLoop@{sustainLoop}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{sustainLoop}{sustainLoop}}
+{\footnotesize\ttfamily bool A\+D\+S\+R\+::sustain\+Loop}
+
+
+
+Definition at line 32 of file A\+D\+S\+R.\+h.
+
+\mbox{\Hypertarget{class_a_d_s_r_a632fd678cbf4d1e619d7e4a56354f388}\label{class_a_d_s_r_a632fd678cbf4d1e619d7e4a56354f388}} 
+\index{ADSR@{ADSR}!total@{total}}
+\index{total@{total}!ADSR@{ADSR}}
+\doxysubsubsection{\texorpdfstring{total}{total}}
+{\footnotesize\ttfamily double A\+D\+S\+R\+::total}
+
+
+
+Definition at line 33 of file A\+D\+S\+R.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{_a_d_s_r_8h}{A\+D\+S\+R.\+h}}\item 
+lib/\mbox{\hyperlink{_a_d_s_r_8cpp}{A\+D\+S\+R.\+cpp}}\end{DoxyCompactItemize}

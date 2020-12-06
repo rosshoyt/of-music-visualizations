@@ -1,0 +1,61 @@
+\hypertarget{_a_d_s_r_8h}{}\doxysection{inc/\+A\+D\+SR.h File Reference}
+\label{_a_d_s_r_8h}\index{inc/ADSR.h@{inc/ADSR.h}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}spline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_d_s_r}{A\+D\+SR}}
+\item 
+class \mbox{\hyperlink{class_note_a_d_s_r_state}{Note\+A\+D\+S\+R\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}{A\+D\+S\+R\+State}} \{ \newline
+\mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a05f520974a8946a4b11907b698557a8b}{A\+T\+T\+A\+C\+K\+I\+NG}}, 
+\mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a9f02aae530e2878b0b9ff4f1119bc6b7}{D\+E\+C\+A\+Y\+I\+NG}}, 
+\mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a5abb1e286a712d40468b0d080d1eb407}{S\+U\+S\+T\+A\+I\+N\+I\+NG}}, 
+\mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a1312e1e19db666d26ef93f168374c721}{R\+E\+L\+E\+A\+S\+I\+NG}}, 
+\newline
+\mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9aac132f2982b98bcaa3445e535a03ff75}{O\+FF}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}} 
+\index{ADSR.h@{ADSR.h}!ADSRState@{ADSRState}}
+\index{ADSRState@{ADSRState}!ADSR.h@{ADSR.h}}
+\doxysubsubsection{\texorpdfstring{ADSRState}{ADSRState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9}{A\+D\+S\+R\+State}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ATTACKING@{ATTACKING}!ADSR.h@{ADSR.h}}\index{ADSR.h@{ADSR.h}!ATTACKING@{ATTACKING}}}\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a05f520974a8946a4b11907b698557a8b}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a05f520974a8946a4b11907b698557a8b}} 
+A\+T\+T\+A\+C\+K\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DECAYING@{DECAYING}!ADSR.h@{ADSR.h}}\index{ADSR.h@{ADSR.h}!DECAYING@{DECAYING}}}\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a9f02aae530e2878b0b9ff4f1119bc6b7}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a9f02aae530e2878b0b9ff4f1119bc6b7}} 
+D\+E\+C\+A\+Y\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUSTAINING@{SUSTAINING}!ADSR.h@{ADSR.h}}\index{ADSR.h@{ADSR.h}!SUSTAINING@{SUSTAINING}}}\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a5abb1e286a712d40468b0d080d1eb407}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a5abb1e286a712d40468b0d080d1eb407}} 
+S\+U\+S\+T\+A\+I\+N\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RELEASING@{RELEASING}!ADSR.h@{ADSR.h}}\index{ADSR.h@{ADSR.h}!RELEASING@{RELEASING}}}\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a1312e1e19db666d26ef93f168374c721}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9a1312e1e19db666d26ef93f168374c721}} 
+R\+E\+L\+E\+A\+S\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OFF@{OFF}!ADSR.h@{ADSR.h}}\index{ADSR.h@{ADSR.h}!OFF@{OFF}}}\mbox{\Hypertarget{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9aac132f2982b98bcaa3445e535a03ff75}\label{_a_d_s_r_8h_a25fad2730465bca53850bc73c09830b9aac132f2982b98bcaa3445e535a03ff75}} 
+O\+FF&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 18 of file A\+D\+S\+R.\+h.
+

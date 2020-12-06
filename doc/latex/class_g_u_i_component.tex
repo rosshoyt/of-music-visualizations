@@ -1,0 +1,200 @@
+\hypertarget{class_g_u_i_component}{}\doxysection{G\+U\+I\+Component Class Reference}
+\label{class_g_u_i_component}\index{GUIComponent@{GUIComponent}}
+
+
+{\ttfamily \#include $<$G\+U\+I\+Component.\+h$>$}
+
+Inheritance diagram for G\+U\+I\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.276423cm]{class_g_u_i_component}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_u_i_component_a72058f7e000feb0dfc1db9882f206fa2}{G\+U\+I\+Component}} (std\+::string uid)
+\item 
+virtual void \mbox{\hyperlink{class_g_u_i_component_a7193d4079eec5585fad80e1ff37f45c1}{setup\+G\+UI}} ()=0
+\item 
+void \mbox{\hyperlink{class_g_u_i_component_aabc79793818ff80f73838871cb56bc43}{set\+G\+U\+I\+Name}} (std\+::string name)
+\item 
+std\+::string \mbox{\hyperlink{class_g_u_i_component_ae84ea12251b100f0f9c1ce4dac93a42f}{get\+G\+U\+I\+Name}} ()
+\item 
+virtual void \mbox{\hyperlink{class_g_u_i_component_aea8e943c9206f4a36f88c10628e3268d}{draw\+G\+UI}} ()
+\item 
+virtual void \mbox{\hyperlink{class_g_u_i_component_afb5a79b5201c11130860bd102260c176}{set\+Menu\+XY}} (float x, float y)
+\item 
+virtual float \mbox{\hyperlink{class_g_u_i_component_afdd6d68533f96d01bbcdf430db99808a}{get\+Menu\+Height}} ()
+\item 
+float \mbox{\hyperlink{class_g_u_i_component_a181fc0740e308d236ffbd53d08942fd0}{get\+Menu\+Width}} ()
+\item 
+void \mbox{\hyperlink{class_g_u_i_component_a609f52319c2578abb07ea59b913bcc3c}{set\+Default\+Menu\+Width}} (float width)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofx\+Panel \mbox{\hyperlink{class_g_u_i_component_ade2bdd63a9ad721f097ad8078260462a}{gui}}
+\item 
+float \mbox{\hyperlink{class_g_u_i_component_ad6850e1ed52605983e0d35fbdbaa792e}{menuX}} = 0
+\item 
+float \mbox{\hyperlink{class_g_u_i_component_af25486251cf9d0fd3ed13bc1b6f6b7d8}{menuY}} = 0
+\item 
+float \mbox{\hyperlink{class_g_u_i_component_a7c1357257584d7448576d08a521ded9e}{default\+Menu\+Width}} = 100
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file G\+U\+I\+Component.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_u_i_component_a72058f7e000feb0dfc1db9882f206fa2}\label{class_g_u_i_component_a72058f7e000feb0dfc1db9882f206fa2}} 
+\index{GUIComponent@{GUIComponent}!GUIComponent@{GUIComponent}}
+\index{GUIComponent@{GUIComponent}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{GUIComponent()}{GUIComponent()}}
+{\footnotesize\ttfamily G\+U\+I\+Component\+::\+G\+U\+I\+Component (\begin{DoxyParamCaption}\item[{std\+::string}]{uid }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file G\+U\+I\+Component.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_u_i_component_aea8e943c9206f4a36f88c10628e3268d}\label{class_g_u_i_component_aea8e943c9206f4a36f88c10628e3268d}} 
+\index{GUIComponent@{GUIComponent}!drawGUI@{drawGUI}}
+\index{drawGUI@{drawGUI}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{drawGUI()}{drawGUI()}}
+{\footnotesize\ttfamily void G\+U\+I\+Component\+::draw\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_main_g_u_i_a0441da91d97bdc3802afe81c82b0f71a}{Main\+G\+UI}}.
+
+
+
+Definition at line 16 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_ae84ea12251b100f0f9c1ce4dac93a42f}\label{class_g_u_i_component_ae84ea12251b100f0f9c1ce4dac93a42f}} 
+\index{GUIComponent@{GUIComponent}!getGUIName@{getGUIName}}
+\index{getGUIName@{getGUIName}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{getGUIName()}{getGUIName()}}
+{\footnotesize\ttfamily std\+::string G\+U\+I\+Component\+::get\+G\+U\+I\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_afdd6d68533f96d01bbcdf430db99808a}\label{class_g_u_i_component_afdd6d68533f96d01bbcdf430db99808a}} 
+\index{GUIComponent@{GUIComponent}!getMenuHeight@{getMenuHeight}}
+\index{getMenuHeight@{getMenuHeight}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{getMenuHeight()}{getMenuHeight()}}
+{\footnotesize\ttfamily float G\+U\+I\+Component\+::get\+Menu\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 26 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_a181fc0740e308d236ffbd53d08942fd0}\label{class_g_u_i_component_a181fc0740e308d236ffbd53d08942fd0}} 
+\index{GUIComponent@{GUIComponent}!getMenuWidth@{getMenuWidth}}
+\index{getMenuWidth@{getMenuWidth}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{getMenuWidth()}{getMenuWidth()}}
+{\footnotesize\ttfamily float G\+U\+I\+Component\+::get\+Menu\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 29 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_a609f52319c2578abb07ea59b913bcc3c}\label{class_g_u_i_component_a609f52319c2578abb07ea59b913bcc3c}} 
+\index{GUIComponent@{GUIComponent}!setDefaultMenuWidth@{setDefaultMenuWidth}}
+\index{setDefaultMenuWidth@{setDefaultMenuWidth}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{setDefaultMenuWidth()}{setDefaultMenuWidth()}}
+{\footnotesize\ttfamily void G\+U\+I\+Component\+::set\+Default\+Menu\+Width (\begin{DoxyParamCaption}\item[{float}]{width }\end{DoxyParamCaption})}
+
+
+
+Definition at line 33 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_aabc79793818ff80f73838871cb56bc43}\label{class_g_u_i_component_aabc79793818ff80f73838871cb56bc43}} 
+\index{GUIComponent@{GUIComponent}!setGUIName@{setGUIName}}
+\index{setGUIName@{setGUIName}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{setGUIName()}{setGUIName()}}
+{\footnotesize\ttfamily void G\+U\+I\+Component\+::set\+G\+U\+I\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_afb5a79b5201c11130860bd102260c176}\label{class_g_u_i_component_afb5a79b5201c11130860bd102260c176}} 
+\index{GUIComponent@{GUIComponent}!setMenuXY@{setMenuXY}}
+\index{setMenuXY@{setMenuXY}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{setMenuXY()}{setMenuXY()}}
+{\footnotesize\ttfamily void G\+U\+I\+Component\+::set\+Menu\+XY (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 20 of file G\+U\+I\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_g_u_i_component_a7193d4079eec5585fad80e1ff37f45c1}\label{class_g_u_i_component_a7193d4079eec5585fad80e1ff37f45c1}} 
+\index{GUIComponent@{GUIComponent}!setupGUI@{setupGUI}}
+\index{setupGUI@{setupGUI}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{setupGUI()}{setupGUI()}}
+{\footnotesize\ttfamily virtual void G\+U\+I\+Component\+::setup\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_note_grid_animation_a8e95c570026a17809c68498fd61c3922}{Note\+Grid\+Animation}}, \mbox{\hyperlink{class_m_i_d_i_port_state_ad664ec89dea98742937e846aad48f8d2}{M\+I\+D\+I\+Port\+State}}, \mbox{\hyperlink{class_a_d_s_r_visualizer_a9b530cdb5ab30e6d4a609159863f036f}{A\+D\+S\+R\+Visualizer}}, \mbox{\hyperlink{class_animated3_d_mesh_ab424fdb953cd33539989b1cef96d94c8}{Animated3\+D\+Mesh}}, \mbox{\hyperlink{class_mesh_from_image_a8eea6610949d221845acd7d1451d4718}{Mesh\+From\+Image}}, \mbox{\hyperlink{class_circle_of_fifths_a8f7f90e69748300242a4c7481f5ea9b3}{Circle\+Of\+Fifths}}, \mbox{\hyperlink{class_textured_sphere_a37c7888f4fef37662e27e19597eb5cbe}{Textured\+Sphere}}, and \mbox{\hyperlink{class_main_g_u_i_add3e49ae13caa93c21d87cf5a41f979d}{Main\+G\+UI}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_g_u_i_component_a7c1357257584d7448576d08a521ded9e}\label{class_g_u_i_component_a7c1357257584d7448576d08a521ded9e}} 
+\index{GUIComponent@{GUIComponent}!defaultMenuWidth@{defaultMenuWidth}}
+\index{defaultMenuWidth@{defaultMenuWidth}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{defaultMenuWidth}{defaultMenuWidth}}
+{\footnotesize\ttfamily float G\+U\+I\+Component\+::default\+Menu\+Width = 100\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 32 of file G\+U\+I\+Component.\+h.
+
+\mbox{\Hypertarget{class_g_u_i_component_ade2bdd63a9ad721f097ad8078260462a}\label{class_g_u_i_component_ade2bdd63a9ad721f097ad8078260462a}} 
+\index{GUIComponent@{GUIComponent}!gui@{gui}}
+\index{gui@{gui}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{gui}{gui}}
+{\footnotesize\ttfamily ofx\+Panel G\+U\+I\+Component\+::gui\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 28 of file G\+U\+I\+Component.\+h.
+
+\mbox{\Hypertarget{class_g_u_i_component_ad6850e1ed52605983e0d35fbdbaa792e}\label{class_g_u_i_component_ad6850e1ed52605983e0d35fbdbaa792e}} 
+\index{GUIComponent@{GUIComponent}!menuX@{menuX}}
+\index{menuX@{menuX}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{menuX}{menuX}}
+{\footnotesize\ttfamily float G\+U\+I\+Component\+::menuX = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 30 of file G\+U\+I\+Component.\+h.
+
+\mbox{\Hypertarget{class_g_u_i_component_af25486251cf9d0fd3ed13bc1b6f6b7d8}\label{class_g_u_i_component_af25486251cf9d0fd3ed13bc1b6f6b7d8}} 
+\index{GUIComponent@{GUIComponent}!menuY@{menuY}}
+\index{menuY@{menuY}!GUIComponent@{GUIComponent}}
+\doxysubsubsection{\texorpdfstring{menuY}{menuY}}
+{\footnotesize\ttfamily float G\+U\+I\+Component\+::menuY = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 30 of file G\+U\+I\+Component.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{_g_u_i_component_8h}{G\+U\+I\+Component.\+h}}\item 
+lib/\mbox{\hyperlink{_g_u_i_component_8cpp}{G\+U\+I\+Component.\+cpp}}\end{DoxyCompactItemize}

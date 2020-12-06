@@ -1,0 +1,273 @@
+\hypertarget{class_note_grid_animation}{}\doxysection{Note\+Grid\+Animation Class Reference}
+\label{class_note_grid_animation}\index{NoteGridAnimation@{NoteGridAnimation}}
+
+
+{\ttfamily \#include $<$Note\+Grid\+Animation.\+h$>$}
+
+Inheritance diagram for Note\+Grid\+Animation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_note_grid_animation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_note_grid_animation_a7243a4d0c273a7ad53db1f325707fbdf}{Note\+Grid\+Animation}} (std\+::string uid=\char`\"{}2D Note Grid\char`\"{})
+\item 
+void \mbox{\hyperlink{class_note_grid_animation_a8982928e8db11a18f397d84e05b144a7}{setup}} ()
+\item 
+void \mbox{\hyperlink{class_note_grid_animation_a8e95c570026a17809c68498fd61c3922}{setup\+G\+UI}} () override
+\item 
+void \mbox{\hyperlink{class_note_grid_animation_a5c8fb5ecaf9dd560e1e222bccefb7a4a}{update}} ()
+\item 
+void \mbox{\hyperlink{class_note_grid_animation_a1a9abf90170755f18d55fa101716570f}{draw}} ()
+\item 
+void \mbox{\hyperlink{class_note_grid_animation_a5b2b40fc98edfc16f72197114f8eaa07}{window\+Resized}} (int w, int h)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofx\+Toggle \mbox{\hyperlink{class_note_grid_animation_ad78067bac2b8f88540eded133bf4b618}{draw\+All\+Animations}}
+\item 
+ofx\+Int\+Slider \mbox{\hyperlink{class_note_grid_animation_ab1142ba98a8a3bee034816373a0292c0}{pitch\+Offset\+Slider}}
+\item 
+ofx\+Toggle \mbox{\hyperlink{class_note_grid_animation_a26515ce3721913895aad4f79b96fdff4}{pitch\+Offset\+Use\+M\+I\+D\+I\+C\+C\+Toggle}}
+\item 
+of\+Parameter$<$ int $>$ \mbox{\hyperlink{class_note_grid_animation_ad8e2f57f67abca8bcdc1314cdf006c4f}{pitch\+Offset\+Amount}}
+\item 
+ofx\+Toggle \mbox{\hyperlink{class_note_grid_animation_ab4215182f7498f1a2c8f41ecc681a4a3}{draw\+Lines\+Toggle}}
+\item 
+ofx\+Toggle \mbox{\hyperlink{class_note_grid_animation_ae301290d4ed166a5541a044cb185f524}{draw\+Background\+Grid\+Toggle}}
+\item 
+ofx\+Color\+Slider \mbox{\hyperlink{class_note_grid_animation_ae08e65e7e20736e78f634c16eda5dec5}{background\+Color\+Selector}}
+\item 
+ofx\+Color\+Slider \mbox{\hyperlink{class_note_grid_animation_adf26f5e0a68aaed57d11b6b44cbff675}{grid\+Line\+Color\+Selector}}
+\item 
+ofx\+Color\+Slider \mbox{\hyperlink{class_note_grid_animation_ac711c3a3ed1a4c47a4445e5443fb8872}{octave\+Row\+Color\+Selector}}
+\item 
+ofx\+Color\+Slider \mbox{\hyperlink{class_note_grid_animation_a213c4984fcfe57e205c88c3b23886410}{note\+Display\+Color\+Selector1}}
+\item 
+ofx\+Color\+Slider \mbox{\hyperlink{class_note_grid_animation_a53848d2d8b804bcc1700d0d3570251ec}{note\+Display\+Color\+Selector2}}
+\item 
+ofx\+Color\+Slider $\ast$ \mbox{\hyperlink{class_note_grid_animation_aea75ca128685b7f2a2e4c9dac669dfe4}{channel\+Colors}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 21 of file Note\+Grid\+Animation.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_note_grid_animation_a7243a4d0c273a7ad53db1f325707fbdf}\label{class_note_grid_animation_a7243a4d0c273a7ad53db1f325707fbdf}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!NoteGridAnimation@{NoteGridAnimation}}
+\index{NoteGridAnimation@{NoteGridAnimation}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{NoteGridAnimation()}{NoteGridAnimation()}}
+{\footnotesize\ttfamily Note\+Grid\+Animation\+::\+Note\+Grid\+Animation (\begin{DoxyParamCaption}\item[{std\+::string}]{uid = {\ttfamily \char`\"{}2D~Note~Grid\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Note\+Grid\+Animation.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_note_grid_animation_a1a9abf90170755f18d55fa101716570f}\label{class_note_grid_animation_a1a9abf90170755f18d55fa101716570f}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!draw@{draw}}
+\index{draw@{draw}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Note\+Grid\+Animation\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_animation_component_a00d82c08b91644fb73c6d385112855ad}{Animation\+Component}}.
+
+
+
+Definition at line 69 of file Note\+Grid\+Animation.\+cpp.
+
+\mbox{\Hypertarget{class_note_grid_animation_a8982928e8db11a18f397d84e05b144a7}\label{class_note_grid_animation_a8982928e8db11a18f397d84e05b144a7}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!setup@{setup}}
+\index{setup@{setup}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void Note\+Grid\+Animation\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_animation_component_af22bddd14a26f667a6558f398a3b3974}{Animation\+Component}}.
+
+
+
+Definition at line 7 of file Note\+Grid\+Animation.\+cpp.
+
+\mbox{\Hypertarget{class_note_grid_animation_a8e95c570026a17809c68498fd61c3922}\label{class_note_grid_animation_a8e95c570026a17809c68498fd61c3922}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!setupGUI@{setupGUI}}
+\index{setupGUI@{setupGUI}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{setupGUI()}{setupGUI()}}
+{\footnotesize\ttfamily void Note\+Grid\+Animation\+::setup\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_g_u_i_component_a7193d4079eec5585fad80e1ff37f45c1}{G\+U\+I\+Component}}.
+
+
+
+Definition at line 10 of file Note\+Grid\+Animation.\+cpp.
+
+\mbox{\Hypertarget{class_note_grid_animation_a5c8fb5ecaf9dd560e1e222bccefb7a4a}\label{class_note_grid_animation_a5c8fb5ecaf9dd560e1e222bccefb7a4a}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!update@{update}}
+\index{update@{update}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Note\+Grid\+Animation\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_animation_component_ae36ba9a4f011140e93c0a6da5946f2e3}{Animation\+Component}}.
+
+
+
+Definition at line 56 of file Note\+Grid\+Animation.\+cpp.
+
+\mbox{\Hypertarget{class_note_grid_animation_a5b2b40fc98edfc16f72197114f8eaa07}\label{class_note_grid_animation_a5b2b40fc98edfc16f72197114f8eaa07}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!windowResized@{windowResized}}
+\index{windowResized@{windowResized}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{windowResized()}{windowResized()}}
+{\footnotesize\ttfamily void Note\+Grid\+Animation\+::window\+Resized (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+
+
+Definition at line 172 of file Note\+Grid\+Animation.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_note_grid_animation_ae08e65e7e20736e78f634c16eda5dec5}\label{class_note_grid_animation_ae08e65e7e20736e78f634c16eda5dec5}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!backgroundColorSelector@{backgroundColorSelector}}
+\index{backgroundColorSelector@{backgroundColorSelector}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{backgroundColorSelector}{backgroundColorSelector}}
+{\footnotesize\ttfamily ofx\+Color\+Slider Note\+Grid\+Animation\+::background\+Color\+Selector}
+
+
+
+Definition at line 43 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_aea75ca128685b7f2a2e4c9dac669dfe4}\label{class_note_grid_animation_aea75ca128685b7f2a2e4c9dac669dfe4}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!channelColors@{channelColors}}
+\index{channelColors@{channelColors}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{channelColors}{channelColors}}
+{\footnotesize\ttfamily ofx\+Color\+Slider$\ast$ Note\+Grid\+Animation\+::channel\+Colors}
+
+
+
+Definition at line 50 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ad78067bac2b8f88540eded133bf4b618}\label{class_note_grid_animation_ad78067bac2b8f88540eded133bf4b618}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!drawAllAnimations@{drawAllAnimations}}
+\index{drawAllAnimations@{drawAllAnimations}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{drawAllAnimations}{drawAllAnimations}}
+{\footnotesize\ttfamily ofx\+Toggle Note\+Grid\+Animation\+::draw\+All\+Animations}
+
+
+
+Definition at line 34 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ae301290d4ed166a5541a044cb185f524}\label{class_note_grid_animation_ae301290d4ed166a5541a044cb185f524}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!drawBackgroundGridToggle@{drawBackgroundGridToggle}}
+\index{drawBackgroundGridToggle@{drawBackgroundGridToggle}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{drawBackgroundGridToggle}{drawBackgroundGridToggle}}
+{\footnotesize\ttfamily ofx\+Toggle Note\+Grid\+Animation\+::draw\+Background\+Grid\+Toggle}
+
+
+
+Definition at line 41 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ab4215182f7498f1a2c8f41ecc681a4a3}\label{class_note_grid_animation_ab4215182f7498f1a2c8f41ecc681a4a3}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!drawLinesToggle@{drawLinesToggle}}
+\index{drawLinesToggle@{drawLinesToggle}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{drawLinesToggle}{drawLinesToggle}}
+{\footnotesize\ttfamily ofx\+Toggle Note\+Grid\+Animation\+::draw\+Lines\+Toggle}
+
+
+
+Definition at line 40 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_adf26f5e0a68aaed57d11b6b44cbff675}\label{class_note_grid_animation_adf26f5e0a68aaed57d11b6b44cbff675}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!gridLineColorSelector@{gridLineColorSelector}}
+\index{gridLineColorSelector@{gridLineColorSelector}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{gridLineColorSelector}{gridLineColorSelector}}
+{\footnotesize\ttfamily ofx\+Color\+Slider Note\+Grid\+Animation\+::grid\+Line\+Color\+Selector}
+
+
+
+Definition at line 44 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_a213c4984fcfe57e205c88c3b23886410}\label{class_note_grid_animation_a213c4984fcfe57e205c88c3b23886410}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!noteDisplayColorSelector1@{noteDisplayColorSelector1}}
+\index{noteDisplayColorSelector1@{noteDisplayColorSelector1}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{noteDisplayColorSelector1}{noteDisplayColorSelector1}}
+{\footnotesize\ttfamily ofx\+Color\+Slider Note\+Grid\+Animation\+::note\+Display\+Color\+Selector1}
+
+
+
+Definition at line 46 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_a53848d2d8b804bcc1700d0d3570251ec}\label{class_note_grid_animation_a53848d2d8b804bcc1700d0d3570251ec}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!noteDisplayColorSelector2@{noteDisplayColorSelector2}}
+\index{noteDisplayColorSelector2@{noteDisplayColorSelector2}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{noteDisplayColorSelector2}{noteDisplayColorSelector2}}
+{\footnotesize\ttfamily ofx\+Color\+Slider Note\+Grid\+Animation\+::note\+Display\+Color\+Selector2}
+
+
+
+Definition at line 47 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ac711c3a3ed1a4c47a4445e5443fb8872}\label{class_note_grid_animation_ac711c3a3ed1a4c47a4445e5443fb8872}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!octaveRowColorSelector@{octaveRowColorSelector}}
+\index{octaveRowColorSelector@{octaveRowColorSelector}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{octaveRowColorSelector}{octaveRowColorSelector}}
+{\footnotesize\ttfamily ofx\+Color\+Slider Note\+Grid\+Animation\+::octave\+Row\+Color\+Selector}
+
+
+
+Definition at line 45 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ad8e2f57f67abca8bcdc1314cdf006c4f}\label{class_note_grid_animation_ad8e2f57f67abca8bcdc1314cdf006c4f}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!pitchOffsetAmount@{pitchOffsetAmount}}
+\index{pitchOffsetAmount@{pitchOffsetAmount}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{pitchOffsetAmount}{pitchOffsetAmount}}
+{\footnotesize\ttfamily of\+Parameter$<$int$>$ Note\+Grid\+Animation\+::pitch\+Offset\+Amount}
+
+
+
+Definition at line 37 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_ab1142ba98a8a3bee034816373a0292c0}\label{class_note_grid_animation_ab1142ba98a8a3bee034816373a0292c0}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!pitchOffsetSlider@{pitchOffsetSlider}}
+\index{pitchOffsetSlider@{pitchOffsetSlider}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{pitchOffsetSlider}{pitchOffsetSlider}}
+{\footnotesize\ttfamily ofx\+Int\+Slider Note\+Grid\+Animation\+::pitch\+Offset\+Slider}
+
+
+
+Definition at line 35 of file Note\+Grid\+Animation.\+h.
+
+\mbox{\Hypertarget{class_note_grid_animation_a26515ce3721913895aad4f79b96fdff4}\label{class_note_grid_animation_a26515ce3721913895aad4f79b96fdff4}} 
+\index{NoteGridAnimation@{NoteGridAnimation}!pitchOffsetUseMIDICCToggle@{pitchOffsetUseMIDICCToggle}}
+\index{pitchOffsetUseMIDICCToggle@{pitchOffsetUseMIDICCToggle}!NoteGridAnimation@{NoteGridAnimation}}
+\doxysubsubsection{\texorpdfstring{pitchOffsetUseMIDICCToggle}{pitchOffsetUseMIDICCToggle}}
+{\footnotesize\ttfamily ofx\+Toggle Note\+Grid\+Animation\+::pitch\+Offset\+Use\+M\+I\+D\+I\+C\+C\+Toggle}
+
+
+
+Definition at line 36 of file Note\+Grid\+Animation.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+of-\/midi-\/visualizer/src/\mbox{\hyperlink{_note_grid_animation_8h}{Note\+Grid\+Animation.\+h}}\item 
+of-\/midi-\/visualizer/src/\mbox{\hyperlink{_note_grid_animation_8cpp}{Note\+Grid\+Animation.\+cpp}}\end{DoxyCompactItemize}
