@@ -16,13 +16,13 @@ void MIDIPortState::setupGUI() {
 	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
 	for (int i = 0; i < numChannels; i++) {
-		auto params = channels[i].getChannelSettings()->params;
+		auto params = channels[i]->getChannelSettings()->params;
 		params.setName("Channel " + std::to_string(i + 1) + " Settings");
-		
+		//std::cout << "MIDIPortState::setupGUI() added channel params with size " << params.size() << "\n";
 		gui.add(params);
 	}
 
-    resetMidiPortButton.addListener(this, &MIDIPortState::setupMIDIPort);
+    resetMidiPortButton.addListener(this, &MIDIPortState::setupOfxMIDIPort);
    
 	gui.minimizeAll();
 
@@ -43,7 +43,7 @@ unsigned int MIDIPortState::getNumChannels() {
 * TODO Input validation
 */
 std::map<int, int> MIDIPortState::getChannelNotes(unsigned int channel) {
-	return channels[channel].getAllNotes();
+	return channels[channel]->getAllNotes();
 }
 
 std::vector<std::map<int, int>> MIDIPortState::getAllChannelNotes() {
@@ -76,24 +76,37 @@ const std::map<int, std::pair<int, float>> MIDIPortState::getAllNotesDown() {
 * TODO Input validation
 */
 int MIDIPortState::getMIDICCValue(unsigned int channel, int ccNumber) {
-	return channels[channel].tryGetCCValue(ccNumber);
+	return channels[channel]->tryGetCCValue(ccNumber);
 }
 
 float MIDIPortState::getADSRValue(unsigned int channel, int noteNumber) {
-	return channels[channel].getADSRLevel(noteNumber);
+	return channels[channel]->getADSRLevel(noteNumber);
 }
 
 MIDIChannelSettings* MIDIPortState::getChannelSettings(unsigned int channel) {
-	return channels[channel].getChannelSettings();
+	return channels[channel]->getChannelSettings();
 }
 
 
 void MIDIPortState::setupMIDIPortState() {
+	std::cout << "In MIDIPortState::setupMIDIPortState(), numChannels = "<< numChannels << "\n";
 	validateSettings();
+	EnvelopeSettings settings;
+	settings.envelopeType = ADSR;
+	settings.envSegmentLengths = { 50, 2000, 400 };
+	settings.envSegmentLevels = { 0.f, 1.f, .5f };
+
+	Envelope envelope(settings);
+
+	MIDIChannelSettings* channelSettings = new MIDIChannelSettings(envelope);
+
+
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
-	channels = new MIDIChannelState[numChannels];
-	
-	setupMIDIPort();
+	for (int i = 0; i < numChannels; ++i) {
+		std::cout << "Creating MIDI Channel #" << i+1 << '\n';
+		channels.push_back(new MIDIChannelState(channelSettings));
+	}
+	setupOfxMIDIPort();
 }
 
 void MIDIPortState::validateSettings() {
@@ -101,7 +114,7 @@ void MIDIPortState::validateSettings() {
 	assert(numChannels > 0 && numChannels >= 16);
 }
 
-void MIDIPortState::setupMIDIPort() {
+void MIDIPortState::setupOfxMIDIPort() {
 	std::cout << "Setting up MIDI Port...";
 	if (useVirtualPort) {
 		std::cout << "... using local virtual midi port name " << virtualPortName << "\n";
@@ -132,7 +145,7 @@ void MIDIPortState::newMidiMessage(ofxMidiMessage& message) {
 	updateMIDIMessageMonitor(message);
 	unsigned int channel(message.channel - 1);
 	if (channel < numChannels) {
-		channels[channel].processMIDIMessage(message);
+		channels[channel]->processMIDIMessage(message);
 	}
 }
 
@@ -161,14 +174,4 @@ void MIDIPortState::updateMIDIMessageMonitor(ofxMidiMessage& message) {
 	text.append(value);
 	
 	midiMessageMonitor = text;
-	//midiMessageMonitor += " " + message.
-	//bool addValue = true;
-	/*switch (message.status) {
-	case MIDI_NOTE_ON:
-		break;
-	case MIDI_NOTE_OFF:
-		break;
-	case: MIDI_
-
-	}*/
 }

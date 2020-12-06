@@ -64,7 +64,6 @@ public:
 
 class Envelope {
 public:
-	
 	Envelope(EnvelopeSettings envelopeSettings);
 
 	// no-args constructor which sets default envelopeADR settings
@@ -97,58 +96,28 @@ private:
 	double totalLength;
 };
 
-
 // Class which manages state information for an object using an envelope
 class EnvelopeNode {
 public:
-	EnvelopeNode(Envelope* envelope) : envelope(envelope) {
+	EnvelopeNode(Envelope* envelope);
 
-	}
+	float getLevel(long currentTimeMS);
 
-	float getLevel(long currentTimeMS) {
-		/*if (lastStart > lastStop) {
-			return 0;
-		}*/
-		
-		return envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop);
-	}
+	float getLevel();
 
-	float getLevel() {
-		return getLevel(ofGetSystemTimeMillis());
-	}
-
-	void start(int velocity) {
-		lastNoteOnVelocity = velocity;
-		start();
-	}
+	void start(int velocity);
 
 	// function called when a note is pressed down (via Note On)
-	void start() {
-		// TODO
-		// deal with what happens when start() called before stop() cancels previous note
-		// stop();
-		lastStart = ofGetSystemTimeMillis();
-		//std:cout << "Starting Node at " << lastStart << ", time since last note released = " << lastStart - lastStop <<"\n";
-	}
+	void start();
 	
 	// function called when a note is released (via Note Off or Sustain Pedal Off)
-	void stop() {
-		lastStop = ofGetSystemTimeMillis();
-		//std:cout << "Stopping Node at " << lastStop << ", length held = " << lastStop - lastStart << "\n";
+	void stop();
 
-	}
+	long getLastStartTimeMS();
 
-	long getLastStartTimeMS() {
-		return lastStart;
-	}
+	long getLastStopTimeMS();
 
-	long getLastStopTimeMS() {
-		return lastStop;
-	}
-
-	int getLastNoteOnVelocity() {
-		return lastNoteOnVelocity;
-	}
+	int getLastNoteOnVelocity();
 
 private:
 	Envelope* envelope;
@@ -156,5 +125,4 @@ private:
 	long lastStart = 0, lastStop = 0;
 	
 	int lastNoteOnVelocity = 0;
-	
 };

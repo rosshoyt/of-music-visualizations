@@ -40,7 +40,7 @@ public:
     std::vector<std::map<int, std::pair<int, float>>> getAllChannelActiveNoteADSRLevels() {
         std::vector<std::map<int, std::pair<int, float>>> ret;
         for (int i = 0; i < numChannels; ++i) {
-            ret.push_back(channels[i].getAllActiveNoteADSRLevels());
+            ret.push_back(channels[i]->getAllActiveNoteADSRLevels());
         }
         return ret;
     }
@@ -68,7 +68,7 @@ private:
     // names of local and network MIDI ports
     ofParameter<std::string> networkPortName = std::string("Network Session 1"), virtualPortName = std::string("ofxMidiIn Input");
     // How many midi channels to listen to on the port (1 - 16)
-    ofParameter<unsigned int> numChannels = 16;
+    ofParameter<unsigned int> numChannels = unsigned int(16);
     
     ofxButton resetMidiPortButton;
     
@@ -76,17 +76,17 @@ private:
     ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");
     
     // Array of channel note states (TODO refactor to std::vector)
-    MIDIChannelState* channels;
+    std::vector<MIDIChannelState*> channels;
     
     // Private methods
     void setupMIDIPortState();
 
     void validateSettings();
 
-    void setupMIDIPort();
+    void setupOfxMIDIPort();
 
     /**
-     * ofMidiListener implemented method
+     * ofxMidiListener implemented method
      */
     void newMidiMessage(ofxMidiMessage& message);
 

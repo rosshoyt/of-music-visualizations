@@ -22,26 +22,29 @@ public:
 
     //std::vector<ofAbstractParameter> params;
 
+    MIDIChannelSettings(Envelope volumeEnvelope) : volumeEnvelope(volumeEnvelope) {
+        init();
+    }
+
+
     MIDIChannelSettings() { 
-        // TODO add channel number to the gui names
-        params.add(color.set("Note Color", ofColor::cornflowerBlue));
-        params.add(volumeEnvelope.guiParams);
-        
-        //params.minimize();
-        //volumeEnvelope.guiParams.setName()
+        init();
     }
 
    /* int getChannelNum() {
         return channelNum;
     }*/
 private:
-    // TODO implement
-    //ShapeType shape = TRIANGLE;
-    //ofParameter<int> pitchOffsetAmount;
-    //ADSR adsr;
+    void init() {
+        // TODO add channel number to the gui names
+        params.add(color.set("Note Color", ofColor::cornflowerBlue));
 
-    //int channelNum = 0;
-
+        params.add(volumeEnvelope.guiParams);
+        std::cout << "Created MIDIChannel Settings with volume envelope controls containing " << volumeEnvelope.guiParams.size() << " items \n";
+        //params.minimize();
+        //volumeEnvelope.guiParams.setName()
+    }
+    //int channelNum;
 };
 
 typedef std::unique_lock<std::mutex> Lock;
@@ -65,7 +68,9 @@ private:
  */
 class MIDIChannelState {
 public:
-    MIDIChannelState();
+    //MIDIChannelState();
+
+    MIDIChannelState(MIDIChannelSettings* settings);
     
     void processMIDIMessage(ofxMidiMessage& message);
     
@@ -115,6 +120,7 @@ public:
     
 private:
     MIDIChannelSettings* settings;
+    
 
     std::map<int,int> notesHeldDown;
     std::map<int,int> notesSustained;

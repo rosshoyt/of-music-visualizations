@@ -18,14 +18,15 @@ void MidiCCNode::setValue(int value) {
 }
 
 
-MIDIChannelState::MIDIChannelState() : notesHeldDown(), notesSustained(), midiCCState(128), adsrStates(), sustained(false), mtx(), mtxSusNotes() {
-	settings = new MIDIChannelSettings();
+MIDIChannelState::MIDIChannelState(MIDIChannelSettings* settings) :  settings(settings), notesHeldDown(), notesSustained(), midiCCState(128), adsrStates(), sustained(false), mtx(), mtxSusNotes() {
+	//settings = new MIDIChannelSettings();
 	
 	// TODO move to init() function
 	//ADSR pianoADSR;
 	for (int i = 0; i < 128; i++) {
 		//NoteADSRState* adsrNode = new NoteADSRState(pianoADSR);
 		EnvelopeNode* envelopeNode = new EnvelopeNode(&settings->volumeEnvelope);
+		
 		adsrStates.push_back(envelopeNode);
 	}
 }

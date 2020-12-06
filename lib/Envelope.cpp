@@ -46,7 +46,7 @@ void EnvelopeSegment::init() {
 		splineControlY.push_back(yVal);
 		splineControlX.push_back(xVal);
 		splineControlXRelative.push_back(xVal - settings.start);
-		std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
+		//std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
 	}
 	
 	// setup intensity slider
@@ -83,7 +83,6 @@ float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
 				if (segment->containsTime(timeSinceNoteStart)) {
 					level = segment->getLevel(timeSinceNoteStart);
 				}
-				
 			}
 		}
 	}
@@ -100,41 +99,14 @@ float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
 			// note is Sustaining - value to return is start level of release curve
 			level = envelopeSegments[2]->getStartingLevel();
 		}
-		else { //if (envelopeSegments[2]->containsTime(timeSinceNoteStart)) { 
+		else {
 			// note is Releasing
-			
-			//level = envelopeSegments[2]->getLevel(timeSinceNoteStart);
 			level = envelopeSegments[2]->getLevelForRelativeTime(timeSinceNoteOff);
 		}
-
-
-		   //for (int i = 0; i < envelopeSegments.size(); ++i) {
-		//	//if()
-
-
-
-
-		//	if (i < 2 && envelopeSegments[i]->containsTime(timeSinceNoteStart)) {
-		//		
-		//		level = envelopeSegments[i]->getLevel(timeSinceNoteStart);
-		//		//std::cout << "Found level in Attack/Decay" << 
-		//	}
-		//	else {
-		//		if (sustained) {
-		//			level = envelopeSegments[i]->getStartingLevel();
-		//		}
-		//		else if (envelopeSegments[i]->containsTime(timeSinceNoteStart)) {
-		//			level = envelopeSegments[i]->getLevel(timeSinceNoteStart);
-		//		}
-		//	}
-
-		//}
-		   		//	level = envelopeSegments
 	}
 	return level;
 }
 
-// TODO Refactor (could cause feedback loop if casting doesn't go correctly
 float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
 	return getLevel(double(timeSinceNoteStart), double(timeSinceNoteOff));
 }
@@ -159,6 +131,7 @@ void Envelope::init() {
 	// initialize the segments of the envelopeADR
 	totalLength = 0;
 	int size = envelopeSettings.envSegmentLengths.size();
+	std::cout << "Intializing Envelope with " << size << " env segment lengths\n";
 	for (int i = 0; i < size; ++i) {
 		// TODO refactor - Envelope Settings could generate a list of EnvelopeSegmentSettings on init()
 		// Create the segment settings
@@ -183,11 +156,49 @@ void Envelope::init() {
 		guiParams.add(envelopeSegment->splineIntensitySlider);
 		envelopeSegments.push_back(envelopeSegment);
 		
-		
-		
 		totalLength += envelopeSegment->getLength();
 	}
 
 	std::cout << "initialized envelope with size " << totalLength << '\n';
 
+}
+
+EnvelopeNode::EnvelopeNode(Envelope* envelope) : envelope(envelope) {}
+
+float EnvelopeNode::getLevel(long currentTimeMS) {
+	return envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop);
+}
+
+float EnvelopeNode::getLevel() {
+	return getLevel(ofGetSystemTimeMillis());
+}
+
+void EnvelopeNode::start(int velocity) {
+	lastNoteOnVelocity = velocity;
+	start();
+}
+
+void EnvelopeNode::start() {
+	// TODO
+	// deal with what happens when start() called before stop() cancels previous note
+	// stop();
+	lastStart = ofGetSystemTimeMillis();
+	//std:cout << "Starting Node at " << lastStart << ", time since last note released = " << lastStart - lastStop <<"\n";
+}
+
+void EnvelopeNode::stop() {
+	lastStop = ofGetSystemTimeMillis();
+	//std:cout << "Stopping Node at " << lastStop << ", length held = " << lastStop - lastStart << "\n";
+}
+
+long EnvelopeNode::getLastStartTimeMS() {
+	return lastStart;
+}
+
+long EnvelopeNode::getLastStopTimeMS() {
+	return lastStop;
+}
+
+int EnvelopeNode::getLastNoteOnVelocity() {
+	return lastNoteOnVelocity;
 }
