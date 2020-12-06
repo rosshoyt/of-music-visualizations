@@ -1,22 +1,13 @@
 #include "Envelope.h"
 
-//EnvelopeSegment::EnvelopeSegment(double start, double startLevel, double end, double endLevel) : type(type), start(start), startLevel(startLevel), end(end), endLevel(endLevel) {
-//	init();
-//}
-
-// TODO refactor - store calculated value to avoid calculating redundantly?
-
 EnvelopeSegment::EnvelopeSegment(EnvelopeSegmentSettings settings) : settings(settings) {
 	init();
 }
 
 float EnvelopeSegment::getLevel(double timeSinceNoteStart) {
-
 	std::vector<double> xTemps(splineControlX), yTemps = getSplineYControlsWithIntensity();
-
 	tk::spline spline;
 	spline.set_points(xTemps, yTemps);
-
 	return spline(timeSinceNoteStart);
 }
 
@@ -30,9 +21,12 @@ float EnvelopeSegment::getLevelForRelativeTime(double timeSinceStartOfThisEnvelo
 	return 0;
 }
 
-
 double EnvelopeSegment::getLength() {
 	return totalLength;
+}
+
+float EnvelopeSegment::getStartingLevel() {
+	return settings.startLevel;
 }
 
 bool EnvelopeSegment::containsTime(double elapsedTimeMS) {
@@ -59,10 +53,18 @@ void EnvelopeSegment::init() {
 	splineIntensitySlider.set("Spline Intensity", 0, -yStepSize * MAX_SPLINE_CONTROL_PERC, yStepSize * MAX_SPLINE_CONTROL_PERC);
 }
 
+std::vector<double> EnvelopeSegment::getSplineYControlsWithIntensity() {
+	std::vector<double> yTemps(splineControlY);
+	yTemps[0] -= splineIntensitySlider;
+	yTemps[2] += splineIntensitySlider;
+	yTemps[3] += splineIntensitySlider;
+	yTemps[5] -= splineIntensitySlider;
+	return yTemps;
+}
+
 Envelope::Envelope(EnvelopeSettings envelopeSettings) : envelopeSettings(envelopeSettings) {
 	init();
 }
-
 
 Envelope::Envelope() : Envelope(EnvelopeSettings()) {
 	init();
@@ -75,25 +77,18 @@ EnvelopeType Envelope::getEnvelopeType() {
 float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
 	//int counter = 0;
 	float level = 0;
-	
-	
-	
 	if (envelopeSettings.envelopeType == ADR) {
 		if (timeSinceNoteStart < totalLength) {
 			for (auto& segment : envelopeSegments) {
 				if (segment->containsTime(timeSinceNoteStart)) {
-					//std::cout << "Getting Level from segment # " << counter + 1 << '\n';
 					level = segment->getLevel(timeSinceNoteStart);
 				}
-				//++counter;
+				
 			}
 		}
 	}
 	else { // ADSR
 		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
-		//std::cout << "Evauluating ADSR with TimeSinceNoteStart = " << timeSinceNoteStart << ", TimeSinceNoteOFF = " << timeSinceNoteOff << " Sustained: " << std::boolalpha << sustained << '\n';
-
-
 		// Check Attack
 		if (envelopeSegments[0]->containsTime(timeSinceNoteStart))
 			level = envelopeSegments[0]->getLevel(timeSinceNoteStart);
@@ -146,6 +141,18 @@ float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
 
 double Envelope::getLength() {
 	return totalLength;
+}
+
+double Envelope::getAttackLength() {
+	return envelopeSegments[0]->getLength();
+}
+
+double Envelope::getDecayLength() {
+	return envelopeSegments[1]->getLength();
+}
+
+double Envelope::getReleaseLength() {
+	return envelopeSegments.back()->getLength();
 }
 
 void Envelope::init() {

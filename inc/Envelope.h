@@ -4,32 +4,6 @@
 #include "spline.h"
 #include "Utils.h"
 
-//enum EnvelopeSegmentType { ATTACK, DECAY, SUSTAIN, RELEASE };
-
-
-// TODO - template parameterize all classes
-//template <class T>
-//class EnvelopeSegmentSettings {
-//	T start, startLevel;
-//public:
-//	EnvelopeSegmentSettings(T first, T second)
-//	{
-//		a = first; b = second;
-//	}
-//	T getmax();
-//};
-//
-//template <class T>
-//T mypair<T>::getmax()
-//{
-//	T retval;
-//	retval = a > b ? a : b;
-//	return retval;
-//}
-
-
-
-
 class EnvelopeSegmentSettings {
 public:
 	double start = 0, startLevel = 0, end = 500, endLevel = 1;
@@ -48,29 +22,11 @@ public:
 
 	double getLength();
 
-	float getStartingLevel() {
-		return settings.startLevel;
-	}
+	float getStartingLevel();
 
-	
-
-
-	// TODO (only if implementation completed using real-timeSinceNoteStart values for Segment timeSinceNoteStart values)
 	bool containsTime(double elapsedTimeMS);
 
-	/*void setStart(double start) { settings.start = start; }
-
-	void setEnd(double end) { end = end; }
-
-	void setStartLevel(double startLevel) { settings.startLevel = startLevel; }
-
-	void setEndLevel(double endLevel) { endLevel = endLevel; }*/
-
-	
-	
-	//bool containsTime(double elapsedTimeMS) {}
-
-	// Public GUI Slider
+	// Public GUI Sliders
 	ofParameter<float> splineIntensitySlider;
 	ofParameter<double> lengthSlider;
 
@@ -78,18 +34,7 @@ private:
 
 	void init();
 
-	std::vector<double> getSplineYControlsWithIntensity() {
-		std::vector<double> yTemps(splineControlY);
-		yTemps[0] -= splineIntensitySlider;
-		yTemps[2] += splineIntensitySlider;
-		yTemps[3] += splineIntensitySlider;
-		yTemps[5] -= splineIntensitySlider;
-		return yTemps;
-	}
-
-	/*std::vector<double> getSplineXControls() {
-		std::vector<double> x
-	}*/
+	std::vector<double> getSplineYControlsWithIntensity();
 
 	// PRIVATE Fields
 	EnvelopeSegmentSettings settings;
@@ -97,8 +42,6 @@ private:
 	// Derived values
 	double totalLength;
 
-	// enum type of envelopeADR segment
-	//EnvelopeSegmentType type;
 	// spline control values 
 	std::vector<double> splineControlX, splineControlY;
 
@@ -108,11 +51,9 @@ private:
 	// constants
 	const int NUM_INTERNAL_CONTROL_SEGMENTS = 3;
 	const float MAX_SPLINE_CONTROL_PERC = 0.88888888; // so that control points don't put spline above/below target val
-
 };
 
 enum EnvelopeType { ADR, ADSR };
-
 
 class EnvelopeSettings {
 public:
@@ -126,7 +67,7 @@ public:
 	
 	Envelope(EnvelopeSettings envelopeSettings);
 
-	// no-args constructor sets default envelopeADR settings
+	// no-args constructor which sets default envelopeADR settings
 	Envelope();
 
 	EnvelopeType getEnvelopeType();
@@ -139,24 +80,16 @@ public:
 
 	double getLength();
 
-	double getAttackLength() {
-		return envelopeSegments[0]->getLength();
-	}
+	double getAttackLength();
 
-	double getDecayLength() {
-		return envelopeSegments[1]->getLength();
-	}
+	double getDecayLength();
 
-	double getReleaseLength() {
-		return envelopeSegments.back()->getLength();
-	}
+	double getReleaseLength();
 
 	ofParameterGroup guiParams;
 
-
 private:
 	void init();
-
 
 	std::vector<EnvelopeSegment*> envelopeSegments;
 	EnvelopeSettings envelopeSettings;
