@@ -35,8 +35,9 @@ void CircleOfFifths::draw() {
 	for(auto channel : midiPortState->getAllChannelActiveNoteADSRLevels()){
 		auto channelSettings = midiPortState->getChannelSettings(channelNum);
 		//for (auto noteVel : channel) {
-		for(auto noteLevel : channel){
-			auto octavePitch = utils::midi::getOctavePitchPair(noteLevel.first);
+		// noteData is a pair of Pitch / Pair of Velocity / Float
+		for(std::pair<int, std::pair<int, float>> noteData : channel){
+			auto octavePitch = utils::midi::getOctavePitchPair(noteData.first);
 			int pitchPosition = octavePitch.second;
 			// convert chromatic pitch to circle of fifths
 			pitchPosition = (pitchPosition * noteMultiplierSlider + pitchOffsetSlider) % numPitches;
@@ -44,10 +45,9 @@ void CircleOfFifths::draw() {
 			// Old velocity code
 			//int velocity = 127; //noteVel.second;
 			//float circleSize = 40 * velocity / 127.f * noteCircleSizeSlider;
-			
+			float velocityScale = noteData.second.first / 127.f * noteData.second.second;
 			// Scale size of circle by envelope level TODO take original velocity into account in Envelope::getLevel()
-			float circleSize = 40 * noteLevel.second * noteCircleSizeSlider;
-
+			float circleSize = 40 * velocityScale * noteCircleSizeSlider;
 
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			

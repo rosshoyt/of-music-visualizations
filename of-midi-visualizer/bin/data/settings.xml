@@ -83,53 +83,117 @@
 	<Network_Port_Name>Network Session 1</Network_Port_Name>
 	<Channel_1_Settings>
 		<UnknownName>237, 197, 161, 255</UnknownName>
+		<Note_Color>0, 146, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_1_Settings>
 	<Channel_2_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>88, 237, 47, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_2_Settings>
 	<Channel_3_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_3_Settings>
 	<Channel_4_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_4_Settings>
 	<Channel_5_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_5_Settings>
 	<Channel_6_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_6_Settings>
 	<Channel_7_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_7_Settings>
 	<Channel_8_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_8_Settings>
 	<Channel_9_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_9_Settings>
 	<Channel_10_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_10_Settings>
 	<Channel_11_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_11_Settings>
 	<Channel_12_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_12_Settings>
 	<Channel_13_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_13_Settings>
 	<Channel_14_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_14_Settings>
 	<Channel_15_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_15_Settings>
 	<Channel_16_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
+		<Note_Color>100, 149, 237, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
 	</Channel_16_Settings>
-	<UnknownName>h# Note Off </UnknownName>
+	<UnknownName>Ch#5 Note Off       94</UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
 	<Background_Color>9, 0, 20, 255</Background_Color>
@@ -144,11 +208,13 @@
 <Circle_of_Fifths>
 	<Draw_Octaves>1</Draw_Octaves>
 	<Draw_Chromatic_Circle>0</Draw_Chromatic_Circle>
-	<Note_Circle_Size>5.80042</Note_Circle_Size>
+	<Note_Circle_Size>1</Note_Circle_Size>
 	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
-	<Octave_Size_Multiplier>0.694</Octave_Size_Multiplier>
+	<Octave_Size_Multiplier>1</Octave_Size_Multiplier>
 	<Note_Multiplier_>1</Note_Multiplier_>
 	<Draw_Halo_on_Notes>0</Draw_Halo_on_Notes>
+	<Note_Multiplier>7</Note_Multiplier>
+	<Pitch_Offset>0</Pitch_Offset>
 </Circle_of_Fifths>
 <ADSR_Visualizer>
 	<Spline_Intensity>0.23643</Spline_Intensity>
