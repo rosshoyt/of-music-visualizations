@@ -37,13 +37,7 @@ public:
     const std::map<int, std::pair<int, float>> getAllNotesDown();
 
 
-    std::vector<std::map<int, std::pair<int, float>>> getAllChannelActiveNoteADSRLevels() {
-        std::vector<std::map<int, std::pair<int, float>>> ret;
-        for (int i = 0; i < numChannels; ++i) {
-            ret.push_back(channels[i]->getAllActiveNoteADSRLevels());
-        }
-        return ret;
-    }
+    std::vector<std::map<int, std::pair<int, float>>> getAllChannelActiveNoteADSRLevels();
 
     /**
      * Gets the current value of the specified MIDI CC value based on its channel
@@ -61,14 +55,13 @@ public:
 private:
     // Midi Input port
     ofxMidiIn midiIn;
-
     // GUI parameters
     // flag set to true if using local MIDI port, false if using network MIDI port
     ofParameter<bool> useVirtualPort = false;
     // names of local and network MIDI ports
     ofParameter<std::string> networkPortName = std::string("Network Session 1"), virtualPortName = std::string("ofxMidiIn Input");
     // How many midi channels to listen to on the port (1 - 16)
-    ofParameter<unsigned int> numChannels = unsigned int(16);
+    ofParameter<unsigned int> numChannels = unsigned int(10);
     
     ofxButton resetMidiPortButton;
     

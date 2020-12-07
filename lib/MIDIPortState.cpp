@@ -18,7 +18,7 @@ void MIDIPortState::setupGUI() {
 	for (int i = 0; i < numChannels; i++) {
 		auto params = channels[i]->getChannelSettings()->params;
 		params.setName("Channel " + std::to_string(i + 1) + " Settings");
-		//std::cout << "MIDIPortState::setupGUI() added channel params with size " << params.size() << "\n";
+		std::cout << "MIDIPortState::setupGUI() added channel params with size " << params.size() << "\n";
 		gui.add(params);
 	}
 
@@ -69,6 +69,14 @@ const std::map<int, std::pair<int, float>> MIDIPortState::getAllNotesDown() {
 	return allNotesDown;
 }
 
+std::vector<std::map<int, std::pair<int, float>>> MIDIPortState::getAllChannelActiveNoteADSRLevels() {
+	std::vector<std::map<int, std::pair<int, float>>> ret;
+	for (int i = 0; i < numChannels; ++i) {
+		ret.push_back(channels[i]->getAllActiveNoteADSRLevels());
+	}
+	return ret;
+}
+
 /**
 * Gets the current value of the specified MIDI CC value based on its channel
 * @param channel - MIDI Channel Number (0-15)
@@ -97,21 +105,21 @@ void MIDIPortState::setupMIDIPortState() {
 	settings.envSegmentLevels = { 0.f, 1.f, .5f };
 
 	Envelope envelope(settings);
-
+	
 	MIDIChannelSettings* channelSettings = new MIDIChannelSettings(envelope);
 
 
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
 	for (int i = 0; i < numChannels; ++i) {
 		std::cout << "Creating MIDI Channel #" << i+1 << '\n';
-		channels.push_back(new MIDIChannelState(channelSettings));
+		channels.push_back(new MIDIChannelState(new MIDIChannelSettings(envelope)));
 	}
 	setupOfxMIDIPort();
 }
 
 void MIDIPortState::validateSettings() {
 	// ensure numChannels is between 1 and 16 (inclusive)
-	assert(numChannels > 0 && numChannels >= 16);
+	assert(numChannels >= 1 && numChannels <= 16);
 }
 
 void MIDIPortState::setupOfxMIDIPort() {
