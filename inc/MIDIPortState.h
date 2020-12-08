@@ -20,9 +20,6 @@ public:
 
     void setupGUI() override;
    
-    // TODO allow user to change from virtual port to network port
-    // void setUseVirtualPort(bool useVirtualPort){ }
-
     unsigned int getNumChannels();
 
     /**
@@ -35,7 +32,6 @@ public:
     std::vector<std::map<int, int>> getAllChannelNotes();
     
     const std::map<int, std::pair<int, float>> getAllNotesDown();
-
 
     std::vector<std::map<int, std::pair<int, float>>> getAllChannelActiveNoteADSRLevels();
 
