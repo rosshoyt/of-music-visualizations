@@ -6,16 +6,16 @@ ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
 //--------------------------------------------------------------
 void ADSRVisualizer::setup() {
 	// Create ADR envelope
-	EnvelopeSettings envelopeSettingsADR;
+	/*EnvelopeSettings envelopeSettingsADR;
 	envelopeSettingsADR.envelopeType = ADR;
 	envelopeSettingsADR.envSegmentLengths = { 400, 1400, 400 };
-	envelopeSettingsADR.envSegmentLevels  = { 0,      1,  .5 };
-	envelopeADR = new Envelope(envelopeSettingsADR);
+	envelopeSettingsADR.envSegmentLevels  = { 0,      1,  .5 };*/
+	envelopeADR = new Envelope();
 	
 	// Create ADSR envelope
-	EnvelopeSettings envelopeSettingsADSR(envelopeSettingsADR);
-	envelopeSettingsADSR.envelopeType = ADSR;
-	envelopeADSR = new Envelope(envelopeSettingsADSR);
+	//EnvelopeSettings envelopeSettingsADSR(envelopeSettingsADR);
+	//envelopeSettingsADSR.envelopeType = ADSR;
+	envelopeADSR = new Envelope(EnvelopeSettings().setSustain());
 	// Setup ADSR Envelope Node
 	envelopeADSRNode = new EnvelopeNode(envelopeADSR);
 
@@ -31,10 +31,10 @@ void ADSRVisualizer::setupGUI() {
 	//gui.add(attackSegment.splineIntensitySlider);
 	gui.add(showADRToggle.set("Show ADR", false));
 	gui.add(adsrTestNoteSpeed.set("Test Note Length MS", 4000, 1, 20000));
-	envelopeADSR->guiParams.setName("ADSR Params");
-	envelopeADR->guiParams.setName("ADR Params");
-	gui.add(envelopeADSR->guiParams);
-	gui.add(envelopeADR->guiParams);
+	//envelopeADSR->guiParams.setName("ADSR Params");
+	//envelopeADR->guiParams.setName("ADR Params");
+	//gui.add(envelopeADSR->guiParams);
+	//gui.add(envelopeADR->guiParams);
 	
 	//gui.add(splineIntensitySlider.set("Spline Intensity", 0, -.3, .3));
 	/*for (int i = 0; i < scXDefaults.size(); ++i) {
@@ -67,7 +67,7 @@ void ADSRVisualizer::draw() {
 	float heightScale, circleX, circleY;
 
 	if (!showADRToggle) {
-		// Draw the ADSR visualizer as a horizontal line, 
+		// Draw the ADSR visualizer which is a horizontal line, 
 		// so we'll get the level now instead of per-point
 		heightScale = envelopeADSRNode->getLevel(timeNowMS);
 	}
@@ -78,7 +78,10 @@ void ADSRVisualizer::draw() {
 		circleX = animationWidth * xF;
 
 		if (showADRToggle) { //Draw the ADR visualizer, so get a height value for current point
-			heightScale = envelopeADR->getLevel(xF * envelopeADR->getLength(), true);
+			EnvelopeSettings stgs;
+			
+			//heightScale = envelopeADR->getLevel(xF * envelopeADR->getLength(), true); // OG
+			heightScale = .5;//envelopeADR->getLevel(stgs, stgs., xF * envelopeADR->getLength(), true); // TODO implement new
 		}
 		
 		circleY = animationHeight - animationHeight * heightScale;

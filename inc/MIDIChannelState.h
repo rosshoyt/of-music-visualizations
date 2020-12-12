@@ -39,8 +39,8 @@ private:
         // TODO add channel number to the gui names
         params.add(color.set("Note Color", ofColor::cornflowerBlue));
 
-        params.add(volumeEnvelope.guiParams);
-        std::cout << "Created MIDIChannel Settings with volume envelope controls containing " << volumeEnvelope.guiParams.size() << " items \n";
+        //params.add(volumeEnvelope.guiParams);
+        std::cout << "Created MIDIChannel Settings with volume envelope controls containing \n";// << volumeEnvelope.guiParams.size() << " items \n";
         //params.minimize();
         //volumeEnvelope.guiParams.setName()
     }

@@ -499,6 +499,7 @@
       <Filter>src\animation-components</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\Envelope.h" />
+    <ClInclude Include="..\inc\EnvelopeSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

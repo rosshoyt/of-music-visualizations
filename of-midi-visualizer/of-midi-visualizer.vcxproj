@@ -250,6 +250,7 @@
     <ClInclude Include="..\inc\ADSR.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
     <ClInclude Include="..\inc\Envelope.h" />
+    <ClInclude Include="..\inc\EnvelopeSettings.h" />
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
