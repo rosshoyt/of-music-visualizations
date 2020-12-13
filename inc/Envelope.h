@@ -141,11 +141,17 @@ public:
 	ofParameterGroup guiParams;
 
 private:
-	double lengthA = 250, lengthD = 1500, lengthR = 250;
-	double levelA = 1, levelD = .5;
-	double splineA = .1, splineD = -.1, splineR = -.1;
-	bool sustain = false;
+	ofParameter<double> lengthA = 250, lengthD = 1500, lengthR = 250, levelA = 1, levelD = .5, splineA = .1, splineD = -.1, splineR = -.1;
 
+	ofParameter<bool> sustain = false;
+
+
+	ofParameterGroup attackParams, decayParams, releaseParams;
+
+	
+	const double MIN_SEG_LENGTH = 0, MAX_SEG_LENGTH = 20000;
+
+	
 
 	float getLevel(double segTimeElapsed, double lengthSeg, double levelSegStart, double levelSegEnd, double levelSpline) {
 
@@ -187,7 +193,7 @@ private:
 	std::vector<EnvelopeSegment*> envelopeSegments;
 	EnvelopeSettings envelopeSettings;
 
-	double totalLength;
+	//double totalLength;
 };
 
 // Class which manages state information for an object using an envelope

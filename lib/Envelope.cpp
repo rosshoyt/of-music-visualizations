@@ -112,54 +112,99 @@ EnvelopeType Envelope::getEnvelopeType() {
 //}
 
 double Envelope::getLength() {
-	return totalLength;
+	return getAttackLength() + getDecayLength() + getReleaseLength();
 }
 
 double Envelope::getAttackLength() {
-	return envelopeSegments[0]->getLength();
+	return lengthA;//envelopeSegments[0]->getLength();
 }
 
 double Envelope::getDecayLength() {
-	return envelopeSegments[1]->getLength();
+	return lengthD; //envelopeSegments[1]->getLength();
 }
 
 double Envelope::getReleaseLength() {
-	return envelopeSegments.back()->getLength();
+	return lengthR;//totalLength;//envelopeSegments.back()->getLength();
 }
 
 void Envelope::init() {
-	// initialize the segments of the envelopeADR
-	totalLength = 0;
-	int size = envelopeSettings.envSegmentLengths.size();
-	std::cout << "Intializing Envelope with " << size << " env segment lengths\n";
-	for (int i = 0; i < size; ++i) {
-		// TODO refactor - Envelope Settings could generate a list of EnvelopeSegmentSettings on init()
-		// Create the segment settings
-		EnvelopeSegmentSettings segmentSettings;
-		// Set the start time of the envelopeADR - how much time has passed to this point
-		segmentSettings.start = totalLength; 
-		// Set the end time of the envelopeADR
-		segmentSettings.end = totalLength + envelopeSettings.envSegmentLengths[i];
-		
-		// Set the level the envelopeADR should start at
-		segmentSettings.startLevel = envelopeSettings.envSegmentLevels[i];
-		// Set the end level
-		if (i < size - 1) {
-			//nextLength = envelopeSettings.envSegmentLengths[i+1];
-			segmentSettings.endLevel = envelopeSettings.envSegmentLevels[i+1];
-		}
-		else { // Release envelopeADR, so set end level to 0
-			segmentSettings.endLevel = 0;
-		}
+	// init all ofParameters
+	sustain.set("Sustain", sustain);
 
-		EnvelopeSegment* envelopeSegment = new EnvelopeSegment(segmentSettings);
-		guiParams.add(envelopeSegment->splineIntensitySlider);
-		envelopeSegments.push_back(envelopeSegment);
-		
-		totalLength += envelopeSegment->getLength();
-	}
+	lengthA.set("Length", lengthA, 0, MAX_SEG_LENGTH);
+	levelA.set("Level", levelA, 0, 1);
+	splineA.set("Spline", splineA, 0, 1);
 
-	std::cout << "initialized envelope with size " << totalLength << '\n';
+	lengthD.set("Length", lengthD, 0, MAX_SEG_LENGTH);
+	levelD.set("Level", levelD, 0, 1);
+	splineD.set("Spline", splineD, 0, 1);
+
+	lengthR.set("Length", lengthR, 0, MAX_SEG_LENGTH);
+	splineR.set("Spline", splineR, 0, 1);
+
+
+	// TODO move to setupSubGUI()
+	guiParams.setName("Envelope Settings");
+	attackParams.setName("Attack Parameters");
+	releaseParams.setName("Release Parameters");
+	decayParams.setName("Decay Parameters");
+
+	attackParams.add(lengthA);
+	attackParams.add(levelA);
+	attackParams.add(splineA);
+	decayParams.add(lengthD);
+	decayParams.add(levelD);
+	decayParams.add(splineD);
+	decayParams.add(lengthR);
+	decayParams.add(splineR);
+	releaseParams.add(lengthR);
+	releaseParams.add(splineR);
+
+	guiParams.add(sustain);
+	guiParams.add(attackParams);
+	guiParams.add(decayParams);
+	guiParams.add(releaseParams);
+
+	
+
+
+
+
+
+
+	//int size = envelopeSettings.envSegmentLengths.size();
+	//std::cout << "Intializing Envelope with " << size << " env segment lengths\n";
+	//for (int i = 0; i < size; ++i) {
+	//	// TODO refactor - Envelope Settings could generate a list of EnvelopeSegmentSettings on init()
+	//	// Create the segment settings
+	//	EnvelopeSegmentSettings segmentSettings;
+	//	// Set the start time of the envelopeADR - how much time has passed to this point
+	//	segmentSettings.start = totalLength; 
+	//	// Set the end time of the envelopeADR
+	//	segmentSettings.end = totalLength + envelopeSettings.envSegmentLengths[i];
+	//	
+	//	// Set the level the envelopeADR should start at
+	//	segmentSettings.startLevel = envelopeSettings.envSegmentLevels[i];
+	//	// Set the end level
+	//	if (i < size - 1) {
+	//		//nextLength = envelopeSettings.envSegmentLengths[i+1];
+	//		segmentSettings.endLevel = envelopeSettings.envSegmentLevels[i+1];
+	//	}
+	//	else { // Release envelopeADR, so set end level to 0
+	//		segmentSettings.endLevel = 0;
+	//	}
+
+	//	EnvelopeSegment* envelopeSegment = new EnvelopeSegment(segmentSettings);
+	//	guiParams.add(envelopeSegment->splineIntensitySlider);
+	//	envelopeSegments.push_back(envelopeSegment);
+	//	
+	//	totalLength += envelopeSegment->getLength();
+	//}
+
+
+
+
+	std::cout << "initialized envelope with length " << getLength() << '\n';
 
 }
 
