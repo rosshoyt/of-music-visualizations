@@ -74,42 +74,42 @@ EnvelopeType Envelope::getEnvelopeType() {
 	return envelopeSettings.envelopeType;
 }
 
-float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
-	//int counter = 0;
-	float level = 0;
-	if (envelopeSettings.envelopeType == ADR) {
-		if (timeSinceNoteStart < totalLength) {
-			for (auto& segment : envelopeSegments) {
-				if (segment->containsTime(timeSinceNoteStart)) {
-					level = segment->getLevel(timeSinceNoteStart);
-				}
-			}
-		}
-	}
-	else { // ADSR
-		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
-		// Check Attack
-		if (envelopeSegments[0]->containsTime(timeSinceNoteStart))
-			level = envelopeSegments[0]->getLevel(timeSinceNoteStart);
-		// Check Decay
-		else if (envelopeSegments[1]->containsTime(timeSinceNoteStart))
-			level = envelopeSegments[1]->getLevel(timeSinceNoteStart);
-		// Note is either sustained, in the Release segment, or finished
-		else if (sustained) { 
-			// note is Sustaining - value to return is start level of release curve
-			level = envelopeSegments[2]->getStartingLevel();
-		}
-		else {
-			// note is Releasing
-			level = envelopeSegments[2]->getLevelForRelativeTime(timeSinceNoteOff);
-		}
-	}
-	return level;
-}
-
-float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
-	return getLevel(double(timeSinceNoteStart), double(timeSinceNoteOff));
-}
+//float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
+//	//int counter = 0;
+//	float level = 0;
+//	if (envelopeSettings.envelopeType == ADR) {
+//		if (timeSinceNoteStart < totalLength) {
+//			for (auto& segment : envelopeSegments) {
+//				if (segment->containsTime(timeSinceNoteStart)) {
+//					level = segment->getLevel(timeSinceNoteStart);
+//				}
+//			}
+//		}
+//	}
+//	else { // ADSR
+//		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
+//		// Check Attack
+//		if (envelopeSegments[0]->containsTime(timeSinceNoteStart))
+//			level = envelopeSegments[0]->getLevel(timeSinceNoteStart);
+//		// Check Decay
+//		else if (envelopeSegments[1]->containsTime(timeSinceNoteStart))
+//			level = envelopeSegments[1]->getLevel(timeSinceNoteStart);
+//		// Note is either sustained, in the Release segment, or finished
+//		else if (sustained) { 
+//			// note is Sustaining - value to return is start level of release curve
+//			level = envelopeSegments[2]->getStartingLevel();
+//		}
+//		else {
+//			// note is Releasing
+//			level = envelopeSegments[2]->getLevelForRelativeTime(timeSinceNoteOff);
+//		}
+//	}
+//	return level;
+//}
+//
+//float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
+//	return getLevel(double(timeSinceNoteStart), double(timeSinceNoteOff));
+//}
 
 double Envelope::getLength() {
 	return totalLength;
