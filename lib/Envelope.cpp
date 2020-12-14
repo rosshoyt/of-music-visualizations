@@ -1,116 +1,145 @@
 #include "Envelope.h"
 
-EnvelopeSegment::EnvelopeSegment(EnvelopeSegmentSettings settings) : settings(settings) {
+Envelope::Envelope() {
 	init();
 }
 
-float EnvelopeSegment::getLevel(double timeSinceNoteStart) {
-	std::vector<double> xTemps(splineControlX), yTemps = getSplineYControlsWithIntensity();
-	tk::spline spline;
-	spline.set_points(xTemps, yTemps);
-	return spline(timeSinceNoteStart);
+float Envelope::getLevel(long timeSinceStart, long timeSinceEnd, float lastNoteLevel) {
+	std::string debug = "";
+
+	double level = 0;
+
+	// check if note is currently engaged.
+	bool heldNote = timeSinceEnd > timeSinceStart;
+
+	bool heldNoteButMayBeReleasing = false;
+	if (heldNote) {
+		long timeThreshold = lengthA;
+
+		if (timeThreshold > timeSinceStart) {
+			// attacking 
+			level = getLevelFromSegment(timeSinceStart, lengthA, 0, levelA, splineA);
+			debug = "Attacking";
+		}
+		else if ((timeThreshold += lengthD) > timeSinceStart) {
+			// decaying
+			level = getLevelFromSegment(timeSinceStart - lengthA, lengthD, levelA, levelD, splineD);
+			debug = "Decaying";
+		}
+		else if (sustain) {
+			// sustaining
+			level = levelD;//getLevel(timeSinceStart - lengthA - lengthD, st)
+			debug = "Sustaining";
+		}
+		else {
+			// timePastRelease = timeSinceStart - timeThreshold;
+			//heldNoteButMayBeReleasing = true;
+			debug = "Held down";
+			auto elapsedSinceEndOfDecay = timeSinceStart - timeThreshold;
+			if (elapsedSinceEndOfDecay < lengthR) {
+				// releasing
+				level = getLevelFromSegment(elapsedSinceEndOfDecay, lengthR, levelD, 0, splineR);
+				debug.append(" but in Release curve");
+			}
+			else {
+				debug.append(" but envelope completed.");
+			}
+		}
+	}
+	else {
+		// note is not being held down right now
+		debug = "Not held down";
+		if (timeSinceEnd < lengthR) {
+			level = getLevelFromSegment(timeSinceEnd, lengthR, lastNoteLevel, 0, splineR);
+			debug.append(" and in Release Curve");
+		}
+	}
+	debug = debug == "" ? "Inactive" : debug;
+	//std::cout << "Time Since Start: " << timeSinceStart << " State: " << debug << " Value = " << level << std::endl;
+	return level;
 }
 
-float EnvelopeSegment::getLevelForRelativeTime(double timeSinceStartOfThisEnvelopeSegment) {
-	if (timeSinceStartOfThisEnvelopeSegment >= 0 && timeSinceStartOfThisEnvelopeSegment < totalLength) {
-		std::vector<double> xTemps(splineControlXRelative), yTemps = getSplineYControlsWithIntensity();
+float getLevel(double segTimeElapsed, double lengthSeg, double levelSegStart, double levelSegEnd, double levelSpline) {
+	float level;
+	if (levelSegStart == 0 && levelSegEnd == 0) {
+		level = 0;
+	}
+	else {
+		std::vector<double> splineControlX, splineControlY;
+
+		//int numInternalControlSegments = 3; // TODO use named variable instead of 'magic number'
+
+		// setup 6-point control spline in default state (linear)
+		double xStepSize = lengthSeg / 3;
+		double yStepSize = (levelSegEnd - levelSegStart) / 3;
+		double yVal = levelSegStart - yStepSize;
+		double xVal = -xStepSize;//settings.start - xStepSize;
+		for (int i = 0; i < 6; ++i, xVal += xStepSize, yVal += yStepSize) {
+			splineControlY.push_back(yVal);
+			splineControlX.push_back(xVal);
+			//std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
+		}
+
+		if (levelSpline != 0) {
+			// TODO change the direction of the control points depending on segment slope being positive, negative (or 0?)
+			// double change = levelSegStart > levelSegEnd ? -change : change;
+			// TODO also add error correction so that spline values are not toop big/small
+			splineControlY[0] -= levelSpline;
+			splineControlY[2] += levelSpline;
+			splineControlY[3] += levelSpline;
+			splineControlY[5] -= levelSpline;
+		} // else { linear interpolate to save processing power? }; // TODO
+
 		tk::spline spline;
-		spline.set_points(xTemps, yTemps);
-		return spline(timeSinceStartOfThisEnvelopeSegment);
+
+		spline.set_points(splineControlX, splineControlY);
+
+
+		level = spline(segTimeElapsed);
 	}
-	return 0;
+	return level;
 }
 
-double EnvelopeSegment::getLength() {
-	return totalLength;
-}
+float Envelope::getLevelFromSegment(double segTimeElapsed, double lengthSeg, double levelSegStart, double levelSegEnd, double levelSpline) {
+		float level;
+		if (levelSegStart == 0 && levelSegEnd == 0) {
+			level = 0;
+		}
+		else{
+			std::vector<double> splineControlX, splineControlY;
 
-float EnvelopeSegment::getStartingLevel() {
-	return settings.startLevel;
-}
+			//int numInternalControlSegments = 3; // TODO use named variable instead of 'magic number'
 
-bool EnvelopeSegment::containsTime(double elapsedTimeMS) {
-	return elapsedTimeMS >= settings.start && elapsedTimeMS < settings.end;
-}
+			// setup 6-point control spline in default state (linear)
+			double xStepSize = lengthSeg / 3;
+			double yStepSize = (levelSegEnd - levelSegStart) / 3;
+			double yVal = levelSegStart - yStepSize;
+			double xVal = -xStepSize;//settings.start - xStepSize;
+			for (int i = 0; i < 6; ++i, xVal += xStepSize, yVal += yStepSize) {
+				splineControlY.push_back(yVal);
+				splineControlX.push_back(xVal);
+				//std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
+			}
 
-void EnvelopeSegment::init() {
-	// set derived fields
-	totalLength = settings.end - settings.start;
+			if (levelSpline != 0) {
+				// TODO change the direction of the control points depending on segment slope being positive, negative (or 0?)
+				// double change = levelSegStart > levelSegEnd ? -change : change;
+				// TODO also add error correction so that spline values are not toop big/small
+				splineControlY[0] -= levelSpline;
+				splineControlY[2] += levelSpline;
+				splineControlY[3] += levelSpline;
+				splineControlY[5] -= levelSpline;
+			} // else { linear interpolate to save processing power? }; // TODO
 
-	// setup 6-point control spline in default state (linear)
-	double xStepSize = totalLength / NUM_INTERNAL_CONTROL_SEGMENTS;
-	double yStepSize = (settings.endLevel - settings.startLevel) / NUM_INTERNAL_CONTROL_SEGMENTS;
-	double yVal = settings.startLevel - yStepSize;
-	double xVal = settings.start - xStepSize;
-	for (int i = 0; i < 6; ++i, xVal += xStepSize, yVal += yStepSize) {
-		splineControlY.push_back(yVal);
-		splineControlX.push_back(xVal);
-		splineControlXRelative.push_back(xVal - settings.start);
-		//std::cout << "Xval = "<< xVal << " Yval = " << yVal << " Xval (relative) = " << splineControlXRelative[i] <<'\n';
+			tk::spline spline;
+
+			spline.set_points(splineControlX, splineControlY);
+
+
+			level = spline(segTimeElapsed);
+		}
+		return level;
 	}
-	
-	// setup intensity slider
-	splineIntensitySlider.set("Spline Intensity", 0, -yStepSize * MAX_SPLINE_CONTROL_PERC, yStepSize * MAX_SPLINE_CONTROL_PERC);
-}
-
-std::vector<double> EnvelopeSegment::getSplineYControlsWithIntensity() {
-	std::vector<double> yTemps(splineControlY);
-	yTemps[0] -= splineIntensitySlider;
-	yTemps[2] += splineIntensitySlider;
-	yTemps[3] += splineIntensitySlider;
-	yTemps[5] -= splineIntensitySlider;
-	return yTemps;
-}
-
-Envelope::Envelope(EnvelopeSettings envelopeSettings) : envelopeSettings(envelopeSettings) {
-	init();
-}
-
-Envelope::Envelope() : Envelope(EnvelopeSettings()) {
-	init();
-}
-
-EnvelopeType Envelope::getEnvelopeType() {
-	return envelopeSettings.envelopeType;
-}
-
-//float Envelope::getLevel(double timeSinceNoteStart, double timeSinceNoteOff) {
-//	//int counter = 0;
-//	float level = 0;
-//	if (envelopeSettings.envelopeType == ADR) {
-//		if (timeSinceNoteStart < totalLength) {
-//			for (auto& segment : envelopeSegments) {
-//				if (segment->containsTime(timeSinceNoteStart)) {
-//					level = segment->getLevel(timeSinceNoteStart);
-//				}
-//			}
-//		}
-//	}
-//	else { // ADSR
-//		bool sustained = timeSinceNoteStart < timeSinceNoteOff;
-//		// Check Attack
-//		if (envelopeSegments[0]->containsTime(timeSinceNoteStart))
-//			level = envelopeSegments[0]->getLevel(timeSinceNoteStart);
-//		// Check Decay
-//		else if (envelopeSegments[1]->containsTime(timeSinceNoteStart))
-//			level = envelopeSegments[1]->getLevel(timeSinceNoteStart);
-//		// Note is either sustained, in the Release segment, or finished
-//		else if (sustained) { 
-//			// note is Sustaining - value to return is start level of release curve
-//			level = envelopeSegments[2]->getStartingLevel();
-//		}
-//		else {
-//			// note is Releasing
-//			level = envelopeSegments[2]->getLevelForRelativeTime(timeSinceNoteOff);
-//		}
-//	}
-//	return level;
-//}
-//
-//float Envelope::getLevel(long timeSinceNoteStart, long timeSinceNoteOff) {
-//	return getLevel(double(timeSinceNoteStart), double(timeSinceNoteOff));
-//}
-
 double Envelope::getLength() {
 	return getAttackLength() + getDecayLength() + getReleaseLength();
 }
@@ -144,66 +173,29 @@ void Envelope::init() {
 
 
 	// TODO move to setupSubGUI()
+	// set names of groups
 	guiParams.setName("Envelope Settings");
 	attackParams.setName("Attack Parameters");
 	releaseParams.setName("Release Parameters");
 	decayParams.setName("Decay Parameters");
 
+	// add params to the param groups
 	attackParams.add(lengthA);
 	attackParams.add(levelA);
 	attackParams.add(splineA);
+	
 	decayParams.add(lengthD);
 	decayParams.add(levelD);
 	decayParams.add(splineD);
-	decayParams.add(lengthR);
-	decayParams.add(splineR);
+	
 	releaseParams.add(lengthR);
 	releaseParams.add(splineR);
 
+	// add sub-param groups to main group
 	guiParams.add(sustain);
 	guiParams.add(attackParams);
 	guiParams.add(decayParams);
 	guiParams.add(releaseParams);
-
-	
-
-
-
-
-
-
-	//int size = envelopeSettings.envSegmentLengths.size();
-	//std::cout << "Intializing Envelope with " << size << " env segment lengths\n";
-	//for (int i = 0; i < size; ++i) {
-	//	// TODO refactor - Envelope Settings could generate a list of EnvelopeSegmentSettings on init()
-	//	// Create the segment settings
-	//	EnvelopeSegmentSettings segmentSettings;
-	//	// Set the start time of the envelopeADR - how much time has passed to this point
-	//	segmentSettings.start = totalLength; 
-	//	// Set the end time of the envelopeADR
-	//	segmentSettings.end = totalLength + envelopeSettings.envSegmentLengths[i];
-	//	
-	//	// Set the level the envelopeADR should start at
-	//	segmentSettings.startLevel = envelopeSettings.envSegmentLevels[i];
-	//	// Set the end level
-	//	if (i < size - 1) {
-	//		//nextLength = envelopeSettings.envSegmentLengths[i+1];
-	//		segmentSettings.endLevel = envelopeSettings.envSegmentLevels[i+1];
-	//	}
-	//	else { // Release envelopeADR, so set end level to 0
-	//		segmentSettings.endLevel = 0;
-	//	}
-
-	//	EnvelopeSegment* envelopeSegment = new EnvelopeSegment(segmentSettings);
-	//	guiParams.add(envelopeSegment->splineIntensitySlider);
-	//	envelopeSegments.push_back(envelopeSegment);
-	//	
-	//	totalLength += envelopeSegment->getLength();
-	//}
-
-
-
-
 	std::cout << "initialized envelope with length " << getLength() << '\n';
 
 }
@@ -211,7 +203,12 @@ void Envelope::init() {
 EnvelopeNode::EnvelopeNode(Envelope* envelope) : envelope(envelope) {}
 
 float EnvelopeNode::getLevel(long currentTimeMS) {
-	return envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop);
+	auto level = envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop, lastLevel);
+	if (lastStart > lastStop)
+		lastLevel = level;
+	return level;
+	//return envelope->getLevel(currentTimeMS - lastStart, currentTimeMS - lastStop, lastLevel);
+
 }
 
 float EnvelopeNode::getLevel() {

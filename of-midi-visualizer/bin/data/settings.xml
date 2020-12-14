@@ -83,24 +83,75 @@
 	<Network_Port_Name>Network Session 1</Network_Port_Name>
 	<Channel_1_Settings>
 		<UnknownName>237, 197, 161, 255</UnknownName>
-		<Note_Color>237, 0, 89, 255</Note_Color>
+		<Note_Color>113, 237, 22, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>0</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>100</Length>
+				<Level>0.787503</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_1_Settings>
 	<Channel_2_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>237, 149, 39, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>1</Sustain>
+			<Attack_Parameters>
+				<Length>90</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>500</Length>
+				<Level>0.9</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>100</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_2_Settings>
 	<Channel_3_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>165, 244, 255, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>1</Sustain>
+			<Attack_Parameters>
+				<Length>400</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.8</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>1800</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_3_Settings>
 	<Channel_4_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -108,6 +159,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_4_Settings>
 	<Channel_5_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -115,6 +183,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_5_Settings>
 	<Channel_6_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -122,6 +207,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_6_Settings>
 	<Channel_7_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -129,6 +231,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_7_Settings>
 	<Channel_8_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -136,6 +255,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_8_Settings>
 	<Channel_9_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -143,6 +279,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_9_Settings>
 	<Channel_10_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -150,6 +303,23 @@
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>1500</Length>
+				<Level>0.5</Level>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_10_Settings>
 	<Channel_11_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
@@ -193,7 +363,7 @@
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 	</Channel_16_Settings>
-	<UnknownName>Ch#5 Note Off       90</UnknownName>
+	<UnknownName>Ch#3 CC#64           0</UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
 	<Background_Color>9, 0, 20, 255</Background_Color>

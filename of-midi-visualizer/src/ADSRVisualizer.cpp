@@ -6,16 +6,16 @@ ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
 //--------------------------------------------------------------
 void ADSRVisualizer::setup() {
 	// Create ADR envelope
-	EnvelopeSettings envelopeSettingsADR;
+	/*EnvelopeSettings envelopeSettingsADR;
 	envelopeSettingsADR.envelopeType = ADR;
 	envelopeSettingsADR.envSegmentLengths = { 400, 1400, 400 };
-	envelopeSettingsADR.envSegmentLevels  = { 0,      1,  .5 };
-	envelopeADR = new Envelope(envelopeSettingsADR);
-	
+	envelopeSettingsADR.envSegmentLevels  = { 0,      1,  .5 };*/
+	envelopeADR = new Envelope();//envelopeSettingsADR);
+
 	// Create ADSR envelope
-	EnvelopeSettings envelopeSettingsADSR(envelopeSettingsADR);
-	envelopeSettingsADSR.envelopeType = ADSR;
-	envelopeADSR = new Envelope(envelopeSettingsADSR);
+	//EnvelopeSettings envelopeSettingsADSR(envelopeSettingsADR);
+	//envelopeSettingsADSR.envelopeType = ADSR;
+	envelopeADSR = new Envelope();// envelopeSettingsADSR);
 	// Setup ADSR Envelope Node
 	envelopeADSRNode = new EnvelopeNode(envelopeADSR);
 
@@ -87,7 +87,7 @@ void ADSRVisualizer::draw() {
 
 	// debug TODO delete
 	if (!showADRToggle) {
-		std::cout << "ADSR Y = "<< circleY << ", Height Scale (Level) = " << heightScale << '\n';
+		//std::cout << "ADSR Y = "<< circleY << ", Height Scale (Level) = " << heightScale << '\n';
 
 	}
 }

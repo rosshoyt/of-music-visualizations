@@ -107,13 +107,8 @@ void MIDIPortState::setupMIDIPortState() {
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
 	for (int i = 0; i < numChannels; ++i) {
 		std::cout << "Creating MIDI Channel #" << i+1 << '\n';
-		EnvelopeSettings settings;
-		settings.envelopeType = ADSR;
-		settings.envSegmentLengths = { 50, 2000, 400 };
-		settings.envSegmentLevels = { 0.f, 1.f, .5f };
-
-		Envelope envelope(settings);
-		channels.push_back(new MIDIChannelState(new MIDIChannelSettings(envelope)));
+		
+		channels.push_back(new MIDIChannelState(new MIDIChannelSettings()));
 	}
 	setupOfxMIDIPort();
 }
