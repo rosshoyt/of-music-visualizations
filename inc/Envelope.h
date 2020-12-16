@@ -28,8 +28,12 @@ private:
 	ofParameter<bool> sustain = false;
 	// gui sub-sub groups;
 	ofParameterGroup attackParams, decayParams, releaseParams;
-	const double MIN_SEG_LENGTH = 0, MAX_SEG_LENGTH = 20000;
-
+	
+    const double MIN_SEG_LENGTH = 0, MAX_SEG_LENGTH = 20000;
+    
+    const float MAX_SPLINE_CONTROL_PERC = 0.88888888; // so that control points don't put spline above/below target val
+    
+    
 	float getLevelFromSegment(double segTimeElapsed, double lengthSeg, double levelSegStart, double levelSegEnd, double levelSpline);
 
 	void init();
