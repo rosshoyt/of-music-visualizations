@@ -88,7 +88,7 @@
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 		<Envelope_Settings>
-			<Sustain>0</Sustain>
+			<Sustain>1</Sustain>
 			<Attack_Parameters>
 				<Length>0</Length>
 				<Level>1</Level>
@@ -363,7 +363,7 @@
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 	</Channel_16_Settings>
-	<UnknownName>Ch#3 CC#64           0</UnknownName>
+	<UnknownName>Ch#1 Note Off       61</UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
 	<Background_Color>9, 0, 20, 255</Background_Color>

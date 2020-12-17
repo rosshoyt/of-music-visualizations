@@ -16,6 +16,9 @@ public:
 	std::string getGUIName();
 
 	virtual void drawGUI();
+	
+	// TODO allow user to specify a different settings save file name
+	void loadSavedSettings(); 
 
 	virtual void setMenuXY(float x, float y);
 
@@ -26,6 +29,8 @@ public:
 	void setDefaultMenuWidth(float width);
 protected:
 	ofxPanel gui;
+
+	const std::string DEFAULT_SETTINGS_FILE_NAME = "settings.xml";
 
 	float menuX = 0, menuY = 0;
 

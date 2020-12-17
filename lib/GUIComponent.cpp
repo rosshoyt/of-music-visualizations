@@ -3,6 +3,7 @@
 GUIComponent::GUIComponent(std::string uid) : UID(uid) {
 	gui.setup();
 	setGUIName(uid);
+	
 }
 
 void GUIComponent::setGUIName(std::string name) {
@@ -15,6 +16,10 @@ std::string GUIComponent::getGUIName() {
 
 void GUIComponent::drawGUI() {
 	gui.draw();
+}
+
+void GUIComponent::loadSavedSettings(){
+	gui.loadFromFile(DEFAULT_SETTINGS_FILE_NAME);
 }
 
 void GUIComponent::setMenuXY(float x, float y) {

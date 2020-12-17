@@ -36,10 +36,17 @@ void ofApp::setup() {
         // add the component to the GUI Component list (TODO separate MIDIAnimationComponent from GUIComponent parent class)
         guiComponentsList.push_back(component);
     }
+
     // initialize the animation toggles in the main gui
     mainGUI.initToggles();
+    
     // set an animation to start with
-    mainGUI.setToggleState(adsrVisualizer.getUID(), true);
+    mainGUI.setToggleState(circleOfFifths.getUID(), true);
+    
+    // load all GUI panel settings 
+    for (auto& guiComponent : guiComponentsList) {
+        guiComponent->loadSavedSettings();
+    }
 }
 
 //--------------------------------------------------------------
