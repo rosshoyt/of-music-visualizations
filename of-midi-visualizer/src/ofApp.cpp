@@ -106,7 +106,7 @@ void ofApp::windowResized(int w, int h){
     for (auto& component : guiComponentsList) {
         auto bottomOfNewGUIComponent = y + component->getMenuHeight();
         // check if we are going to position GUI off-screen
-        if (bottomOfNewGUIComponent > HEIGHT) {
+        if (bottomOfNewGUIComponent > ANIMATION_HEIGHT) {
             // TODO refactor the positioning of the GUI components
             y = 0; // reset Y
             x += OFXGUI_DEF_WIDTH; // shift right to the next column 

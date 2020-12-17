@@ -196,6 +196,7 @@
     <ClCompile Include="..\lib\MIDIPortStateUser.cpp" />
     <ClCompile Include="..\lib\Utils.cpp" />
     <ClCompile Include="src\ADSRVisualizer.cpp" />
+    <ClCompile Include="src\AppConstants.cpp" />
     <ClCompile Include="src\CircleOfFifths.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainGUI.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="..\inc\UID.h" />
     <ClInclude Include="..\inc\Utils.h" />
     <ClInclude Include="src\ADSRVisualizer.h" />
+    <ClInclude Include="src\AppConstants.h" />
     <ClInclude Include="src\CircleOfFifths.h" />
     <ClInclude Include="src\MainGUI.h" />
     <ClInclude Include="src\MeshFromImage.h" />

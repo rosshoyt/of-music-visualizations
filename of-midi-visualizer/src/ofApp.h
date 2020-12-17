@@ -14,7 +14,7 @@
 #include "CircleOfFifths.h"
 #include "Utils.h"
 
-extern const int WIDTH, HEIGHT, OFXGUI_DEF_WIDTH, RIGHT_CONTROLBAR;
+extern const int ANIMATION_WIDTH, ANIMATION_HEIGHT, OFXGUI_DEF_WIDTH, RIGHT_CONTROLBAR;
 
 class ofApp : public ofBaseApp {
 

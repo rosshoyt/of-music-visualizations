@@ -6,7 +6,12 @@ void MainGUI::setupGUI() {
     gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
     backgroundColorSelector.maximize(); // starts in un-collapsed state
     animationTogglesGroup.setName("Animation Toggles");
-    gui.loadFromFile("settings.xml");
+    
+    // TODO fix bug where default value doesn't set correctly
+    gui.add(animationWidth.set("Animation Width:", ANIMATION_WIDTH, 300, 3000));
+    gui.add(animationHeight.set("Animation Height:", ANIMATION_HEIGHT, 300, 3000));
+    gui.add(resizeWindowButton.setup("Reset Animation Size"));
+    resizeWindowButton.addListener(this, &MainGUI::resizeWindow);
 }
 
 void MainGUI::drawGUI() {
@@ -37,4 +42,8 @@ bool MainGUI::isToggled(std::string uid) {
 
 ofColor MainGUI::getBackgroundColor() {
     return backgroundColorSelector;
+}
+
+void MainGUI::resizeWindow(){
+    ofSetWindowShape(animationWidth + RIGHT_CONTROLBAR, animationHeight);
 }
