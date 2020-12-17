@@ -10,7 +10,7 @@ float Envelope::getLevel(long timeSinceStart, long timeSinceEnd, float lastNoteL
 	double level = 0;
 
 	// check if note is currently engaged.
-	bool heldNote = timeSinceEnd > timeSinceStart;
+	bool heldNote = timeSinceEnd >= timeSinceStart;
 
 	bool heldNoteButMayBeReleasing = false;
 	if (heldNote) {
@@ -91,7 +91,7 @@ float getLevel(double segTimeElapsed, double lengthSeg, double levelSegStart, do
 		} // else { linear interpolate to save processing power? }; // TODO
 
 		tk::spline spline;
-
+        
 		spline.set_points(splineControlX, splineControlY);
 
 
@@ -115,6 +115,10 @@ float Envelope::getLevelFromSegment(double segTimeElapsed, double lengthSeg, dou
 			double yStepSize = (levelSegEnd - levelSegStart) / 3;
 			double yVal = levelSegStart - yStepSize;
 			double xVal = -xStepSize;//settings.start - xStepSize;
+            
+            
+            
+            
 			for (int i = 0; i < 6; ++i, xVal += xStepSize, yVal += yStepSize) {
 				splineControlY.push_back(yVal);
 				splineControlX.push_back(xVal);
@@ -122,15 +126,17 @@ float Envelope::getLevelFromSegment(double segTimeElapsed, double lengthSeg, dou
 			}
 
 			if (levelSpline != 0) {
+                double splineAmount = levelSpline * yStepSize * MAX_SPLINE_CONTROL_PERC;
 				// TODO change the direction of the control points depending on segment slope being positive, negative (or 0?)
 				// double change = levelSegStart > levelSegEnd ? -change : change;
-				// TODO also add error correction so that spline values are not toop big/small
-				splineControlY[0] -= levelSpline;
-				splineControlY[2] += levelSpline;
-				splineControlY[3] += levelSpline;
-				splineControlY[5] -= levelSpline;
+				// TODO also add error correction so that spline values are not too big/small
+				splineControlY[0] -= splineAmount;
+				splineControlY[2] += splineAmount;
+				splineControlY[3] += splineAmount;
+				splineControlY[5] -= splineAmount;
+                //std::cout << "Spline Slider = " << levelSpline << " YStepSize: " << yStepSize <<  "Spline Coord Y: " << splineAmount << '\n';
 			} // else { linear interpolate to save processing power? }; // TODO
-
+           
 			tk::spline spline;
 
 			spline.set_points(splineControlX, splineControlY);
@@ -162,14 +168,14 @@ void Envelope::init() {
 
 	lengthA.set("Length", lengthA, 0, MAX_SEG_LENGTH);
 	levelA.set("Level", levelA, 0, 1);
-	splineA.set("Spline", splineA, 0, 1);
+	splineA.set("Spline", splineA, -1, 1);
 
 	lengthD.set("Length", lengthD, 0, MAX_SEG_LENGTH);
 	levelD.set("Level", levelD, 0, 1);
-	splineD.set("Spline", splineD, 0, 1);
+	splineD.set("Spline", splineD, -1, 1);
 
 	lengthR.set("Length", lengthR, 0, MAX_SEG_LENGTH);
-	splineR.set("Spline", splineR, 0, 1);
+	splineR.set("Spline", splineR, -1, 1);
 
 
 	// TODO move to setupSubGUI()
@@ -196,7 +202,8 @@ void Envelope::init() {
 	guiParams.add(attackParams);
 	guiParams.add(decayParams);
 	guiParams.add(releaseParams);
-	std::cout << "initialized envelope with length " << getLength() << '\n';
+    
+	//std::cout << "Initialized envelope with length " << getLength() << '\n';
 
 }
 

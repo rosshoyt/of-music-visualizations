@@ -78,7 +78,8 @@ void ADSRVisualizer::draw() {
 		circleX = animationWidth * xF;
 
 		if (showADRToggle) { //Draw the ADR visualizer, so get a height value for current point
-			heightScale = envelopeADR->getLevel(xF * envelopeADR->getLength(), true);
+            long timeSinceStart = xF * envelopeADR->getLength();
+            heightScale = envelopeADR->getLevel(timeSinceStart,timeSinceStart + 1);
 		}
 		
 		circleY = animationHeight - animationHeight * heightScale;
