@@ -17,8 +17,12 @@ void MidiCCNode::setValue(int value) {
 	lck.unlock();
 }
 
+void MidiCCNode::reset() {
+	value = 0;
+}
 
-MIDIChannelState::MIDIChannelState(MIDIChannelSettings* settings) :  settings(settings), notesHeldDown(), notesSustained(), midiCCState(128), adsrStates(), sustained(false), mtx(), mtxSusNotes() {
+
+MIDIChannelState::MIDIChannelState(MIDIChannelSettings* settings) :  settings(settings), notesHeldDown(), notesSustained(), midiCCState(128), envelopeStates(), sustained(false), mtx(), mtxSusNotes() {
 	//settings = new MIDIChannelSettings();
 	
 	// TODO move to init() function
@@ -27,7 +31,7 @@ MIDIChannelState::MIDIChannelState(MIDIChannelSettings* settings) :  settings(se
 		//NoteADSRState* adsrNode = new NoteADSRState(pianoADSR);
 		EnvelopeNode* envelopeNode = new EnvelopeNode(&settings->volumeEnvelope);
 		
-		adsrStates.push_back(envelopeNode);
+		envelopeStates.push_back(envelopeNode);
 	}
 }
 
@@ -76,15 +80,20 @@ void MIDIChannelState::tryAddNoteOn(int note, int velocity) {
 	notesHeldDown[note] = velocity;
 	lck.unlock();
 
-	adsrStates[note]->start(velocity);
+	envelopeStates[note]->start(velocity);
 }
 
 void MIDIChannelState::tryAddNoteOff(int note) {
 	// We may want to continue to hear the note if the sustain pedal is down, so track it
 	if (sustained) {
 		// Move note to sustainedNotes
-		// first get the note's earliest occuring NoteOn Velocity
-		// TODO could cause exception if key not exists in the map (cased by corrupted MIDI data)
+
+		// First, we should check if the note still exists in the map. 
+		// If not, return. This prevents out of range memory access occuring 
+		// when accessing deleted notes in the notesHeldDown map.
+		if (notesHeldDown.count(note) == 0) return;
+
+		// Next get the note's earliest occuring NoteOn Velocity
 		int noteOnVel = notesHeldDown.at(note); // 'concurrent access is safe' @s`ee http://www.cplusplus.com/reference/map/map/at/
 												// add to sustainedNotes
 		Lock lck2(mtxSusNotes, std::defer_lock);
@@ -97,7 +106,7 @@ void MIDIChannelState::tryAddNoteOff(int note) {
 	else {
 		// If sustain pedal wasn't down, clear the ADSR curve because we will be removing it
 		// TODO can add sus pedal tracking to the ADSR class
-		adsrStates[note]->stop();
+		envelopeStates[note]->stop();
 	}
 	// Remove note from list of held-down notes
 	Lock lck(mtx, std::defer_lock);
@@ -116,7 +125,7 @@ void MIDIChannelState::setSustainPedalOff() {
 		// clear ADSR curves of all the notes that were
 		// only being sustained
 		for (const auto& nnvp : notesSustained)
-			adsrStates[nnvp.first]->stop();
+			envelopeStates[nnvp.first]->stop();
 
 
 		// clear all notes from sustainedNotes
@@ -133,7 +142,7 @@ void MIDIChannelState::setSustainPedalOff() {
 // TODO input validation
 
 float MIDIChannelState::getADSRLevel(int note) {
-	return adsrStates[note]->getLevel();
+	return envelopeStates[note]->getLevel();
 }
 
 std::map<int, int> MIDIChannelState::getNotes() {
@@ -191,3 +200,14 @@ bool MIDIChannelState::sustainPedalIsDown() {
 }
 
 
+void MIDIChannelState::resetNotes() {
+	notesHeldDown.clear();
+	notesSustained.clear();
+	
+	for (auto adsrState : envelopeStates)
+		adsrState->reset();
+	
+	// implement 
+	for (auto& mcc : midiCCState)
+		mcc.setValue(0);
+}

@@ -251,3 +251,10 @@ long EnvelopeNode::getLastStopTimeMS() {
 int EnvelopeNode::getLastNoteOnVelocity() {
 	return lastNoteOnVelocity;
 }
+
+void EnvelopeNode::reset() {
+	lastStart = 0;
+	lastStop = 0;
+	lastNoteOnVelocity = 0;
+	lastLevel = 0;
+}

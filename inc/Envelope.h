@@ -63,6 +63,8 @@ public:
 
 	int getLastNoteOnVelocity();
 
+	void reset();
+
 private:
 	Envelope* envelope;
 

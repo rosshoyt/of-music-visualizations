@@ -56,6 +56,8 @@ public:
     int getValue();
     
     void setValue(int value);
+
+    void reset();
     
 private:
     int value;
@@ -95,8 +97,8 @@ public:
     std::map<int, std::pair<int, float>> getAllActiveNoteADSRLevels() {
         std::map<int, std::pair<int, float>> ret;
         for (int i = 0; i < 128; ++i) {
-            auto level = adsrStates[i]->getLevel();
-            auto velocity = adsrStates[i]->getLastNoteOnVelocity();
+            auto level = envelopeStates[i]->getLevel();
+            auto velocity = envelopeStates[i]->getLastNoteOnVelocity();
             // TODO ensure no probelm caused by notes being numbered 0 - 127
             if (level > 0) 
                 ret.insert({ i, {  velocity , level } });
@@ -117,7 +119,8 @@ public:
     
     bool sustainPedalIsDown();
 
-    
+    void resetNotes();
+
 private:
     MIDIChannelSettings* settings;
     
@@ -127,7 +130,7 @@ private:
 
 
     // TODO rename (might not be ADSR, could be ADR)
-    std::vector<EnvelopeNode*> adsrStates;
+    std::vector<EnvelopeNode*> envelopeStates;
     std::atomic<bool>  sustained;
     
     std::mutex mtx;

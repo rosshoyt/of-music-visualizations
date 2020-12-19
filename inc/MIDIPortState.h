@@ -48,6 +48,8 @@ public:
 
     MIDIChannelSettings* getChannelSettings(unsigned int channel);
 
+    void resetNotes();
+
 private:
     // Midi Input port
     ofxMidiIn midiIn;
@@ -59,7 +61,7 @@ private:
     // How many midi channels to listen to on the port (1 - 16)
     ofParameter<unsigned int> numChannels = 10;
     
-    ofxButton resetMidiPortButton;
+    ofxButton resetMidiPortButton, resetNotesButton;
     
     // Display field for the most recent midi message
     ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");

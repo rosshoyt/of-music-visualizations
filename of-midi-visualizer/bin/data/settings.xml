@@ -155,31 +155,31 @@
 	</Channel_3_Settings>
 	<Channel_4_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>92, 4, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 		<Envelope_Settings>
-			<Sustain>0</Sustain>
+			<Sustain>1</Sustain>
 			<Attack_Parameters>
-				<Length>250</Length>
+				<Length>0</Length>
 				<Level>1</Level>
 				<Spline>0</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
-				<Length>1500</Length>
-				<Level>0.5</Level>
+				<Length>5868.98</Length>
+				<Level>0.112827</Level>
 				<Spline>0</Spline>
 			</Decay_Parameters>
 			<Release_Parameters>
-				<Length>250</Length>
-				<Spline>0</Spline>
+				<Length>2575.29</Length>
+				<Spline>-0.147481</Spline>
 			</Release_Parameters>
 		</Envelope_Settings>
 	</Channel_4_Settings>
 	<Channel_5_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>237, 226, 97, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
@@ -227,7 +227,7 @@
 	</Channel_6_Settings>
 	<Channel_7_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>198, 13, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
@@ -251,16 +251,16 @@
 	</Channel_7_Settings>
 	<Channel_8_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>237, 0, 89, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 		<Envelope_Settings>
 			<Sustain>0</Sustain>
 			<Attack_Parameters>
-				<Length>250</Length>
+				<Length>4062.76</Length>
 				<Level>1</Level>
-				<Spline>0</Spline>
+				<Spline>0.575007</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
 				<Length>1500</Length>
@@ -268,31 +268,31 @@
 				<Spline>0</Spline>
 			</Decay_Parameters>
 			<Release_Parameters>
-				<Length>250</Length>
-				<Spline>0</Spline>
+				<Length>1087.81</Length>
+				<Spline>0.351886</Spline>
 			</Release_Parameters>
 		</Envelope_Settings>
 	</Channel_8_Settings>
 	<Channel_9_Settings>
 		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<Note_Color>154, 59, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 		<Envelope_Settings>
 			<Sustain>0</Sustain>
 			<Attack_Parameters>
-				<Length>250</Length>
+				<Length>0</Length>
 				<Level>1</Level>
 				<Spline>0</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
-				<Length>1500</Length>
-				<Level>0.5</Level>
-				<Spline>0</Spline>
+				<Length>662.819</Length>
+				<Level>0.856565</Level>
+				<Spline>0.660006</Spline>
 			</Decay_Parameters>
 			<Release_Parameters>
-				<Length>250</Length>
+				<Length>556.571</Length>
 				<Spline>0</Spline>
 			</Release_Parameters>
 		</Envelope_Settings>
@@ -363,7 +363,7 @@
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 	</Channel_16_Settings>
-	<UnknownName>Ch#1 Note Off       61</UnknownName>
+	<UnknownName>Ch#5 CC#1           40</UnknownName>
 </MIDI_Port_Info>
 <Main_Controls>
 	<Background_Color>9, 0, 20, 255</Background_Color>
@@ -378,13 +378,13 @@
 <Circle_of_Fifths>
 	<Draw_Octaves>1</Draw_Octaves>
 	<Draw_Chromatic_Circle>0</Draw_Chromatic_Circle>
-	<Note_Circle_Size>1</Note_Circle_Size>
+	<Note_Circle_Size>3.05069</Note_Circle_Size>
 	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
 	<Octave_Size_Multiplier>1</Octave_Size_Multiplier>
 	<Note_Multiplier_>1</Note_Multiplier_>
 	<Draw_Halo_on_Notes>0</Draw_Halo_on_Notes>
 	<Note_Multiplier>7</Note_Multiplier>
-	<Pitch_Offset>0</Pitch_Offset>
+	<Pitch_Offset>8</Pitch_Offset>
 </Circle_of_Fifths>
 <ADSR_Visualizer>
 	<Spline_Intensity>0.23643</Spline_Intensity>

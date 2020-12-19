@@ -13,6 +13,7 @@ void MIDIPortState::setupGUI() {
 	gui.add(virtualPortName.set("Virtual Port Name", virtualPortName));
 	gui.add(networkPortName.set("Network Port Name", networkPortName));
     gui.add(resetMidiPortButton.setup("Reset MIDI Port"));
+	gui.add(resetNotesButton.setup("Reset Notes"));
 	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
 	for (int i = 0; i < numChannels; i++) {
@@ -23,6 +24,7 @@ void MIDIPortState::setupGUI() {
 	}
 
     resetMidiPortButton.addListener(this, &MIDIPortState::setupOfxMIDIPort);
+	resetNotesButton.addListener(this, &MIDIPortState::resetNotes);
    
 	gui.minimizeAll();
 
@@ -137,7 +139,7 @@ void MIDIPortState::setupOfxMIDIPort() {
 		}
 
 	}
-	midiIn.addListener(this);
+	midiIn.addListener(this);	
 }
 
 /**
@@ -178,4 +180,10 @@ void MIDIPortState::updateMIDIMessageMonitor(ofxMidiMessage& message) {
 	text.append(value);
 	
 	midiMessageMonitor = text;
+}
+
+void MIDIPortState::resetNotes() {
+	for (auto channel : channels) {
+		channel->resetNotes();
+	}
 }
