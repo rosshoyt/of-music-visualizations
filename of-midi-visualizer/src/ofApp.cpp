@@ -98,10 +98,8 @@ void ofApp::windowResized(int w, int h){
 
     // TODO Algorithm to sort dynamically sort GUI panels in a 
 
-
-
     // update all GUI panel positions
-    float guiSpacer = 10; // TODO move to global variable, create WindowManager
+    float guiYSpacer = 10; // TODO move to global variable, create WindowManager
     float x = animationDisplayWidth, y = 0;
     for (auto& component : guiComponentsList) {
         auto bottomOfNewGUIComponent = y + component->getMenuHeight();
@@ -113,7 +111,15 @@ void ofApp::windowResized(int w, int h){
             // TODO ensure doesn't paint gui menu in off-screen columns
         }
         component->setMenuXY(x, y);
-        y += component->getMenuHeight() + guiSpacer; 
+        y += component->getMenuHeight() + guiYSpacer; 
+
+        // Check if we just drew the midi port state, move over a column for the rest of components.
+        // TODO create functions to abstract the column position management, or create
+        // a separate class.
+        if (component->getUID() == midiPortState.getUID()) {
+            y = 0; // reset Y
+            x += OFXGUI_DEF_WIDTH;
+        }
     }
 }
 
