@@ -43,3 +43,4 @@ void GUIComponent::setDefaultMenuWidth(float width) {
 void GUIComponent::setupParameterListeners() {}
 
 GUIParameterNode* GUIComponent::lastClickedParam = new GUIParameterNode();
+

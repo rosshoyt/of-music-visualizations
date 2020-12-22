@@ -143,7 +143,6 @@
       <Filter>src\animation-components</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\AbletonController.cpp" />
-    <ClCompile Include="..\lib\ADSR.cpp" />
     <ClCompile Include="..\lib\AnimationComponent.cpp" />
     <ClCompile Include="..\lib\MIDIChannelState.cpp" />
     <ClCompile Include="..\lib\MIDIPortState.cpp" />
@@ -166,6 +165,7 @@
     <ClCompile Include="src\AppConstants.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\GUIParameterNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -468,7 +468,6 @@
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AbletonController.h" />
-    <ClInclude Include="..\inc\ADSR.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
@@ -505,6 +504,7 @@
     <ClInclude Include="src\AppConstants.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\inc\GUIParameterNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
