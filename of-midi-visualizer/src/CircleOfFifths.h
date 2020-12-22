@@ -1,4 +1,4 @@
-    #pragma once
+#pragma once
 #include <string>
 #include "ofMain.h"
 #include "Utils.h"
@@ -11,6 +11,7 @@ public:
 
     void setup();
     void setupGUI() override;
+    void setupParameterListeners();
     void update();
     void draw();
 
@@ -29,21 +30,4 @@ private:
     ofParameter<int> noteMultiplierSlider;
     ofParameter<int> pitchOffsetSlider;
     ofParameter<bool> drawHaloOnNotesToggle;
-
-    // TODO create class to manage a GUI toggle for enum values (stepped slider)
-    struct Toggle {
-        Toggle(std::vector<std::string> _states) : states(_states) {
-            currentState.set("States", 0, 0, states.size() - 1);
-        }
-        
-        ofParameter<int> currentState;
-        ofParameter<std::string> currentStateText;
-        std::vector<std::string> states;
-        
-        std::string getCurrentState() {
-
-        }
-
-        // void draw(){} // TODO implement?
-    };
 };

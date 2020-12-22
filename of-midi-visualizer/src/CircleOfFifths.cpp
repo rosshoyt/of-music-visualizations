@@ -17,6 +17,15 @@ void CircleOfFifths::setupGUI() {
 	gui.add(pitchOffsetSlider.set("Pitch Offset", 0, 0, 11));
 	gui.add(drawHaloOnNotesToggle.set("Draw Halo on Notes", false));
 	
+	
+}
+
+//--------------------------------------------------------------
+void CircleOfFifths::setupParameterListeners() {
+	addParameterListener<float>(noteCircleSizeSlider);
+	addParameterListener<float>(octaveSizeMultiplierSlider);
+	addParameterListener<int>(noteMultiplierSlider);
+	addParameterListener<int>(pitchOffsetSlider);
 }
 
 //--------------------------------------------------------------

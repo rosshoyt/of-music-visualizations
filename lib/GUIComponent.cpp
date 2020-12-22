@@ -3,7 +3,6 @@
 GUIComponent::GUIComponent(std::string uid) : UID(uid) {
 	gui.setup();
 	setGUIName(uid);
-	
 }
 
 void GUIComponent::setGUIName(std::string name) {
@@ -31,6 +30,7 @@ void GUIComponent::setMenuXY(float x, float y) {
 float GUIComponent::getMenuHeight() {
 	return gui.getHeight();
 }
+
 float GUIComponent::getMenuWidth() {
 	return gui.getWidth();
 }
@@ -39,6 +39,7 @@ void GUIComponent::setDefaultMenuWidth(float width) {
 	gui.setDefaultWidth(width);
 }
 
-//void GUIComponent::setMenuXY(int x, int y) {
-//	menuX = x, menuY = y;
-//}
+// empty method definition, can be implemented by inheriting classes
+void GUIComponent::setupParameterListeners() {}
+
+GUIParameterNode* GUIComponent::lastClickedParam = new GUIParameterNode();

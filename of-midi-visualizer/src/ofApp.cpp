@@ -46,6 +46,7 @@ void ofApp::setup() {
     // load all GUI panel settings 
     for (auto& guiComponent : guiComponentsList) {
         guiComponent->loadSavedSettings();
+        guiComponent->setupParameterListeners();
     }
 }
 
