@@ -10,6 +10,7 @@
 #include "ofxMidi.h"
 #include "ofxGui.h"
 #include "Envelope.h"
+#include "GUIParameterNode.h"
 
 class MIDIChannelSettings {
 public:
@@ -17,23 +18,16 @@ public:
     ofParameter<ofColor> color;
     Envelope volumeEnvelope;
 
-    //ofxGuiGroup params; // TODO
-    ofParameterGroup params; // TODO
+    ofParameterGroup params;
 
-    //std::vector<ofAbstractParameter> params;
+    MIDIChannelSettings() {
+        init();
+    }
 
     MIDIChannelSettings(Envelope volumeEnvelope) : volumeEnvelope(volumeEnvelope) {
         init();
     }
 
-
-    MIDIChannelSettings() { 
-        init();
-    }
-
-   /* int getChannelNum() {
-        return channelNum;
-    }*/
 private:
     void init() {
         // TODO add channel number to the gui names
@@ -41,9 +35,9 @@ private:
 
         params.add(volumeEnvelope.guiParams);
         std::cout << "Created MIDIChannel Settings with volume envelope controls containing " << volumeEnvelope.guiParams.size() << " items \n";
-        //params.minimize();
-        //volumeEnvelope.guiParams.setName()
     }
+
+    // todo
     //int channelNum;
 };
 
@@ -58,10 +52,19 @@ public:
     void setValue(int value);
 
     void reset();
+
+    void setParameterNode(GUIParameterNode* node) {
+        param = node;
+    }
     
 private:
     int value;
+
     std::mutex mtx;
+
+    GUIParameterNode* param = nullptr;
+
+    static const int MAX_CC_VAL = 127;
 };
 
 /**
@@ -70,10 +73,8 @@ private:
  */
 class MIDIChannelState {
 public:
-    //MIDIChannelState();
-
     MIDIChannelState(MIDIChannelSettings* settings);
-    
+
     void processMIDIMessage(ofxMidiMessage& message);
     
     void processMIDICC(ofxMidiMessage& message);
@@ -94,52 +95,42 @@ public:
     
     std::map<int, int> getAllNotes();
 
-    std::map<int, std::pair<int, float>> getAllActiveNoteADSRLevels() {
-        std::map<int, std::pair<int, float>> ret;
-        for (int i = 0; i < 128; ++i) {
-            auto level = envelopeStates[i]->getLevel();
-            auto velocity = envelopeStates[i]->getLastNoteOnVelocity();
-            // TODO ensure no probelm caused by notes being numbered 0 - 127
-            if (level > 0) 
-                ret.insert({ i, {  velocity , level } });
-        }
-        return ret;
-    }
+    std::map<int, std::pair<int, float>> getAllActiveNoteADSRLevels();
     
     int getNumNotes();
     
-    MIDIChannelSettings* getChannelSettings() {
-        return settings;
-    }
+    MIDIChannelSettings* getChannelSettings();
 
     void tryAddMIDICC(int midiCC, int value);
     
     int tryGetCCValue(int ccNo);
     
-    
     bool sustainPedalIsDown();
 
     void resetNotes();
 
+    void addCCControlledParam(GUIParameterNode* node, int ccNum);
+
 private:
     MIDIChannelSettings* settings;
     
-
     std::map<int,int> notesHeldDown;
     std::map<int,int> notesSustained;
 
-
-    // TODO rename (might not be ADSR, could be ADR)
+    // list of each note's envelope state
     std::vector<EnvelopeNode*> envelopeStates;
-    std::atomic<bool>  sustained;
+    // list of each MIDI CC State, also stores MIDI CC controlled GUI parameters
+    std::vector<MidiCCNode> midiCCState;
+
+    // flag storing if the sustain pedal is down
+    std::atomic<bool> sustained;
     
+    // mutexs used to synchronize access to data structures across multiple threads
     std::mutex mtx;
     std::mutex mtxSusNotes;
-    
-    std::vector<MidiCCNode> midiCCState;
-    
+   
+    // the MIDI channel number 
     unsigned int channelNumber;
-    
 };
 
 #endif /* MidiNotesState_h */

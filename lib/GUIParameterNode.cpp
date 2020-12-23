@@ -50,16 +50,7 @@ void GUIParameterNode::setValue(float percentage) {
 }
 
 std::string GUIParameterNode::getName() {
-	std::string ret;
-	switch (paramType) {
-	case INT:
-		ret = intParam.getName();
-	case FLOAT:
-		ret = floatParam.getName();
-	case DOUBLE:
-		ret = doubleParam.getName();
-	}
-	return ret;
+	return paramName;
 }
 
 template<typename T> void GUIParameterNode::setValue(float percentage, ofParameter<T>& param) {

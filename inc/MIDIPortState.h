@@ -7,6 +7,7 @@
 
 #ifndef MIDIPortNotesState_h
 #define MIDIPortNotesState_h
+#include "ofMain.h"
 #include "ofxMidi.h"
 #include "ofxGui.h"
 #include "MIDIChannelState.h"
@@ -45,7 +46,6 @@ public:
     
     float getADSRValue(unsigned int channel, int noteNumber);
 
-
     MIDIChannelSettings* getChannelSettings(unsigned int channel);
 
     void resetNotes();
@@ -62,14 +62,20 @@ private:
     ofParameter<unsigned int> numChannels = 10;
     
     ofxButton resetMidiPortButton, resetNotesButton;
-    
+    ofParameter<bool> mapParamToMIDICCButton;
+
     // Display field for the most recent midi message
-    ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected");
+    ofParameter<std::string> midiMessageMonitor = std::string("No MIDI Messages Detected"), selectedParamMonitor = std::string("No Parameter Selected");
     
-    // Array of channel note states (TODO refactor to std::vector)
+    // Array of channel note states
     std::vector<MIDIChannelState*> channels;
     
+    // Most recent Channel/MIDI CC stored as int pair, for mapping to GUI Params
+    std::pair<int, int> lastMIDIChannelCC; 
+
     // Private methods
+    void mapMostRecentGUIParameterToMIDICC(int channel, int ccNum);
+    
     void setupMIDIPortState();
 
     void validateSettings();
@@ -81,8 +87,6 @@ private:
      */
     void newMidiMessage(ofxMidiMessage& message);
 
-    void updateMIDIMessageMonitor(ofxMidiMessage& message);
-    
-    
+    void parseMIDIForPort(ofxMidiMessage& message);
 };
 #endif /* MIDIPortNotesState_h */

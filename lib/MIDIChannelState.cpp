@@ -15,6 +15,8 @@ void MidiCCNode::setValue(int value) {
 	lck.lock();
 	this->value = value;
 	lck.unlock();
+	if(param != nullptr)
+		param->setValue(static_cast<float>(value) / MAX_CC_VAL);
 }
 
 void MidiCCNode::reset() {
@@ -54,23 +56,31 @@ void MIDIChannelState::processMIDIMessage(ofxMidiMessage& message) {
 }
 
 void MIDIChannelState::processMIDICC(ofxMidiMessage& message) {
-	switch (message.control) {
-	case 1:
+	int ccNum = message.control, value = message.value;
+
+	midiCCState[ccNum].setValue(value);
+
+	// check if this midi CC controls any parameters
+	/*if (midiCCdParameters.count(ccNum)) {
+		midiCCdParameters[ccNum]->setValue(value / 127);
+	}*/
+	switch (ccNum) {
+	/*case 1:
 		tryAddMIDICC(message.control, message.value);
-		break;
+		break;*/
 	case 64:
-		switch (message.value) {
+		// Sustain Pedal
+		switch (value) {
 		case 0:
-			//std::cout<< "MIDI Control Change # " << message.control << " value = " << message.value << '\n';
 			setSustainPedalOff();
 			break;
-
 		case 127:
-
 			setSustainPedalOn();
 			break;
 		}
+		break;
 	}
+	
 }
 
 void MIDIChannelState::tryAddNoteOn(int note, int velocity) {
@@ -170,6 +180,18 @@ std::map<int, int> MIDIChannelState::getAllNotes() {
 	return notes;
 }
 
+std::map<int, std::pair<int, float>> MIDIChannelState::getAllActiveNoteADSRLevels() {
+	std::map<int, std::pair<int, float>> ret;
+	for (int i = 0; i < 128; ++i) {
+		auto level = envelopeStates[i]->getLevel();
+		auto velocity = envelopeStates[i]->getLastNoteOnVelocity();
+		// TODO ensure no probelm caused by notes being numbered 0 - 127
+		if (level > 0)
+			ret.insert({ i,{ velocity , level } });
+	}
+	return ret;
+}
+
 int MIDIChannelState::getNumNotes() {
 	Lock lck(mtx, std::defer_lock);
 	lck.lock();
@@ -178,12 +200,17 @@ int MIDIChannelState::getNumNotes() {
 	return n;
 }
 
+MIDIChannelSettings* MIDIChannelState::getChannelSettings() {
+	return settings;
+}
+
 void MIDIChannelState::tryAddMIDICC(int midiCC, int value) {
 	//std::cout << "Recieved midi CC #1 val = " << value << '\n';
 	Lock lck(mtx, std::defer_lock);
 	lck.lock();
 	midiCCState[midiCC].setValue(value);
 	lck.unlock();
+	
 }
 
 int MIDIChannelState::tryGetCCValue(int ccNo) {
@@ -211,3 +238,8 @@ void MIDIChannelState::resetNotes() {
 	for (auto& mcc : midiCCState)
 		mcc.setValue(0);
 }
+
+void MIDIChannelState::addCCControlledParam(GUIParameterNode* node, int ccNum) {
+	midiCCState[ccNum].setParameterNode(node);
+}
+
