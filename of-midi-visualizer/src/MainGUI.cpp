@@ -3,8 +3,8 @@
 MainGUI::MainGUI() : GUIComponent("Main Controls") {}
 
 void MainGUI::setupGUI() {
-    gui.add(backgroundColorSelector.setup("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
-    backgroundColorSelector.maximize(); // starts in un-collapsed state
+    gui.add(backgroundColorSelector.set("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
+    //backgroundColorSelector.maximize(); // starts in un-collapsed state
     animationTogglesGroup.setName("Animation Toggles");
     
     // TODO fix bug where default value doesn't set correctly

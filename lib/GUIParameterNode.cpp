@@ -29,6 +29,15 @@ GUIParameterNode::GUIParameterNode(ofAbstractParameter& e) {
 		doubleParam.setMin(parRef.getMin());
 		doubleParam.setMax(parRef.getMax());
 	}
+	else if (e.type() == typeid(ofParameter<ofColor>).name()) {
+		paramType = COLOR;
+		// cast to ofParameter of this type
+		auto parRef = e.cast<ofColor>();
+		colorParam.makeReferenceTo(parRef);
+		//colorParam.setMin(parRef.getMin());
+		//colorParam.setMax(parRef.getMax());
+	}
+
 	// debug msg
 	//std::cout << "Created GUIParameterNode for " << e.getName() << " of type " << paramType << '\n';
 }
@@ -46,6 +55,9 @@ void GUIParameterNode::setValue(float percentage) {
 	case DOUBLE:
 		setValue<double>(percentage, doubleParam);
 		break;
+	case COLOR:
+		setColorValue(percentage, colorParam);
+		break;
 	}
 }
 
@@ -61,5 +73,8 @@ template<typename T> void GUIParameterNode::setValue(float percentage, ofParamet
 	param.set(min + range * percentage);
 
 	// debug msg
-	//std::cout << "Setting value for " << paramName << " to percentage " << percentage << " (current value = " << param << ", updated value = " << newValue <<")." << "The min/max were: " << min << "/" << max << "\n";
+	std::cout << "Setting value for " << paramName << " to percentage " << percentage << " (current value = " << param << ", updated value = " << newValue <<")." << "The min/max were: " << min << "/" << max << "\n";
  }
+
+
+

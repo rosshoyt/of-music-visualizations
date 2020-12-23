@@ -28,8 +28,12 @@ public:
     bool isToggled(std::string uid);
 
     ofColor getBackgroundColor();
+
+    void setupParameterListeners() override {
+        addParameterListener(backgroundColorSelector);
+    }
 private:
-    ofxColorSlider backgroundColorSelector;
+    ofParameter<ofColor> backgroundColorSelector;
     ofParameterGroup animationTogglesGroup;
 
     std::map<std::string, ofParameter<bool>> toggles;
