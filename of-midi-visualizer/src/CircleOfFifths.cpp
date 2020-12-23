@@ -12,7 +12,7 @@ void CircleOfFifths::setup() {}
 void CircleOfFifths::setupGUI() {
 	gui.add(drawOctavesToggle.set("Draw Octaves", true));
 	gui.add(noteCircleSizeSlider.set("Note Circle Size", 1.0, .001, 10));
-	gui.add(octaveSizeMultiplierSlider.set("Octave Size Multiplier", 1, 0.1, 10));
+	gui.add(octaveSizeMultiplierSlider.set("Octave Size Multiplier", 1, 0.1, 5));
 	gui.add(noteMultiplierSlider.set("Note Multiplier", 7, 1, 12));
 	gui.add(pitchOffsetSlider.set("Pitch Offset", 0, 0, 11));
 	gui.add(drawHaloOnNotesToggle.set("Draw Halo on Notes", false));
