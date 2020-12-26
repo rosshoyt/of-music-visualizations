@@ -12,6 +12,8 @@ public:
 
 	void setValue(float percentage);
 
+	// void resetValueToDefault(); // TODO Implement tracking of original value
+
 	std::string getName();
 private:
 	

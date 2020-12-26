@@ -73,7 +73,7 @@ template<typename T> void GUIParameterNode::setValue(float percentage, ofParamet
 	param.set(min + range * percentage);
 
 	// debug msg
-	std::cout << "Setting value for " << paramName << " to percentage " << percentage << " (current value = " << param << ", updated value = " << newValue <<")." << "The min/max were: " << min << "/" << max << "\n";
+	//std::cout << "Setting value for " << paramName << " to percentage " << percentage << " (current value = " << param << ", updated value = " << newValue <<")." << "The min/max were: " << min << "/" << max << "\n";
  }
 
 

@@ -53,16 +53,16 @@ public:
 
     void reset();
 
-    void setParameterNode(GUIParameterNode* node) {
-        param = node;
-    }
+    void setParameterNode(GUIParameterNode* node);
+
+    // TODO: void removeParameterMappings();
     
 private:
     int value;
 
     std::mutex mtx;
 
-    GUIParameterNode* param = nullptr;
+    std::vector<GUIParameterNode*> params;
 
     static const int MAX_CC_VAL = 127;
 };

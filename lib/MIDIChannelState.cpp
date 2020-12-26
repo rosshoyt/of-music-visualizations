@@ -15,15 +15,21 @@ void MidiCCNode::setValue(int value) {
 	lck.lock();
 	this->value = value;
 	lck.unlock();
-	if(param != nullptr)
+	// update controlled parameters
+	for(auto param : params)
 		param->setValue(static_cast<float>(value) / MAX_CC_VAL);
 }
 
 void MidiCCNode::reset() {
 	value = 0;
+	
+	for (auto param : params) {}
+	//don't remove the params mappings (TOD0: allow user to remove mappings)
 }
 
-
+void MidiCCNode::setParameterNode(GUIParameterNode* node) {
+	params.push_back(node);
+}
 MIDIChannelState::MIDIChannelState(MIDIChannelSettings* settings) :  settings(settings), notesHeldDown(), notesSustained(), midiCCState(128), envelopeStates(), sustained(false), mtx(), mtxSusNotes() {
 	//settings = new MIDIChannelSettings();
 	
