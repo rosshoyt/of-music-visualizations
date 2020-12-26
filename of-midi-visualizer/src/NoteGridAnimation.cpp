@@ -17,7 +17,7 @@ void NoteGridAnimation::setupGUI() {
 
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", false));
-    gui.add(octaveRowColorSelector.setup("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(octaveRowColorSelector.set("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
 
     // 2 colors to interpolate between for default colors
     ofColor color1(0, 5, 255, 255);
@@ -29,27 +29,23 @@ void NoteGridAnimation::setupGUI() {
         std::string channelName("Channel #");
         channelName.append(std::to_string(i + 1));
 
-        //ofxToggle chanDrawCirclesToggle;
-        //chanDrawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i+1)), true);
-        //ofxColorSlider chanColor;
-        //chanColor.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
-
         ChannelSettings* channelSettings = new ChannelSettings();
-        //channelSettings->color.setup(channelName, color2.getLerped(color1, lerpAmount), ofColor(0, 0), ofColor(255, 255));
         channelSettings->drawCirclesToggle.setup(std::string("Draw Circles #").append(std::to_string(i + 1)), true);
 
 
         gui.add(&channelSettings->drawCirclesToggle);
-        //gui.add(&channelSettings->color);
 
         channelSettingsList.push_back(channelSettings);
-
-        std::cout << std::boolalpha << channelSettings->drawCirclesToggle;
     }
     
     
     // set global display vars
-    windowResized(ofGetWidth(), ofGetHeight());
+    //windowResized(ofGetWidth(), ofGetHeight());
+}
+
+//--------------------------------------------------------------
+void NoteGridAnimation::setupParameterListeners() {
+    addParameterListener(octaveRowColorSelector);
 }
 
 //--------------------------------------------------------------
@@ -130,6 +126,8 @@ void NoteGridAnimation::drawActiveNotes() {
 
         // Original method based on notes held down
         //auto ns = midiPortState->getChannelNotes(channelNumber);
+
+
 
         auto channelSettings = channelSettingsList[channelNum];
 

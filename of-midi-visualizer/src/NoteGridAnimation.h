@@ -23,8 +23,10 @@ public:
 	NoteGridAnimation(std::string uid = "2D Note Grid");
 
 	void setup();
+
     void setupGUI() override;
-	void update();
+    void setupParameterListeners() override;
+    void update();
 	void draw();
 
 
@@ -40,9 +42,9 @@ public:
     ofxToggle drawLinesToggle;
     ofxToggle drawBackgroundGridToggle;
     
-    ofxColorSlider backgroundColorSelector;
+    ofParameter<ofColor> backgroundColorSelector;
     ofxColorSlider gridLineColorSelector;
-    ofxColorSlider octaveRowColorSelector;
+    ofParameter<ofColor> octaveRowColorSelector;
     ofxColorSlider noteDisplayColorSelector1;
     ofxColorSlider noteDisplayColorSelector2;
 
