@@ -24,8 +24,10 @@ class SineLFO : public LFO {
 public:
 	double getValue(double timeSinceStart) override {
 		auto percentComplete = fmod(timeSinceStart, timeLengthMS) / timeLengthMS;
-		auto value = std::sin(percentComplete * utils::math::pi);
+		auto value = std::cos(percentComplete * utils::math::pi * 2);
 		// scale value to be between 0 and 1
+
+		// std::cout << "Value for " << timeSinceStart << " = " << value << '\n';
 		return (value + 1.f) / 2.f;
 	}
 
