@@ -1,11 +1,11 @@
 #pragma once
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 #include "ofMain.h"
 #include "Utils.h"
 
 
 class MeshFromImage :
-	public MIDIAnimationComponent
+	public MIDIAnimationGUIComponent
 {
 public:
     // TODO add multiple mesh support (search all pictures in a directory?) support async loading (may holdup build times)

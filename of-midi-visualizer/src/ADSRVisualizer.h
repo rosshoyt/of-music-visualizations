@@ -1,6 +1,6 @@
 #pragma once
 #include "Utils.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 #include "Envelope.h"
 #include "spline.h"
 #include "ofMain.h"
@@ -10,7 +10,7 @@
 #include "ofxGui.h"
 
 
-class ADSRVisualizer : public MIDIAnimationComponent {
+class ADSRVisualizer : public MIDIAnimationGUIComponent {
 public:
 	ADSRVisualizer(std::string uid = "ADSR Visualizer");
 

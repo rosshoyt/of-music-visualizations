@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 
 
 //extern const int RIGHT_CONTROLBAR;
@@ -18,7 +18,7 @@ public:
 
 };
 
-class NoteGridAnimation : public MIDIAnimationComponent {
+class NoteGridAnimation : public MIDIAnimationGUIComponent {
 public:
 	NoteGridAnimation(std::string uid = "2D Note Grid");
 

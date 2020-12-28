@@ -1,7 +1,7 @@
 #include "NoteGridAnimation.h"
 
 //--------------------------------------------------------------
-NoteGridAnimation::NoteGridAnimation(std::string uid) : MIDIAnimationComponent(uid), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
+NoteGridAnimation::NoteGridAnimation(std::string uid) : MIDIAnimationGUIComponent(uid), nColumns(12), nRows(11), boxWidth(), boxHeight(), drawLines(true) {}
 
 //--------------------------------------------------------------
 void NoteGridAnimation::setup() {}

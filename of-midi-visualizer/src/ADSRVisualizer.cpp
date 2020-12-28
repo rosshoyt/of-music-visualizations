@@ -1,7 +1,7 @@
 #include "ADSRVisualizer.h"
 
 //--------------------------------------------------------------
-ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationComponent(uid) {}
+ADSRVisualizer::ADSRVisualizer(std::string uid) : MIDIAnimationGUIComponent(uid) {}
 
 //--------------------------------------------------------------
 void ADSRVisualizer::setup() {

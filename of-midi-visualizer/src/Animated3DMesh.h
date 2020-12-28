@@ -1,6 +1,6 @@
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 #include "Utils.h"
 
 
@@ -8,7 +8,7 @@
 /**
 * Class that manages state of 3D mesh animation
 */
-class Animated3DMesh : public MIDIAnimationComponent {
+class Animated3DMesh : public MIDIAnimationGUIComponent {
 public:
     Animated3DMesh(std::string uid = "3D Mesh");
     void setup();

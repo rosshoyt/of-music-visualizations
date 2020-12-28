@@ -1,7 +1,7 @@
 #include "CircleOfFifths.h"
 
 //--------------------------------------------------------------
-CircleOfFifths::CircleOfFifths(std::string uid) : MIDIAnimationComponent(uid) {
+CircleOfFifths::CircleOfFifths(std::string uid) : MIDIAnimationGUIComponent(uid) {
 	
 }
 

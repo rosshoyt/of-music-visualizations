@@ -2,10 +2,10 @@
 #include <string>
 #include "ofMain.h"
 #include "Utils.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 
 
-class CircleOfFifths : public MIDIAnimationComponent {
+class CircleOfFifths : public MIDIAnimationGUIComponent {
 public:
     CircleOfFifths(std::string uid = "Circle of Fifths");
 

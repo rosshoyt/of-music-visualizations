@@ -5,7 +5,7 @@
 #include "MIDIPortState.h"
 #include "MainGUI.h"
 #include "NoteGridAnimation.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 #include "Animated3DMesh.h"
 #include "MeshFromImage.h"
 #include "TexturedSphere.h"
@@ -38,7 +38,7 @@ private:
         ADSRVisualizer adsrVisualizer;
         CircleOfFifths circleOfFifths;
         // List for all MIDI Animations
-        std::vector<MIDIAnimationComponent*> animationComponentsList;
+        std::vector<MIDIAnimationGUIComponent*> animationComponentsList;
 
         // GUI Components of the main window (always visible)
         MIDIPortState midiPortState;

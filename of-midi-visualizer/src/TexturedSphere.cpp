@@ -1,7 +1,7 @@
 #include "TexturedSphere.h"
 
 //--------------------------------------------------------------
-TexturedSphere::TexturedSphere(std::string uid) : MIDIAnimationComponent(uid) {}
+TexturedSphere::TexturedSphere(std::string uid) : MIDIAnimationGUIComponent(uid) {}
 
 //--------------------------------------------------------------
 void TexturedSphere::setup() {

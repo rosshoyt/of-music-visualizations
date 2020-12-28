@@ -1,8 +1,8 @@
 #pragma once
 #include "ofMain.h"
-#include "MIDIAnimationComponent.h"
+#include "MIDIAnimationGUIComponent.h"
 
-class TexturedSphere : public MIDIAnimationComponent {
+class TexturedSphere : public MIDIAnimationGUIComponent {
 public:
 	TexturedSphere(std::string uid = "Textured Sphere");
 	void setup();

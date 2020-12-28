@@ -1,7 +1,7 @@
 #include "MeshFromImage.h"
 
 //--------------------------------------------------------------
-MeshFromImage::MeshFromImage(std::string uid, std::string imagePath) : MIDIAnimationComponent(uid), imagePath(imagePath), pointNoteMap(), zVals() {
+MeshFromImage::MeshFromImage(std::string uid, std::string imagePath) : MIDIAnimationGUIComponent(uid), imagePath(imagePath), pointNoteMap(), zVals() {
 	// "textures/treeCrop.png"
 	// textures/allRGBV.png
 	// textures/nebulabrotCrop.png

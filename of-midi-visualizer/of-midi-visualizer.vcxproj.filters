@@ -169,7 +169,6 @@
     <ClCompile Include="src\LFOVisualizer.cpp">
       <Filter>src\animation-components</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\GUIAnimationComponent.cpp" />
     <ClCompile Include="..\lib\LFO.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -512,7 +511,7 @@
     </ClInclude>
     <ClInclude Include="..\inc\GUIAnimationComponent.h" />
     <ClInclude Include="..\inc\LFO.h" />
-    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
+    <ClInclude Include="..\inc\MIDIAnimationGUIComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -189,7 +189,6 @@
     <ClCompile Include="..\lib\AbletonController.cpp" />
     <ClCompile Include="..\lib\AnimationComponent.cpp" />
     <ClCompile Include="..\lib\Envelope.cpp" />
-    <ClCompile Include="..\lib\GUIAnimationComponent.cpp" />
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\GUIParameterNode.cpp" />
     <ClCompile Include="..\lib\LFO.cpp" />
@@ -257,7 +256,7 @@
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\GUIParameterNode.h" />
     <ClInclude Include="..\inc\LFO.h" />
-    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
+    <ClInclude Include="..\inc\MIDIAnimationGUIComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />

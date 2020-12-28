@@ -1,6 +1,6 @@
 #include "Animated3DMesh.h"
 
-Animated3DMesh::Animated3DMesh(std::string uid) : MIDIAnimationComponent(uid), pointNoteMap() {}
+Animated3DMesh::Animated3DMesh(std::string uid) : MIDIAnimationGUIComponent(uid), pointNoteMap() {}
 
 //--------------------------------------------------------------
 void Animated3DMesh::setup() {
