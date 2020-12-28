@@ -166,6 +166,11 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\GUIParameterNode.cpp" />
+    <ClCompile Include="src\LFOVisualizer.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\GUIAnimationComponent.cpp" />
+    <ClCompile Include="..\lib\LFO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -492,9 +497,6 @@
     <ClInclude Include="src\MeshFromImage.h">
       <Filter>src\animation-components</Filter>
     </ClInclude>
-    <ClInclude Include="src\MIDIAnimationComponent.h">
-      <Filter>src\animation-components</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\UID.h" />
     <ClInclude Include="src\MainGUI.h">
@@ -505,6 +507,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\GUIParameterNode.h" />
+    <ClInclude Include="src\LFOVisualizer.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\GUIAnimationComponent.h" />
+    <ClInclude Include="..\inc\LFO.h" />
+    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

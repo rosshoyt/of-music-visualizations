@@ -189,8 +189,10 @@
     <ClCompile Include="..\lib\AbletonController.cpp" />
     <ClCompile Include="..\lib\AnimationComponent.cpp" />
     <ClCompile Include="..\lib\Envelope.cpp" />
+    <ClCompile Include="..\lib\GUIAnimationComponent.cpp" />
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\GUIParameterNode.cpp" />
+    <ClCompile Include="..\lib\LFO.cpp" />
     <ClCompile Include="..\lib\MIDIChannelState.cpp" />
     <ClCompile Include="..\lib\MIDIPortState.cpp" />
     <ClCompile Include="..\lib\MIDIPortStateUser.cpp" />
@@ -198,6 +200,7 @@
     <ClCompile Include="src\ADSRVisualizer.cpp" />
     <ClCompile Include="src\AppConstants.cpp" />
     <ClCompile Include="src\CircleOfFifths.cpp" />
+    <ClCompile Include="src\LFOVisualizer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainGUI.cpp" />
     <ClCompile Include="src\MeshFromImage.cpp" />
@@ -250,8 +253,11 @@
     <ClInclude Include="..\inc\AbletonController.h" />
     <ClInclude Include="..\inc\AnimationComponent.h" />
     <ClInclude Include="..\inc\Envelope.h" />
+    <ClInclude Include="..\inc\GUIAnimationComponent.h" />
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\GUIParameterNode.h" />
+    <ClInclude Include="..\inc\LFO.h" />
+    <ClInclude Include="..\inc\MIDIAnimationComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />
     <ClInclude Include="..\inc\MIDIPortState.h" />
     <ClInclude Include="..\inc\MIDIPortStateUser.h" />
@@ -261,9 +267,9 @@
     <ClInclude Include="src\ADSRVisualizer.h" />
     <ClInclude Include="src\AppConstants.h" />
     <ClInclude Include="src\CircleOfFifths.h" />
+    <ClInclude Include="src\LFOVisualizer.h" />
     <ClInclude Include="src\MainGUI.h" />
     <ClInclude Include="src\MeshFromImage.h" />
-    <ClInclude Include="src\MIDIAnimationComponent.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Animated3DMesh.h" />
     <ClInclude Include="src\NoteGridAnimation.h" />
