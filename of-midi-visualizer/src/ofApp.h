@@ -11,6 +11,7 @@
 #include "TexturedSphere.h"
 #include "AbletonController.h"  
 #include "ADSRVisualizer.h"
+#include "LFOVisualizer.h"
 #include "CircleOfFifths.h"
 #include "Utils.h"
 
@@ -35,8 +36,13 @@ private:
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
-        ADSRVisualizer adsrVisualizer;
         CircleOfFifths circleOfFifths;
+
+        // MIDI Animations which are tests of custom library components
+        // TODO create separate GUIAnimation class, as these don't use MIDI Port
+        ADSRVisualizer adsrVisualizer;
+        LFOVisualizer lfoVisualizer;
+
         // List for all MIDI Animations
         std::vector<MIDIAnimationGUIComponent*> animationComponentsList;
 

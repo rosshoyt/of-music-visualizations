@@ -22,10 +22,11 @@ void ofApp::setup() {
     // track animation components 
     animationComponentsList.push_back(&noteGridAnimation);
     animationComponentsList.push_back(&animated3DMesh);
-    animationComponentsList.push_back(&adsrVisualizer);
     animationComponentsList.push_back(&circleOfFifths);
     //animationComponentsList.push_back(&meshFromImage);
-
+    animationComponentsList.push_back(&lfoVisualizer);
+    animationComponentsList.push_back(&adsrVisualizer);
+    
     // setup animation components
     for (auto& component : animationComponentsList) {
         component->setMIDIPortState(&midiPortState);
@@ -33,7 +34,7 @@ void ofApp::setup() {
         component->setupGUI();
         // add a toggle to turn the animation on and off from the main gui
         mainGUI.addToggle(component->getUID(), false);
-        // add the component to the GUI Component list (TODO separate MIDIAnimationComponent from GUIComponent parent class)
+        // add the component to the GUI Component list (TODO separate MIDIAnimationGUIComponent from GUIComponent parent class)
         guiComponentsList.push_back(component);
     }
 
