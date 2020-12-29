@@ -91,9 +91,7 @@ float MIDIPortState::getADSRValue(unsigned int channel, int noteNumber) {
 MIDIChannelSettings* MIDIPortState::getChannelSettings(unsigned int channel) {
 	return channels[channel]->getChannelSettings();
 }
-
-
-
+	
 // Private methods
 
 void MIDIPortState::mapMostRecentGUIParameterToMIDICC(int channel, int ccNum) {
@@ -108,10 +106,6 @@ void MIDIPortState::mapMostRecentGUIParameterToMIDICC(int channel, int ccNum) {
 void MIDIPortState::setupMIDIPortState() {
 	std::cout << "In MIDIPortState::setupMIDIPortState(), numChannels = "<< numChannels << "\n";
 	validateSettings();
-	
-	
-	//MIDIChannelSettings* channelSettings = new MIDIChannelSettings(envelope);
-
 
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
 	for (int i = 0; i < numChannels; ++i) {
@@ -119,7 +113,7 @@ void MIDIPortState::setupMIDIPortState() {
 		
 		channels.push_back(new MIDIChannelState(new MIDIChannelSettings()));
 	}
-	setupOfxMIDIPort();
+	setupOfxMIDIPort();		 
 }
 
 void MIDIPortState::validateSettings() {
@@ -155,7 +149,7 @@ void MIDIPortState::setupOfxMIDIPort() {
 * Converts Channel Number from 1-16 (inclusive) to 0-15 (inclusive)
 */
 void MIDIPortState::newMidiMessage(ofxMidiMessage& message) {
-	parseMIDIForPort(message);
+	updateMIDIMessageMonitor(message);
 	unsigned int channel(message.channel - 1);
 	if (channel < numChannels) {
 		// check if we are currently mapping MIDI CC's
@@ -164,35 +158,42 @@ void MIDIPortState::newMidiMessage(ofxMidiMessage& message) {
 
 		// pass the message to the channel to process	
 		channels[channel]->processMIDIMessage(message);
-
-		
 	}
 }
 
-void MIDIPortState::parseMIDIForPort(ofxMidiMessage& message) {
-	int descriptionMsgSize = 22;
-	std::string text, value;
-	text.append("Ch#" + std::to_string(message.channel) + " ");
-	// TODO refactor
-	switch (message.status) {
-	case MIDI_NOTE_ON:
-		
-		text.append("Note On");
-		value = std::to_string(message.pitch);
-		break;
-	case MIDI_NOTE_OFF:
-		text.append("Note Off");
-		value = std::to_string(message.pitch);
-		break;
-	case MIDI_CONTROL_CHANGE:
-		text.append("CC#" + std::to_string(message.control));
-		value = std::to_string(message.value);
-		break;
+void MIDIPortState::updateMIDIMessageMonitor(ofxMidiMessage& message) {
+	// only update about once per frame
+	auto currTimeMS = ofGetSystemTimeMillis();
+	auto timePassedMS = currTimeMS - lastMIDIMonitorUpdateFrameTimeMS;
+	if (timePassedMS > (1000 / ofGetFrameRate())) {
+		// track current time
+		lastMIDIMonitorUpdateFrameTimeMS = currTimeMS;
+		//std::cout << "Updating MIDI Message Monitor after " << timePassedMS << " ms\n";
+
+		int descriptionMsgSize = 22;
+		std::string text, value;
+		text.append("Ch#" + std::to_string(message.channel) + " ");
+		// TODO refactor
+		switch (message.status) {
+		case MIDI_NOTE_ON:
+
+			text.append("Note On");
+			value = std::to_string(message.pitch);
+			break;
+		case MIDI_NOTE_OFF:
+			text.append("Note Off");
+			value = std::to_string(message.pitch);
+			break;
+		case MIDI_CONTROL_CHANGE:
+			text.append("CC#" + std::to_string(message.control));
+			value = std::to_string(message.value);
+			break;
+		}
+		text.resize(descriptionMsgSize - value.size(), ' ');
+		text.append(value);
+
+		midiMessageMonitor = text;
 	}
-	text.resize(descriptionMsgSize - value.size(), ' ');
-	text.append(value);
-	
-	midiMessageMonitor = text;
 }
 
 void MIDIPortState::resetNotes() {

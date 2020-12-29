@@ -73,6 +73,9 @@ private:
     // Most recent Channel/MIDI CC stored as int pair, for mapping to GUI Params
     std::pair<int, int> lastMIDIChannelCC; 
 
+    // variable to track when the most recent MIDI Message Monitor update happened
+    long lastMIDIMonitorUpdateFrameTimeMS = 0;
+
     // Private methods
     void mapMostRecentGUIParameterToMIDICC(int channel, int ccNum);
     
@@ -87,6 +90,6 @@ private:
      */
     void newMidiMessage(ofxMidiMessage& message);
 
-    void parseMIDIForPort(ofxMidiMessage& message);
+    void updateMIDIMessageMonitor(ofxMidiMessage& message);
 };
 #endif /* MIDIPortNotesState_h */
