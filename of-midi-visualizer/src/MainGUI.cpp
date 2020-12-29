@@ -2,14 +2,13 @@
 
 MainGUI::MainGUI() : GUIAnimationComponent("Main Controls") {}
 
-void MainGUI::setup(){
-   
+void MainGUI::setup(){}
+
+void MainGUI::update(){
+    ofBackground(backgroundColorSelector);
 }
 
-void MainGUI::update(){}
-
 void MainGUI::draw() {
-    //ofBackground(backgroundColorSelector);
     ofSetColor(255);
     for (auto& entry : images) {
         auto toggleImagePair = entry.second;
@@ -18,19 +17,7 @@ void MainGUI::draw() {
             toggleImagePair.second->draw(0, 0);
         }
     }
-    /*for (int i = 0; i < backgroundImageGroup.size(); ++i) {
-        auto toggleImagePair = images[backgroundImageGroup[i].getName()];
-        if (toggleImagePair.first) {
-            toggleImagePair.second->draw(0, 0);
-        }
-    }*/
-    //ofBackground(getBackgroundColor());
-    /*for (auto& entry: images) {
-        auto toggled = entry.second.first;
-        if (toggled) {
-            entry.second.second->draw(0, 0);
-        }
-    }*/
+   
 }
 
 void MainGUI::setupGUI() {
@@ -56,26 +43,17 @@ void MainGUI::setupGUI() {
 
     // setup background image param group
     backgroundImageGroup.setName("Background Images");
-    /*backgroundImageGroup.add(drawBackgroundImageToggle.set("Draw Background Image"));*/
-    /*for (auto& imageToggleImagePair : images) {
-
-        auto toggle = imageToggleImagePair.first;
-        std::cout << "Adding Toggle " << toggle.getName() << " to background image group\n";
-        backgroundImageGroup.add(toggle);
-    }*/
+  
     gui.add(backgroundImageGroup);
 
 
     // setup background color
     gui.add(backgroundColorSelector.set("Background Color", ofColor::darkGray, ofColor(0, 0), ofColor(255, 255)));
+  
     //backgroundColorSelector.maximize(); // starts in un-collapsed state
 
-
-
     animationTogglesGroup.setName("Animation Toggles");
-
-
-    //
+    
     // TODO fix bug where default value doesn't set correctly
     gui.add(animationWidth.set("Animation Width:", ANIMATION_WIDTH, 300, 3000));
     gui.add(animationHeight.set("Animation Height:", ANIMATION_HEIGHT, 300, 3000));

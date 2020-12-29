@@ -62,6 +62,9 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    for (auto& permanentAnimation : permanentGUIAnimationComponentsList) {
+        permanentAnimation->update();
+    }
     for (auto& animation : midiAnimationGUIComponentsList) {
         if(mainGUI.isToggled(animation->getUID()))
             animation->update();

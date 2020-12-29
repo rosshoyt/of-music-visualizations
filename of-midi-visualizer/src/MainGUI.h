@@ -21,9 +21,14 @@ public:
 
     // Inherited via GUIAnimationComponent
     virtual void setup() override;
+
+    // the MainGUI sets the ofBackground in the update() function 
+    // @see https://openframeworks.cc/documentation/graphics/ofGraphics/#show_ofBackground
     virtual void update() override;
+
     virtual void draw() override;
     
+    // in this function the images are read from the folder and the GUI is constructed
     void setupGUI();
 
     // TODO remove?
