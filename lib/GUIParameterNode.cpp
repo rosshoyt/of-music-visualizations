@@ -80,6 +80,9 @@ inline void GUIParameterNode::setColorValue(float percentage, ofParameter<ofColo
 
 	// set the alpha value to its current value
 	a = colorParam_.get().a;
+	
+	// get the maximum value determined by the color's brightness amount
+	float maxBrightness = colorParam_.get().getBrightness();
 
 	float sectionSize = 1.f / 6.f;
 
@@ -92,10 +95,10 @@ inline void GUIParameterNode::setColorValue(float percentage, ofParameter<ofColo
 	{
 	case 0:
 		interpolateStart = 0;
-		interpolateEnd = 255;
+		interpolateEnd = maxBrightness;
 		break;
 	case 1:
-		interpolateStart = 255;
+		interpolateStart = maxBrightness;
 		interpolateEnd = 0;
 		break;
 	}
@@ -105,44 +108,44 @@ inline void GUIParameterNode::setColorValue(float percentage, ofParameter<ofColo
 	switch (section)
 	{
 	case 0:
-		r = 255;
+		r = maxBrightness;
 		g = 0;
 		b = interpolatedValue;
 		break;
 	case 1:
 		r = interpolatedValue;
 		g = 0;
-		b = 255;
+		b = maxBrightness;
 		break;
 	case 2:
 		r = 0;
 		g = interpolatedValue;
-		b = 255;
+		b = maxBrightness;
 		break;
 	case 3:
 		r = 0;
-		g = 255;
+		g = maxBrightness;
 		b = interpolatedValue;
 		break;
 	case 4:
 		r = interpolatedValue;
-		g = 255;
+		g = maxBrightness;
 		b = 0;
 		break;
 	case 5:
-		r = 255;
+		r = maxBrightness;
 		g = interpolatedValue;
 		b = 0;
 		break;
 	case 6: // only happens when MIDI CC is at 100%
-		r = 255;
+		r = maxBrightness;
 		g = 0;
 		b = 0;
 		break;
 	default:
-		r = 255;
-		g = 255;
-		b = 255;
+		r = maxBrightness;
+		g = maxBrightness;
+		b = maxBrightness;
 		break;
 	}
 	colorParam_.set(ofColor(r, g, b, a));
