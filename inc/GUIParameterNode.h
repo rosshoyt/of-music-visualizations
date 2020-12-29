@@ -1,11 +1,12 @@
 #pragma once
 #include "ofMain.h"
+#include "Utils.h"
+#include <cmath> // std::fmod
 
 // Class which creates a linked reference to another GUI Parameter, 
 // Allows the GUI Parameter to be controlled and scaled, regardless of type.
 class GUIParameterNode {
 public:
-
 	GUIParameterNode() = default;
 
 	GUIParameterNode(ofAbstractParameter& e);
@@ -16,52 +17,24 @@ public:
 
 	std::string getName();
 private:
-	
-
 	template<typename T> void setValue(float percentage, ofParameter<T>& param);
-	
-	vector<ofColor> defaultCols = { ofColor::red, ofColor::blue, ofColor::green };
-	
-	inline void setColorValue(float percentage, ofParameter<ofColor>& colorParam_) {
 
-		
-
-		ofColor c1, c2;
-		float curr = 0, divisor = 3; // 3 - way color interpolation
-		float increment = 1.f / divisor;
-		
-		
-		
-
-		int colorIndex = -1;
-		do{
-			++colorIndex;
-			curr += increment;
-		} while (curr < percentage);
-		c1 = defaultCols[colorIndex];
-
-		float amountOfLerp = percentage - curr;
-
-		colorParam_.set(c1.getLerped(c2, amountOfLerp));
-	}
+	// TODO optimize/refactor
+	inline void setColorValue(float percentage, ofParameter<ofColor>& colorParam_);
 
 	// the name of the parameter
 	std::string paramName;
 
-	
 	// possible types of the underlying parameter
 	enum ParamType {
 		NONE, INT, FLOAT, DOUBLE, COLOR
 	};
-	ParamType paramType = NONE; // default type when no parameter has been set
-	
 
+	ParamType paramType = NONE; // default type of NONE when no parameter has been set
+	
+	// the underlying parameters (only one is used per object)
 	ofParameter<int> intParam;
 	ofParameter<float> floatParam;
 	ofParameter<double> doubleParam;
 	ofParameter<ofColor> colorParam;
-
-
-	
-
 };
