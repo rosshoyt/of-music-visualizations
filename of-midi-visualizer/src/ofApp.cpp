@@ -9,26 +9,35 @@ void ofApp::setup() {
     ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
-    // add MIDI Port State GUI and Main GUI to the permanent gui components list
+   
+    // setup the mainGUI animation (TODO - create a list of AnimationComponents to setup at same time)
+    mainGUI.setup();
+
+     // add MIDI Port State GUI to the permanent gui components list
     permanentGUIComponentsList.push_back(&midiPortState);
     permanentGUIComponentsList.push_back(&mainGUI);
-    // setup all GUI components which are not animations
+
+    
+    // setup all GUI Animation components which are not animations
     for (auto& guiComponent : permanentGUIComponentsList) {
         guiComponent->setupGUI();
         // also add them to the list for all GUI components for updating positions on resize
         guiComponentsList.push_back(guiComponent);
     }
 
+    // add Main GUI to the permanent GUI Animation Components list
+    permanentGUIAnimationComponentsList.push_back(&mainGUI);
+
     // track animation components 
-    animationComponentsList.push_back(&noteGridAnimation);
-    animationComponentsList.push_back(&animated3DMesh);
-    animationComponentsList.push_back(&circleOfFifths);
-    //animationComponentsList.push_back(&meshFromImage);
-    animationComponentsList.push_back(&lfoVisualizer);
-    animationComponentsList.push_back(&adsrVisualizer);
+    midiAnimationGUIComponentsList.push_back(&noteGridAnimation);
+    midiAnimationGUIComponentsList.push_back(&animated3DMesh);
+    midiAnimationGUIComponentsList.push_back(&circleOfFifths);
+    //midiAnimationGUIComponentsList.push_back(&meshFromImage);
+    midiAnimationGUIComponentsList.push_back(&lfoVisualizer);
+    midiAnimationGUIComponentsList.push_back(&adsrVisualizer);
     
     // setup animation components
-    for (auto& component : animationComponentsList) {
+    for (auto& component : midiAnimationGUIComponentsList) {
         component->setMIDIPortState(&midiPortState);
         component->setup();
         component->setupGUI();
@@ -53,7 +62,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for (auto& animation : animationComponentsList) {
+    for (auto& animation : midiAnimationGUIComponentsList) {
         if(mainGUI.isToggled(animation->getUID()))
             animation->update();
     }    
@@ -61,8 +70,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackground(mainGUI.getBackgroundColor());
-    for (auto& animation: animationComponentsList) {
+    // draw all permanent animations (backround image/color, etc)
+    for (auto& permanentAnimation : permanentGUIAnimationComponentsList) {
+        permanentAnimation->draw();
+    }
+    
+    for (auto& animation: midiAnimationGUIComponentsList) {
         if (mainGUI.isToggled(animation->getUID())) {
             animation->draw();
             animation->drawGUI();
@@ -88,7 +101,7 @@ void ofApp::windowResized(int w, int h){
     float animationDisplayWidth = w - RIGHT_CONTROLBAR;
     
     // update all animation posisions
-    for (auto& animation : animationComponentsList) {
+    for (auto& animation : midiAnimationGUIComponentsList) {
         animation->setAnimationDimensions(animationDisplayWidth, h);
         animation->resized(w, h);
     }

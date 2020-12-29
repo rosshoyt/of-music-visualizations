@@ -7,3 +7,5 @@ extern const int NUM_GUI_COLUMNS = 3;
 extern const int RIGHT_CONTROLBAR = OFXGUI_DEF_WIDTH * NUM_GUI_COLUMNS;
 
 extern const std::string IMAGE_FOLDER_RELATIVE("images/");
+
+extern const std::set<std::string> IMAGE_FILE_EXTENSIONS({ "png", "jpg" });

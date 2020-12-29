@@ -363,7 +363,7 @@
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 	</Channel_16_Settings>
-	<UnknownName></UnknownName>
+	<UnknownName />
 	<Map_Parameter_to_MIDI_CC>0</Map_Parameter_to_MIDI_CC>
 </MIDI_Port_Info>
 <Main_Controls>
@@ -405,9 +405,9 @@
 	<circle_size>30.5695</circle_size>
 </ADSR_Visualizer>
 <LFOVisualizer>
-	<LFO_Time_Length__MS_>4</LFO_Time_Length__MS_>
-	<Number_of_Points>896</Number_of_Points>
-	<Circle_Size>16.5775</Circle_Size>
-	<Point_Length__MS_>35.9876</Point_Length__MS_>
+	<LFO_Time_Length__MS_>27.5276</LFO_Time_Length__MS_>
+	<Number_of_Points>2048</Number_of_Points>
+	<Circle_Size>2</Circle_Size>
+	<Point_Length__MS_>10</Point_Length__MS_>
 	<UnknownName>59, 179, 112, 255</UnknownName>
 </LFOVisualizer>

@@ -29,9 +29,10 @@ class ofApp : public ofBaseApp {
 		
 private:
         // Class which communicates with Ableton via OSC
+        // TODO create GUI controls for this component
         AbletonController abletonController;
 
-        // Individual MIDI Animations
+        // MIDI Animation Components
         NoteGridAnimation noteGridAnimation;
         Animated3DMesh animated3DMesh;
         MeshFromImage meshFromImage;
@@ -39,20 +40,26 @@ private:
         CircleOfFifths circleOfFifths;
 
         // MIDI Animations which are tests of custom library components
-        // TODO create separate GUIAnimation class, as these don't use MIDI Port
+        // TODO convert to GUIAnimation class, as these don't use MIDI Port
+        // TODO will need to move 'isToggled' to AnimationComponent.h from GUIComponent.h
         ADSRVisualizer adsrVisualizer;
         LFOVisualizer lfoVisualizer;
 
-        // List for all MIDI Animations
-        std::vector<MIDIAnimationGUIComponent*> animationComponentsList;
-
-        // GUI Components of the main window (always visible)
+        // Always-Visible GUI Components
         MIDIPortState midiPortState;
+
+        // Always-visible GUI Animation Components
         MainGUI mainGUI;
 
-        // List for always-visible GUI components
-        std::vector<GUIComponent*> permanentGUIComponentsList;
-        
+        // List for all MIDI Animations
+        std::vector<MIDIAnimationGUIComponent*> midiAnimationGUIComponentsList;
+
         // List for all GUI components
-        std::vector<GUIComponent*> guiComponentsList;     
+        std::vector<GUIComponent*> guiComponentsList;
+
+        // List for always-visible GUI-only components
+        std::vector<GUIComponent*> permanentGUIComponentsList;
+
+        // List for always-visible GUI Animation Components
+        std::vector<GUIAnimationComponent*> permanentGUIAnimationComponentsList;
 };

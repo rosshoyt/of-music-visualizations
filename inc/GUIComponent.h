@@ -50,9 +50,17 @@ protected:
 	template<typename T> void addParameterListener(ofParameter<T>& param) {
 		eventListeners.push(param.newListener([&](T&) { GUIComponent::clickEvent({ param }); }));
 	}
+
+	// TODO only works for ofParameters of the same type
+	template<typename T> void addParameterListeners(std::vector<ofParameter<T>>& params) {
+		for (const auto& param : params)
+			addParameterListener(param);
+	}
 	
 private:
 	ofEventListeners eventListeners;
+
+	bool guiHasBeenSetup = false;
 
 	static GUIParameterNode* lastClickedParam;
 	
