@@ -37,6 +37,7 @@ public:
     ofxIntSlider pitchOffsetSlider;
     ofxToggle pitchOffsetUseMIDICCToggle;
     ofParameter<int> pitchOffsetAmount;
+    ofParameter<float> noteSizeScale = 1.f;
 
 
     ofxToggle drawLinesToggle;

@@ -13,11 +13,13 @@ void NoteGridAnimation::setupGUI() {
     gui.add(pitchOffsetUseMIDICCToggle.setup("Toggle Pitch Offset MIDI CC Control", false));
     pitchOffsetAmount.set("Pitch Offset (Half-Steps) MIDI CC-Controlled Value", 0, 0, 11);
     gui.add(pitchOffsetAmount);
+    gui.add(noteSizeScale.set("Size", 1, .1, 10));
     gui.add(drawLinesToggle.setup("Draw Lines", false));
 
     gui.add(gridLineColorSelector.setup("Grid Line Color", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
     gui.add(drawBackgroundGridToggle.setup("Draw Rows/Columns", false));
     gui.add(octaveRowColorSelector.set("Octave Row Color", ofColor(86, 0, 200, 88), ofColor(0, 0), ofColor(255, 255)));
+
 
     // 2 colors to interpolate between for default colors
     ofColor color1(0, 5, 255, 255);
@@ -143,7 +145,7 @@ void NoteGridAnimation::drawActiveNotes() {
             int velocity = note.second.first;
             float scalarADSR = midiPortState->getADSRValue(channelNum, noteNumber);
             float scalarVelocity = float(velocity) / 128.f;
-            float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f);
+            float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f) * noteSizeScale;
             
             ofSetColor(settings->color, scalar * 256.f);
             int startX = col * boxWidth, startY = row * boxHeight;
@@ -153,7 +155,7 @@ void NoteGridAnimation::drawActiveNotes() {
                 ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); // good 'bloomy', lens-flare circle effect (with purple/red colors)
             }
             else {
-                ofDrawRectangle(startX, startY, boxWidth, boxHeight);
+                ofDrawRectangle(startX, startY, boxWidth * scalar, boxHeight * scalar);
             }
 
             // debug msgs TODO delete
