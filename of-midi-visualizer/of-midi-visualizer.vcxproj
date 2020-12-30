@@ -191,6 +191,7 @@
     <ClCompile Include="..\lib\Envelope.cpp" />
     <ClCompile Include="..\lib\GUIComponent.cpp" />
     <ClCompile Include="..\lib\GUIParameterNode.cpp" />
+    <ClCompile Include="..\lib\GUISubComponent.cpp" />
     <ClCompile Include="..\lib\LFO.cpp" />
     <ClCompile Include="..\lib\MIDIChannelState.cpp" />
     <ClCompile Include="..\lib\MIDIPortState.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="..\inc\GUIAnimationComponent.h" />
     <ClInclude Include="..\inc\GUIComponent.h" />
     <ClInclude Include="..\inc\GUIParameterNode.h" />
+    <ClInclude Include="..\inc\GUISubComponent.h" />
     <ClInclude Include="..\inc\LFO.h" />
     <ClInclude Include="..\inc\MIDIAnimationGUIComponent.h" />
     <ClInclude Include="..\inc\MIDIChannelState.h" />

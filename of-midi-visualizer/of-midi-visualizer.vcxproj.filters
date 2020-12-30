@@ -170,6 +170,7 @@
       <Filter>src\animation-components</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\LFO.cpp" />
+    <ClCompile Include="..\lib\GUISubComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -512,6 +513,7 @@
     <ClInclude Include="..\inc\GUIAnimationComponent.h" />
     <ClInclude Include="..\inc\LFO.h" />
     <ClInclude Include="..\inc\MIDIAnimationGUIComponent.h" />
+    <ClInclude Include="..\inc\GUISubComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

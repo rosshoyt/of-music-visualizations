@@ -3,7 +3,10 @@
 #include "ofParameter.h"
 #include "ofxGui.h"
 #include "UID.h"
+#include "GUISubComponent.h"
 #include "GUIParameterNode.h"
+
+class GUISubComponent;
 
 class GUIComponent : public UID {
 public:
@@ -11,6 +14,7 @@ public:
 
 	// method which must be implemented by inheriting class.
 	// gui parameters should be added to the ofxPanel in this method
+	// GUISubComponents should also be added to the ofxPanel in this method
 	virtual void setupGUI() = 0;
 	
 	void setGUIName(std::string name);
@@ -36,26 +40,29 @@ public:
 	static GUIParameterNode* getLastClickedParameter() {
 		return lastClickedParam;
 	}
-	
+
+	template<typename T> void addParameterListener(ofParameter<T>& param) {
+		eventListeners.push(param.newListener([&](T&) { GUIComponent::clickEvent({ param }); }));
+	}
+
+	// TODO fix, only works for ofParameters of the same type
+	template<typename T> void addParameterListeners(std::vector<ofParameter<T>>& params) {
+		for (const auto& param : params)
+			addParameterListener(param);
+	}
+
 protected:
 
 	ofxPanel gui;
+
+	std::vector<GUISubComponent*> subComponents;
 
 	const std::string DEFAULT_SETTINGS_FILE_NAME = "settings.xml";
 
 	float menuX = 0, menuY = 0;
 
 	float defaultMenuWidth = 100; // TODO choose better default value
-
-	template<typename T> void addParameterListener(ofParameter<T>& param) {
-		eventListeners.push(param.newListener([&](T&) { GUIComponent::clickEvent({ param }); }));
-	}
-
-	// TODO only works for ofParameters of the same type
-	template<typename T> void addParameterListeners(std::vector<ofParameter<T>>& params) {
-		for (const auto& param : params)
-			addParameterListener(param);
-	}
+	
 	
 private:
 	ofEventListeners eventListeners;
