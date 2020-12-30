@@ -11,30 +11,34 @@
 #include "ofxGui.h"
 #include "Envelope.h"
 #include "GUIParameterNode.h"
+#include "GUISubComponent.h"
 
-class MIDIChannelSettings {
+class MIDIChannelSettings : public GUISubComponent{
 public:
     // gui params
     ofParameter<ofColor> color;
     Envelope volumeEnvelope;
 
-    ofParameterGroup params;
 
-    MIDIChannelSettings() {
-        init();
+    MIDIChannelSettings(GUIComponent* par) : GUISubComponent(par) {
+       
     }
 
-    MIDIChannelSettings(Envelope volumeEnvelope) : volumeEnvelope(volumeEnvelope) {
-        init();
+    MIDIChannelSettings(GUIComponent* par, Envelope volumeEnvelope) : GUISubComponent(par), volumeEnvelope(volumeEnvelope) {
+        
     }
 
-private:
-    void init() {
+    // Inherited via GUISubComponent
+    void setupParamGroup() override {
         // TODO add channel number to the gui names
-        params.add(color.set("Note Color", ofColor::cornflowerBlue));
+        paramGroup.add(color.set("Note Color", ofColor::cornflowerBlue));
 
-        params.add(volumeEnvelope.guiParams);
+        paramGroup.add(volumeEnvelope.guiParams);
         std::cout << "Created MIDIChannel Settings with volume envelope controls containing " << volumeEnvelope.guiParams.size() << " items \n";
+    }
+
+    void setupParameterListeners() override {
+        parent->addParameterListener(color);
     }
 
     // todo

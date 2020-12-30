@@ -18,10 +18,15 @@ void MIDIPortState::setupGUI() {
 	gui.add(midiMessageMonitor);// .set("MIDI Data", midiMessageMonitor));
 
 	for (int i = 0; i < numChannels; i++) {
-		auto params = channels[i]->getChannelSettings()->params;
+		auto* channelSettings = channels[i]->getChannelSettings();
+		auto params = channelSettings->getParamGroup();
 		params.setName("Channel " + std::to_string(i + 1) + " Settings");
 		std::cout << "MIDIPortState::setupGUI() added channel params with size " << params.size() << "\n";
+		
+		channelSettings->setupParameterListeners();
 		gui.add(params);
+		subComponents.push_back(channelSettings);
+
 	}
 
     resetMidiPortButton.addListener(this, &MIDIPortState::setupOfxMIDIPort);
@@ -110,8 +115,9 @@ void MIDIPortState::setupMIDIPortState() {
 	// initialize channel state map TODO move to separate function and only re-initialize when needed
 	for (int i = 0; i < numChannels; ++i) {
 		std::cout << "Creating MIDI Channel #" << i+1 << '\n';
-		
-		channels.push_back(new MIDIChannelState(new MIDIChannelSettings()));
+		auto* channelSettings = new MIDIChannelSettings(this);
+		channelSettings->setupParamGroup();
+		channels.push_back(new MIDIChannelState(channelSettings));
 	}
 	setupOfxMIDIPort();		 
 }

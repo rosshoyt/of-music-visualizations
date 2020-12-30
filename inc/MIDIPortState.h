@@ -12,6 +12,7 @@
 #include "ofxGui.h"
 #include "MIDIChannelState.h"
 #include "GUIComponent.h"
+#include "GUISubComponent.h"
 #include <assert.h>
 
 
