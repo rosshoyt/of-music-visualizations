@@ -116,43 +116,32 @@ void NoteGridAnimation::drawActiveNotes() {
     //for (unsigned int channelNumber = 0; channelNumber < midiPortState->getNumChannels(); ++channelNumber) {
     int channelNum = 0;
     for(auto channel : midiPortState->getAllChannelActiveNoteADSRLevels()){
-        /*
-        // TODO Look at each midi node instead of by 'held down' notes
-        auto ns = midiPortState->getChannelNotes(channelNumber);
-        for (int i = 0; i < 128; ++i) {
-            auto adsrVal = midiPortState->getADSRValue(channelNumber, i);
-            float lerpAmount = velocity * 2.f / 256.f;
-            ofSetColor(channelColors[channelNumber], float(velocity) / 128.f  * float(adsrVal) * 256.f );
-            ofDrawRectangle(col * boxWidth, row * boxHeight, boxWidth, boxHeight);
-        }*/
+      
+        auto animationSpecificChannelSettings = channelSettingsList[channelNum];
 
-        // Original method based on notes held down
-        //auto ns = midiPortState->getChannelNotes(channelNumber);
-
-
-
-        auto channelSettings = channelSettingsList[channelNum];
-
-        
         auto settings = midiPortState->getChannelSettings(channelNum); // TODO combine above line into this call
         for (auto note: channel) {
 
-            //std::cout<< "drawing a note!\n";
+           
             int noteNumber = note.first;//, velocity = note.second;
-            int row = nRows - 1 - (noteNumber - pitchOffsetAmount) / 12, col = (noteNumber - pitchOffsetAmount) % nColumns;
 
-            // TODO ensure MIDI NOTE #0 doesn't cause issue (scale midi note #s to start at 1?)
+            int row = nRows - 1 - (noteNumber - pitchOffsetAmount) / 12;
+            int col = (noteNumber - pitchOffsetAmount) % nColumns;
+
             int velocity = note.second.first;
             float scalarADSR = midiPortState->getADSRValue(channelNum, noteNumber);
             float scalarVelocity = float(velocity) / 128.f;
-            float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f) * noteSizeScale;
+            float scalar = std::min(scalarADSR * scalarVelocity * 1.1f, 1.f) * settings->size;
             
-            ofSetColor(settings->color, scalar * 256.f);
+
+            ofSetColor(settings->color, scalarADSR * scalarVelocity * 256.f);
+
+
             int startX = col * boxWidth, startY = row * boxHeight;
             
-            if (channelSettings->drawCirclesToggle) {
+            if (animationSpecificChannelSettings->drawCirclesToggle) {
                 float radius = float(boxWidth) / 2.f;
-                ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); // good 'bloomy', lens-flare circle effect (with purple/red colors)
+                ofDrawCircle({ startX + radius, startY + radius }, radius * scalar); 
             }
             else {
                 ofDrawRectangle(startX, startY, boxWidth * scalar, boxHeight * scalar);
