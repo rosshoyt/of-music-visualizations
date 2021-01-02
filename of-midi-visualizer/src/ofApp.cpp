@@ -28,13 +28,14 @@ void ofApp::setup() {
     // add Main GUI to the permanent GUI Animation Components list
     permanentGUIAnimationComponentsList.push_back(&mainGUI);
 
-    // track animation components 
+    // track animation components
+    midiAnimationGUIComponentsList.push_back(&lfoVisualizer);
+    midiAnimationGUIComponentsList.push_back(&adsrVisualizer);
     midiAnimationGUIComponentsList.push_back(&noteGridAnimation);
     midiAnimationGUIComponentsList.push_back(&animated3DMesh);
     midiAnimationGUIComponentsList.push_back(&circleOfFifths);
     //midiAnimationGUIComponentsList.push_back(&meshFromImage);
-    midiAnimationGUIComponentsList.push_back(&lfoVisualizer);
-    midiAnimationGUIComponentsList.push_back(&adsrVisualizer);
+   
     
     // setup animation components
     for (auto& component : midiAnimationGUIComponentsList) {
@@ -113,12 +114,11 @@ void ofApp::windowResized(int w, int h){
     // TODO Algorithm to sort GUI panels most evenly across a given number of columns of fixed size
 
     // or
-
-    // TODO Algorithm to sort dynamically sort GUI panels in a 
-
     // update all GUI panel positions
     float guiYSpacer = 10; // TODO move to global variable, create WindowManager
     float x = animationDisplayWidth, y = 0;
+
+    std::cout << "Resizing: current width/height = " << w << "/" << h << "\n";
     for (auto& component : guiComponentsList) {
         auto bottomOfNewGUIComponent = y + component->getMenuHeight();
         // check if we are going to position GUI off-screen
@@ -138,6 +138,7 @@ void ofApp::windowResized(int w, int h){
             y = 0; // reset Y
             x += OFXGUI_DEF_WIDTH;
         }
+        std::cout << "Placing " << component->getUID() << " at " << x << "/" << y << " (x/y) \n";
     }
 }
 
