@@ -18,17 +18,17 @@ float Envelope::getLevel(long timeSinceStart, long timeSinceEnd, float lastNoteL
 
 		if (timeThreshold > timeSinceStart) {
 			// attacking 
-			level = getLevelFromSegment(timeSinceStart, lengthA, 0, levelA, splineA);
+			level = getLevelFromSegment(timeSinceStart, lengthA, levelA, levelD, splineA);
 			debug = "Attacking";
 		}
 		else if ((timeThreshold += lengthD) > timeSinceStart) {
 			// decaying
-			level = getLevelFromSegment(timeSinceStart - lengthA, lengthD, levelA, levelD, splineD);
+			level = getLevelFromSegment(timeSinceStart - lengthA, lengthD, levelD, levelR, splineD);
 			debug = "Decaying";
 		}
 		else if (sustain) {
 			// sustaining
-			level = levelD;//getLevel(timeSinceStart - lengthA - lengthD, st)
+			level = levelR;//getLevel(timeSinceStart - lengthA - lengthD, st)
 			debug = "Sustaining";
 		}
 		else {
@@ -38,7 +38,7 @@ float Envelope::getLevel(long timeSinceStart, long timeSinceEnd, float lastNoteL
 			auto elapsedSinceEndOfDecay = timeSinceStart - timeThreshold;
 			if (elapsedSinceEndOfDecay < lengthR) {
 				// releasing
-				level = getLevelFromSegment(elapsedSinceEndOfDecay, lengthR, levelD, 0, splineR);
+				level = getLevelFromSegment(elapsedSinceEndOfDecay, lengthR, levelR, 0, splineR);
 				debug.append(" but in Release curve");
 			}
 			else {
@@ -166,12 +166,14 @@ void Envelope::init() {
 	// init all ofParameters
 	sustain.set("Sustain", sustain);
 
-	lengthA.set("Length", lengthA, 0, MAX_SEG_LENGTH);
 	levelA.set("Level", levelA, 0, 1);
+
+	lengthA.set("Length", lengthA, 0, MAX_SEG_LENGTH);
+	levelD.set("Level", levelD, 0, 1);
 	splineA.set("Spline", splineA, -1, 1);
 
 	lengthD.set("Length", lengthD, 0, MAX_SEG_LENGTH);
-	levelD.set("Level", levelD, 0, 1);
+	levelR.set("Level", levelR, 0, 1);
 	splineD.set("Spline", splineD, -1, 1);
 
 	lengthR.set("Length", lengthR, 0, MAX_SEG_LENGTH);
@@ -186,16 +188,19 @@ void Envelope::init() {
 	decayParams.setName("Decay Parameters");
 
 	// add params to the param groups
-	attackParams.add(lengthA);
+
 	attackParams.add(levelA);
+	attackParams.add(lengthA);
 	attackParams.add(splineA);
 	
-	decayParams.add(lengthD);
 	decayParams.add(levelD);
+	decayParams.add(lengthD);
 	decayParams.add(splineD);
 	
+	releaseParams.add(levelR);
 	releaseParams.add(lengthR);
 	releaseParams.add(splineR);
+
 
 	// add sub-param groups to main group
 	guiParams.add(sustain);

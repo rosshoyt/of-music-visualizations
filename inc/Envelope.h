@@ -24,7 +24,10 @@ public:
 
 private:
 	// GUI params
-	ofParameter<double> lengthA = 250, lengthD = 1500, lengthR = 250, levelA = 1, levelD = .5, splineA = 0, splineD = 0, splineR = 0;
+	ofParameter<double> 
+		lengthA = 250, lengthD = 1500, lengthR = 250, 
+		levelA = 0, levelD = 1, levelR = .5, 
+		splineA = 0, splineD = 0, splineR = 0;
 	ofParameter<bool> sustain = false;
 	// gui sub-sub groups;
 	ofParameterGroup attackParams, decayParams, releaseParams;
