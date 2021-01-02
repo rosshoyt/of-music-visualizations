@@ -16,10 +16,10 @@
 class MIDIChannelSettings : public GUISubComponent{
 public:
     // gui params
+    ofParameter<std::string> textNotesBox;
     ofParameter<ofColor> color = ofColor::cornflowerBlue;
     ofParameter<float> size = 1.f;
     Envelope volumeEnvelope;
-
 
     MIDIChannelSettings(GUIComponent* par) : GUISubComponent(par) {
        
@@ -32,8 +32,9 @@ public:
     // Inherited via GUISubComponent
     void setupParamGroup() override {
         // TODO add channel number to the gui names
+        paramGroup.add(textNotesBox.set("[Name/Track Info]"));
         paramGroup.add(color.set("Note Color", color));
-        paramGroup.add(size.set("Size", size, .1, 10));
+        paramGroup.add(size.set("Size", size, .5, 8));
         paramGroup.add(volumeEnvelope.guiParams);
         //std::cout << "Created MIDIChannel Settings with volume envelope controls containing " << volumeEnvelope.guiParams.size() << " items \n";
         
