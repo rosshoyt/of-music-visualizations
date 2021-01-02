@@ -77,13 +77,91 @@
 	<Draw_All_Animations>0</Draw_All_Animations>
 </group>
 <MIDI_Port_Info>
-	<__MIDI_Channels>10</__MIDI_Channels>
+	<__MIDI_Channels>16</__MIDI_Channels>
 	<Use_Virtual_Port>0</Use_Virtual_Port>
 	<Virtual_Port_Name>micro lite: Port 1 2</Virtual_Port_Name>
-	<Network_Port_Name>micro lite: Port 1 2</Network_Port_Name>
+	<Network_Port_Name>Network Session 3</Network_Port_Name>
 	<Channel_1_Settings>
-		<UnknownName>237, 197, 161, 255</UnknownName>
-		<Note_Color>47, 237, 155, 255</Note_Color>
+		<UnknownName>Drums</UnknownName>
+		<Note_Color>255, 247, 247, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>2</Length>
+				<Level>0.1</Level>
+				<Spline>-0.00265621</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>250</Length>
+				<Level>1</Level>
+				<Spline>0.649381</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>750</Length>
+				<Spline>-0.593724</Spline>
+				<Level>0.341261</Level>
+			</Release_Parameters>
+		</Envelope_Settings>
+		<Size>8</Size>
+	</Channel_1_Settings>
+	<Channel_2_Settings>
+		<UnknownName>Synth 1</UnknownName>
+		<Note_Color>0, 228, 255, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
+		<Envelope_Settings>
+			<Sustain>1</Sustain>
+			<Attack_Parameters>
+				<Length>4600</Length>
+				<Level>0.622819</Level>
+				<Spline>0.808753</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>13000</Length>
+				<Level>1</Level>
+				<Spline>0.373135</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>7250.21</Length>
+				<Spline>0.394385</Spline>
+				<Level>0.5</Level>
+			</Release_Parameters>
+		</Envelope_Settings>
+		<Size>4.97704</Size>
+	</Channel_2_Settings>
+	<Channel_3_Settings>
+		<UnknownName>Erhu</UnknownName>
+		<Note_Color>247, 0, 166, 255</Note_Color>
+		<group>
+			<Spline_Intensity>0</Spline_Intensity>
+		</group>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Length>35</Length>
+				<Level>0</Level>
+				<Spline>0.71313</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Length>5337.74</Length>
+				<Level>1</Level>
+				<Spline>0.702505</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Length>3000.28</Length>
+				<Spline>0</Spline>
+				<Level>0.399697</Level>
+			</Release_Parameters>
+		</Envelope_Settings>
+		<Size>2.33673</Size>
+	</Channel_3_Settings>
+	<Channel_4_Settings>
+		<UnknownName>Kalimba</UnknownName>
+		<Note_Color>255, 77, 169, 225</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
@@ -95,115 +173,47 @@
 				<Spline>0</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
-				<Length>1619.05</Length>
-				<Level>0.787503</Level>
-				<Spline>0.373135</Spline>
+				<Length>875.316</Length>
+				<Level>0.580319</Level>
+				<Spline>-0.731846</Spline>
 			</Decay_Parameters>
 			<Release_Parameters>
-				<Length>4620.57</Length>
-				<Spline>-0.466226</Spline>
+				<Length>2150.29</Length>
+				<Spline>0.678599</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
-	</Channel_1_Settings>
-	<Channel_2_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>237, 149, 39, 255</Note_Color>
-		<group>
-			<Spline_Intensity>0</Spline_Intensity>
-		</group>
-		<Envelope_Settings>
-			<Sustain>0</Sustain>
-			<Attack_Parameters>
-				<Length>60</Length>
-				<Level>1</Level>
-				<Spline>-0.5406</Spline>
-			</Attack_Parameters>
-			<Decay_Parameters>
-				<Length>981.564</Length>
-				<Level>0.771566</Level>
-				<Spline>0</Spline>
-			</Decay_Parameters>
-			<Release_Parameters>
-				<Length>5500</Length>
-				<Spline>0</Spline>
-			</Release_Parameters>
-		</Envelope_Settings>
-	</Channel_2_Settings>
-	<Channel_3_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>18, 0, 207, 255</Note_Color>
-		<group>
-			<Spline_Intensity>0</Spline_Intensity>
-		</group>
-		<Envelope_Settings>
-			<Sustain>1</Sustain>
-			<Attack_Parameters>
-				<Length>400</Length>
-				<Level>1</Level>
-				<Spline>0</Spline>
-			</Attack_Parameters>
-			<Decay_Parameters>
-				<Length>1500</Length>
-				<Level>0.8</Level>
-				<Spline>0</Spline>
-			</Decay_Parameters>
-			<Release_Parameters>
-				<Length>1800</Length>
-				<Spline>0</Spline>
-			</Release_Parameters>
-		</Envelope_Settings>
-	</Channel_3_Settings>
-	<Channel_4_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>195, 101, 255, 255</Note_Color>
-		<group>
-			<Spline_Intensity>0</Spline_Intensity>
-		</group>
-		<Envelope_Settings>
-			<Sustain>1</Sustain>
-			<Attack_Parameters>
-				<Length>0</Length>
-				<Level>1</Level>
-				<Spline>0</Spline>
-			</Attack_Parameters>
-			<Decay_Parameters>
-				<Length>1619.05</Length>
-				<Level>0.707817</Level>
-				<Spline>0.71313</Spline>
-			</Decay_Parameters>
-			<Release_Parameters>
-				<Length>1937.8</Length>
-				<Spline>0.681255</Spline>
-			</Release_Parameters>
-		</Envelope_Settings>
+		<Size>2.18367</Size>
 	</Channel_4_Settings>
 	<Channel_5_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>237, 78, 85, 255</Note_Color>
+		<UnknownName></UnknownName>
+		<Note_Color>0, 230, 100, 224</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
 		<Envelope_Settings>
-			<Sustain>0</Sustain>
+			<Sustain>1</Sustain>
 			<Attack_Parameters>
-				<Length>250</Length>
-				<Level>1</Level>
+				<Length>1194.06</Length>
+				<Level>0.203138</Level>
 				<Spline>0</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
-				<Length>1500</Length>
+				<Length>3212.78</Length>
 				<Level>0.5</Level>
 				<Spline>0</Spline>
 			</Decay_Parameters>
 			<Release_Parameters>
-				<Length>250</Length>
+				<Length>3425.27</Length>
 				<Spline>0</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>1.53316</Size>
 	</Channel_5_Settings>
 	<Channel_6_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
-		<Note_Color>100, 149, 237, 255</Note_Color>
+		<UnknownName></UnknownName>
+		<Note_Color>42, 0, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
@@ -211,7 +221,7 @@
 			<Sustain>0</Sustain>
 			<Attack_Parameters>
 				<Length>250</Length>
-				<Level>1</Level>
+				<Level>0.150014</Level>
 				<Spline>0</Spline>
 			</Attack_Parameters>
 			<Decay_Parameters>
@@ -222,11 +232,13 @@
 			<Release_Parameters>
 				<Length>250</Length>
 				<Spline>0</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>7.15816</Size>
 	</Channel_6_Settings>
 	<Channel_7_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>198, 13, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
@@ -246,11 +258,13 @@
 			<Release_Parameters>
 				<Length>250</Length>
 				<Spline>0</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>1</Size>
 	</Channel_7_Settings>
 	<Channel_8_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>53, 0, 255, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
@@ -270,11 +284,13 @@
 			<Release_Parameters>
 				<Length>2256.54</Length>
 				<Spline>-0.476851</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>1</Size>
 	</Channel_8_Settings>
 	<Channel_9_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>154, 59, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
@@ -294,11 +310,13 @@
 			<Release_Parameters>
 				<Length>556.571</Length>
 				<Spline>0</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>1</Size>
 	</Channel_9_Settings>
 	<Channel_10_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>116, 210, 255, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
@@ -318,68 +336,194 @@
 			<Release_Parameters>
 				<Length>250</Length>
 				<Spline>0</Spline>
+				<Level>0.5</Level>
 			</Release_Parameters>
 		</Envelope_Settings>
+		<Size>1</Size>
 	</Channel_10_Settings>
 	<Channel_11_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_11_Settings>
 	<Channel_12_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_12_Settings>
 	<Channel_13_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_13_Settings>
 	<Channel_14_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_14_Settings>
 	<Channel_15_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_15_Settings>
 	<Channel_16_Settings>
-		<UnknownName>100, 149, 237, 255</UnknownName>
+		<UnknownName></UnknownName>
 		<Note_Color>100, 149, 237, 255</Note_Color>
 		<group>
 			<Spline_Intensity>0</Spline_Intensity>
 		</group>
+		<Size>1</Size>
+		<Envelope_Settings>
+			<Sustain>0</Sustain>
+			<Attack_Parameters>
+				<Level>0</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Attack_Parameters>
+			<Decay_Parameters>
+				<Level>1</Level>
+				<Length>1500</Length>
+				<Spline>0</Spline>
+			</Decay_Parameters>
+			<Release_Parameters>
+				<Level>0.5</Level>
+				<Length>250</Length>
+				<Spline>0</Spline>
+			</Release_Parameters>
+		</Envelope_Settings>
 	</Channel_16_Settings>
-	<UnknownName />
+	<UnknownName>Ch#5 CC#69          93</UnknownName>
 	<Map_Parameter_to_MIDI_CC>0</Map_Parameter_to_MIDI_CC>
 </MIDI_Port_Info>
 <Main_Controls>
-	<Background_Color>9, 0, 20, 255</Background_Color>
+	<Background_Color>81, 87, 83, 255</Background_Color>
 	<Animation_Toggles>
 		<Show_2D_Note_Grid>1</Show_2D_Note_Grid>
 		<Show_3D_Mesh>0</Show_3D_Mesh>
 		<Show_ADSR_Visualizer>0</Show_ADSR_Visualizer>
 		<Show_Circle_of_Fifths>0</Show_Circle_of_Fifths>
 		<Show_Mesh_From_Image>0</Show_Mesh_From_Image>
+		<Show_LFOVisualizer>1</Show_LFOVisualizer>
 	</Animation_Toggles>
+	<Background_Images>
+		<allRGBV_png>0</allRGBV_png>
+		<earth_jpg>0</earth_jpg>
+		<hubble_png>0</hubble_png>
+		<nebulabrot_png>0</nebulabrot_png>
+		<nebulabrotCrop_png>0</nebulabrotCrop_png>
+		<pnw_jpg>0</pnw_jpg>
+		<treeCrop_png>0</treeCrop_png>
+	</Background_Images>
 </Main_Controls>
 <Circle_of_Fifths>
 	<Draw_Octaves>1</Draw_Octaves>
 	<Draw_Chromatic_Circle>0</Draw_Chromatic_Circle>
-	<Note_Circle_Size>3.05069</Note_Circle_Size>
+	<Note_Circle_Size>4.85051</Note_Circle_Size>
 	<Octave_Row_Color>86, 0, 200, 88</Octave_Row_Color>
 	<Octave_Size_Multiplier>1</Octave_Size_Multiplier>
 	<Note_Multiplier_>1</Note_Multiplier_>
@@ -405,9 +549,10 @@
 	<circle_size>30.5695</circle_size>
 </ADSR_Visualizer>
 <LFOVisualizer>
-	<LFO_Time_Length__MS_>27.5276</LFO_Time_Length__MS_>
-	<Number_of_Points>2048</Number_of_Points>
-	<Circle_Size>2</Circle_Size>
-	<Point_Length__MS_>10</Point_Length__MS_>
-	<UnknownName>59, 179, 112, 255</UnknownName>
+	<LFO_Time_Length__MS_>880.48</LFO_Time_Length__MS_>
+	<Number_of_Points>4096</Number_of_Points>
+	<Circle_Size>40.3</Circle_Size>
+	<Point_Length__MS_>11.35</Point_Length__MS_>
+	<UnknownName>73, 0, 76, 79</UnknownName>
+	<LFO_Visualizer_Color>106, 0, 255, 11</LFO_Visualizer_Color>
 </LFOVisualizer>
