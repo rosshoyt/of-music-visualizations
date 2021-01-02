@@ -24,10 +24,14 @@
 		5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF49D76C45D5DB505A234880 /* ofxOscMessage.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
 		62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63A47AC60FFAFC3BF093EC0F /* OscOutboundPacketStream.cpp */; };
+		63109A6925A133B80045B74C /* GUIParameterNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63109A6725A133B80045B74C /* GUIParameterNode.cpp */; };
+		63109A6A25A133B80045B74C /* GUISubComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63109A6825A133B80045B74C /* GUISubComponent.cpp */; };
+		63109A6C25A133C30045B74C /* LFO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63109A6B25A133C30045B74C /* LFO.cpp */; };
+		63109A6F25A1347A0045B74C /* LFOVisualizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63109A6E25A1347A0045B74C /* LFOVisualizer.cpp */; };
 		631702104AFC104323A9EB79 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AC32CCCB56FAABA3E1BDE0 /* CoreMIDI.framework */; };
+		6334593F258B45C200F48FE1 /* AppConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6334593D258B45C200F48FE1 /* AppConstants.cpp */; };
 		63D0FD8734D5760B8080C901 /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDEF0ACF05BF28F5C74E008 /* RtMidi.cpp */; };
 		63EA988F2578206400A8A620 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EA98862578206300A8A620 /* Utils.cpp */; };
-		63EA98902578206400A8A620 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EA98872578206300A8A620 /* ADSR.cpp */; };
 		63EA98912578206400A8A620 /* Envelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EA98882578206300A8A620 /* Envelope.cpp */; };
 		63EA98922578206400A8A620 /* MIDIChannelState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EA98892578206300A8A620 /* MIDIChannelState.cpp */; };
 		63EA98932578206400A8A620 /* MIDIPortStateUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63EA988A2578206400A8A620 /* MIDIPortStateUser.cpp */; };
@@ -124,9 +128,30 @@
 		545BBA6F6669BED2DA497BC6 /* ofxDatGuiScrollView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxDatGuiScrollView.h; path = ../../../addons/ofxDatGui/src/components/ofxDatGuiScrollView.h; sourceTree = SOURCE_ROOT; };
 		54DC82C20E63BAC0F0F926FA /* ofxMidiTimecode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxMidiTimecode.h; path = ../../../addons/ofxMidi/src/ofxMidiTimecode.h; sourceTree = SOURCE_ROOT; };
 		5D0AAEB18D9B2787EF731A12 /* TexturedSphere.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = TexturedSphere.h; path = src/TexturedSphere.h; sourceTree = SOURCE_ROOT; };
+		63109A6225A132B90045B74C /* GUIAnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUIAnimationComponent.h; path = ../inc/GUIAnimationComponent.h; sourceTree = "<group>"; };
+		63109A6325A132C80045B74C /* GUIParameterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUIParameterNode.h; path = ../inc/GUIParameterNode.h; sourceTree = "<group>"; };
+		63109A6425A132E20045B74C /* GUISubComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUISubComponent.h; path = ../inc/GUISubComponent.h; sourceTree = "<group>"; };
+		63109A6525A132EA0045B74C /* LFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFO.h; path = ../inc/LFO.h; sourceTree = "<group>"; };
+		63109A6625A132FE0045B74C /* MIDIAnimationGUIComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIAnimationGUIComponent.h; path = ../inc/MIDIAnimationGUIComponent.h; sourceTree = "<group>"; };
+		63109A6725A133B80045B74C /* GUIParameterNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIParameterNode.cpp; path = ../lib/GUIParameterNode.cpp; sourceTree = "<group>"; };
+		63109A6825A133B80045B74C /* GUISubComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUISubComponent.cpp; path = ../lib/GUISubComponent.cpp; sourceTree = "<group>"; };
+		63109A6B25A133C30045B74C /* LFO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LFO.cpp; path = ../lib/LFO.cpp; sourceTree = "<group>"; };
+		63109A6D25A1347A0045B74C /* LFOVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFOVisualizer.h; sourceTree = "<group>"; };
+		63109A6E25A1347A0045B74C /* LFOVisualizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFOVisualizer.cpp; sourceTree = "<group>"; };
+		6334593D258B45C200F48FE1 /* AppConstants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppConstants.cpp; sourceTree = "<group>"; };
+		6334593E258B45C200F48FE1 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
+		6387B551258965FA00B487E7 /* spline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = spline.h; path = ../inc/spline.h; sourceTree = "<group>"; };
+		6387B552258965FA00B487E7 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../inc/Utils.h; sourceTree = "<group>"; };
+		6387B553258965FA00B487E7 /* AbletonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AbletonController.h; path = ../inc/AbletonController.h; sourceTree = "<group>"; };
+		6387B554258965FA00B487E7 /* MIDIChannelState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MIDIChannelState.h; path = ../inc/MIDIChannelState.h; sourceTree = "<group>"; };
+		6387B556258965FA00B487E7 /* GUIComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GUIComponent.h; path = ../inc/GUIComponent.h; sourceTree = "<group>"; };
+		6387B557258965FA00B487E7 /* Envelope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Envelope.h; path = ../inc/Envelope.h; sourceTree = "<group>"; };
+		6387B558258965FA00B487E7 /* AnimationComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnimationComponent.h; path = ../inc/AnimationComponent.h; sourceTree = "<group>"; };
+		6387B559258965FA00B487E7 /* MIDIPortState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MIDIPortState.h; path = ../inc/MIDIPortState.h; sourceTree = "<group>"; };
+		6387B55A258965FA00B487E7 /* MIDIPortStateUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MIDIPortStateUser.h; path = ../inc/MIDIPortStateUser.h; sourceTree = "<group>"; };
+		6387B55B258965FB00B487E7 /* UID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UID.h; path = ../inc/UID.h; sourceTree = "<group>"; };
 		63A47AC60FFAFC3BF093EC0F /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = OscOutboundPacketStream.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
 		63EA98862578206300A8A620 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = ../lib/Utils.cpp; sourceTree = "<group>"; };
-		63EA98872578206300A8A620 /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ADSR.cpp; path = ../lib/ADSR.cpp; sourceTree = "<group>"; };
 		63EA98882578206300A8A620 /* Envelope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Envelope.cpp; path = ../lib/Envelope.cpp; sourceTree = "<group>"; };
 		63EA98892578206300A8A620 /* MIDIChannelState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MIDIChannelState.cpp; path = ../lib/MIDIChannelState.cpp; sourceTree = "<group>"; };
 		63EA988A2578206400A8A620 /* MIDIPortStateUser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MIDIPortStateUser.cpp; path = ../lib/MIDIPortStateUser.cpp; sourceTree = "<group>"; };
@@ -136,7 +161,6 @@
 		63EA988E2578206400A8A620 /* AbletonController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbletonController.cpp; path = ../lib/AbletonController.cpp; sourceTree = "<group>"; };
 		64C563B8158C37E9D07AE29D /* ofxDatGuiFRM.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxDatGuiFRM.h; path = ../../../addons/ofxDatGui/src/components/ofxDatGuiFRM.h; sourceTree = SOURCE_ROOT; };
 		65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxOscBundle.cpp; path = ../../../addons/ofxOsc/src/ofxOscBundle.cpp; sourceTree = SOURCE_ROOT; };
-		681F412176C09BD7B4CB53E7 /* MIDIAnimationComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MIDIAnimationComponent.h; path = src/MIDIAnimationComponent.h; sourceTree = SOURCE_ROOT; };
 		6B65E6930994CC4B2D2B8B33 /* OscPacketListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OscPacketListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h; sourceTree = SOURCE_ROOT; };
 		712B183BC00EBFFB1EEA5AB8 /* ofxRtMidiOut.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxRtMidiOut.cpp; path = ../../../addons/ofxMidi/src/desktop/ofxRtMidiOut.cpp; sourceTree = SOURCE_ROOT; };
 		744031A3E8F8DAF9FE6F3EA8 /* ofxDatGuiGroups.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxDatGuiGroups.h; path = ../../../addons/ofxDatGui/src/components/ofxDatGuiGroups.h; sourceTree = SOURCE_ROOT; };
@@ -968,10 +992,27 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				6387B553258965FA00B487E7 /* AbletonController.h */,
+				6387B558258965FA00B487E7 /* AnimationComponent.h */,
+				6387B557258965FA00B487E7 /* Envelope.h */,
+				6387B556258965FA00B487E7 /* GUIComponent.h */,
+				6387B554258965FA00B487E7 /* MIDIChannelState.h */,
+				6387B559258965FA00B487E7 /* MIDIPortState.h */,
+				6387B55A258965FA00B487E7 /* MIDIPortStateUser.h */,
+				6387B551258965FA00B487E7 /* spline.h */,
+				63109A6225A132B90045B74C /* GUIAnimationComponent.h */,
+				6387B55B258965FB00B487E7 /* UID.h */,
+				63109A6325A132C80045B74C /* GUIParameterNode.h */,
+				63109A6725A133B80045B74C /* GUIParameterNode.cpp */,
+				63109A6825A133B80045B74C /* GUISubComponent.cpp */,
+				6387B552258965FA00B487E7 /* Utils.h */,
+				63109A6425A132E20045B74C /* GUISubComponent.h */,
+				63109A6B25A133C30045B74C /* LFO.cpp */,
+				63109A6625A132FE0045B74C /* MIDIAnimationGUIComponent.h */,
 				63EA988E2578206400A8A620 /* AbletonController.cpp */,
-				63EA98872578206300A8A620 /* ADSR.cpp */,
 				63EA988C2578206400A8A620 /* AnimationComponent.cpp */,
 				63EA98882578206300A8A620 /* Envelope.cpp */,
+				63109A6525A132EA0045B74C /* LFO.h */,
 				63EA988B2578206400A8A620 /* GUIComponent.cpp */,
 				63EA98892578206300A8A620 /* MIDIChannelState.cpp */,
 				63EA988D2578206400A8A620 /* MIDIPortState.cpp */,
@@ -990,16 +1031,19 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6334593D258B45C200F48FE1 /* AppConstants.cpp */,
+				6334593E258B45C200F48FE1 /* AppConstants.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				C8563A10F6E59C1EFDE4E536 /* TexturedSphere.cpp */,
+				63109A6E25A1347A0045B74C /* LFOVisualizer.cpp */,
+				63109A6D25A1347A0045B74C /* LFOVisualizer.h */,
 				EB6B1A27F22FCB4FF6A6EEC0 /* MainGUI.cpp */,
 				2CF1210C036AE3D8B8946965 /* MainGUI.h */,
 				771077D8BEAB06851D81D2CB /* CircleOfFifths.h */,
 				C75B39765E43DC5224C30C7E /* Animated3DMesh.h */,
 				8D2B209CF118EA770DDE5149 /* NoteGridAnimation.h */,
-				681F412176C09BD7B4CB53E7 /* MIDIAnimationComponent.h */,
 				27862463A7DCC498178D8FB9 /* ADSRVisualizer.cpp */,
 				8FF4378155743E8FE3446562 /* CircleOfFifths.cpp */,
 				0A11EF46E40A667E1F565C3B /* NoteGridAnimation.cpp */,
@@ -1164,6 +1208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				63109A6925A133B80045B74C /* GUIParameterNode.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				28664007FEF35A970A76FD91 /* TexturedSphere.cpp in Sources */,
 				81FBFEA16153EF8894CB03FF /* MainGUI.cpp in Sources */,
@@ -1173,6 +1218,7 @@
 				80CE8C1CA5CE019CEE9E57EE /* NoteGridAnimation.cpp in Sources */,
 				93683134A6BC8F80F7868BE7 /* MeshFromImage.cpp in Sources */,
 				0CD7DBEEFEDF318A11686C04 /* Animated3DMesh.cpp in Sources */,
+				63109A6F25A1347A0045B74C /* LFOVisualizer.cpp in Sources */,
 				38B71BBB0749BF5FBB132556 /* ofxAbletonLive.cpp in Sources */,
 				9BBDD8855741076B5783D568 /* ofxAbletonLiveClip.cpp in Sources */,
 				63EA98912578206400A8A620 /* Envelope.cpp in Sources */,
@@ -1182,6 +1228,7 @@
 				547B74FF3416E79DAD062B3E /* ofxAbletonLiveTrack.cpp in Sources */,
 				D3C1C48E59CAA2D68C0DD477 /* ofxDatGuiComponent.cpp in Sources */,
 				9CF4130A7E6DA19A3DC42B9A /* ofxSmartFont.cpp in Sources */,
+				6334593F258B45C200F48FE1 /* AppConstants.cpp in Sources */,
 				63EA98972578206400A8A620 /* AbletonController.cpp in Sources */,
 				C9466C434D1CF8AB968D298D /* ofxDatGui.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
@@ -1192,7 +1239,6 @@
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				63EA98932578206400A8A620 /* MIDIPortStateUser.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
-				63EA98902578206400A8A620 /* ADSR.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
@@ -1200,6 +1246,7 @@
 				BCC8D420CBA9217E437D2D76 /* ofxRtMidiIn.cpp in Sources */,
 				3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */,
 				63EA98952578206400A8A620 /* AnimationComponent.cpp in Sources */,
+				63109A6A25A133B80045B74C /* GUISubComponent.cpp in Sources */,
 				1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */,
 				63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */,
 				881AF887EC2124F4105DE9E1 /* ofxMidiClock.cpp in Sources */,
@@ -1218,6 +1265,7 @@
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,
 				5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */,
 				63EA98922578206400A8A620 /* MIDIChannelState.cpp in Sources */,
+				63109A6C25A133C30045B74C /* LFO.cpp in Sources */,
 				4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */,
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
