@@ -97,7 +97,7 @@ void MainGUI::setupParameterListeners() {
 }
 
 void MainGUI::resizeWindow(){
-    ofSetWindowShape(animationWidth + RIGHT_CONTROLBAR, animationHeight);
+    ofSetWindowShape(animationWidth + RIGHT_CONTROLBAR, AnimationComponent::getAnimationHeight());
 }
 
 

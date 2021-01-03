@@ -2,14 +2,14 @@
 #include <string>
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "AppConstants.h"
 
+extern const int ANIMATION_WIDTH, ANIMATION_HEIGHT;
 
 class AnimationComponent {
 public:
-	AnimationComponent() = default;
-	
-	void setAnimationDimensions(float width, float height);
-
+    AnimationComponent() = default;
+    
 	// method which should be called to initialize the AnimationComponent and prepare it to display at some point in the future.
 	// memory allocations, expensive 1-time  initializations and file operations are examples that should be implemented in setup()
 	virtual void setup() = 0;
@@ -26,29 +26,20 @@ public:
 	virtual void update() = 0;
 
 	virtual void draw() = 0;
+    
+    virtual void resized(int w, int h);
+    
+    static void setAnimationDimensions(float width, float height);
+    
+    static void setAnimationWidth(float w);
+    
+    static void setAnimationHeight(float h);
+    
+    static float getAnimationWidth();
+    
+    static float getAnimationHeight();
 
-
-	//void drawBackground();
-
-	virtual void resized(int w, int h);
-
-
-
-	/*void setBackgroundColor(ofColor color) {
-		backgroundColor = color;
-	}
-
-	ofColor getBackgroundColor() {
-		return backgroundColor;
-	}*/
-
-
-protected:
-
-	float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
-
-
-//	
-//private:
-//	std::string uid;
+private:
+	static float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
+    
 };

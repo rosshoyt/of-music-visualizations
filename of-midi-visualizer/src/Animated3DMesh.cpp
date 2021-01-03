@@ -16,7 +16,7 @@ void Animated3DMesh::setup() {
     perlinRange = 1.0;
     perlinHeight = 5.0;
 
-    //mainCam.setPosition(ofGetWidth() - animationWidth / 2.f, 0, 80);
+    //mainCam.setPosition(ofGetWidth() - AnimationComponent::getAnimationWidth() / 2.f, 0, 80);
 
     //mainMesh.setMode(OF_PRIMITIVE_LINE_LOOP);
     // make points inside the mesh
@@ -155,7 +155,7 @@ void Animated3DMesh::resized(int w, int h) {
     // displace the camera to the right by half of the size of the menu bar
     // TODO allow each app to access the size of the GUI menu bar on the side
     // TODO along with other variables via a DTO struct
-    float xDisplacement = (w - animationWidth) / 25.f; // TODO figure out better way to move mesh to left
+    float xDisplacement = (w - AnimationComponent::getAnimationWidth()) / 25.f; // TODO figure out better way to move mesh to left
     mainCam.setPosition(xDisplacement, 0, 80);
     std::cout << "xDisplacement: " << xDisplacement << "\n";
 

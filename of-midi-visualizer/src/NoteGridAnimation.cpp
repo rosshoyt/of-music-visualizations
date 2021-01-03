@@ -53,8 +53,8 @@ void NoteGridAnimation::setupParameterListeners() {
 //--------------------------------------------------------------
 void NoteGridAnimation::update() {
     // calculate note box width/height based on window size
-    boxWidth = animationWidth / nColumns;
-    boxHeight = animationHeight / nRows;
+    boxWidth = AnimationComponent::getAnimationWidth() / nColumns;
+    boxHeight = AnimationComponent::getAnimationHeight() / nRows;
 
     // update the pitch offset amount
     if (pitchOffsetUseMIDICCToggle) 
@@ -82,11 +82,11 @@ void NoteGridAnimation::drawBgdGridLines() {
     ofSetColor(gridLineColorSelector);
 
     for (int i = 0; i < nRows; ++i)
-        ofDrawLine(0, i * boxHeight, animationWidth, i * boxHeight);
+        ofDrawLine(0, i * boxHeight, AnimationComponent::getAnimationWidth(), i * boxHeight);
 
     // draw border column lines
     for (int i = 0; i < nColumns; ++i)
-        ofDrawLine(i * boxWidth, 0, i * boxWidth, animationHeight);
+        ofDrawLine(i * boxWidth, 0, i * boxWidth, AnimationComponent::getAnimationHeight());
 }
 
 //--------------------------------------------------------------
@@ -94,7 +94,7 @@ void NoteGridAnimation::drawBgdGrid() {
     // color the even numbered rows with chosen color
     ofSetColor(octaveRowColorSelector);
     for (int i = 0; i < nRows; i += 2)
-        ofDrawRectangle(0, i * boxHeight, animationWidth, boxHeight);
+        ofDrawRectangle(0, i * boxHeight, AnimationComponent::getAnimationWidth(), boxHeight);
 
     // draw black and white background to represent fundamental pitches C - B
     for (int i = 0; i < nColumns; ++i) {
@@ -106,7 +106,7 @@ void NoteGridAnimation::drawBgdGrid() {
         else
             ofSetColor(ofColor::darkGrey, 128);
         // draw the column rectangles
-        ofDrawRectangle(i * boxWidth, 0, boxWidth, animationHeight);
+        ofDrawRectangle(i * boxWidth, 0, boxWidth, AnimationComponent::getAnimationHeight());
     }
 }
 

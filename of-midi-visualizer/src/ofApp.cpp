@@ -59,6 +59,8 @@ void ofApp::setup() {
         guiComponent->loadSavedSettings();
         guiComponent->setupParameterListeners();
     }
+    
+    windowResized(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -94,7 +96,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) {
     switch (key) {
     case ' ':
-        std::cout << "Pressed Space\n";
+        //std::cout << "Pressed Space\n";
         abletonController.processSpacebar();
     }
     animated3DMesh.keyPressed(key);
@@ -102,43 +104,89 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    float animationDisplayWidth = w - RIGHT_CONTROLBAR;
-    
+    std::cout << "Resizing: current width/height = " << w << "/" << h << "\n";
+    //AnimationComponent::setAnimationDimensions(;
+    AnimationComponent::setAnimationDimensions(w - RIGHT_CONTROLBAR, h);
     // update all animation posisions
     for (auto& animation : midiAnimationGUIComponentsList) {
-        animation->setAnimationDimensions(animationDisplayWidth, h);
+        // TODO could set Animation dimensions statically
+        //animation->setAnimationDimensions(animationDisplayWidth, h);
         animation->resized(w, h);
     }
 
-
-    // TODO Algorithm to sort GUI panels most evenly across a given number of columns of fixed size
-
-    // or
-    // update all GUI panel positions
-    float guiYSpacer = 10; // TODO move to global variable, create WindowManager
-    float x = animationDisplayWidth, y = 0;
-
-    std::cout << "Resizing: current width/height = " << w << "/" << h << "\n";
-    for (auto& component : guiComponentsList) {
-        auto bottomOfNewGUIComponent = y + component->getMenuHeight();
-        // check if we are going to position GUI off-screen
-        if (bottomOfNewGUIComponent > ANIMATION_HEIGHT) {
-            // TODO refactor the positioning of the GUI components
-            y = 0; // reset Y
-            x += OFXGUI_DEF_WIDTH; // shift right to the next column 
-            // TODO ensure doesn't paint gui menu in off-screen columns
-        }
-        component->setMenuXY(x, y);
-        y += component->getMenuHeight() + guiYSpacer; 
-
-        // Check if we just drew the midi port state, move over a column for the rest of components.
-        // TODO create functions to abstract the column position management, or create
-        // a separate class.
-        if (component->getUID() == midiPortState.getUID()) {
-            y = 0; // reset Y
-            x += OFXGUI_DEF_WIDTH;
-        }
-        std::cout << "Placing " << component->getUID() << " at " << x << "/" << y << " (x/y) \n";
-    }
+    repositionGUIComponents();
+    
+//    for (auto& component : guiComponentsList) {
+//        auto bottomOfNewGUIComponent = y + component->getMenuHeight();
+//        // check if we are going to position GUI off-screen
+//        if (bottomOfNewGUIComponent > ANIMATION_HEIGHT) {
+//            // TODO refactor the positioning of the GUI components
+//            y = 0; // reset Y
+//            x += OFXGUI_DEF_WIDTH; // shift right to the next column
+//            // TODO ensure doesn't paint gui menu in off-screen columns
+//        }
+//        component->setMenuXY(x, y);
+//        y += component->getMenuHeight() + guiYSpacer;
+//
+//        // Check if we just drew the midi port state, move over a column for the rest of components.
+//        // TODO create functions to abstract the column position management, or create
+//        // a separate class.
+//        if (component->getUID() == midiPortState.getUID()) {
+//            y = 0; // reset Y
+//            x += OFXGUI_DEF_WIDTH;
+//        }
+//        std::cout << "Placing " << component->getUID() << " at " << x << "/" << y << " (x/y) \n";
+//    }
 }
 
+void ofApp::repositionGUIComponents(){
+    // put all gui panels into a map based on size
+    std::map<float, std::queue<GUIComponent*>> sizeGuiMap;
+    for(auto& guiComponent : guiComponentsList){
+        //float menuHeight = guiComponent->getMenuHeight();
+        sizeGuiMap[guiComponent->getMenuHeight()].push(guiComponent);
+    }
+    
+    
+    
+    // or
+    // update all GUI panel positions
+    //float guiYSpacer = 10; // TODO move to global variable, create WindowManager
+    auto startingX = AnimationComponent::getAnimationWidth();
+    //float x = , y = 0;
+    
+    
+    int numCols = 3; // TODO refactor where number of columns for GUI panels to display is determined
+    
+    std::vector<float> columnSizes(numCols);
+    
+    
+    
+    // reverse iterate through the gui components map by the size of each
+    for (auto it = sizeGuiMap.rbegin(); it != sizeGuiMap.rend(); it++) {
+        
+        // find smallest column
+        int column = 0;
+        for(int j = column + 1; j < columnSizes.size(); ++j){
+            if(columnSizes[j] < columnSizes[column])
+                column = j;
+        }
+        
+        // get the height of the component(s)' menu
+        auto height = it->first;
+        auto compQueue = it->second;
+        
+        // get the first component (probably the only component in queue)
+        auto guiComp = compQueue.front();
+        compQueue.pop();  // remove from queue
+        
+        auto x = startingX + column * OFXGUI_DEF_WIDTH;
+        auto y = columnSizes[column];
+        guiComp->setMenuXY(x, y);
+        
+        columnSizes[column] += height;
+        
+        std::cout << "Placing " << guiComp->getUID() << " at " << x << "/" << y << " (x/y), gui column # = " << column << " \n";
+    }
+    
+}

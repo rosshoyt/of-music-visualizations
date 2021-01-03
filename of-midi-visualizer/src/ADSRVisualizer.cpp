@@ -71,7 +71,7 @@ void ADSRVisualizer::draw() {
 		// so we'll get the level now instead of per-point
 		heightScale = envelopeADSRNode->getLevel(timeNowMS);
 	}
-
+    auto animationHeight = getAnimationHeight(), animationWidth = getAnimationWidth();
 	for (int i = 0; i < numPoints; ++i) {
 
 		double xF = float(i) / numPoints;

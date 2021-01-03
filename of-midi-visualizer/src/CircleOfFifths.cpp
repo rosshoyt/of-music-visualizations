@@ -36,8 +36,8 @@ void CircleOfFifths::draw() {
 
 	// TODO add 'snap to cursor' control so that Circle of Fifths displays around cursor?
 	//ofVec2f centerPos(ofGetMouseX(), ofGetMouseY());
-	ofVec2f centerPos(animationWidth / 2.f, animationHeight / 2.f);
-	float smallestDim = animationWidth > animationHeight ? animationHeight : animationWidth;
+	ofVec2f centerPos(AnimationComponent::getAnimationWidth() / 2.f, AnimationComponent::getAnimationHeight() / 2.f);
+	float smallestDim = AnimationComponent::getAnimationWidth() > AnimationComponent::getAnimationHeight() ? AnimationComponent::getAnimationHeight() : AnimationComponent::getAnimationWidth();
 
 	int channelNum = 0; // TODO refactor - midiChannelState object should contain all 'channel settings'
 	//for (auto channel : midiPortState->getAllChannelNotes()) {
@@ -59,7 +59,7 @@ void CircleOfFifths::draw() {
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			
 			// TODO base this on smaller of height or width
-			float radius = animationHeight / 2.f / numOctaves * octaveSizeMultiplierSlider;
+			float radius = AnimationComponent::getAnimationHeight() / 2.f / numOctaves * octaveSizeMultiplierSlider;
 			
 			if (drawOctavesToggle) 
 				radius *= octavePitch.first + 1;

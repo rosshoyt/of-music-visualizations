@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include <iostream>
+#include <queue>
 #include "GUIComponent.h"
 #include "MIDIPortState.h"
 #include "MainGUI.h"
@@ -28,6 +29,8 @@ class ofApp : public ofBaseApp {
         void windowResized(int w, int h);
 		
 private:
+        void repositionGUIComponents();
+    
         // Class which communicates with Ableton via OSC
         // TODO create GUI controls for this component
         AbletonController abletonController;

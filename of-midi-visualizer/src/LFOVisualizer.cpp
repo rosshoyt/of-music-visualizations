@@ -29,6 +29,6 @@ void LFOVisualizer::draw() {
 	for (int i = 0; i < numPoints; ++i) {
 		float x = float(i) / float(numPoints);
 		float y = sineLFO.getValue(i * pointLength);
-		ofDrawCircle({ x * animationWidth, y * animationHeight}, circleSize);
+		ofDrawCircle({ x * AnimationComponent::getAnimationWidth(), y * AnimationComponent::getAnimationHeight()}, circleSize);
 	}
 }
