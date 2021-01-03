@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['volumeenvelope_205',['volumeEnvelope',['../class_m_i_d_i_channel_settings.html#a5d7d2a83d284c5b408504f699cccdfe3',1,'MIDIChannelSettings']]]
+  ['windowresized_204',['windowResized',['../class_note_grid_animation.html#a5b2b40fc98edfc16f72197114f8eaa07',1,'NoteGridAnimation::windowResized()'],['../classof_app.html#ae4dc1ec1513dcbe48bc78a5e4c3fac0f',1,'ofApp::windowResized()']]]
 ];

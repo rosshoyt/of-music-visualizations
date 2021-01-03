@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['menux_407',['menuX',['../class_g_u_i_component.html#ad6850e1ed52605983e0d35fbdbaa792e',1,'GUIComponent']]],
-  ['menuy_408',['menuY',['../class_g_u_i_component.html#af25486251cf9d0fd3ed13bc1b6f6b7d8',1,'GUIComponent']]],
-  ['midiportstate_409',['midiPortState',['../class_m_i_d_i_port_state_user.html#a62fc18c024263f693d3f984aa14eb390',1,'MIDIPortStateUser']]]
+  ['octaverowcolorselector_423',['octaveRowColorSelector',['../class_note_grid_animation.html#a2cbffc6c651bd8877dc443014293ebeb',1,'NoteGridAnimation']]],
+  ['ofxgui_5fdef_5fwidth_424',['OFXGUI_DEF_WIDTH',['../_app_constants_8cpp.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;AppConstants.cpp'],['../_app_constants_8h.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;AppConstants.h'],['../main_8cpp.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;main.cpp'],['../_main_g_u_i_8h.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;MainGUI.h'],['../of_app_8h.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;ofApp.h']]]
 ];

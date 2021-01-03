@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gridlinecolorselector_402',['gridLineColorSelector',['../class_note_grid_animation.html#adf26f5e0a68aaed57d11b6b44cbff675',1,'NoteGridAnimation']]],
-  ['gui_403',['gui',['../class_g_u_i_component.html#ade2bdd63a9ad721f097ad8078260462a',1,'GUIComponent']]],
-  ['guiparams_404',['guiParams',['../class_envelope.html#a06b16803659df44b9e844e54f26a7dd6',1,'Envelope']]]
+  ['image_5ffile_5fextensions_414',['IMAGE_FILE_EXTENSIONS',['../_app_constants_8h.html#a12114ccd7d833db89a1c64cd791b68b4',1,'IMAGE_FILE_EXTENSIONS():&#160;AppConstants.h'],['../_main_g_u_i_8h.html#a12114ccd7d833db89a1c64cd791b68b4',1,'IMAGE_FILE_EXTENSIONS():&#160;MainGUI.h']]],
+  ['image_5ffolder_5frelative_415',['IMAGE_FOLDER_RELATIVE',['../_app_constants_8h.html#ad140ee704a63e25453bad17fe9f91b94',1,'IMAGE_FOLDER_RELATIVE():&#160;AppConstants.h'],['../_main_g_u_i_8h.html#ad140ee704a63e25453bad17fe9f91b94',1,'IMAGE_FOLDER_RELATIVE():&#160;MainGUI.h'],['../_mesh_from_image_8h.html#ad140ee704a63e25453bad17fe9f91b94',1,'IMAGE_FOLDER_RELATIVE():&#160;MeshFromImage.h']]]
 ];

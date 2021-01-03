@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uid_234',['UID',['../class_u_i_d.html',1,'']]]
+  ['sinelfo_230',['SineLFO',['../class_sine_l_f_o.html',1,'']]]
 ];

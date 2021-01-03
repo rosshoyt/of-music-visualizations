@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['a_380',['a',['../class_a_d_s_r.html#af422ee3598d3c0ef5e9add6536fd3c91',1,'ADSR']]],
-  ['al_381',['aL',['../class_a_d_s_r.html#a07443924ea7ed0b33f4808d67464740e',1,'ADSR']]],
-  ['animationheight_382',['animationHeight',['../class_animation_component.html#a638394f0533efc512e931a8f0666dbe0',1,'AnimationComponent']]],
-  ['animationwidth_383',['animationWidth',['../class_animation_component.html#a627f78662daded09a00c8090ab5908cb',1,'AnimationComponent']]],
-  ['atot_384',['aTot',['../class_a_d_s_r.html#a720e037f73ede68b88c8bd1c77cd64f8',1,'ADSR']]]
+  ['animation_5fheight_398',['ANIMATION_HEIGHT',['../_app_constants_8cpp.html#a7693aaa4a78f2dedaad141b8c43d5144',1,'ANIMATION_HEIGHT():&#160;AppConstants.cpp'],['../_app_constants_8h.html#a7693aaa4a78f2dedaad141b8c43d5144',1,'ANIMATION_HEIGHT():&#160;AppConstants.h'],['../main_8cpp.html#a7693aaa4a78f2dedaad141b8c43d5144',1,'ANIMATION_HEIGHT():&#160;main.cpp'],['../_main_g_u_i_8h.html#a7693aaa4a78f2dedaad141b8c43d5144',1,'ANIMATION_HEIGHT():&#160;MainGUI.h'],['../of_app_8h.html#a7693aaa4a78f2dedaad141b8c43d5144',1,'ANIMATION_HEIGHT():&#160;ofApp.h']]],
+  ['animation_5fwidth_399',['ANIMATION_WIDTH',['../_app_constants_8cpp.html#a02578725a7339247f215dfa04763b68f',1,'ANIMATION_WIDTH():&#160;AppConstants.cpp'],['../_app_constants_8h.html#a02578725a7339247f215dfa04763b68f',1,'ANIMATION_WIDTH():&#160;AppConstants.h'],['../main_8cpp.html#a02578725a7339247f215dfa04763b68f',1,'ANIMATION_WIDTH():&#160;main.cpp'],['../_main_g_u_i_8h.html#a02578725a7339247f215dfa04763b68f',1,'ANIMATION_WIDTH():&#160;MainGUI.h'],['../of_app_8h.html#a02578725a7339247f215dfa04763b68f',1,'ANIMATION_WIDTH():&#160;ofApp.h']]],
+  ['animationheight_400',['animationHeight',['../class_animation_component.html#a638394f0533efc512e931a8f0666dbe0',1,'AnimationComponent']]],
+  ['animationwidth_401',['animationWidth',['../class_animation_component.html#a627f78662daded09a00c8090ab5908cb',1,'AnimationComponent']]]
 ];

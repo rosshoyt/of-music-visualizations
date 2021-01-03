@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['openframeworks_20music_20visualizations_136',['openFrameworks Music Visualizations',['../md__r_e_a_d_m_e.html',1,'']]],
-  ['octaverowcolorselector_137',['octaveRowColorSelector',['../class_note_grid_animation.html#ac711c3a3ed1a4c47a4445e5443fb8872',1,'NoteGridAnimation']]],
-  ['of_2dmidi_2dvisualizer_2evcxproj_2efilelistabsolute_2etxt_138',['of-midi-visualizer.vcxproj.FileListAbsolute.txt',['../of-midi-visualizer_8vcxproj_8_file_list_absolute_8txt.html',1,'']]],
-  ['ofapp_139',['ofApp',['../classof_app.html',1,'ofApp'],['../classof_app.html#a23bbd1b428e636849c4623d3e679874e',1,'ofApp::ofApp()']]],
-  ['ofapp_2ecpp_140',['ofApp.cpp',['../of_app_8cpp.html',1,'']]],
-  ['ofapp_2eh_141',['ofApp.h',['../of_app_8h.html',1,'']]],
-  ['off_142',['OFF',['../_a_d_s_r_8h.html#a25fad2730465bca53850bc73c09830b9aac132f2982b98bcaa3445e535a03ff75',1,'ADSR.h']]],
-  ['ofxgui_5fdef_5fwidth_143',['OFXGUI_DEF_WIDTH',['../main_8cpp.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;main.cpp'],['../of_app_8h.html#aa086c247b2da09d820276afffe6d9eb9',1,'OFXGUI_DEF_WIDTH():&#160;ofApp.h']]]
+  ['paramgroup_143',['paramGroup',['../class_g_u_i_sub_component.html#aeab16bbabf9f634045030e766acc6dc4',1,'GUISubComponent']]],
+  ['parent_144',['parent',['../class_g_u_i_sub_component.html#a786edeb07b22159cd692ff8671d164cf',1,'GUISubComponent']]],
+  ['pitchoffsetamount_145',['pitchOffsetAmount',['../class_note_grid_animation.html#ad8e2f57f67abca8bcdc1314cdf006c4f',1,'NoteGridAnimation']]],
+  ['pitchoffsetslider_146',['pitchOffsetSlider',['../class_note_grid_animation.html#ab1142ba98a8a3bee034816373a0292c0',1,'NoteGridAnimation']]],
+  ['pitchoffsetusemidicctoggle_147',['pitchOffsetUseMIDICCToggle',['../class_note_grid_animation.html#a26515ce3721913895aad4f79b96fdff4',1,'NoteGridAnimation']]],
+  ['pointnotemap_148',['PointNoteMap',['../classutils_1_1note__grid_1_1_point_note_map.html',1,'utils::note_grid::PointNoteMap'],['../classutils_1_1note__grid_1_1_point_note_map.html#afa5028eb4b38fd7d8b87367b4ad94c0f',1,'utils::note_grid::PointNoteMap::PointNoteMap()']]],
+  ['prepare_149',['prepare',['../class_animation_component.html#a9305158f44d5647ad6fec20a6077d0a8',1,'AnimationComponent::prepare()'],['../class_a_d_s_r_visualizer.html#aecc3d343c7d6014cbb77c9d6793e1217',1,'ADSRVisualizer::prepare()'],['../class_textured_sphere.html#a3be4c1a8f1041fc92e2d55749d7e2b09',1,'TexturedSphere::prepare()']]],
+  ['processmidicc_150',['processMIDICC',['../class_m_i_d_i_channel_state.html#a31306900f5e074085c961b29ef76cb9a',1,'MIDIChannelState']]],
+  ['processmidimessage_151',['processMIDIMessage',['../class_m_i_d_i_channel_state.html#a9ca6c223d0c2e68af9a0cff556ee2d75',1,'MIDIChannelState']]],
+  ['processspacebar_152',['processSpacebar',['../class_ableton_controller.html#aa6864e11380d5f0cc13b949c29f02ae2',1,'AbletonController']]]
 ];
