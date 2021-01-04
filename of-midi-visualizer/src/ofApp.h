@@ -26,11 +26,22 @@ class ofApp : public ofBaseApp {
 		void update();
 		void draw();
         void keyPressed(int key);
+        void mouseScrolled(int x, int y, float scrollX, float scrollY);
         void windowResized(int w, int h);
 		
 private:
-        void repositionGUIComponents();
-    
+        
+        void repositionGUIComponents(float yOffset = 0);
+        
+
+        // variables used to support scrolling in the GUI panel area
+        // TODO create GUIManager class
+        float guiMenuYOffset = 0, scrollSpeed = 35;
+        const float GUI_MENU_Y_MAX_OFFSET = ANIMATION_HEIGHT;
+      
+        
+        
+        
         // Class which communicates with Ableton via OSC
         // TODO create GUI controls for this component
         AbletonController abletonController;

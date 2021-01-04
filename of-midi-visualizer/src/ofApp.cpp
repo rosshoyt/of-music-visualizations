@@ -6,7 +6,7 @@ ofApp::ofApp() : abletonController() {}
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetFrameRate(60);
-    ofSetWindowTitle("OpenFrameworks MIDI Visualizer - Ross Hoyt Music");
+    ofSetWindowTitle("openFrameworks MIDI Visualizer - Ross Hoyt Music");
     ofEnableAntiAliasing();
 
    
@@ -103,6 +103,34 @@ void ofApp::keyPressed(int key) {
 }
 
 //--------------------------------------------------------------
+void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY) {
+    if (x >= AnimationComponent::getAnimationWidth()) {
+        
+        float newYOffsetValue = guiMenuYOffset + scrollY;
+        
+        if (scrollY >= 0)
+            newYOffsetValue = std::min(newYOffsetValue, GUI_MENU_Y_MAX_OFFSET);
+        else
+            newYOffsetValue = std::max(newYOffsetValue, 0.f);
+        
+
+
+        if (newYOffsetValue != guiMenuYOffset) {
+            repositionGUIComponents(guiMenuYOffset);
+            guiMenuYOffset = newYOffsetValue;
+        }
+
+        
+
+
+        //std::cout << "Mouse Scrolled: x = " << x << " y = " << y << " scrollX = " << scrollX << " scrollY = " << scrollY << " guiMenuYOffset = " << guiMenuYOffset << '\n';
+     
+
+    }
+}
+
+
+//--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     std::cout << "Resizing: current width/height = " << w << "/" << h << "\n";
     //AnimationComponent::setAnimationDimensions(;
@@ -116,30 +144,9 @@ void ofApp::windowResized(int w, int h){
 
     repositionGUIComponents();
     
-//    for (auto& component : guiComponentsList) {
-//        auto bottomOfNewGUIComponent = y + component->getMenuHeight();
-//        // check if we are going to position GUI off-screen
-//        if (bottomOfNewGUIComponent > ANIMATION_HEIGHT) {
-//            // TODO refactor the positioning of the GUI components
-//            y = 0; // reset Y
-//            x += OFXGUI_DEF_WIDTH; // shift right to the next column
-//            // TODO ensure doesn't paint gui menu in off-screen columns
-//        }
-//        component->setMenuXY(x, y);
-//        y += component->getMenuHeight() + guiYSpacer;
-//
-//        // Check if we just drew the midi port state, move over a column for the rest of components.
-//        // TODO create functions to abstract the column position management, or create
-//        // a separate class.
-//        if (component->getUID() == midiPortState.getUID()) {
-//            y = 0; // reset Y
-//            x += OFXGUI_DEF_WIDTH;
-//        }
-//        std::cout << "Placing " << component->getUID() << " at " << x << "/" << y << " (x/y) \n";
-//    }
 }
 
-void ofApp::repositionGUIComponents(){
+void ofApp::repositionGUIComponents(float yOffset){
     // put all gui panels into a map based on size
     std::map<float, std::queue<GUIComponent*>> sizeGuiMap;
     for(auto& guiComponent : guiComponentsList){
@@ -181,12 +188,12 @@ void ofApp::repositionGUIComponents(){
         compQueue.pop();  // remove from queue
         
         auto x = startingX + column * OFXGUI_DEF_WIDTH;
-        auto y = columnSizes[column];
+        auto y = columnSizes[column] - yOffset;
         guiComp->setMenuXY(x, y);
         
         columnSizes[column] += height;
         
-        std::cout << "Placing " << guiComp->getUID() << " at " << x << "/" << y << " (x/y), gui column # = " << column << " \n";
+        //std::cout << "Placing " << guiComp->getUID() << " at " << x << "/" << y << " (x/y), gui column # = " << column << " \n";
     }
     
 }
