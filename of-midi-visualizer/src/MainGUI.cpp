@@ -26,7 +26,7 @@ void MainGUI::setupGUI() {
 
     for (auto& file : dir.getFiles()) {
         auto extension = file.getExtension();
-        std::cout << "Looking at file " << file.getFileName() << " with extension " << extension << "\n";
+        std::cout << "Checking for images | filename: " << file.getFileName() << " extension: " << extension << "\n";
         if (IMAGE_FILE_EXTENSIONS.count(extension)) {
             auto* image = new ofImage(file.getAbsolutePath());
             std::string imageID = file.getFileName();
