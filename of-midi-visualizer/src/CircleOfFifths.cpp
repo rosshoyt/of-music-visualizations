@@ -50,11 +50,10 @@ void CircleOfFifths::draw() {
 			int pitchPosition = octavePitch.second;
 			// convert chromatic pitch to circle of fifths
 			pitchPosition = (pitchPosition * pitchMultiplierSlider + pitchOffsetSlider) % numPitches;
-			
 		
 			float velocityScale = noteData.second.first / 127.f * noteData.second.second;
 			// Scale size of circle by envelope level TODO take original velocity into account in Envelope::getLevel()
-			float circleSize = 40 * velocityScale * channelSettings->size;
+			float circleSize = 40 * velocityScale * channelSettings->size * noteSizeMultiplierSlider;
 
 			float rads = 2 * utils::math::pi * pitchPosition / numPitches; // The rotate function uses degrees!
 			
