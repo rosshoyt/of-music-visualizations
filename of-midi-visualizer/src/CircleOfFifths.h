@@ -25,9 +25,9 @@ private:
     int alpha = 150;    
     
     ofParameter<bool> drawOctavesToggle;
-    ofParameter<float> noteCircleSizeSlider;
+    ofParameter<float> noteSizeMultiplierSlider;
     ofParameter<float> octaveSizeMultiplierSlider;
-    ofParameter<int> noteMultiplierSlider;
+    ofParameter<int> pitchMultiplierSlider;
     ofParameter<int> pitchOffsetSlider;
     ofParameter<bool> drawHaloOnNotesToggle;
 };
