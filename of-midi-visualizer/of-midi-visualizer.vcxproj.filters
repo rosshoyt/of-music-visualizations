@@ -171,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="..\lib\LFO.cpp" />
     <ClCompile Include="..\lib\GUISubComponent.cpp" />
+    <ClCompile Include="src\ModalVisualizer.cpp">
+      <Filter>src\animation-components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -514,6 +517,9 @@
     <ClInclude Include="..\inc\LFO.h" />
     <ClInclude Include="..\inc\MIDIAnimationGUIComponent.h" />
     <ClInclude Include="..\inc\GUISubComponent.h" />
+    <ClInclude Include="src\ModalVisualizer.h">
+      <Filter>src\animation-components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

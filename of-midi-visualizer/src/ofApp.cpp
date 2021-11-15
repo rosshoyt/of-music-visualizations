@@ -34,6 +34,7 @@ void ofApp::setup() {
     midiAnimationGUIComponentsList.push_back(&noteGridAnimation);
     midiAnimationGUIComponentsList.push_back(&animated3DMesh);
     midiAnimationGUIComponentsList.push_back(&circleOfFifths);
+    midiAnimationGUIComponentsList.push_back(&modalVisualizer);
     //midiAnimationGUIComponentsList.push_back(&meshFromImage);
    
     

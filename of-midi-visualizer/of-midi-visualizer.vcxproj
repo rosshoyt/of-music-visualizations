@@ -204,6 +204,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainGUI.cpp" />
     <ClCompile Include="src\MeshFromImage.cpp" />
+    <ClCompile Include="src\ModalVisualizer.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Animated3DMesh.cpp" />
     <ClCompile Include="src\NoteGridAnimation.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="src\LFOVisualizer.h" />
     <ClInclude Include="src\MainGUI.h" />
     <ClInclude Include="src\MeshFromImage.h" />
+    <ClInclude Include="src\ModalVisualizer.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Animated3DMesh.h" />
     <ClInclude Include="src\NoteGridAnimation.h" />

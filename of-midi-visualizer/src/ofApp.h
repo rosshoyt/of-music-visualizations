@@ -14,6 +14,7 @@
 #include "ADSRVisualizer.h"
 #include "LFOVisualizer.h"
 #include "CircleOfFifths.h"
+#include "ModalVisualizer.h"
 #include "Utils.h"
 
 extern const int ANIMATION_WIDTH, ANIMATION_HEIGHT, OFXGUI_DEF_WIDTH, RIGHT_CONTROLBAR;
@@ -52,6 +53,7 @@ private:
         MeshFromImage meshFromImage;
         TexturedSphere texturedSphere;
         CircleOfFifths circleOfFifths;
+        ModalVisualizer modalVisualizer;
 
         // MIDI Animations which are tests of custom library components
         // TODO convert to GUIAnimation class, as these don't use MIDI Port
