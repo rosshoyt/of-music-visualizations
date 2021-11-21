@@ -1,5 +1,7 @@
 #pragma once
 #include "MidiAnimationGUIComponent.h"
+#include "Utils.h"
+#include <iostream>
 
 class ModalVisualizer : public MIDIAnimationGUIComponent {
 public:
