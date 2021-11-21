@@ -24,6 +24,10 @@ float AnimationComponent::getAnimationHeight(){
     return animationHeight;
 }
 
+ofVec2f AnimationComponent::getAnimationCenterPosition() {
+    return ofVec2f(animationWidth / 2.f, animationHeight / 2.f);
+}
+
 void AnimationComponent::prepare() {}
 
 void AnimationComponent::takedown() {}

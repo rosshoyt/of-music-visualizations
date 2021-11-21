@@ -34,9 +34,6 @@ void CircleOfFifths::update() {}
 //--------------------------------------------------------------
 void CircleOfFifths::draw() {
 
-	// TODO add 'snap to cursor' control so that Circle of Fifths displays around cursor?
-	//ofVec2f centerPos(ofGetMouseX(), ofGetMouseY());
-	ofVec2f centerPos(AnimationComponent::getAnimationWidth() / 2.f, AnimationComponent::getAnimationHeight() / 2.f);
 	float smallestDim = AnimationComponent::getAnimationWidth() > AnimationComponent::getAnimationHeight() ? AnimationComponent::getAnimationHeight() : AnimationComponent::getAnimationWidth();
 
 	int channelNum = 0; // TODO refactor - midiChannelState object should contain all 'channel settings'
@@ -65,7 +62,8 @@ void CircleOfFifths::draw() {
 			else 
 				radius *= numOctaves / 2;
 			
-			auto point = centerPos + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
+			// TODO add 'snap to cursor' control so that Circle of Fifths displays around cursor, instead of center position?
+			auto point = AnimationComponent::getAnimationCenterPosition() + ofVec2f(radius * std::cos(rads), radius * std::sin(rads));
 
 			ofColor aqua(0, 252, 255, alpha);
 			/*ofColor purple(198, 0, 205, alpha);

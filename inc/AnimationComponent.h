@@ -39,6 +39,8 @@ public:
     
     static float getAnimationHeight();
 
+    static ofVec2f getAnimationCenterPosition();
+
 private:
 	static float animationWidth, animationHeight; // to track the sub-window space that the animation component displays on
     
